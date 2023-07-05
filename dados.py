@@ -29,22 +29,25 @@ def valor_de_pagamento(dados):
     checagem = []
     itens_somados = {}
     for indice, linha in duplicados.iterrows():
-        palavra_checagem = str(linha['Cotação']) + str(linha['Empresa ']) + str(linha['Nº DANFE'])
+        palavra_checagem = str(linha['Cotação']) + '-' + str(linha['Empresa ']) + '-' + str(linha['Nº DANFE'])
         if palavra_checagem in checagem:
             continue
         else:
             checagem.append(palavra_checagem)
             print(palavra_checagem)
-            duplicados_subset1 = duplicados[(duplicados['Cotação'] == linha['Cotação']) & (duplicados['Empresa '] == linha['Empresa ']) & (duplicados['Nº DANFE'] == linha['Nº DANFE'])]
+            duplicados_subset1 = duplicados[
+                (duplicados['Cotação'] == linha['Cotação']) &
+                (duplicados['Empresa '] == linha['Empresa ']) &
+                (duplicados['Nº DANFE'] == linha['Nº DANFE'])
+            ]
             print(duplicados_subset1)
-            #duplicados_subset2 = duplicados_subset1[duplicados_subset1['Empresa '] == linha['Empresa ']]
-            #duplicados_subset3 = duplicados_subset2[duplicados_subset2['Nº DANFE'] == linha['Nº DANFE']]
-            #print(duplicados_subset3)
             soma = duplicados_subset1['V. Total'].sum()
             print(f'Soma dos itens da NF R$ {soma}')
-            itens_somados[palavra_checagem] = soma
+            descricao = palavra_checagem.split('-')
+            itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma]
     print(checagem)
     print(itens_somados)
+    return itens_somados
 
 
 dados = dados_de_pagamento()
