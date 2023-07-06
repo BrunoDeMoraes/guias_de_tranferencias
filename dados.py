@@ -64,15 +64,3 @@ class Dados():
     def relatorio_inicial(self):
         self.dados_de_pagamento()
         self.valor_de_pagamento()
-
-#dados = dados_de_pagamento()
-#print(dados)
-#fornecedores = fornecedores()
-#separador(dados, fornecedores)
-#valor_de_pagamento(dados)
-
-#teste = Dados()
-#teste.dados_de_pagamento()
-#print(teste.pagamentos)
-#teste.fornecedores()
-#print(teste.empresas)
