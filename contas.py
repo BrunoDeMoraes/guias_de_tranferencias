@@ -43,4 +43,3 @@ contas = consulta_contas(cam)
 for conta in contas:
     print(conta)
 
-
