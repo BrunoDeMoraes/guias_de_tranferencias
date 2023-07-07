@@ -1,6 +1,6 @@
 import pandas as pd
 
-class Dados():
+class Dados:
     def dados_de_pagamento(self):
         df = pd.read_excel("Matrix_2023_HRG.xlsx", skiprows=[0])
         print(df.columns)
