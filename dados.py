@@ -6,7 +6,7 @@ class Dados():
         print(df.columns)
         filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
         self.pagamentos = filtro.filter(
-            ['Cotação', 'Empresa ', 'Nº DANFE', 'V. Total', 'Nº TED']
+            ['Cotação', 'Empresa ', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI']
         )
         print(self.pagamentos)
 
@@ -31,7 +31,7 @@ class Dados():
                 soma = duplicados_subset1['V. Total'].sum()
                 print(f'Soma dos itens da NF R$ {soma}')
                 descricao = palavra_checagem.split('-')
-                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma]
+                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma, linha['Nº de processo SEI']]
         for indice, linha in self.pagamentos.iterrows():
             palavra_checagem = str(linha['Cotação']) + '-' + str(linha['Empresa ']) + '-' + str(linha['Nº DANFE'])
             if palavra_checagem in checagem:
@@ -40,7 +40,7 @@ class Dados():
                 checagem.append(palavra_checagem)
                 print(palavra_checagem)
                 descricao = palavra_checagem.split('-')
-                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['V. Total']]
+                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['V. Total'], linha['Nº de processo SEI']]
         print(checagem)
         for chave, valor in sorted(itens_somados.items()):
             print(f'{chave} - {valor}')
