@@ -5,16 +5,19 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 
+from contas import Contas
 from dados import Dados
 
-class interface(Dados):
+class interface(Contas, Dados):
     def __init__(self, tela):
 
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
         self.frame_mestre.pack(padx=200, pady=100)
 
-        self.teste = Button(self.frame_mestre, text='Executar', command=self.relatorio_inicial)
+        self.teste = Button(self.frame_mestre, text='Executar', command=self.listar_contas)
         self.teste.pack()
+
+
 
 if __name__ == '__main__':
     tela = Tk()
