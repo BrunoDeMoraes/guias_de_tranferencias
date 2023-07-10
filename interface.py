@@ -14,7 +14,7 @@ class interface(Contas, Dados):
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
         self.frame_mestre.pack(padx=200, pady=100)
 
-        self.teste = Button(self.frame_mestre, text='Executar', command=self.listar_contas)
+        self.teste = Button(self.frame_mestre, text='Executar', command=self.relatorio_inicial)
         self.teste.pack()
 
 
