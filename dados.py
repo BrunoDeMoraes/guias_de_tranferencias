@@ -1,4 +1,5 @@
 import pandas as pd
+from num2words import num2words
 
 class Dados:
     def dados_de_pagamento(self):
@@ -43,6 +44,8 @@ class Dados:
                 itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['V. Total'], linha['Nº de processo SEI']]
         print(checagem)
         for chave, valor in sorted(itens_somados.items()):
+            extenso = num2words(valor[3], lang='pt_BR', to='currency')
+            valor.append(extenso)
             print(f'{chave} - {valor}')
         return itens_somados
 
