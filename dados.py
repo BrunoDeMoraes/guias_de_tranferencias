@@ -12,8 +12,7 @@ class Dados:
         #print(self.pagamentos)
 
     def valor_de_pagamento(self):
-        duplicados = self.pagamentos[self.pagamentos.duplicated(subset=self.pagamentos.columns.drop('V. Total', 'Conta'), keep=False)]
-        #print(duplicados)
+        duplicados = self.pagamentos[self.pagamentos.duplicated(subset=['Cotação', 'Empresa ', 'Nº DANFE'], keep=False)]
         self.itens_somados = {}
         checagem = []
         for indice, linha in duplicados.iterrows():
