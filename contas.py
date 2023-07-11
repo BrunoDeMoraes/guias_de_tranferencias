@@ -22,14 +22,13 @@ class Contas:
         direcionador = self.conexao(comando)
         self.registros = direcionador.fetchall()
 
-    def cria_bd(caminho_do_bd):
-        caminho_do_banco_de_dados = caminho_do_bd
-        if not os.path.exists(caminho_do_banco_de_dados):
+    def cria_bd(self):
+        if not os.path.exists(self.banco_de_dados):
             comando = 'CREATE TABLE contas (local text, recurso text, tipo text, banco text, agencia text, numero text, cnpj texto, endereco text, telefone text)'
-            conexao(caminho_do_banco_de_dados, comando)
+            self.conexao(comando)
         else:
             print('Banco de dados localizado.')
-            consulta_contas(caminho_do_bd)
+            self.consulta_contas()
 
     def listar_contas(self):
         self.caminho_do_arquivo()
@@ -39,12 +38,14 @@ class Contas:
             print(i)
 
 
-#arquivo = caminho_do_arquivo()
-#cam = caminho_do_bd(arquivo)
-#cria_bd(cam)
-#comando = 'INSERT INTO contas VALUES ("APS", "Emenda", "Custeio", "070", "146", "007.333-0", "00.3994.700/0006-12", "Quadra 01", "3333-4444")'
-#conexao(cam, comando)
-#contas = consulta_contas(cam)
-#for conta in contas:
+
+#arquivo = Contas()
+#arq = arquivo.caminho_do_arquivo()
+#cam = arquivo.caminho_do_bd()
+#arquivo.cria_bd()
+#comando = 'INSERT INTO contas VALUES ("APS", "Regula", "Custeio", "777", "789", "007.777-0", "00.3994.700/0006-77", "Quadra 01", "3333-7777")'
+#arquivo.conexao(comando)
+#contas = arquivo.consulta_contas()
+#for conta in arquivo.registros:
 #    print(conta)
 
