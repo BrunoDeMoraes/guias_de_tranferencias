@@ -10,7 +10,6 @@ from contas import Contas
 from dados import Dados
 
 class interface(Contas, Dados):
-
     ORIGEM = [("SRSSU", "SRSSU"), ("APS", "APS")]
     def __init__(self, tela):
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
@@ -29,7 +28,7 @@ class interface(Contas, Dados):
         self.rolagem.pack(side=RIGHT, fill=Y)
 
         self.mycanvas.config(yscrollcommand=self.rolagem.set)
-        self.mycanvas.bind('<Configure>', lambda e: self.mycanvas.config(scrollregion=(0, 0, 2000, 5000)))
+        self.mycanvas.bind('<Configure>', lambda e: self.mycanvas.config(scrollregion=(0, 0, 2000, 3000)))
         self.mycanvas.bind("<MouseWheel>", lambda event: self.mycanvas.yview_scroll(-int(event.delta / 60), "units"))
 
         self.frame_display = Frame(self.mycanvas, padx=0, pady=0)
@@ -52,25 +51,25 @@ class interface(Contas, Dados):
         self.teste2 = Button(self.frame_1, text='Limpar', command=self.limpa_tela)
         self.teste2.grid(row=1, column=1)
 
-
-
-    def display(self, valor):
-        self.mycanvas.create_text((500, 470), text=valor, fill="green", font=("Helvetica", 10))
+        self.teste3 = Button(self.frame_1, text='Checar', command=self.gerar_guias)
+        self.teste3.grid(row=1, column=3)
 
     def carregar_dados(self):
         self.listar_pagamentos()
         self.listar_contas()
-        self.valores_formatados()
-        self.display(self.a)
+        self.display(self.valores_formatados())
+
+    def display(self, valor):
+        self.mycanvas.create_text((500, 470), text=valor, fill="green", font=("Helvetica", 10))
 
     def limpa_tela(self):
         self.mycanvas.delete("all")
 
-    def valores_formatados(self):
-        self.a =""
-        for i in self.itens_somados.values():
-            self.a = self.a + f'\n{i}\n'
-        print(self.a)
+    def gerar_guias(self):
+        if not self.checa_carregamento():
+            print('Aí não, meu patrão! Carrega os dados.')
+        else:
+            print("Vou gerar as Guias")
 
 
 if __name__ == '__main__':
