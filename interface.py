@@ -17,7 +17,7 @@ class interface(Contas, Dados):
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
 
         self.frame_1 = LabelFrame(self.frame_mestre, padx=0, pady=0)
-        self.frame_1.pack(fill="both", expand=1, padx=10, pady=(10, 2))
+        self.frame_1.pack(fill="both", padx=10, pady=(2, 2), ipady=10)
 
         self.frame_2 = LabelFrame(self.frame_mestre, padx=0, pady=0)
         self.frame_2.pack(fill="both", expand=1, padx=10, pady=10)
@@ -37,33 +37,34 @@ class interface(Contas, Dados):
 
         self.mycanvas.create_window((0, 0), window=self.frame_display, anchor="nw")
 
-        #self.janela = Label(self.frame_display, text="", bg="black", fg="white", padx=10, pady=0, justify=LEFT, font=("Helvetica", 10))
-        #self.janela.pack(ipadx=0, ipady=0)
-
         local = StringVar()
         local.set("SRSSU")
 
+        contador = 0
         for legenda, valor in interface.ORIGEM:
             self.conta_origem = Radiobutton(self.frame_1, text=legenda, variable=local, value=valor)
-            self.conta_origem.pack()
+            self.conta_origem.grid(row=0, column=contador)
+            contador += 1
 
-        self.teste = Button(self.frame_1, text='Executar', command=lambda: self.display(local.get()))
-        self.teste.pack(padx=0, pady=0)
+        self.teste1 = Button(self.frame_1, text='Listar', command=self.carregar_dados)
+        self.teste1.grid(row=1, column=0)
 
-        self.teste2 = Button(self.frame_1, text='listar', command=self.carregar_dados)
-        self.teste2.pack(padx=0, pady=0)
+        self.teste2 = Button(self.frame_1, text='Limpar', command=self.limpa_tela)
+        self.teste2.grid(row=1, column=1)
+
+
 
     def display(self, valor):
         self.mycanvas.create_text((500, 470), text=valor, fill="green", font=("Helvetica", 10))
-        #self.janela.destroy()
-        #self.janela = Label(self.frame_display, text=valor, bg="black", fg="green", padx=10, pady=0, justify=LEFT, font=("Helvetica", 10))
-        #self.janela.pack(ipadx=0, ipady=0)
 
     def carregar_dados(self):
         self.listar_pagamentos()
         self.listar_contas()
         self.valores_formatados()
         self.display(self.a)
+
+    def limpa_tela(self):
+        self.mycanvas.delete("all")
 
     def valores_formatados(self):
         self.a =""
@@ -75,7 +76,7 @@ class interface(Contas, Dados):
 if __name__ == '__main__':
     tela = Tk()
     tela.geometry("1100x600")
-    tela.resizable(1, 1)
+    tela.resizable(0, 0)
     objeto_tela = interface(tela)
     #tela.title()
     #tela.config(menu=objeto_tela.menu_certidões)
