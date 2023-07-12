@@ -37,8 +37,8 @@ class interface(Contas, Dados):
 
         self.mycanvas.create_window((0, 0), window=self.frame_display, anchor="nw")
 
-        self.janela = Label(self.frame_display, text="", bg="black", fg="white", padx=10, pady=0, justify=LEFT, font=("Helvetica", 10))
-        self.janela.pack(ipadx=0, ipady=0)
+        #self.janela = Label(self.frame_display, text="", bg="black", fg="white", padx=10, pady=0, justify=LEFT, font=("Helvetica", 10))
+        #self.janela.pack(ipadx=0, ipady=0)
 
         local = StringVar()
         local.set("SRSSU")
@@ -54,9 +54,10 @@ class interface(Contas, Dados):
         self.teste2.pack(padx=0, pady=0)
 
     def display(self, valor):
-        self.janela.destroy()
-        self.janela = Label(self.frame_display, text=valor, bg="black", fg="green", padx=10, pady=0, justify=LEFT, font=("Helvetica", 10))
-        self.janela.pack(ipadx=0, ipady=0)
+        self.mycanvas.create_text((500, 470), text=valor, fill="green", font=("Helvetica", 10))
+        #self.janela.destroy()
+        #self.janela = Label(self.frame_display, text=valor, bg="black", fg="green", padx=10, pady=0, justify=LEFT, font=("Helvetica", 10))
+        #self.janela.pack(ipadx=0, ipady=0)
 
     def carregar_dados(self):
         self.listar_pagamentos()
@@ -73,7 +74,7 @@ class interface(Contas, Dados):
 
 if __name__ == '__main__':
     tela = Tk()
-    tela.geometry("1000x600")
+    tela.geometry("1100x600")
     tela.resizable(1, 1)
     objeto_tela = interface(tela)
     #tela.title()
