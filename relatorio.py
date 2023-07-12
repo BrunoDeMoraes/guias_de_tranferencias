@@ -5,6 +5,7 @@ from contas import Contas
 from dados import Dados
 class Relatorio:
     def __init__(self, ):
+        pass
 
 
     def gerar_ted(self):

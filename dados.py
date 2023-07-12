@@ -74,4 +74,3 @@ class Dados:
 
     def checa_carregamento(self):
         return hasattr(self, 'itens_somados')
- 
