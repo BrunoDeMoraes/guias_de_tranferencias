@@ -3,7 +3,9 @@ from reportlab.lib.pagesizes import A4
 
 from contas import Contas
 from dados import Dados
-class Relatorio(Contas, Dados):
+class Relatorio:
+    def __init__(self, ):
+
 
     def gerar_ted(self):
         pass
