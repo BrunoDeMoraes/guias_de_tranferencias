@@ -10,7 +10,7 @@ from contas import Contas
 from dados import Dados
 
 class interface(Contas, Dados):
-    ORIGEM = [("SRSSU", "SRSSU"), ("APS", "APS")]
+    ORIGEM = ["SRSSU", "APS"]
     def __init__(self, tela):
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
@@ -37,13 +37,10 @@ class interface(Contas, Dados):
         self.mycanvas.create_window((0, 0), window=self.frame_display, anchor="nw")
 
         local = StringVar()
-        local.set("SRSSU")
+        local.set(interface.ORIGEM[0])
 
-        contador = 0
-        for legenda, valor in interface.ORIGEM:
-            self.conta_origem = Radiobutton(self.frame_1, text=legenda, variable=local, value=valor)
-            self.conta_origem.grid(row=0, column=contador)
-            contador += 1
+        self.conta_origem = OptionMenu(self.frame_1, local, *interface.ORIGEM)
+        self.conta_origem.grid(row=0, column=0)
 
         self.teste1 = Button(self.frame_1, text='Listar', command=self.carregar_dados)
         self.teste1.grid(row=1, column=0)
