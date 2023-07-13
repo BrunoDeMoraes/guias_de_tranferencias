@@ -16,15 +16,18 @@ class interface(Contas, Dados):
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
 
         self.frame_1 = LabelFrame(self.frame_mestre, padx=0, pady=0)
-        self.frame_1.pack(fill="both", padx=10, pady=(2, 2), ipady=10)
+        self.frame_1.pack(fill="both", padx=10, pady=0, ipady=0)
 
         self.frame_2 = LabelFrame(self.frame_mestre, padx=0, pady=0)
-        self.frame_2.pack(fill="both", expand=1, padx=10, pady=10)
+        self.frame_2.pack(fill="both", padx=10, pady=10)
 
-        self.mycanvas = Canvas(self.frame_2, bg="black")
+        self.frame_3 = LabelFrame(self.frame_mestre, padx=0, pady=0)
+        self.frame_3.pack(fill="both", expand=1, padx=10, pady=10)
+
+        self.mycanvas = Canvas(self.frame_3, bg="black")
         self.mycanvas.pack(side=LEFT, fill=BOTH, expand=1)
 
-        self.rolagem = ttk.Scrollbar(self.frame_2, orient=VERTICAL, command=self.mycanvas.yview)
+        self.rolagem = ttk.Scrollbar(self.frame_3, orient=VERTICAL, command=self.mycanvas.yview)
         self.rolagem.pack(side=RIGHT, fill=Y)
 
         self.mycanvas.config(yscrollcommand=self.rolagem.set)
@@ -42,14 +45,14 @@ class interface(Contas, Dados):
         self.conta_origem = OptionMenu(self.frame_1, local, *interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
-        self.teste1 = Button(self.frame_1, text='Listar', command=self.carregar_dados)
-        self.teste1.grid(row=1, column=0)
+        self.teste1 = Button(self.frame_2, text='Listar', command=self.carregar_dados)
+        self.teste1.grid(row=0, column=0)
 
-        self.teste2 = Button(self.frame_1, text='Limpar', command=self.limpa_tela)
-        self.teste2.grid(row=1, column=1)
+        self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpa_tela)
+        self.teste2.grid(row=0, column=1)
 
-        self.teste3 = Button(self.frame_1, text='Checar', command=self.gerar_guias)
-        self.teste3.grid(row=1, column=3)
+        self.teste3 = Button(self.frame_2, text='Checar', command=self.gerar_guias)
+        self.teste3.grid(row=0, column=3)
 
     def carregar_dados(self):
         self.listar_pagamentos()
