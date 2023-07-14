@@ -6,6 +6,7 @@ class Contas:
         caminho_py = __file__
         caminho_do_dir = caminho_py.split('\\')
         self.caminho_de_uso = ('/').join(caminho_do_dir[0:-1])
+        return self.caminho_de_uso
 
     def caminho_do_bd(self):
         caminho = self.caminho_de_uso

@@ -60,7 +60,7 @@ class interface():
         self.teste3 = Button(self.frame_2, text='Contas', command=self.relatorio.listar_contas)
         self.teste3.grid(row=0, column=4)
 
-        self.teste4 = Button(self.frame_2, text='Contas', command=self.relatorio.fornecedores)
+        self.teste4 = Button(self.frame_2, text='Fornecedores', command=self.relatorio.crir_ted)
         self.teste4.grid(row=0, column=5)
 
     def display(self, valor):
