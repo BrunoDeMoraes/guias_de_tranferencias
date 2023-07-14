@@ -9,6 +9,11 @@ class Dados:
             ['Cotação', 'Empresa ', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI', 'Conta']
         )
 
+    def valor_por_extenso(self):
+        for chave, valor in sorted(self.itens_somados.items()):
+            extenso = num2words(valor[3], lang='pt_BR', to='currency')
+            valor.append(extenso)
+
     def valor_de_pagamento(self):
         duplicados = self.pagamentos[self.pagamentos.duplicated(subset=['Cotação', 'Empresa ', 'Nº DANFE'], keep=False)]
         self.itens_somados = {}
@@ -36,12 +41,8 @@ class Dados:
                 descricao = palavra_checagem.split('-')
                 self.itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['V. Total'], linha['Nº de processo SEI'], linha['Conta']]
         self.valor_por_extenso()
+        return self.itens_somados
 
-
-    def valor_por_extenso(self):
-        for chave, valor in sorted(self.itens_somados.items()):
-            extenso = num2words(valor[3], lang='pt_BR', to='currency')
-            valor.append(extenso)
 
     def fornecedores(self):
         df = pd.read_excel("Matrix_2023_HRG.xlsx", sheet_name='Fornecedores')
@@ -49,16 +50,8 @@ class Dados:
         for indice, linha in df.iterrows():
             a = linha.to_list()
             self.empresas[a[0]] = a[1:]
-            print(self.empresas)
-
-    def separador(self, dados):
-        for indice, linha in dados.iterrows():
-            a = linha.to_list()
-            if self.empresas[a[1]][5] == "BRB":
-                print(f"{a[1]} - TED")
-                print(f"{a[1]} - tranferência")
-            else:
-                pass
+            #print(self.empresas)
+        return self.empresas
 
     def valores_formatados(self):
         valores_impressao = ""
