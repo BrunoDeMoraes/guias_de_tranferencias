@@ -6,12 +6,15 @@ from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 
-from contas import Contas
-from dados import Dados
+#from contas import Contas
+#from dados import Dados
+from relatorio import Relatorio
 
-class interface(Contas, Dados):
+class interface():
     ORIGEM = ["SRSSU", "APS"]
-    def __init__(self, tela):
+    def __init__(self, tela, relatorio):
+        self.relatorio = relatorio
+
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
 
@@ -54,29 +57,38 @@ class interface(Contas, Dados):
         self.teste3 = Button(self.frame_2, text='Checar', command=self.gerar_guias)
         self.teste3.grid(row=0, column=3)
 
-    def carregar_dados(self):
-        self.listar_pagamentos()
-        self.listar_contas()
-        self.display(self.valores_formatados())
+        self.teste3 = Button(self.frame_2, text='Contas', command=self.relatorio.listar_contas)
+        self.teste3.grid(row=0, column=4)
+
+        self.teste4 = Button(self.frame_2, text='Contas', command=self.relatorio.fornecedores)
+        self.teste4.grid(row=0, column=5)
 
     def display(self, valor):
-        self.mycanvas.create_text((500, 470), text=valor, fill="green", font=("Helvetica", 10))
+        self.mycanvas.create_text((500, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
 
     def limpa_tela(self):
         self.mycanvas.delete("all")
 
+    def carregar_dados(self):
+        self.relatorio.listar_pagamentos()
+        self.relatorio.listar_contas()
+        self.display(self.relatorio.valores_formatados())
+
     def gerar_guias(self):
-        if not self.checa_carregamento():
+        if not self.relatorio.checa_carregamento():
             print('Aí não, meu patrão! Carrega os dados.')
+            #msgbox de erro
         else:
             print("Vou gerar as Guias")
+            #metodo para gerar guias de transferência
 
 
 if __name__ == '__main__':
+    rel = Relatorio()
     tela = Tk()
     tela.geometry("1100x600")
     tela.resizable(0, 0)
-    objeto_tela = interface(tela)
+    objeto_tela = interface(tela, rel)
     #tela.title()
     #tela.config(menu=objeto_tela.menu_certidões)
     tela.mainloop()
