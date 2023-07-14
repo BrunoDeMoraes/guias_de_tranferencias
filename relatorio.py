@@ -41,11 +41,7 @@ class Relatorio(Contas, Dados):
         cnv.setFont("Courier-Bold", 10)
         cnv.drawString(self.mm(110), self.mm(275), 'Transferência Eletrônica Disponível - TED -"E"')
         cnv.setFont("Courier-Bold", 10)
-        cnv.drawString(self.mm(110), self.mm(275), 'Transferência Eletrônica Disponível - TED -"E"')
-        cnv.setFont("Courier-Bold", 10)
-        cnv.drawString(self.mm(110), self.mm(275), 'Transferência Eletrônica Disponível - TED -"E"')
-        cnv.setFont("Courier-Bold", 10)
-        cnv.drawString(self.mm(110), self.mm(275), 'Transferência Eletrônica Disponível - TED -"E"')
+        
         cnv.save()
 
 if __name__ == '__main__':
