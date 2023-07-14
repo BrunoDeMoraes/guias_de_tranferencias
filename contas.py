@@ -36,16 +36,4 @@ class Contas:
         self.consulta_contas()
         for i in self.registros:
             print(i)
-
-
-
-#arquivo = Contas()
-#arq = arquivo.caminho_do_arquivo()
-#cam = arquivo.caminho_do_bd()
-#arquivo.cria_bd()
-#comando = 'INSERT INTO contas VALUES ("APS", "Regula", "Custeio", "777", "789", "007.777-0", "00.3994.700/0006-77", "Quadra 01", "3333-7777")'
-#arquivo.conexao(comando)
-#contas = arquivo.consulta_contas()
-#for conta in arquivo.registros:
-#    print(conta)
-
+        return self.registros
