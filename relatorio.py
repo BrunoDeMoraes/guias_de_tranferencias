@@ -1,6 +1,8 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import fonts
+from reportlab.platypus import SimpleDocTemplate
+from reportlab.platypus import Table
 
 from contas import Contas
 from dados import Dados
@@ -27,22 +29,91 @@ class Relatorio(Contas, Dados):
         return (medida/0.352777)
 
     def criar_ted(self):
-        #ontes = fonts.
+
+        linhas = ['Banco', 'Agência', 'Nº Conta Remetente', 'Uso do Banco']
+        linhas2 = [1, 2, 3, 4]
+        linhas3 = [1, 2, 3, 4]
+
         #print(fontes)
         pasta = self.caminho_do_arquivo()
+
         cnv = canvas.Canvas(f'{pasta}/ted.pdf')
+        fontes = cnv.getAvailableFonts()
+        for f in fontes:
+            print(f)
         cnv.setPageSize(A4)
-        cnv.drawImage(f'{pasta}/Imagens/Logo_brb.jpg', self.mm(0), self.mm(276), width=self.mm(85), height=self.mm(18))
-        cnv.rect(self.mm(126), self.mm(279), width=self.mm(70), height=self.mm(7))
-        cnv.setFont("Courier-Bold", 12)
-        cnv.drawString(self.mm(140), self.mm(281), "Emenda parlamentar")
-        cnv.setFont("Courier-Bold", 8)
-        cnv.drawString(self.mm(9), self.mm(275), "ISPB -00.000.208")
-        cnv.setFont("Courier-Bold", 10)
-        cnv.drawString(self.mm(110), self.mm(275), 'Transferência Eletrônica Disponível - TED -"E"')
-        cnv.setFont("Courier-Bold", 10)
-        
+
+        contador = 0
+        for i in range(0, 2):
+            cnv.drawImage(
+                f'{pasta}/Imagens/Logo_brb.jpg', self.mm(0), self.mm(276 - contador), width=self.mm(85),
+                height=self.mm(18
+                               )
+            )
+
+            cnv.rect(self.mm(126), self.mm(279 - contador), width=self.mm(70), height=self.mm(7))
+
+            cnv.setFont("Times-Roman", 7)
+            cnv.drawString(self.mm(10), self.mm(265 - contador), "Banco")
+            cnv.drawString(self.mm(27), self.mm(265 - contador), "Agência")
+            cnv.drawString(self.mm(54), self.mm(265 - contador), "Nº Conta Remetente")
+            cnv.drawString(self.mm(80), self.mm(265 - contador), "Uso do Banco")
+            cnv.drawString(self.mm(104), self.mm(265 - contador), "Banco")
+            cnv.drawString(self.mm(121), self.mm(265 - contador), "Agência")
+            cnv.drawString(self.mm(148), self.mm(265 - contador), "Nº Conta Favorecido")
+            cnv.drawString(self.mm(174), self.mm(265 - contador), "Valor")
+
+
+
+            cnv.setFont("Times-Bold", 8)
+            cnv.drawString(self.mm(9), self.mm(275 - contador), "ISPB -00.000.208")
+
+            cnv.setFont("Times-Bold", 10)
+            cnv.drawString(self.mm(115), self.mm(275 - contador), 'Transferência Eletrônica Disponível - TED -"E"')
+            cnv.line(self.mm(8), self.mm(273 - contador), self.mm(196), self.mm(273 - contador))
+            cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
+
+            cnv.setFont("Times-Bold", 12)
+            cnv.drawString(self.mm(140), self.mm(281 - contador), "Emenda parlamentar")
+
+            cnv.line(self.mm(102), self.mm(268 - contador), self.mm(102), self.mm(198 - contador)) #Linha central
+            cnv.line(self.mm(196), self.mm(268 - contador), self.mm(196), self.mm(188 - contador)) #linha direita
+            cnv.line(self.mm(8), self.mm(268 - contador), self.mm(8), self.mm(188 - contador)) #linha esquerda
+            cnv.line(self.mm(25), self.mm(268 - contador), self.mm(25), self.mm(258 - contador)) #divisão linha 1.1
+            cnv.line(self.mm(52), self.mm(268 - contador), self.mm(52), self.mm(258 - contador)) #divisão linha 1.2
+            cnv.line(self.mm(78), self.mm(268 - contador), self.mm(78), self.mm(258 - contador)) #divisão linha 1.3
+            cnv.line(self.mm(119), self.mm(268 - contador), self.mm(119), self.mm(258 - contador)) #divisão linha 1.3
+            cnv.line(self.mm(146), self.mm(268 - contador), self.mm(146), self.mm(258 - contador)) #divisão linha 1.3
+            cnv.line(self.mm(172), self.mm(268 - contador), self.mm(172), self.mm(258 - contador)) #divisão linha 1.3
+            cnv.line(self.mm(8), self.mm(258 - contador), self.mm(196), self.mm(258 - contador)) #linha horizontal 1
+            cnv.line(self.mm(8), self.mm(248 - contador), self.mm(196), self.mm(248 - contador)) #linha horizontal 2
+            cnv.line(self.mm(8), self.mm(238 - contador), self.mm(196), self.mm(238 - contador)) #linha horizontal 3
+            cnv.line(self.mm(8), self.mm(228 - contador), self.mm(102), self.mm(228 - contador)) #meia linha horizontal 1
+            cnv.line(self.mm(8), self.mm(218 - contador), self.mm(196), self.mm(218 - contador)) #linha horizontal 4
+            cnv.line(self.mm(8), self.mm(208 - contador), self.mm(196), self.mm(208 - contador)) #linha horizontal 5
+            cnv.line(self.mm(8), self.mm(203 - contador), self.mm(196), self.mm(203 - contador)) #linha horizontal 6
+            cnv.line(self.mm(8), self.mm(198 - contador), self.mm(196), self.mm(198 - contador)) #linha horizontal 7
+            cnv.line(self.mm(8), self.mm(193 - contador), self.mm(196), self.mm(193 - contador)) #linha horizontal 8
+            cnv.line(self.mm(8), self.mm(188 - contador), self.mm(196), self.mm(188 - contador)) #linha horizontal 9
+            cnv.line(self.mm(8), self.mm(183 - contador), self.mm(8), self.mm(178 - contador))  #linha vertical id esquerda
+            cnv.line(self.mm(75), self.mm(183 - contador), self.mm(75), self.mm(178 - contador)) #linha vertica id direita
+            cnv.line(self.mm(8), self.mm(178 - contador), self.mm(75), self.mm(178 - contador)) #linha horizontal id
+            cnv.line(self.mm(8), self.mm(163 - contador), self.mm(196), self.mm(163 - contador)) #linha horizontal assinatura
+            cnv.line(self.mm(102), self.mm(172 - contador), self.mm(102), self.mm(163 - contador)) #linha vertical assinatura
+            contador += 143
+
+        cnv.setDash([3, 1])
+        cnv.line(self.mm(8), self.mm(153), self.mm(196), self.mm(153))
+
+        #cnv.drawImage(f'{pasta}/Imagens/Logo_brb.jpg', self.mm(0), self.mm(138), width=self.mm(85), height=self.mm(18))
+
+
+
+
+
+
         cnv.save()
+
 
 if __name__ == '__main__':
     r = Relatorio()
