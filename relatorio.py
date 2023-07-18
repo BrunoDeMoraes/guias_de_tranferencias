@@ -117,6 +117,18 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(17), self.mm(160 - contador), "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
             cnv.drawString(self.mm(114), self.mm(160 - contador), "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
+
+            # nome_destinatário
+            cnv.setFont("Times-Bold", 7)
+            nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA)"
+            nome = self.alinhar_texto(nome_teste)
+
+            calc = 0
+            for i in nome:
+                print(i)
+                cnv.drawString(self.mm(104), self.mm((252 - contador) - calc), i)
+                calc += 3
+
             cnv.setFont("Times-Roman", 8)
             cnv.drawString(self.mm(45), self.mm(204 - contador), "Pesssoa Física")
             cnv.drawString(self.mm(75), self.mm(204 - contador), "Pesssoa Jurídica")
@@ -140,9 +152,7 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(141), self.mm(200 - contador), "\u2713")
             cnv.drawString(self.mm(106), self.mm(195 - contador), "\u2713")
 
-            # nome_destinatário
-            nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA)"
-            cnv.drawString(self.mm(104), self.mm(250 - contador),
+
 
             cnv.setFont("Times-Bold", 10)
             cnv.drawString(self.mm(115), self.mm(275 - contador), 'Transferência Eletrônica Disponível - TED -"E"')
@@ -165,7 +175,7 @@ class Relatorio(Contas, Dados):
 
             #pagamento
             cnv.drawString(self.mm(174), self.mm(260 - contador), "R$ 56.700,00")
-            # cnv.drawString(self.mm(10), self.mm(245 - contador), "CNPJ/CPF(s)")
+            #cnv.drawString(self.mm(10), self.mm(245 - contador), "CNPJ/CPF(s)")
             # cnv.drawString(self.mm(104), self.mm(245 - contador), "CNPJ/CPF(s)")
             # cnv.drawString(self.mm(10), self.mm(235 - contador), "Nº identidade / Órgão expedidor / UF")
             # cnv.drawString(self.mm(104), self.mm(235 - contador), "Valor por Extenso")
@@ -202,8 +212,25 @@ class Relatorio(Contas, Dados):
         cnv.line(self.mm(8), self.mm(153), self.mm(196), self.mm(153))
         cnv.save()
 
+    def alinhar_texto(self, texto: str):
+        palavras = texto.split(" ")
+        linha = ""
+        texto_alinhado = []
+        for palavra in palavras:
+            if len((linha + palavra)) > 60:
+                print(len(linha))
+                texto_alinhado.append(linha)
+                linha = palavra + " "
+            else:
+                linha += palavra + " "
+            if palavra == palavras[-1]:
+                texto_alinhado.append(linha)
+        return texto_alinhado
+
 
 if __name__ == '__main__':
     r = Relatorio()
     #r.fornecedores()
     r.criar_ted()
+    #nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA textoextragrandao para testar se o código realemente funciona com qualquer palavra enorme)"
+    #r.alinhar_texto(nome_teste)
