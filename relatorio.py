@@ -3,6 +3,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib import fonts
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus import Table
+from datetime import date
 
 from contas import Contas
 from dados import Dados
@@ -29,6 +30,8 @@ class Relatorio(Contas, Dados):
         return (medida/0.352777)
 
     def criar_ted(self):
+        data = date.today()
+        data_formatada = data.strftime('%d/%m/%Y')
         pasta = self.caminho_do_arquivo()
 
         cnv = canvas.Canvas(f'{pasta}/ted.pdf')
@@ -112,6 +115,8 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(10), self.mm(195 - contador), "Finalidade")
             cnv.drawString(self.mm(10), self.mm(190 - contador), "Histórico")
             cnv.drawString(self.mm(10), self.mm(185 - contador), "Nº Identificação Depósito")
+            cnv.drawString(self.mm(171), self.mm(185 - contador), f"Impresso em {data_formatada}")
+            cnv.drawString(self.mm(171), self.mm(182 - contador), f"113-ENGELITE 6 F")
             cnv.drawString(self.mm(76), self.mm(180 - contador), "Preencher somente nas transferências de recursos para deposito judicial")
             cnv.drawString(self.mm(10), self.mm(175 - contador), "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
             cnv.drawString(self.mm(17), self.mm(160 - contador), "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
@@ -187,16 +192,10 @@ class Relatorio(Contas, Dados):
             calc = 0
             for i in v_nome:
                 cnv.drawString(self.mm(104), self.mm((230 - contador) - calc), i)
-                calc += 3
+                calc += 4
 
             cnv.setFont("Times-Bold", 12)
             cnv.drawString(self.mm(140), self.mm(281 - contador), "Emenda parlamentar")
-
-
-
-
-
-
             contador += 143
 
         cnv.setDash([3, 1])
