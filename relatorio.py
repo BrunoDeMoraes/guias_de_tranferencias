@@ -52,8 +52,8 @@ class Relatorio(Contas, Dados):
             cnv.line(self.mm(52), self.mm(268 - contador), self.mm(52), self.mm(258 - contador))  # divisão linha 1.2
             cnv.line(self.mm(78), self.mm(268 - contador), self.mm(78), self.mm(258 - contador))  # divisão linha 1.3
             cnv.line(self.mm(119), self.mm(268 - contador), self.mm(119), self.mm(258 - contador))  # divisão linha 1.4
-            cnv.line(self.mm(146), self.mm(268 - contador), self.mm(146), self.mm(258 - contador))  # divisão linha 1.5
-            cnv.line(self.mm(172), self.mm(268 - contador), self.mm(172), self.mm(258 - contador))  # divisão linha 1.6
+            cnv.line(self.mm(142), self.mm(268 - contador), self.mm(142), self.mm(258 - contador))  # divisão linha 1.5
+            cnv.line(self.mm(168), self.mm(268 - contador), self.mm(168), self.mm(258 - contador))  # divisão linha 1.6
             cnv.line(self.mm(8), self.mm(258 - contador), self.mm(196), self.mm(258 - contador))  # linha horizontal 1
             cnv.line(self.mm(8), self.mm(248 - contador), self.mm(196), self.mm(248 - contador))  # linha horizontal 2
             cnv.line(self.mm(8), self.mm(238 - contador), self.mm(196), self.mm(238 - contador))  # linha horizontal 3
@@ -94,8 +94,8 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(80), self.mm(265 - contador), "Uso do Banco")
             cnv.drawString(self.mm(104), self.mm(265 - contador), "Banco")
             cnv.drawString(self.mm(121), self.mm(265 - contador), "Agência")
-            cnv.drawString(self.mm(148), self.mm(265 - contador), "Nº Conta Favorecido")
-            cnv.drawString(self.mm(174), self.mm(265 - contador), "Valor")
+            cnv.drawString(self.mm(144), self.mm(265 - contador), "Nº Conta Favorecido")
+            cnv.drawString(self.mm(170), self.mm(265 - contador), "Valor")
             cnv.drawString(self.mm(10), self.mm(255 - contador), "Nome do(s) Remetente(s)")
             cnv.drawString(self.mm(104), self.mm(255 - contador), "Nome do(s) Destinatário(s)")
             cnv.drawString(self.mm(10), self.mm(245 - contador), "CNPJ/CPF(s)")
@@ -117,7 +117,6 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(17), self.mm(160 - contador), "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
             cnv.drawString(self.mm(114), self.mm(160 - contador), "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
-
             # nome_destinatário
             cnv.setFont("Times-Bold", 7)
             nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA)"
@@ -125,7 +124,6 @@ class Relatorio(Contas, Dados):
 
             calc = 0
             for i in nome:
-                print(i)
                 cnv.drawString(self.mm(104), self.mm((252 - contador) - calc), i)
                 calc += 3
 
@@ -151,6 +149,8 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(171), self.mm(205 - contador), "\u2713")
             cnv.drawString(self.mm(141), self.mm(200 - contador), "\u2713")
             cnv.drawString(self.mm(106), self.mm(195 - contador), "\u2713")
+            cnv.drawString(self.mm(10), self.mm(221 - contador),
+                           "Área especial nº 01, Lote Único - Setor Central Gama/DF. CEP: 72.405-901")
 
 
 
@@ -160,43 +160,34 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
             cnv.drawString(self.mm(84), self.mm(155 - contador), 'Assinatura do Remetente')
 
-            #conta
-            cnv.drawString(self.mm(12), self.mm(260 - contador), "070")
-            cnv.drawString(self.mm(29), self.mm(260 - contador), "144")
-            cnv.drawString(self.mm(56), self.mm(260 - contador), "000.000-0")
-            cnv.drawString(self.mm(45), self.mm(250 - contador), "SRSSU - (Regular)")
-
+            #contas
+            cnv.drawString(self.mm(10), self.mm(260 - contador), "070")
+            cnv.drawString(self.mm(27), self.mm(260 - contador), "144")
+            cnv.drawString(self.mm(54), self.mm(260 - contador), "000.000-0")
+            cnv.drawString(self.mm(10), self.mm(250 - contador), "SRSSU - (Regular)")
+            cnv.drawString(self.mm(10), self.mm(240 - contador), "00.394.700/0006-12")
 
 
             #fornecedor
-            cnv.drawString(self.mm(106), self.mm(260 - contador), "341")
-            cnv.drawString(self.mm(123), self.mm(260 - contador), "56066-6")
-            cnv.drawString(self.mm(150), self.mm(260 - contador), "311.361-6")
+            cnv.drawString(self.mm(104), self.mm(260 - contador), "341")
+            cnv.drawString(self.mm(121), self.mm(260 - contador), "56066-6")
+            cnv.drawString(self.mm(144), self.mm(260 - contador), "311.361-6")
+            cnv.drawString(self.mm(104), self.mm(240 - contador), "00.394.700/0001-22")
+            cnv.drawString(self.mm(10), self.mm(210 - contador), "(61) 3392-6465 / 3393-6514")
 
-            #pagamento
-            cnv.drawString(self.mm(174), self.mm(260 - contador), "R$ 56.700,00")
-            #cnv.drawString(self.mm(10), self.mm(245 - contador), "CNPJ/CPF(s)")
-            # cnv.drawString(self.mm(104), self.mm(245 - contador), "CNPJ/CPF(s)")
-            # cnv.drawString(self.mm(10), self.mm(235 - contador), "Nº identidade / Órgão expedidor / UF")
-            # cnv.drawString(self.mm(104), self.mm(235 - contador), "Valor por Extenso")
-            # cnv.drawString(self.mm(10), self.mm(225 - contador), "Endereço")
-            # cnv.drawString(self.mm(10), self.mm(215 - contador), "Telefone(s)")
-            # cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº Identidade / Órgão expedidor / UF")
-            # cnv.drawString(self.mm(10), self.mm(205 - contador), "Tipo Pessoa Debitada")
-            # cnv.drawString(self.mm(10), self.mm(200 - contador), "Tipo Conta Debitada")
-            # cnv.drawString(self.mm(104), self.mm(205 - contador), "Tipo Pessoa Creditada")
-            # cnv.drawString(self.mm(104), self.mm(200 - contador), "Tipo Conta Creditada")
-            # cnv.drawString(self.mm(10), self.mm(195 - contador), "Finalidade")
-            # cnv.drawString(self.mm(10), self.mm(190 - contador), "Histórico")
-            # cnv.drawString(self.mm(10), self.mm(185 - contador), "Nº Identificação Depósito")
-            # cnv.drawString(self.mm(76), self.mm(180 - contador),
-            #                "Preencher somente nas transferências de recursos para deposito judicial")
-            # cnv.drawString(self.mm(10), self.mm(175 - contador),
-            #                "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
-            # cnv.drawString(self.mm(17), self.mm(160 - contador),
-            #                "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
-            # cnv.drawString(self.mm(114), self.mm(160 - contador),
-            #                "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
+            #dados
+            cnv.drawString(self.mm(170), self.mm(260 - contador), "R$ 5.555.555,55")
+            cnv.drawString(self.mm(46), self.mm(189 - contador), "00060-00553264/2021-81")
+            cnv.drawString(self.mm(121), self.mm(189 - contador), "492/2023")
+            cnv.drawString(self.mm(161), self.mm(189 - contador), "999999999")
+
+            valor_teste = "Cinco milhões, quinhentos e cinquenta e cinco mil, quinhentos e cinquenta e cinco reais e cinquenta e cinco centavos"
+            v_nome = self.alinhar_texto(valor_teste)
+
+            calc = 0
+            for i in v_nome:
+                cnv.drawString(self.mm(104), self.mm((230 - contador) - calc), i)
+                calc += 3
 
             cnv.setFont("Times-Bold", 12)
             cnv.drawString(self.mm(140), self.mm(281 - contador), "Emenda parlamentar")
@@ -209,7 +200,7 @@ class Relatorio(Contas, Dados):
             contador += 143
 
         cnv.setDash([3, 1])
-        cnv.line(self.mm(8), self.mm(153), self.mm(196), self.mm(153))
+        cnv.line(self.mm(8), self.mm(149), self.mm(196), self.mm(149))
         cnv.save()
 
     def alinhar_texto(self, texto: str):
