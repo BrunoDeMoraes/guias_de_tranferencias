@@ -29,12 +29,6 @@ class Relatorio(Contas, Dados):
         return (medida/0.352777)
 
     def criar_ted(self):
-
-        linhas = ['Banco', 'Agência', 'Nº Conta Remetente', 'Uso do Banco']
-        linhas2 = [1, 2, 3, 4]
-        linhas3 = [1, 2, 3, 4]
-
-        #print(fontes)
         pasta = self.caminho_do_arquivo()
 
         cnv = canvas.Canvas(f'{pasta}/ted.pdf')
@@ -50,6 +44,36 @@ class Relatorio(Contas, Dados):
                 height=self.mm(18
                                )
             )
+
+            cnv.line(self.mm(102), self.mm(268 - contador), self.mm(102), self.mm(198 - contador))  # Linha central
+            cnv.line(self.mm(196), self.mm(268 - contador), self.mm(196), self.mm(188 - contador))  # linha direita
+            cnv.line(self.mm(8), self.mm(268 - contador), self.mm(8), self.mm(188 - contador))  # linha esquerda
+            cnv.line(self.mm(25), self.mm(268 - contador), self.mm(25), self.mm(258 - contador))  # divisão linha 1.1
+            cnv.line(self.mm(52), self.mm(268 - contador), self.mm(52), self.mm(258 - contador))  # divisão linha 1.2
+            cnv.line(self.mm(78), self.mm(268 - contador), self.mm(78), self.mm(258 - contador))  # divisão linha 1.3
+            cnv.line(self.mm(119), self.mm(268 - contador), self.mm(119), self.mm(258 - contador))  # divisão linha 1.4
+            cnv.line(self.mm(146), self.mm(268 - contador), self.mm(146), self.mm(258 - contador))  # divisão linha 1.5
+            cnv.line(self.mm(172), self.mm(268 - contador), self.mm(172), self.mm(258 - contador))  # divisão linha 1.6
+            cnv.line(self.mm(8), self.mm(258 - contador), self.mm(196), self.mm(258 - contador))  # linha horizontal 1
+            cnv.line(self.mm(8), self.mm(248 - contador), self.mm(196), self.mm(248 - contador))  # linha horizontal 2
+            cnv.line(self.mm(8), self.mm(238 - contador), self.mm(196), self.mm(238 - contador))  # linha horizontal 3
+            cnv.line(self.mm(8), self.mm(228 - contador), self.mm(102),
+                     self.mm(228 - contador))  # meia linha horizontal 1
+            cnv.line(self.mm(8), self.mm(218 - contador), self.mm(196), self.mm(218 - contador))  # linha horizontal 4
+            cnv.line(self.mm(8), self.mm(208 - contador), self.mm(196), self.mm(208 - contador))  # linha horizontal 5
+            cnv.line(self.mm(8), self.mm(203 - contador), self.mm(196), self.mm(203 - contador))  # linha horizontal 6
+            cnv.line(self.mm(8), self.mm(198 - contador), self.mm(196), self.mm(198 - contador))  # linha horizontal 7
+            cnv.line(self.mm(8), self.mm(193 - contador), self.mm(196), self.mm(193 - contador))  # linha horizontal 8
+            cnv.line(self.mm(8), self.mm(188 - contador), self.mm(196), self.mm(188 - contador))  # linha horizontal 9
+            cnv.line(self.mm(8), self.mm(183 - contador), self.mm(8),
+                     self.mm(178 - contador))  # linha vertical id esquerda
+            cnv.line(self.mm(75), self.mm(183 - contador), self.mm(75),
+                     self.mm(178 - contador))  # linha vertica id direita
+            cnv.line(self.mm(8), self.mm(178 - contador), self.mm(75), self.mm(178 - contador))  # linha horizontal id
+            cnv.line(self.mm(8), self.mm(163 - contador), self.mm(196),
+                     self.mm(163 - contador))  # linha horizontal assinatura
+            cnv.line(self.mm(102), self.mm(172 - contador), self.mm(102),
+                     self.mm(163 - contador))  # linha vertical assinatura
 
             cnv.rect(self.mm(126), self.mm(279 - contador), width=self.mm(70), height=self.mm(7))
             cnv.rect(self.mm(40), self.mm(204 - contador), width=self.mm(3), height=self.mm(3))
@@ -80,13 +104,18 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(104), self.mm(235 - contador), "Valor por Extenso")
             cnv.drawString(self.mm(10), self.mm(225 - contador), "Endereço")
             cnv.drawString(self.mm(10), self.mm(215 - contador), "Telefone(s)")
-            cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº identidade / Órgão expedidor / UF")
+            cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº Identidade / Órgão expedidor / UF")
             cnv.drawString(self.mm(10), self.mm(205 - contador), "Tipo Pessoa Debitada")
             cnv.drawString(self.mm(10), self.mm(200 - contador), "Tipo Conta Debitada")
             cnv.drawString(self.mm(104), self.mm(205 - contador), "Tipo Pessoa Creditada")
             cnv.drawString(self.mm(104), self.mm(200 - contador), "Tipo Conta Creditada")
             cnv.drawString(self.mm(10), self.mm(195 - contador), "Finalidade")
             cnv.drawString(self.mm(10), self.mm(190 - contador), "Histórico")
+            cnv.drawString(self.mm(10), self.mm(185 - contador), "Nº Identificação Depósito")
+            cnv.drawString(self.mm(76), self.mm(180 - contador), "Preencher somente nas transferências de recursos para deposito judicial")
+            cnv.drawString(self.mm(10), self.mm(175 - contador), "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
+            cnv.drawString(self.mm(17), self.mm(160 - contador), "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
+            cnv.drawString(self.mm(114), self.mm(160 - contador), "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
             cnv.setFont("Times-Roman", 8)
             cnv.drawString(self.mm(45), self.mm(204 - contador), "Pesssoa Física")
@@ -105,56 +134,76 @@ class Relatorio(Contas, Dados):
 
             cnv.setFont("Times-Bold", 8)
             cnv.drawString(self.mm(9), self.mm(275 - contador), "ISPB -00.000.208")
+            cnv.drawString(self.mm(71), self.mm(205 - contador), "\u2713")
+            cnv.drawString(self.mm(41), self.mm(200 - contador), "\u2713")
+            cnv.drawString(self.mm(171), self.mm(205 - contador), "\u2713")
+            cnv.drawString(self.mm(141), self.mm(200 - contador), "\u2713")
+            cnv.drawString(self.mm(106), self.mm(195 - contador), "\u2713")
 
+            # nome_destinatário
+            nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA)"
+            cnv.drawString(self.mm(104), self.mm(250 - contador),
 
             cnv.setFont("Times-Bold", 10)
             cnv.drawString(self.mm(115), self.mm(275 - contador), 'Transferência Eletrônica Disponível - TED -"E"')
             cnv.line(self.mm(8), self.mm(273 - contador), self.mm(196), self.mm(273 - contador))
             cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
+            cnv.drawString(self.mm(84), self.mm(155 - contador), 'Assinatura do Remetente')
+
+            #conta
+            cnv.drawString(self.mm(12), self.mm(260 - contador), "070")
+            cnv.drawString(self.mm(29), self.mm(260 - contador), "144")
+            cnv.drawString(self.mm(56), self.mm(260 - contador), "000.000-0")
+            cnv.drawString(self.mm(45), self.mm(250 - contador), "SRSSU - (Regular)")
+
+
+
+            #fornecedor
+            cnv.drawString(self.mm(106), self.mm(260 - contador), "341")
+            cnv.drawString(self.mm(123), self.mm(260 - contador), "56066-6")
+            cnv.drawString(self.mm(150), self.mm(260 - contador), "311.361-6")
+
+            #pagamento
+            cnv.drawString(self.mm(174), self.mm(260 - contador), "R$ 56.700,00")
+            # cnv.drawString(self.mm(10), self.mm(245 - contador), "CNPJ/CPF(s)")
+            # cnv.drawString(self.mm(104), self.mm(245 - contador), "CNPJ/CPF(s)")
+            # cnv.drawString(self.mm(10), self.mm(235 - contador), "Nº identidade / Órgão expedidor / UF")
+            # cnv.drawString(self.mm(104), self.mm(235 - contador), "Valor por Extenso")
+            # cnv.drawString(self.mm(10), self.mm(225 - contador), "Endereço")
+            # cnv.drawString(self.mm(10), self.mm(215 - contador), "Telefone(s)")
+            # cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº Identidade / Órgão expedidor / UF")
+            # cnv.drawString(self.mm(10), self.mm(205 - contador), "Tipo Pessoa Debitada")
+            # cnv.drawString(self.mm(10), self.mm(200 - contador), "Tipo Conta Debitada")
+            # cnv.drawString(self.mm(104), self.mm(205 - contador), "Tipo Pessoa Creditada")
+            # cnv.drawString(self.mm(104), self.mm(200 - contador), "Tipo Conta Creditada")
+            # cnv.drawString(self.mm(10), self.mm(195 - contador), "Finalidade")
+            # cnv.drawString(self.mm(10), self.mm(190 - contador), "Histórico")
+            # cnv.drawString(self.mm(10), self.mm(185 - contador), "Nº Identificação Depósito")
+            # cnv.drawString(self.mm(76), self.mm(180 - contador),
+            #                "Preencher somente nas transferências de recursos para deposito judicial")
+            # cnv.drawString(self.mm(10), self.mm(175 - contador),
+            #                "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
+            # cnv.drawString(self.mm(17), self.mm(160 - contador),
+            #                "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
+            # cnv.drawString(self.mm(114), self.mm(160 - contador),
+            #                "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
             cnv.setFont("Times-Bold", 12)
             cnv.drawString(self.mm(140), self.mm(281 - contador), "Emenda parlamentar")
 
-            cnv.line(self.mm(102), self.mm(268 - contador), self.mm(102), self.mm(198 - contador)) #Linha central
-            cnv.line(self.mm(196), self.mm(268 - contador), self.mm(196), self.mm(188 - contador)) #linha direita
-            cnv.line(self.mm(8), self.mm(268 - contador), self.mm(8), self.mm(188 - contador)) #linha esquerda
-            cnv.line(self.mm(25), self.mm(268 - contador), self.mm(25), self.mm(258 - contador)) #divisão linha 1.1
-            cnv.line(self.mm(52), self.mm(268 - contador), self.mm(52), self.mm(258 - contador)) #divisão linha 1.2
-            cnv.line(self.mm(78), self.mm(268 - contador), self.mm(78), self.mm(258 - contador)) #divisão linha 1.3
-            cnv.line(self.mm(119), self.mm(268 - contador), self.mm(119), self.mm(258 - contador)) #divisão linha 1.4
-            cnv.line(self.mm(146), self.mm(268 - contador), self.mm(146), self.mm(258 - contador)) #divisão linha 1.5
-            cnv.line(self.mm(172), self.mm(268 - contador), self.mm(172), self.mm(258 - contador)) #divisão linha 1.6
-            cnv.line(self.mm(8), self.mm(258 - contador), self.mm(196), self.mm(258 - contador)) #linha horizontal 1
-            cnv.line(self.mm(8), self.mm(248 - contador), self.mm(196), self.mm(248 - contador)) #linha horizontal 2
-            cnv.line(self.mm(8), self.mm(238 - contador), self.mm(196), self.mm(238 - contador)) #linha horizontal 3
-            cnv.line(self.mm(8), self.mm(228 - contador), self.mm(102), self.mm(228 - contador)) #meia linha horizontal 1
-            cnv.line(self.mm(8), self.mm(218 - contador), self.mm(196), self.mm(218 - contador)) #linha horizontal 4
-            cnv.line(self.mm(8), self.mm(208 - contador), self.mm(196), self.mm(208 - contador)) #linha horizontal 5
-            cnv.line(self.mm(8), self.mm(203 - contador), self.mm(196), self.mm(203 - contador)) #linha horizontal 6
-            cnv.line(self.mm(8), self.mm(198 - contador), self.mm(196), self.mm(198 - contador)) #linha horizontal 7
-            cnv.line(self.mm(8), self.mm(193 - contador), self.mm(196), self.mm(193 - contador)) #linha horizontal 8
-            cnv.line(self.mm(8), self.mm(188 - contador), self.mm(196), self.mm(188 - contador)) #linha horizontal 9
-            cnv.line(self.mm(8), self.mm(183 - contador), self.mm(8), self.mm(178 - contador))  #linha vertical id esquerda
-            cnv.line(self.mm(75), self.mm(183 - contador), self.mm(75), self.mm(178 - contador)) #linha vertica id direita
-            cnv.line(self.mm(8), self.mm(178 - contador), self.mm(75), self.mm(178 - contador)) #linha horizontal id
-            cnv.line(self.mm(8), self.mm(163 - contador), self.mm(196), self.mm(163 - contador)) #linha horizontal assinatura
-            cnv.line(self.mm(102), self.mm(172 - contador), self.mm(102), self.mm(163 - contador)) #linha vertical assinatura
+
+
+
+
+
             contador += 143
 
         cnv.setDash([3, 1])
         cnv.line(self.mm(8), self.mm(153), self.mm(196), self.mm(153))
-
-        #cnv.drawImage(f'{pasta}/Imagens/Logo_brb.jpg', self.mm(0), self.mm(138), width=self.mm(85), height=self.mm(18))
-
-
-
-
-
-
         cnv.save()
 
 
 if __name__ == '__main__':
     r = Relatorio()
-    r.criar_ted()
     #r.fornecedores()
+    r.criar_ted()
