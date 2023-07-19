@@ -48,7 +48,7 @@ class interface():
         self.conta_origem = OptionMenu(self.frame_1, local, *interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
-        self.teste1 = Button(self.frame_2, text='Listar', command=self.carregar_dados)
+        self.teste1 = Button(self.frame_2, text='Listar', command=self.exibir_pagamentos)
         self.teste1.grid(row=0, column=0)
 
         self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpa_tela)
@@ -69,10 +69,9 @@ class interface():
     def limpa_tela(self):
         self.mycanvas.delete("all")
 
-    def carregar_dados(self):
+    def exibir_pagamentos(self):
         self.relatorio.listar_pagamentos()
-        self.relatorio.listar_contas()
-        self.display(self.relatorio.valores_formatados())
+        self.display(self.relatorio.formatar_pagamentos())
 
     def gerar_guias(self):
         if not self.relatorio.checa_carregamento():

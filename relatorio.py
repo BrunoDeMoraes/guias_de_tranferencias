@@ -9,7 +9,9 @@ from contas import Contas
 from dados import Dados
 class Relatorio(Contas, Dados):
     def __init__(self):
-        self.lis = []
+        self.rol_de_pagamentos = self.listar_pagamentos()
+        self.dados_de_fornecedore = self.fornecedores()
+
 
     def separador(self):
         fornecedores = self.fornecedores()
@@ -29,15 +31,27 @@ class Relatorio(Contas, Dados):
     def mm(self, medida):
         return (medida/0.352777)
 
+    def alinhar_texto(self, texto: str):
+        palavras = texto.split(" ")
+        linha = ""
+        texto_alinhado = []
+        for palavra in palavras:
+            if len((linha + palavra)) > 60:
+                print(len(linha))
+                texto_alinhado.append(linha)
+                linha = palavra + " "
+            else:
+                linha += palavra + " "
+            if palavra == palavras[-1]:
+                texto_alinhado.append(linha)
+        return texto_alinhado
+
     def criar_ted(self):
         data = date.today()
         data_formatada = data.strftime('%d/%m/%Y')
         pasta = self.caminho_do_arquivo()
 
         cnv = canvas.Canvas(f'{pasta}/ted.pdf')
-        fontes = cnv.getAvailableFonts()
-        for f in fontes:
-            print(f)
         cnv.setPageSize(A4)
 
         contador = 0
@@ -202,25 +216,16 @@ class Relatorio(Contas, Dados):
         cnv.line(self.mm(8), self.mm(149), self.mm(196), self.mm(149))
         cnv.save()
 
-    def alinhar_texto(self, texto: str):
-        palavras = texto.split(" ")
-        linha = ""
-        texto_alinhado = []
-        for palavra in palavras:
-            if len((linha + palavra)) > 60:
-                print(len(linha))
-                texto_alinhado.append(linha)
-                linha = palavra + " "
-            else:
-                linha += palavra + " "
-            if palavra == palavras[-1]:
-                texto_alinhado.append(linha)
-        return texto_alinhado
+    def imprimir_teds(self):
+        pass
+
 
 
 if __name__ == '__main__':
     r = Relatorio()
-    #r.fornecedores()
+    #a = r.fornecedores()
+    #r.listar_pagamentos()
+    #print(a)
     r.criar_ted()
     #nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA textoextragrandao para testar se o código realemente funciona com qualquer palavra enorme)"
     #r.alinhar_texto(nome_teste)
