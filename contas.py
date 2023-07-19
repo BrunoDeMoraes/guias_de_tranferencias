@@ -29,7 +29,8 @@ class Contas:
         return registros
 
     def criar_bd(self):
-        if not os.path.exists(self.caminho_do_bd):
+        banco_de_dados = self.caminho_do_bd()
+        if not os.path.exists(banco_de_dados):
             comando = 'CREATE TABLE contas (local text, recurso text, tipo text, banco text, agencia text, numero text, cnpj texto, endereco text, telefone text)'
             self.conexao(comando)
         else:

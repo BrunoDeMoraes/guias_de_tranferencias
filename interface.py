@@ -54,13 +54,13 @@ class interface():
         self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpa_tela)
         self.teste2.grid(row=0, column=1)
 
-        self.teste3 = Button(self.frame_2, text='Checar', command=self.gerar_guias)
+        self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
         self.teste3.grid(row=0, column=3)
 
         self.teste3 = Button(self.frame_2, text='Contas', command=self.relatorio.listar_contas)
         self.teste3.grid(row=0, column=4)
 
-        self.teste4 = Button(self.frame_2, text='Fornecedores', command=self.relatorio.criar_ted)
+        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.relatorio.criar_ted)
         self.teste4.grid(row=0, column=5)
 
     def display(self, valor):
@@ -70,23 +70,16 @@ class interface():
         self.mycanvas.delete("all")
 
     def exibir_pagamentos(self):
-        self.relatorio.listar_pagamentos()
         self.display(self.relatorio.formatar_pagamentos())
 
-    def gerar_guias(self):
-        if not self.relatorio.checa_carregamento():
-            print('Aí não, meu patrão! Carrega os dados.')
-            #msgbox de erro
-        else:
-            print("Vou gerar as Guias")
-            #metodo para gerar guias de transferência
-
+    def exibir_fornecedores(self):
+        self.display(self.relatorio.formatar_fornecedores())
 
 if __name__ == '__main__':
     rel = Relatorio()
     tela = Tk()
     tela.geometry("1100x600")
-    tela.resizable(0, 0)
+    tela.resizable(False, False)
     objeto_tela = interface(tela, rel)
     #tela.title()
     #tela.config(menu=objeto_tela.menu_certidões)

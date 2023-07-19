@@ -9,24 +9,39 @@ from contas import Contas
 from dados import Dados
 class Relatorio(Contas, Dados):
     def __init__(self):
-        self.rol_de_pagamentos = self.listar_pagamentos()
-        self.dados_de_fornecedore = self.fornecedores()
+        self.pagamentos = self.listar_pagamentos()
+        self.empresas = self.fornecedores()
+        self.contas = self.listar_contas()
 
 
-    def separador(self):
-        fornecedores = self.fornecedores()
-        self.dados_de_pagamento()
-        pagamentos = self.valor_de_pagamento().values()
-        for pagamento in pagamentos:
-            empresa = pagamento[1]
-            banco = fornecedores[pagamento[1]][5]
-            if (banco) == "BRB":
-                print(f"{empresa} - É BRB, porra! Transferência intena")
-                #chama guia BRB
-            else:
-                print(f"{empresa} - Banco: {banco} - melhor fazer uma TED!, ")
-                #chama guia de TED
+    # def separador(self):
+    #     fornecedores = self.fornecedores()
+    #     self.dados_de_pagamento()
+    #     pagamentos = self.valor_de_pagamento().values()
+    #     for pagamento in pagamentos:
+    #         empresa = pagamento[1]
+    #         banco = fornecedores[pagamento[1]][5]
+    #         if (banco) == "BRB":
+    #             print(f"{empresa} - É BRB, porra! Transferência intena")
+    #             #chama guia BRB
+    #         else:
+    #             print(f"{empresa} - Banco: {banco} - melhor fazer uma TED!, ")
+    #             #chama guia de TED
 
+    def formatar_pagamentos(self):
+        #itens_somados = self.listar_pagamentos()
+        valores_impressao = ""
+        for i in self.pagamentos.values():
+            valores_impressao = valores_impressao + f'\n{i}\n'
+        print(valores_impressao)
+        return valores_impressao
+
+    def formatar_fornecedores(self):
+        valores_impressao = ""
+        for i in self.empresas.values():
+            valores_impressao = valores_impressao + f'\n{i}\n'
+        print(valores_impressao)
+        return valores_impressao
 
     def mm(self, medida):
         return (medida/0.352777)

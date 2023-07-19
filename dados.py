@@ -53,11 +53,3 @@ class Dados:
             empresas[a[0]] = a[1:]
             #print(empresas)
         return empresas
-
-    def formatar_pagamentos(self):
-        itens_somados = self.listar_pagamentos()
-        valores_impressao = ""
-        for i in itens_somados.values():
-            valores_impressao = valores_impressao + f'\n{i}\n'
-        print(valores_impressao)
-        return valores_impressao
