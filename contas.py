@@ -2,6 +2,13 @@ import os
 import sqlite3
 
 class Contas:
+
+    CODIGOS = {
+        "RC": ('Regular','Custeio'),
+        "RI": ('Regular','Investimento'),
+        "EI": ('Emenda', 'Investimento'),
+        "EC": ('Emenda', 'Custeio')
+    }
     def caminho_do_arquivo(self):
         caminho_py = __file__
         caminho_do_dir = caminho_py.split('\\')
@@ -28,6 +35,13 @@ class Contas:
          print(i)
          print(type(registros))
         return registros
+
+    def pegar_conta(self, origem, codigo):
+        especificador = self.CODIGOS[codigo]
+        comando = f"SELECT * FROM contas WHERE local = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
+        direcionador = self.conexao(comando)
+        registro = direcionador.fetchall()
+        return registro
 
     def criar_bd(self):
         banco_de_dados = self.caminho_do_bd()

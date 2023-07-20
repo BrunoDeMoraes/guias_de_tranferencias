@@ -60,11 +60,8 @@ class interface():
         self.teste3 = Button(self.frame_2, text='Contas', command=self.exibir_contas)
         self.teste3.grid(row=0, column=4)
 
-        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.relatorio.imprimir_teds)
+        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
         self.teste4.grid(row=0, column=5)
-
-    def pegar_origem(self):
-        return(self.local.get())
 
     def display(self, valor):
         self.mycanvas.create_text((530, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
@@ -81,13 +78,16 @@ class interface():
     def exibir_contas(self):
         self.display(self.relatorio.formatar_relatorio(self.relatorio.contas))
 
+    def imprimir_teds(self):
+        origem = self.local.get()
+        self.relatorio.gerar_teds(origem)
+
 if __name__ == '__main__':
     rel = Relatorio()
     tela = Tk()
     tela.geometry("1100x600")
     tela.resizable(False, False)
     objeto_tela = interface(tela, rel)
-    #print(objeto_tela.local.get())
     #tela.title()
     #tela.config(menu=objeto_tela.menu_certidões)
     tela.mainloop()

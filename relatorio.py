@@ -223,10 +223,12 @@ class Relatorio(Contas, Dados):
         cnv.line(self.mm(8), self.mm(149), self.mm(196), self.mm(149))
         cnv.save()
 
-    def imprimir_teds(self, origem):
+    def gerar_teds(self, origem):
         for pagamento in self.pagamentos.values():
             empresa = self.empresas[pagamento[1]]
-            print(empresa)
+            codigo = pagamento[5]
+            conta = self.pegar_conta(origem, codigo)
+            print(f'{empresa[0]} - {codigo} - {conta}')
 
             #self.criar_ted(pagamento)
 
