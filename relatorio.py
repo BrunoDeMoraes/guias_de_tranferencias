@@ -28,17 +28,9 @@ class Relatorio(Contas, Dados):
     #             print(f"{empresa} - Banco: {banco} - melhor fazer uma TED!, ")
     #             #chama guia de TED
 
-    def formatar_pagamentos(self):
-        #itens_somados = self.listar_pagamentos()
+    def formatar_relatorio(self, iteravel):
         valores_impressao = ""
-        for i in self.pagamentos.values():
-            valores_impressao = valores_impressao + f'\n{i}\n'
-        print(valores_impressao)
-        return valores_impressao
-
-    def formatar_fornecedores(self):
-        valores_impressao = ""
-        for i in self.empresas.values():
+        for i in iteravel:
             valores_impressao = valores_impressao + f'\n{i}\n'
         print(valores_impressao)
         return valores_impressao
@@ -61,12 +53,12 @@ class Relatorio(Contas, Dados):
                 texto_alinhado.append(linha)
         return texto_alinhado
 
-    def criar_ted(self):
+    def criar_ted(self, pagamento):
         data = date.today()
         data_formatada = data.strftime('%d/%m/%Y')
         pasta = self.caminho_do_arquivo()
 
-        cnv = canvas.Canvas(f'{pasta}/ted.pdf')
+        cnv = canvas.Canvas(f'{pasta}/{pagamento}.pdf')
         cnv.setPageSize(A4)
 
         contador = 0
@@ -231,8 +223,12 @@ class Relatorio(Contas, Dados):
         cnv.line(self.mm(8), self.mm(149), self.mm(196), self.mm(149))
         cnv.save()
 
-    def imprimir_teds(self):
-        pass
+    def imprimir_teds(self, origem):
+        for pagamento in self.pagamentos.values():
+            empresa = self.empresas[pagamento[1]]
+            print(empresa)
+
+            #self.criar_ted(pagamento)
 
 
 

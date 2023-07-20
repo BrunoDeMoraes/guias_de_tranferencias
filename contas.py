@@ -26,6 +26,7 @@ class Contas:
         registros = direcionador.fetchall()
         for i in registros:
          print(i)
+         print(type(registros))
         return registros
 
     def criar_bd(self):

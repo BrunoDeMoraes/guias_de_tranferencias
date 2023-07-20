@@ -42,38 +42,44 @@ class interface():
 
         self.mycanvas.create_window((0, 0), window=self.frame_display, anchor="nw")
 
-        local = StringVar()
-        local.set(interface.ORIGEM[0])
+        self.local = StringVar()
+        self.local.set(interface.ORIGEM[0])
 
-        self.conta_origem = OptionMenu(self.frame_1, local, *interface.ORIGEM)
+        self.conta_origem = OptionMenu(self.frame_1, self.local, *interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
         self.teste1 = Button(self.frame_2, text='Listar', command=self.exibir_pagamentos)
         self.teste1.grid(row=0, column=0)
 
-        self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpa_tela)
+        self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpar_tela)
         self.teste2.grid(row=0, column=1)
 
         self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
         self.teste3.grid(row=0, column=3)
 
-        self.teste3 = Button(self.frame_2, text='Contas', command=self.relatorio.listar_contas)
+        self.teste3 = Button(self.frame_2, text='Contas', command=self.exibir_contas)
         self.teste3.grid(row=0, column=4)
 
-        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.relatorio.criar_ted)
+        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.relatorio.imprimir_teds)
         self.teste4.grid(row=0, column=5)
+
+    def pegar_origem(self):
+        return(self.local.get())
 
     def display(self, valor):
         self.mycanvas.create_text((530, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
 
-    def limpa_tela(self):
+    def limpar_tela(self):
         self.mycanvas.delete("all")
 
     def exibir_pagamentos(self):
-        self.display(self.relatorio.formatar_pagamentos())
+        self.display(self.relatorio.formatar_relatorio(self.relatorio.pagamentos.values()))
 
     def exibir_fornecedores(self):
-        self.display(self.relatorio.formatar_fornecedores())
+        self.display(self.relatorio.formatar_relatorio(self.relatorio.empresas.values()))
+
+    def exibir_contas(self):
+        self.display(self.relatorio.formatar_relatorio(self.relatorio.contas))
 
 if __name__ == '__main__':
     rel = Relatorio()
@@ -81,6 +87,7 @@ if __name__ == '__main__':
     tela.geometry("1100x600")
     tela.resizable(False, False)
     objeto_tela = interface(tela, rel)
+    #print(objeto_tela.local.get())
     #tela.title()
     #tela.config(menu=objeto_tela.menu_certidões)
     tela.mainloop()
