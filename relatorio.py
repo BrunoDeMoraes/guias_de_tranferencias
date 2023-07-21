@@ -53,12 +53,12 @@ class Relatorio(Contas, Dados):
                 texto_alinhado.append(linha)
         return texto_alinhado
 
-    def criar_ted(self, pagamento):
+    def criar_ted(self, pagamento, empresa, conta, origem):
         data = date.today()
         data_formatada = data.strftime('%d/%m/%Y')
         pasta = self.caminho_do_arquivo()
 
-        cnv = canvas.Canvas(f'{pasta}/{pagamento}.pdf')
+        cnv = canvas.Canvas(f'{pasta}/pagamentos/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
         cnv.setPageSize(A4)
 
         contador = 0
@@ -137,7 +137,7 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(10), self.mm(190 - contador), "Histórico")
             cnv.drawString(self.mm(10), self.mm(185 - contador), "Nº Identificação Depósito")
             cnv.drawString(self.mm(171), self.mm(185 - contador), f"Impresso em {data_formatada}")
-            cnv.drawString(self.mm(171), self.mm(182 - contador), f"113-ENGELITE 6 F")
+            cnv.drawString(self.mm(171), self.mm(182 - contador), f"{pagamento[0]}-{pagamento[1]}-{pagamento[2]}")
             cnv.drawString(self.mm(76), self.mm(180 - contador), "Preencher somente nas transferências de recursos para deposito judicial")
             cnv.drawString(self.mm(10), self.mm(175 - contador), "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
             cnv.drawString(self.mm(17), self.mm(160 - contador), "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
@@ -145,7 +145,7 @@ class Relatorio(Contas, Dados):
 
             # nome_destinatário
             cnv.setFont("Times-Bold", 7)
-            nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA)"
+            nome_teste = f"{empresa[0]}"
             nome = self.alinhar_texto(nome_teste)
 
             calc = 0
@@ -187,27 +187,27 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(84), self.mm(155 - contador), 'Assinatura do Remetente')
 
             #contas
-            cnv.drawString(self.mm(10), self.mm(260 - contador), "070")
-            cnv.drawString(self.mm(27), self.mm(260 - contador), "144")
-            cnv.drawString(self.mm(54), self.mm(260 - contador), "000.000-0")
-            cnv.drawString(self.mm(10), self.mm(250 - contador), "SRSSU - (Regular)")
-            cnv.drawString(self.mm(10), self.mm(240 - contador), "00.394.700/0006-12")
+            cnv.drawString(self.mm(10), self.mm(260 - contador), f"{conta[0][3]}") #banco
+            cnv.drawString(self.mm(27), self.mm(260 - contador), f"{conta[0][4]}") #agência
+            cnv.drawString(self.mm(54), self.mm(260 - contador), f"{conta[0][5]}") #conta
+            cnv.drawString(self.mm(10), self.mm(250 - contador), f"{origem}") #origem
+            cnv.drawString(self.mm(10), self.mm(240 - contador), f"{conta[0][6]}") #CNPJ - regional
 
 
             #fornecedor
-            cnv.drawString(self.mm(104), self.mm(260 - contador), "341")
-            cnv.drawString(self.mm(121), self.mm(260 - contador), "56066-6")
-            cnv.drawString(self.mm(144), self.mm(260 - contador), "311.361-6")
-            cnv.drawString(self.mm(104), self.mm(240 - contador), "00.394.700/0001-22")
-            cnv.drawString(self.mm(10), self.mm(210 - contador), "(61) 3392-6465 / 3393-6514")
+            cnv.drawString(self.mm(104), self.mm(260 - contador), f"{empresa[6]}") #banco
+            cnv.drawString(self.mm(121), self.mm(260 - contador), f"{empresa[7]}") #agência
+            cnv.drawString(self.mm(144), self.mm(260 - contador), f"{empresa[8]}") #conta
+            cnv.drawString(self.mm(104), self.mm(240 - contador), f"{empresa[4]}") #CNPJ - fornecedor
+            cnv.drawString(self.mm(10), self.mm(210 - contador), f"{empresa[2]}") #telefone
 
             #dados
-            cnv.drawString(self.mm(170), self.mm(260 - contador), "R$ 5.555.555,55")
-            cnv.drawString(self.mm(46), self.mm(189 - contador), "00060-00553264/2021-81")
-            cnv.drawString(self.mm(121), self.mm(189 - contador), "492/2023")
-            cnv.drawString(self.mm(161), self.mm(189 - contador), "999999999")
+            cnv.drawString(self.mm(170), self.mm(260 - contador), f"{pagamento[3]}") #valor
+            cnv.drawString(self.mm(46), self.mm(189 - contador), f"{pagamento[4]}") #CNPJ - empresa
+            cnv.drawString(self.mm(121), self.mm(189 - contador), f"{pagamento[0]}") #cotação
+            cnv.drawString(self.mm(161), self.mm(189 - contador), f"{pagamento[2]}") #danfe
 
-            valor_teste = "Cinco milhões, quinhentos e cinquenta e cinco mil, quinhentos e cinquenta e cinco reais e cinquenta e cinco centavos"
+            valor_teste = f"{pagamento[6]}"
             v_nome = self.alinhar_texto(valor_teste)
 
             calc = 0
@@ -216,7 +216,7 @@ class Relatorio(Contas, Dados):
                 calc += 4
 
             cnv.setFont("Times-Bold", 12)
-            cnv.drawString(self.mm(140), self.mm(281 - contador), "Emenda parlamentar")
+            cnv.drawString(self.mm(140), self.mm(281 - contador), f"{conta[0][1]} - {conta[0][2]}")
             contador += 143
 
         cnv.setDash([3, 1])
@@ -228,10 +228,8 @@ class Relatorio(Contas, Dados):
             empresa = self.empresas[pagamento[1]]
             codigo = pagamento[5]
             conta = self.pegar_conta(origem, codigo)
-            print(f'{empresa[0]} - {codigo} - {conta}')
-
-            #self.criar_ted(pagamento)
-
+            print(conta)
+            self.criar_ted(pagamento, empresa, conta, origem)
 
 
 if __name__ == '__main__':

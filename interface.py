@@ -11,7 +11,7 @@ from tkinter import messagebox
 from relatorio import Relatorio
 
 class interface():
-    ORIGEM = ["SRSSU", "APS"]
+    ORIGEM = ["SRSSU", "SRSSU - (APS)"]
     def __init__(self, tela, relatorio):
         self.relatorio = relatorio
 
