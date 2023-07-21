@@ -12,6 +12,9 @@ class Relatorio(Contas, Dados):
         self.pagamentos = self.listar_pagamentos()
         self.empresas = self.fornecedores()
         self.contas = self.listar_contas()
+        self.data = date.today()
+        self.data_formatada = self.data.strftime('%d/%m/%Y')
+        self.pasta = self.caminho_do_arquivo()
 
 
     # def separador(self):
@@ -71,17 +74,13 @@ class Relatorio(Contas, Dados):
         return texto_alinhado
 
     def criar_ted(self, pagamento, empresa, conta, origem):
-        data = date.today()
-        data_formatada = data.strftime('%d/%m/%Y')
-        pasta = self.caminho_do_arquivo()
-
-        cnv = canvas.Canvas(f'{pasta}/pagamentos/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
+        cnv = canvas.Canvas(f'{self.pasta}/pagamentos/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
         cnv.setPageSize(A4)
 
         contador = 0
         for i in range(0, 2):
             cnv.drawImage(
-                f'{pasta}/Imagens/Logo_brb.jpg', self.mm(0), self.mm(276 - contador), width=self.mm(85),
+                f'{self.pasta}/Imagens/Logo_brb.jpg', self.mm(0), self.mm(276 - contador), width=self.mm(85),
                 height=self.mm(18
                                )
             )
@@ -154,7 +153,7 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(10), self.mm(190 - contador), "Histórico")
             cnv.drawString(self.mm(10), self.mm(185 - contador), "Nº Identificação Depósito")
             cnv.drawString(self.mm(155), self.mm(185 - contador), f"{pagamento[0][0:3]}-{self.formatar_nome(pagamento[1])} {pagamento[2]}")
-            cnv.drawString(self.mm(155), self.mm(182 - contador), f"Impresso em {data_formatada}")
+            cnv.drawString(self.mm(155), self.mm(182 - contador), f"Impresso em {self.data_formatada}")
             cnv.drawString(self.mm(76), self.mm(180 - contador), "Preencher somente nas transferências de recursos para deposito judicial")
             cnv.drawString(self.mm(10), self.mm(175 - contador), "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
             cnv.drawString(self.mm(17), self.mm(160 - contador), "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
@@ -240,12 +239,28 @@ class Relatorio(Contas, Dados):
         cnv.line(self.mm(8), self.mm(149), self.mm(196), self.mm(149))
         cnv.save()
 
+    def cria_transferencia(self, pagamento, empresa, conta, origem):
+        cnv = canvas.Canvas(f'{self.pasta}/pagamentos/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
+        cnv.setPageSize(A4)
+
+        contador = 0
+        for i in range(0, 2):
+            cnv.drawImage(
+                f'{self.pasta}/Imagens/Logo.png', self.mm(0), self.mm(276 - contador), width=self.mm(45),
+                height=self.mm(18
+                               )
+            )
+
+
+        cnv.save()
+
     def gerar_teds(self, origem):
         for pagamento in self.pagamentos.values():
             empresa = self.empresas[pagamento[1]]
             codigo = pagamento[5]
             conta = self.pegar_conta(origem, codigo)
             print(conta)
+            #self.cria_transferencia(pagamento, empresa, conta, origem)
             self.criar_ted(pagamento, empresa, conta, origem)
 
 
