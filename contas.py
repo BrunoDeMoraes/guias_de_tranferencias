@@ -41,9 +41,9 @@ class Contas:
         comando = f"SELECT * FROM contas WHERE local = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
-        for i in registro:
-         print(i)
-         print(type(registro))
+        # for i in registro:
+        #  print(i)
+        #  print(type(registro))
         return registro
 
     def criar_bd(self):
