@@ -15,6 +15,15 @@ class interface():
     def __init__(self, tela, relatorio):
         self.relatorio = relatorio
 
+        self.menu = Menu(tela)
+        self.menu_configurações = Menu(self.menu)
+        self.menu.add_cascade(
+            label='Configurações', menu=self.menu_configurações)
+        self.menu_configurações.add_separator()
+        self.menu_configurações.add_command(
+            label='Cadastro de fornecedores', command=self.abrir_janela_caminhos)
+        self.menu_configurações.add_separator()
+
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
 
@@ -82,6 +91,46 @@ class interface():
         origem = self.local.get()
         self.relatorio.gerar_teds(origem)
 
+    def abrir_janela_caminhos(self):
+        self.janela_de_cadastro = Toplevel()
+        self.janela_de_cadastro.title('Lista de caminhos')
+        self.janela_de_cadastro.resizable(True, True)
+        self.frame_de_cadastro = LabelFrame(
+            self.janela_de_cadastro, padx=0, pady=0
+        )
+        self.frame_de_cadastro.pack(padx=1, pady=1)
+
+        self.local_origem = Entry(self.frame_de_cadastro, width=70)
+
+        self.recurso = Entry(
+            self.frame_de_cadastro, width=70
+        )
+
+        self.tipo_recurso = Entry(self.frame_de_cadastro, width=70)
+
+        self.n_banco = Entry(self.frame_de_cadastro, width=70)
+
+        self.n_agencia = Entry(
+            self.frame_de_cadastro, width=70
+        )
+        self.n_conta = Entry(
+            self.frame_de_cadastro, width=70
+        )
+
+        self.n_cnpj = Entry(
+            self.frame_de_cadastro, width=70
+        )
+
+
+        self.local_origem.grid(row=1, column=2, padx=20)
+        self.recurso.grid(row=2, column=2, padx=20)
+        self.tipo_recurso.grid(row=3, column=2, padx=20)
+        self.n_banco.grid(row=4, column=2, padx=20)
+        self.n_agencia.grid(row=5, column=2, padx=20)
+        self.n_conta.grid(row=6, column=2, padx=20)
+        self.n_cnpj.grid(row=7, column=2, padx=20)
+
+
 if __name__ == '__main__':
     rel = Relatorio()
     tela = Tk()
@@ -89,5 +138,5 @@ if __name__ == '__main__':
     tela.resizable(False, False)
     objeto_tela = interface(tela, rel)
     #tela.title()
-    #tela.config(menu=objeto_tela.menu_certidões)
+    tela.config(menu=objeto_tela.menu)
     tela.mainloop()
