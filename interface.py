@@ -76,6 +76,25 @@ class interface():
         self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
         self.teste4.grid(row=0, column=5)
 
+    def maior_string(self, lista):
+        maior = ""
+        for opcao in lista:
+            if len(opcao) <= len(maior):
+                continue
+            else:
+                maior = opcao
+        return len(maior)
+
+    def ajustar_optionmenu(self, lista):
+        tamanho = self.maior_string(lista)
+        print(tamanho)
+        nova_lista = []
+        for palavra in lista:
+            palavra_ajustada = (" " * (tamanho - len(palavra))) + palavra + (" " * (tamanho - len(palavra)))
+            nova_lista.append(palavra_ajustada)
+        print(nova_lista)
+        return nova_lista
+
     def display(self, valor):
         self.mycanvas.create_text((530, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
 
@@ -101,25 +120,28 @@ class interface():
         self.janela_de_cadastro.resizable(True, True)
 
         self.frame_geral = LabelFrame(
-            self.janela_de_cadastro, padx=50, pady=30
+            self.janela_de_cadastro, padx=100, pady=30
         )
         self.frame_geral.pack(padx=1, pady=1)
 
 
         self.frame_de_cadastro = LabelFrame(
-            self.frame_geral, padx=0, pady=0
+            self.frame_geral, padx=50, pady=0
         )
         self.frame_de_cadastro.pack(padx=1, pady=1)
 
         self.frame_geral.pack(padx=1, pady=1)
 
+        origem_ajustada = self.ajustar_optionmenu(interface.ORIGEM)
         self.origem_bd = StringVar()
-        self.origem_bd.set(interface.ORIGEM[0])
-        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *interface.ORIGEM)
+        self.origem_bd.set(origem_ajustada[0])
+        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *origem_ajustada)
 
+
+        recurso_ajustado = self.ajustar_optionmenu(interface.RECURSO)
         self.recurso_bd = StringVar()
-        self.recurso_bd.set(interface.RECURSO[0])
-        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *interface.RECURSO)
+        self.recurso_bd.set(recurso_ajustado[0])
+        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *recurso_ajustado)
 
         self.tipo_bd = StringVar()
         self.tipo_bd.set(interface.TIPO[0])
@@ -146,13 +168,13 @@ class interface():
             self.frame_de_cadastro, width=20
         )
 
-        self.lista_origem_bd.grid(row=0, column=1)
-        self.lista_recurso_bd.grid(row=0, column=2)
-        self.lista_tipo_bd.grid(row=0, column=3)
-        self.lista_banco_bd.grid(row=0, column=4)
-        self.n_agencia.grid(row=1, column=1, padx=20)
-        self.n_conta.grid(row=2, column=1, padx=20)
-        self.n_cnpj.grid(row=3, column=1, padx=20)
+        self.lista_origem_bd.grid(row=0, column=1, padx=10)
+        self.lista_recurso_bd.grid(row=0, column=2, padx=10)
+        self.lista_tipo_bd.grid(row=0, column=3, padx=10)
+        self.lista_banco_bd.grid(row=0, column=4, padx=10)
+        self.n_agencia.grid(row=1, column=1, padx=10)
+        self.n_conta.grid(row=2, column=1, padx=10)
+        self.n_cnpj.grid(row=3, column=1, padx=10)
 
 
 if __name__ == '__main__':
