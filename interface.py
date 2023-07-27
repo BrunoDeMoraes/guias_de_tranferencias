@@ -76,25 +76,6 @@ class interface():
         self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
         self.teste4.grid(row=0, column=5)
 
-    def maior_string(self, lista):
-        maior = ""
-        for opcao in lista:
-            if len(opcao) <= len(maior):
-                continue
-            else:
-                maior = opcao
-        return len(maior)
-
-    def ajustar_optionmenu(self, lista):
-        tamanho = self.maior_string(lista)
-        print(tamanho)
-        nova_lista = []
-        for palavra in lista:
-            palavra_ajustada = (" " * (tamanho - len(palavra))) + palavra + (" " * (tamanho - len(palavra)))
-            nova_lista.append(palavra_ajustada)
-        print(nova_lista)
-        return nova_lista
-
     def display(self, valor):
         self.mycanvas.create_text((530, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
 
@@ -108,7 +89,7 @@ class interface():
         self.display(self.relatorio.formatar_relatorio(self.relatorio.empresas.values()))
 
     def exibir_contas(self):
-        self.display(self.relatorio.formatar_relatorio(self.relatorio.contas))
+        self.display(self.relatorio.formatar_relatorio(self.relatorio.listar_contas()))
 
     def imprimir_teds(self):
         origem = self.local.get()
@@ -120,32 +101,39 @@ class interface():
         self.janela_de_cadastro.resizable(True, True)
 
         self.frame_geral = LabelFrame(
-            self.janela_de_cadastro, padx=100, pady=30
+            self.janela_de_cadastro, padx=50, pady=30
         )
         self.frame_geral.pack(padx=1, pady=1)
 
 
         self.frame_de_cadastro = LabelFrame(
-            self.frame_geral, padx=50, pady=0
+            self.frame_geral, padx=10, pady=0
         )
         self.frame_de_cadastro.pack(padx=1, pady=1)
 
         self.frame_geral.pack(padx=1, pady=1)
 
-        origem_ajustada = self.ajustar_optionmenu(interface.ORIGEM)
+        self.titulo_origem = Label(self.frame_de_cadastro, text="Origem")
+
         self.origem_bd = StringVar()
-        self.origem_bd.set(origem_ajustada[0])
-        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *origem_ajustada)
+        self.origem_bd.set(interface.ORIGEM[0])
+        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *interface.ORIGEM)
+        self.lista_origem_bd.config(width=15)
 
+        self.titulo_recurso = Label(self.frame_de_cadastro, text="Recurso")
 
-        recurso_ajustado = self.ajustar_optionmenu(interface.RECURSO)
         self.recurso_bd = StringVar()
-        self.recurso_bd.set(recurso_ajustado[0])
-        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *recurso_ajustado)
+        self.recurso_bd.set(interface.RECURSO[0])
+        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *interface.RECURSO)
+        self.lista_recurso_bd.config(width=15)
 
+        self.titulo_tipo = Label(self.frame_de_cadastro, text="Tipo")
         self.tipo_bd = StringVar()
         self.tipo_bd.set(interface.TIPO[0])
         self.lista_tipo_bd = OptionMenu(self.frame_de_cadastro, self.tipo_bd, *interface.TIPO)
+        self.lista_tipo_bd.config(width=15)
+
+        self.titulo_banco = Label(self.frame_de_cadastro, text="Banco")
 
         self.bancos = []
         for banco in interface.BANCO.keys():
@@ -153,28 +141,51 @@ class interface():
         self.banco_bd = StringVar()
         self.banco_bd.set("BRB")
         self.lista_banco_bd = OptionMenu(self.frame_de_cadastro, self.banco_bd, *self.bancos)
+        self.lista_banco_bd.config(width=15)
 
-
-        self.n_banco = Entry(self.frame_de_cadastro, width=15)
+        self.titulo_agencia = Label(self.frame_de_cadastro, text="Agência")
 
         self.n_agencia = Entry(
-            self.frame_de_cadastro, width=15
+            self.frame_de_cadastro, width=10
         )
+
+        self.titulo_conta = Label(self.frame_de_cadastro, text="Conta")
+
         self.n_conta = Entry(
             self.frame_de_cadastro, width=15
         )
+
+        self.titulo_cnpj = Label(self.frame_de_cadastro, text="CNPJ")
 
         self.n_cnpj = Entry(
             self.frame_de_cadastro, width=20
         )
 
-        self.lista_origem_bd.grid(row=0, column=1, padx=10)
-        self.lista_recurso_bd.grid(row=0, column=2, padx=10)
-        self.lista_tipo_bd.grid(row=0, column=3, padx=10)
-        self.lista_banco_bd.grid(row=0, column=4, padx=10)
-        self.n_agencia.grid(row=1, column=1, padx=10)
-        self.n_conta.grid(row=2, column=1, padx=10)
-        self.n_cnpj.grid(row=3, column=1, padx=10)
+        self.botao_cadastro = Button(self.frame_de_cadastro, text="Cadastrar", command=self.submeter_conta)
+
+        #configurações de grid
+
+        self.titulo_origem.grid(row=0, column=1)
+        self.titulo_recurso.grid(row=0, column=2)
+        self.titulo_tipo.grid(row=0, column=3)
+        self.titulo_banco.grid(row=0, column=4)
+        self.titulo_agencia.grid(row=0, column=5)
+        self.titulo_conta.grid(row=0, column=6)
+        self.titulo_cnpj.grid(row=0, column=7)
+
+
+        self.lista_origem_bd.grid(row=1, column=1)
+        self.lista_recurso_bd.grid(row=1, column=2)
+        self.lista_tipo_bd.grid(row=1, column=3)
+        self.lista_banco_bd.grid(row=1, column=4)
+        self.n_agencia.grid(row=1, column=5)
+        self.n_conta.grid(row=1, column=6)
+        self.n_cnpj.grid(row=1, column=7)
+
+        self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10 ,sticky=E)
+
+    def submeter_conta(self):
+        self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), self.banco_bd.get(), self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
 
 
 if __name__ == '__main__':
