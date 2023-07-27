@@ -20,15 +20,18 @@ class Contas:
         banco_de_dados = f'{caminho}/contas.db'
         return banco_de_dados
 
-    def conexao(self, comando):
+    def conexao(self, *args):
         banco_de_dados = self.caminho_do_bd()
         with sqlite3.connect(banco_de_dados) as conexao:
             direcionador = conexao.cursor()
-            direcionador.execute(comando)
+            if len(args) > 1:
+                direcionador.execute(args[0], args[1])
+            else:
+                direcionador.execute(args[0])
             return direcionador
 
     def listar_contas(self):
-        comando = 'SELECT *, oid FROM contas'
+        comando = ('SELECT *, oid FROM contas')
         direcionador = self.conexao(comando)
         registros = direcionador.fetchall()
         # for i in registros:
@@ -54,3 +57,11 @@ class Contas:
         else:
             print('Banco de dados localizado.')
             #self.listar_contas()
+
+    def cadastrar_conta(self, origem, recurso, tipo, banco, agencia, numero, cnpj):
+        comando = ('INSERT INTO contas VALUES (:origem, :recurso, :tipo, :banco, :agencia, :numero, :cnpj)',
+                   {'origem': origem, 'recurso': recurso, 'tipo': tipo, 'banco': banco, 'agencia': agencia, 'numero': numero, 'cnpj': cnpj}
+                   )
+        banco_de_dados = self.caminho_do_bd()
+        self.conexao(comando[0], comando[1])
+
