@@ -11,7 +11,11 @@ from tkinter import messagebox
 from relatorio import Relatorio
 
 class interface():
-    ORIGEM = ["SRSSU", "SRSSU - (APS)"]
+    ORIGEM = ["SRSSU", "SRSSU - APS"]
+    RECURSO = ["Regular", "Emenda"]
+    TIPO = ["Custeio", "Investimento"]
+    BANCO = {"BRB": "070"}
+
     def __init__(self, tela, relatorio):
         self.relatorio = relatorio
 
@@ -95,40 +99,60 @@ class interface():
         self.janela_de_cadastro = Toplevel()
         self.janela_de_cadastro.title('Lista de caminhos')
         self.janela_de_cadastro.resizable(True, True)
+
+        self.frame_geral = LabelFrame(
+            self.janela_de_cadastro, padx=50, pady=30
+        )
+        self.frame_geral.pack(padx=1, pady=1)
+
+
         self.frame_de_cadastro = LabelFrame(
-            self.janela_de_cadastro, padx=0, pady=0
+            self.frame_geral, padx=0, pady=0
         )
         self.frame_de_cadastro.pack(padx=1, pady=1)
 
-        self.local_origem = Entry(self.frame_de_cadastro, width=70)
+        self.frame_geral.pack(padx=1, pady=1)
 
-        self.recurso = Entry(
-            self.frame_de_cadastro, width=70
-        )
+        self.origem_bd = StringVar()
+        self.origem_bd.set(interface.ORIGEM[0])
+        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *interface.ORIGEM)
 
-        self.tipo_recurso = Entry(self.frame_de_cadastro, width=70)
+        self.recurso_bd = StringVar()
+        self.recurso_bd.set(interface.RECURSO[0])
+        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *interface.RECURSO)
 
-        self.n_banco = Entry(self.frame_de_cadastro, width=70)
+        self.tipo_bd = StringVar()
+        self.tipo_bd.set(interface.TIPO[0])
+        self.lista_tipo_bd = OptionMenu(self.frame_de_cadastro, self.tipo_bd, *interface.TIPO)
+
+        self.bancos = []
+        for banco in interface.BANCO.keys():
+            self.bancos.append(banco)
+        self.banco_bd = StringVar()
+        self.banco_bd.set("BRB")
+        self.lista_banco_bd = OptionMenu(self.frame_de_cadastro, self.banco_bd, *self.bancos)
+
+
+        self.n_banco = Entry(self.frame_de_cadastro, width=15)
 
         self.n_agencia = Entry(
-            self.frame_de_cadastro, width=70
+            self.frame_de_cadastro, width=15
         )
         self.n_conta = Entry(
-            self.frame_de_cadastro, width=70
+            self.frame_de_cadastro, width=15
         )
 
         self.n_cnpj = Entry(
-            self.frame_de_cadastro, width=70
+            self.frame_de_cadastro, width=20
         )
 
-
-        self.local_origem.grid(row=1, column=2, padx=20)
-        self.recurso.grid(row=2, column=2, padx=20)
-        self.tipo_recurso.grid(row=3, column=2, padx=20)
-        self.n_banco.grid(row=4, column=2, padx=20)
-        self.n_agencia.grid(row=5, column=2, padx=20)
-        self.n_conta.grid(row=6, column=2, padx=20)
-        self.n_cnpj.grid(row=7, column=2, padx=20)
+        self.lista_origem_bd.grid(row=0, column=1)
+        self.lista_recurso_bd.grid(row=0, column=2)
+        self.lista_tipo_bd.grid(row=0, column=3)
+        self.lista_banco_bd.grid(row=0, column=4)
+        self.n_agencia.grid(row=1, column=1, padx=20)
+        self.n_conta.grid(row=2, column=1, padx=20)
+        self.n_cnpj.grid(row=3, column=1, padx=20)
 
 
 if __name__ == '__main__':

@@ -4,8 +4,8 @@ import sqlite3
 class Contas:
 
     CODIGOS = {
-        "RC": ('Regular','Custeio'),
-        "RI": ('Regular','Investimento'),
+        "RC": ('Regular', 'Custeio'),
+        "RI": ('Regular', 'Investimento'),
         "EI": ('Emenda', 'Investimento'),
         "EC": ('Emenda', 'Custeio')
     }
@@ -38,7 +38,7 @@ class Contas:
 
     def pegar_conta(self, origem, codigo):
         especificador = self.CODIGOS[codigo]
-        comando = f"SELECT * FROM contas WHERE local = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
+        comando = f"SELECT * FROM contas WHERE origem = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         # for i in registro:
@@ -49,8 +49,8 @@ class Contas:
     def criar_bd(self):
         banco_de_dados = self.caminho_do_bd()
         if not os.path.exists(banco_de_dados):
-            comando = 'CREATE TABLE contas (local text, recurso text, tipo text, banco text, agencia text, numero text, cnpj texto, endereco text, telefone text)'
+            comando = 'CREATE TABLE contas (origem text, recurso text, tipo text, banco text, agencia text, numero text, cnpj texto)'
             self.conexao(comando)
         else:
             print('Banco de dados localizado.')
-            self.listar_contas()
+            #self.listar_contas()

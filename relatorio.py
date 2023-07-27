@@ -9,6 +9,7 @@ from contas import Contas
 from dados import Dados
 class Relatorio(Contas, Dados):
     def __init__(self):
+        self.criar_bd()
         self.pagamentos = self.listar_pagamentos()
         self.empresas = self.fornecedores()
         self.contas = self.listar_contas()
