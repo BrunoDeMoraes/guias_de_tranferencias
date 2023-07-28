@@ -76,6 +76,9 @@ class interface():
         self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
         self.teste4.grid(row=0, column=5)
 
+        self.teste5 = Button(self.frame_2, text='pegar contas', command=self.relatorio.pegar_n_cotas)
+        self.teste5.grid(row=0, column=6)
+
     def display(self, valor):
         self.mycanvas.create_text((530, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
 
@@ -110,6 +113,11 @@ class interface():
             self.frame_geral, padx=10, pady=0
         )
         self.frame_de_cadastro.pack(padx=1, pady=1)
+
+        self.frame_de_exclusao = LabelFrame(
+            self.frame_geral, padx=10, pady=0
+        )
+        self.frame_de_exclusao.pack(padx=1, pady=1)
 
         self.frame_geral.pack(padx=1, pady=1)
 
@@ -184,8 +192,23 @@ class interface():
 
         self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10 ,sticky=E)
 
+        a = self.numero_contas()
+        self.v_contas = StringVar()
+        self.v_contas.set(a[0])
+        self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
+        self.v_contas_bd.config(width=15)
+
+        self.v_contas_bd.grid(row=0, column=1)
+
+
+
     def submeter_conta(self):
         self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), self.banco_bd.get(), self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
+
+    def numero_contas(self):
+        contas = list(self.relatorio.pegar_n_cotas())
+        return contas
+
 
 
 if __name__ == '__main__':
