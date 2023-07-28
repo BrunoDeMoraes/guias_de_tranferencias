@@ -31,7 +31,7 @@ class Contas:
             return direcionador
 
     def listar_contas(self):
-        comando = ('SELECT *, oid FROM contas')
+        comando = ('SELECT * FROM contas')
         direcionador = self.conexao(comando)
         registros = direcionador.fetchall()
         # for i in registros:
@@ -47,6 +47,12 @@ class Contas:
         # for i in registro:
         #  print(i)
         #  print(type(registro))
+        return registro
+
+    def pegar_n_cotas(self):
+        comando = f"SELECT numero FROM contas"
+        direcionador = self.conexao(comando)
+        registro = direcionador.fetchall()
         return registro
 
     def criar_bd(self):
