@@ -40,8 +40,10 @@ class Contas:
         return registros
 
     def pegar_conta(self, origem, codigo):
+        print(origem)
         especificador = self.CODIGOS[codigo]
         comando = f"SELECT * FROM contas WHERE origem = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
+        print(comando)
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         # for i in registro:
