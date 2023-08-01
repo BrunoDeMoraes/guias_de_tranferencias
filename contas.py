@@ -51,10 +51,11 @@ class Contas:
         #  print(type(registro))
         return registro
 
-    def pegar_n_cotas(self):
+    def pegar_n_contas(self):
         comando = f"SELECT numero FROM contas"
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
+        print(f"ncontas {registro}")
         return registro
 
     def criar_bd(self):
@@ -72,4 +73,11 @@ class Contas:
                    )
         banco_de_dados = self.caminho_do_bd()
         self.conexao(comando[0], comando[1])
+
+    def deletar_conta(self, conta):
+        comando = f'DELETE FROM contas WHERE numero = {conta}'
+        banco_de_dados = self.caminho_do_bd()
+        print(comando)
+        self.conexao(comando)
+        print("Conta excluída")
 
