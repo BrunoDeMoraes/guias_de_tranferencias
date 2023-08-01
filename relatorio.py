@@ -52,6 +52,11 @@ class Relatorio(Contas, Dados):
         else:
             return virgula
 
+    def formatar_cnpj(self, cnpj):
+        mascara = f"{cnpj[-14:-12]}.{cnpj[-12:-9]}.{cnpj[-9:-6]}/{cnpj[-6:-2]}-{cnpj[-2:]}"
+        return mascara
+
+
     def mm(self, medida):
         return (medida/0.352777)
 
@@ -204,7 +209,9 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(27), self.mm(260 - contador), f"{conta[0][4]}") #agência
             cnv.drawString(self.mm(54), self.mm(260 - contador), f"{conta[0][5]}") #conta
             cnv.drawString(self.mm(10), self.mm(250 - contador), f"{origem}") #origem
-            cnv.drawString(self.mm(10), self.mm(240 - contador), f"{conta[0][6]}") #CNPJ - regional
+
+            cnpj_regional = self.formatar_cnpj(conta[0][6])
+            cnv.drawString(self.mm(10), self.mm(240 - contador), f"{cnpj_regional}") #CNPJ - regional
 
 
             #fornecedor
