@@ -190,7 +190,7 @@ class interface():
         self.n_conta.grid(row=1, column=6)
         self.n_cnpj.grid(row=1, column=7)
 
-        self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10 ,sticky=E)
+        self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10, sticky=E)
 
         a = self.numero_contas()
         print(f'contas {a}')
@@ -209,7 +209,7 @@ class interface():
 
 
     def submeter_conta(self):
-        self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), self.banco_bd.get(), self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
+        self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
 
     def numero_contas(self):
         contas = list(self.relatorio.pegar_n_contas())
