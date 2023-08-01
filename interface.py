@@ -76,8 +76,8 @@ class interface():
         self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
         self.teste4.grid(row=0, column=5)
 
-        self.teste5 = Button(self.frame_2, text='pegar contas', command=self.relatorio.pegar_n_cotas)
-        self.teste5.grid(row=0, column=6)
+        # self.teste5 = Button(self.frame_2, text='pegar contas', command=self.relatorio.pegar_n_cotas)
+        # self.teste5.grid(row=0, column=6)
 
     def display(self, valor):
         self.mycanvas.create_text((530, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
@@ -193,12 +193,18 @@ class interface():
         self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10 ,sticky=E)
 
         a = self.numero_contas()
+        print(f'contas {a}')
         self.v_contas = StringVar()
         self.v_contas.set(a[0])
         self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
-        self.v_contas_bd.config(width=15)
+        self.v_contas_bd.config(width=20)
 
-        self.v_contas_bd.grid(row=0, column=1)
+        self.botao_excluir = Button(self.frame_de_exclusao, text="Excluir conta", command=self.excluir_conta)
+
+        self.v_contas_bd.grid(row=0, column=1, padx=30)
+        self.botao_excluir.grid(row=0, column=2, padx=30)
+
+
 
 
 
@@ -206,8 +212,13 @@ class interface():
         self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), self.banco_bd.get(), self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
 
     def numero_contas(self):
-        contas = list(self.relatorio.pegar_n_cotas())
+        contas = list(self.relatorio.pegar_n_contas())
         return contas
+
+    def excluir_conta(self):
+        conta = self.v_contas.get()
+        print(f"Esta é a {conta[1:-2]}")
+        self.relatorio.deletar_conta(conta[1:-2])
 
 
 
