@@ -17,18 +17,6 @@ class Relatorio(Contas, Dados):
         self.data_formatada = self.data.strftime('%d/%m/%Y')
         self.pasta = self.caminho_do_arquivo()
 
-
-    # def separador(self):
-    #     for pagamento in self.pagamentos().values():
-    #         empresa = pagamento[1]
-    #         banco = self.empresas[pagamento[1]][5]
-    #         if (banco) == "BRB":
-    #             print(f"{empresa} - É BRB, porra! Transferência intena")
-    #             #chama guia BRB
-    #         else:
-    #             print(f"{empresa} - Banco: {banco} - melhor fazer uma TED!, ")
-    #             #chama guia de TED
-
     def formatar_relatorio(self, iteravel):
         valores_impressao = ""
         for i in iteravel:
@@ -55,6 +43,10 @@ class Relatorio(Contas, Dados):
     def formatar_cnpj(self, cnpj):
         mascara = f"{cnpj[-14:-12]}.{cnpj[-12:-9]}.{cnpj[-9:-6]}/{cnpj[-6:-2]}-{cnpj[-2:]}"
         return mascara
+
+    def formatar_conta(self, conta):
+        conta_formatada = f"{conta[:-4]}.{conta[-4:-1]}-{conta[-1]}"
+        return conta_formatada
 
 
     def mm(self, medida):
@@ -207,7 +199,9 @@ class Relatorio(Contas, Dados):
             #contas
             cnv.drawString(self.mm(10), self.mm(260 - contador), f"{conta[0][3]}") #banco
             cnv.drawString(self.mm(27), self.mm(260 - contador), f"{conta[0][4]}") #agência
-            cnv.drawString(self.mm(54), self.mm(260 - contador), f"{conta[0][5]}") #conta
+
+            conta_tratada = self.formatar_conta(conta[0][5])
+            cnv.drawString(self.mm(54), self.mm(260 - contador), f"{conta_tratada}") #conta
             cnv.drawString(self.mm(10), self.mm(250 - contador), f"{origem}") #origem
 
             cnpj_regional = self.formatar_cnpj(conta[0][6])
