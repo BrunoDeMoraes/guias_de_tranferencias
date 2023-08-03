@@ -192,17 +192,20 @@ class interface():
 
         self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10, sticky=E)
 
+        self.opcoes_de_exclusao = Label(self.frame_de_exclusao, text="Caso deseje excluir uma conta, utilize a opção abaixo:")
+
         a = self.numero_contas()
         print(f'contas {a}')
         self.v_contas = StringVar()
-        self.v_contas.set(a[0])
+        self.v_contas.set('Selecione uma conta')
         self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
         self.v_contas_bd.config(width=20)
 
         self.botao_excluir = Button(self.frame_de_exclusao, text="Excluir conta", command=self.excluir_conta)
 
-        self.v_contas_bd.grid(row=0, column=1, padx=30)
-        self.botao_excluir.grid(row=0, column=2, padx=30)
+        self.opcoes_de_exclusao.grid(row=0, column=1, columnspan=2)
+        self.v_contas_bd.grid(row=1, column=1, padx=30)
+        self.botao_excluir.grid(row=1, column=2, padx=30)
 
 
 
