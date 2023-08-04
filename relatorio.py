@@ -194,6 +194,7 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(115), self.mm(275 - contador), 'Transferência Eletrônica Disponível - TED -"E"')
             cnv.line(self.mm(8), self.mm(273 - contador), self.mm(196), self.mm(273 - contador))
             cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
+            cnv.drawString(self.mm(104), self.mm(269 - contador), 'Instituição Financeira Destinatária')
             cnv.drawString(self.mm(84), self.mm(155 - contador), 'Assinatura do Remetente')
 
             #contas
