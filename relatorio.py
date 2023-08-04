@@ -365,7 +365,8 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(129), self.mm(278 - contador), 'Autorização para transferência de valores')
             cnv.drawString(self.mm(138), self.mm(274 - contador), 'entre contas no âmbito do BRB')
             cnv.line(self.mm(8), self.mm(273 - contador), self.mm(196), self.mm(273 - contador))
-            cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
+            cnv.drawString(self.mm(10), self.mm(269 - contador), 'Conta Remetente')
+            cnv.drawString(self.mm(104), self.mm(269 - contador), 'Conta Destinatária')
             cnv.drawString(self.mm(84), self.mm(165 - contador), 'Assinatura do Remetente')
 
             # contas
