@@ -221,6 +221,9 @@ class interface():
     def submeter_conta(self):
         self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
         self.atualizar_contas()
+        self.n_agencia.delete(0, END)
+        self.n_conta.delete(0, END)
+        self.n_cnpj.delete(0, END)
 
 
     def numero_contas(self):
