@@ -11,7 +11,7 @@ from tkinter import messagebox
 from relatorio import Relatorio
 
 class interface():
-    ORIGEM = ["SRSSU", "SRSSU - APS"]
+    ORIGEM = ["SRSSU", "SRSSU - APS", "GAMA", "Santa Maria"]
     RECURSO = ["Regular", "Emenda"]
     TIPO = ["Custeio", "Investimento"]
     BANCO = {"BRB": "070"}
