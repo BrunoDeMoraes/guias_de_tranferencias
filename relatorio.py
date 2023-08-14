@@ -370,11 +370,15 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(84), self.mm(165 - contador), 'Assinatura do Remetente')
 
             # contas
+
+            conta_tratada = self.formatar_conta(conta[0][5])
             #cnv.drawString(self.mm(10), self.mm(260 - contador), f"{conta[0][3]}")  # banco
             cnv.drawString(self.mm(10), self.mm(260 - contador), f"{conta[0][4]}")  # agência
-            cnv.drawString(self.mm(32), self.mm(260 - contador), f"{conta[0][5]}")  # conta
+            cnv.drawString(self.mm(32), self.mm(260 - contador), f"{conta_tratada}")  # conta
             cnv.drawString(self.mm(10), self.mm(250 - contador), f"{origem}")  # origem
-            cnv.drawString(self.mm(10), self.mm(240 - contador), f"{conta[0][6]}")  # CNPJ - regional
+
+            cnpj_regional = self.formatar_cnpj(conta[0][6])
+            cnv.drawString(self.mm(10), self.mm(240 - contador), f"{cnpj_regional}")  # CNPJ - regional
 
             # fornecedor
             #cnv.drawString(self.mm(104), self.mm(260 - contador), f"{empresa[6]}")  # banco
@@ -407,6 +411,9 @@ class Relatorio(Contas, Dados):
 
     def gerar_teds(self, origem):
         for pagamento in self.pagamentos.values():
+            print(pagamento[1])
+            print(self.empresas)
+
             dados_empresa = self.empresas[pagamento[1]]
             codigo = pagamento[5]
             conta = self.pegar_conta(origem, codigo)
