@@ -7,9 +7,14 @@ from datetime import date
 
 from contas import Contas
 from dados import Dados
+
+from comandos_sql import BD_CONTA
+from comandos_sql import BD_URLS
+
 class Relatorio(Contas, Dados):
     def __init__(self):
-        self.criar_bd()
+        self.criar_bd(BD_CONTA)
+        self.criar_bd(BD_URLS)
         self.pagamentos = self.listar_pagamentos()
         self.empresas = self.fornecedores()
         self.contas = self.listar_contas()
