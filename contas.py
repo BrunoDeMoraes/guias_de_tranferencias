@@ -46,9 +46,6 @@ class Contas:
         print(comando)
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
-        # for i in registro:
-        #  print(i)
-        #  print(type(registro))
         return registro
 
     def pegar_n_contas(self):
@@ -58,14 +55,15 @@ class Contas:
         print(f"ncontas {registro}")
         return registro
 
-    def criar_bd(self):
+    def criar_bd(self, comando):
         banco_de_dados = self.caminho_do_bd()
         if not os.path.exists(banco_de_dados):
-            comando = 'CREATE TABLE contas (origem text, recurso text, tipo text, banco text, agencia text, numero text, cnpj texto)'
+            #comando = 'CREATE TABLE contas (origem text, recurso text, tipo text, banco text, agencia text, numero text, cnpj texto)'
             self.conexao(comando)
         else:
             print('Banco de dados localizado.')
             #self.listar_contas()
+
 
     def cadastrar_conta(self, origem, recurso, tipo, banco, agencia, numero, cnpj):
         comando = ('INSERT INTO contas VALUES (:origem, :recurso, :tipo, :banco, :agencia, :numero, :cnpj)',
