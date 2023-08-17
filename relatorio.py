@@ -8,16 +8,17 @@ from datetime import date
 from contas import Contas
 from dados import Dados
 
-from comandos_sql import BD_CONTA
-from comandos_sql import BD_URLS
+from comandos_sql import TABELAS
+from comandos_sql import CONTAS
+from comandos_sql import URLS
 
 class Relatorio(Contas, Dados):
     def __init__(self):
-        self.criar_bd(BD_CONTA)
-        self.criar_bd(BD_URLS)
+        self.criar_bd(TABELAS)
         self.pagamentos = self.listar_pagamentos()
         self.empresas = self.fornecedores()
-        self.contas = self.listar_contas()
+        self.contas = self.consultar_bd(CONTAS)
+        self.urls = self.consultar_bd(URLS)
         self.data = date.today()
         self.data_formatada = self.data.strftime('%d/%m/%Y')
         self.pasta = self.caminho_do_arquivo()
