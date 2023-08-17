@@ -92,7 +92,7 @@ class interface():
         self.display(self.relatorio.formatar_relatorio(self.relatorio.empresas.values()))
 
     def exibir_contas(self):
-        self.display(self.relatorio.formatar_relatorio(self.relatorio.listar_contas()))
+        self.display(self.relatorio.formatar_relatorio(self.relatorio.consultar_bd()))
 
     def imprimir_teds(self):
         origem = self.local.get()
@@ -212,7 +212,10 @@ class interface():
 
 
     def atualizar_contas(self):
-        a = self.numero_contas()
+        if self.numero_contas() == []:
+            a = ["Nenhuma conta cadastrada"]
+        else:
+            a = self.numero_contas()
         self.v_contas.set('Selecione uma conta')
         self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
         self.v_contas_bd.config(width=20)
