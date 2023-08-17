@@ -11,7 +11,7 @@ from tkinter import messagebox
 from relatorio import Relatorio
 
 class interface():
-    ORIGEM = ["SRSSU", "SRSSU - APS", "GAMA", "Santa Maria"]
+    ORIGEM = ["SRSSU", "SRSSU - APS", "SRSSU - GAMA", "SRSSU - Santa Maria"]
     RECURSO = ["Regular", "Emenda"]
     TIPO = ["Custeio", "Investimento"]
     BANCO = {"BRB": "070"}
@@ -25,7 +25,7 @@ class interface():
             label='Configurações', menu=self.menu_configurações)
         self.menu_configurações.add_separator()
         self.menu_configurações.add_command(
-            label='Cadastro de fornecedores', command=self.abrir_janela_caminhos)
+            label='Cadastro de fornecedores', command=self.abrir_janela_cadastro)
         self.menu_configurações.add_separator()
 
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
@@ -98,7 +98,7 @@ class interface():
         origem = self.local.get()
         self.relatorio.gerar_teds(origem)
 
-    def abrir_janela_caminhos(self):
+    def abrir_janela_cadastro(self):
         self.janela_de_cadastro = Toplevel()
         self.janela_de_cadastro.title('Lista de caminhos')
         self.janela_de_cadastro.resizable(True, True)
@@ -235,6 +235,132 @@ class interface():
         print(f"Esta é a {conta[1:-2]}")
         self.relatorio.deletar_conta(conta[1:-2])
         self.atualizar_contas()
+
+    def abrir_janela_caminhos(self):
+        self.janela_de_caminhos = Toplevel()
+        self.urls = self.consulta_urls()
+        self.janela_de_caminhos.title('Lista de caminhos')
+        self.janela_de_caminhos.resizable(False, False)
+        self.frame_de_caminhos = LabelFrame(
+            self.janela_de_caminhos, padx=0, pady=0
+        )
+        self.frame_de_caminhos.pack(padx=1, pady=1)
+
+        self.criar_estrutura = Label(
+            self.frame_de_caminhos, text=TEXTO_CRIA_ESTRUTURA,
+            bg='white', fg='green', font=('Arial Narrow', 11)
+        )
+
+        self.botão_criar_estrutura = Button(
+            self.frame_de_caminhos, text='Criar estrutura',
+            command=self.cria_pastas_de_trabalho, padx=0, pady=0, bg='green',
+            fg='white', font=('Helvetica', 10, 'bold'), bd=1
+        )
+
+        self.botao_xlsx = Button(
+            self.frame_de_caminhos, text='Fonte de\ndados XLSX',
+            command=lambda: self.altera_caminho(self.caminho_xlsx, True),
+            padx=0, pady=0, bg='green', fg='white',
+            font=('Helvetica', 8, 'bold'), bd=1
+        )
+        self.caminho_xlsx = Entry(self.frame_de_caminhos, width=70)
+
+        self.botao_pasta_de_certidões = Button(
+            self.frame_de_caminhos, text='Pasta de\ncertidões',
+            command=lambda: (
+                self.altera_caminho(self.caminho_pasta_de_certidões)),
+            padx=0, pady=0, bg='green', fg='white',
+            font=('Helvetica', 8, 'bold'), bd=1
+        )
+        self.caminho_pasta_de_certidões = Entry(
+            self.frame_de_caminhos, width=70
+        )
+
+        self.botao_log = Button(
+            self.frame_de_caminhos, text='Pasta de\nlogs',
+            command=lambda: self.altera_caminho(self.caminho_log), padx=0,
+            pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
+            bd=1
+        )
+        self.caminho_log = Entry(self.frame_de_caminhos, width=70)
+
+        self.pasta_pagamento = Button(
+            self.frame_de_caminhos, text='Comprovantes\nde pagamentos',
+            command=lambda: self.altera_caminho(self.caminho_pasta_pagamento),
+            padx=0, pady=0, bg='green', fg='white',
+            font=('Helvetica', 8, 'bold'), bd=1
+        )
+        self.caminho_pasta_pagamento = Entry(self.frame_de_caminhos, width=70)
+
+        self.certidões_para_pagamento = Button(
+            self.frame_de_caminhos, text='Certidões para\npagamento',
+            command=lambda: (
+                self.altera_caminho(self.caminho_certidões_para_pagamento)
+            ),
+            padx=0, pady=0, bg='green', fg='white',
+            font=('Helvetica', 8, 'bold'), bd=1
+        )
+
+        self.caminho_certidões_para_pagamento = Entry(
+            self.frame_de_caminhos, width=70
+        )
+
+        self.gravar_alterações = Button(
+            self.frame_de_caminhos, text='Gravar alterações',
+            command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
+            fg='white', font=('Helvetica', 8, 'bold'), bd=1
+        )
+
+        self.botão_criar_estrutura.grid(
+            row=0, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
+            ipady=13, sticky=W + E
+        )
+
+        self.criar_estrutura.grid(row=0, column=2, padx=20, pady=10)
+
+        self.botao_xlsx.grid(
+            row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
+            ipady=13, sticky=W + E
+        )
+        self.caminho_xlsx.insert(0, self.urls[0][1])
+        self.caminho_xlsx.grid(row=1, column=2, padx=20)
+
+        self.botao_pasta_de_certidões.grid(
+            row=2, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+            ipady=13, sticky=W + E
+        )
+
+        self.caminho_pasta_de_certidões.insert(0, self.urls[1][1])
+        self.caminho_pasta_de_certidões.grid(row=2, column=2, padx=20)
+
+        self.botao_log.grid(
+            row=3, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+            ipady=13, sticky=W + E
+        )
+
+        self.caminho_log.insert(0, self.urls[2][1])
+        self.caminho_log.grid(row=3, column=2, padx=20)
+
+        self.certidões_para_pagamento.grid(
+            row=4, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+            ipady=13, sticky=W + E
+        )
+
+        self.caminho_certidões_para_pagamento.insert(0, self.urls[4][1])
+        self.caminho_certidões_para_pagamento.grid(row=4, column=2, padx=20)
+
+        self.pasta_pagamento.grid(
+            row=5, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+            ipady=13, sticky=W + E
+        )
+
+        self.caminho_pasta_pagamento.insert(0, self.urls[3][1])
+        self.caminho_pasta_pagamento.grid(row=5, column=2, padx=20)
+
+        self.gravar_alterações.grid(
+            row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
+            ipady=13
+        )
 
 
 
