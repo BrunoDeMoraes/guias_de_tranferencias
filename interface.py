@@ -10,8 +10,12 @@ from tkinter import messagebox
 #from dados import Dados
 from relatorio import Relatorio
 
+from comandos_sql import URLS
+from comandos_sql import ATUALIZAR_CAMINHOS
+from comandos_sql import CAMINHOS_ATUALIZADOS
+
 class interface():
-    ORIGEM = ["SRSSU", "SRSSU - APS", "SRSSU - GAMA", "SRSSU - Santa Maria"]
+    ORIGEM = ["SRSSU", "SRSSU - APS", "SRSSU (Investimento)", "SRSSU - APS (Investimento)"]
     RECURSO = ["Regular", "Emenda"]
     TIPO = ["Custeio", "Investimento"]
     BANCO = {"BRB": "070"}
@@ -27,6 +31,8 @@ class interface():
         self.menu_configurações.add_command(
             label='Cadastro de fornecedores', command=self.abrir_janela_cadastro)
         self.menu_configurações.add_separator()
+        self.menu_configurações.add_command(
+            label='URLs', command=self.abrir_caminhos)
 
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
@@ -239,64 +245,106 @@ class interface():
         self.relatorio.deletar_conta(conta[1:-2])
         self.atualizar_contas()
 
-    def abrir_janela_caminhos(self):
-        self.janela_de_caminhos = Toplevel()
-        self.urls = self.consulta_urls()
-        self.janela_de_caminhos.title('Lista de caminhos')
-        self.janela_de_caminhos.resizable(False, False)
-        self.frame_de_caminhos = LabelFrame(
-            self.janela_de_caminhos, padx=0, pady=0
-        )
-        self.frame_de_caminhos.pack(padx=1, pady=1)
+    def altera_caminho(self, entrada, xlsx=False):
+        if xlsx == True:
+            caminho = filedialog.askopenfilename(
+                initialdir=self.relatorio.caminho_do_arquivo(),
+                filetypes=(('Arquivos', '*.xlsx'), ("Tudo", '*.*'))
+            )
+        else:
+            caminho = filedialog.askdirectory(
+                initialdir=self.relatorio.caminho_do_arquivo()
+            )
+        entrada.delete(0, 'end')
+        entrada.insert(0, caminho)
 
-        self.criar_estrutura = Label(
-            self.frame_de_caminhos, text=TEXTO_CRIA_ESTRUTURA,
-            bg='white', fg='green', font=('Arial Narrow', 11)
-        )
+    def atualizar_caminhos(self):
+        pass
+        # resposta = messagebox.askyesno(
+        #     ATUALIZAR_CAMINHOS[0], ATUALIZAR_CAMINHOS[1]
+        # )
+        #
+        # itens_para_atualizacao = [
+        #     ['caminho_xlsx',
+        #      '1',
+        #      self.caminho_xlsx.get()],
+        #
+        #     ['pasta_de_certidões',
+        #      '2',
+        #      self.caminho_pasta_de_certidões.get()],
+        #
+        #     ['caminho_de_log',
+        #      '3',
+        #      self.caminho_log.get()],
+        #
+        #     ['comprovantes_de_pagamento',
+        #      '4',
+        #      self.caminho_pasta_pagamento.get()],
+        #
+        #     ['certidões_para_pagamento',
+        #      '5',
+        #      self.caminho_certidões_para_pagamento.get()]
+        # ]
+        #
+        # if resposta:
+        #     arquivo = self.caminho_do_arquivo()
+        #     with sqlite3.connect(f'{arquivo}/caminhos.db') as conexao:
+        #         direcionador = conexao.cursor()
+        #         for item in itens_para_atualizacao:
+        #             linha_update = (
+        #                 f'UPDATE urls SET '
+        #                 f'url = :{item[0]} WHERE oid = {item[1]}'
+        #             )
+        #             direcionador.execute(linha_update, {item[0]: item[2]})
+        #         conexao.commit()
+        #     self.janela_de_caminhos.destroy()
+        #     messagebox.showinfo(
+        #         CAMINHOS_ATUALIZADOS[0],
+        #         (CAMINHOS_ATUALIZADOS[1])
+        #     )
+        # else:
+        #     self.janela_de_caminhos.destroy()
 
-        self.botão_criar_estrutura = Button(
-            self.frame_de_caminhos, text='Criar estrutura',
-            command=self.cria_pastas_de_trabalho, padx=0, pady=0, bg='green',
-            fg='white', font=('Helvetica', 10, 'bold'), bd=1
+    def abrir_caminhos(self):
+        self.caminhos = Toplevel()
+        self.urls = self.relatorio.consultar_registros(URLS)
+        print(self.urls)
+        self.caminhos.title('Caminhos')
+        self.caminhos.resizable(False, False)
+        self.frame_caminhos = LabelFrame(
+            self.caminhos, padx=0, pady=0
         )
+        self.frame_caminhos.pack(padx=1, pady=1)
 
         self.botao_xlsx = Button(
-            self.frame_de_caminhos, text='Fonte de\ndados XLSX',
+            self.frame_caminhos, text='SRSSU',
             command=lambda: self.altera_caminho(self.caminho_xlsx, True),
             padx=0, pady=0, bg='green', fg='white',
             font=('Helvetica', 8, 'bold'), bd=1
         )
-        self.caminho_xlsx = Entry(self.frame_de_caminhos, width=70)
+        self.caminho_xlsx = Entry(self.frame_caminhos, width=70)
 
         self.botao_pasta_de_certidões = Button(
-            self.frame_de_caminhos, text='Pasta de\ncertidões',
+            self.frame_caminhos, text='SRSSU - APS',
             command=lambda: (
                 self.altera_caminho(self.caminho_pasta_de_certidões)),
             padx=0, pady=0, bg='green', fg='white',
             font=('Helvetica', 8, 'bold'), bd=1
         )
         self.caminho_pasta_de_certidões = Entry(
-            self.frame_de_caminhos, width=70
+            self.frame_caminhos, width=70
         )
 
         self.botao_log = Button(
-            self.frame_de_caminhos, text='Pasta de\nlogs',
+            self.frame_caminhos, text='SRSSU (Investimento)',
             command=lambda: self.altera_caminho(self.caminho_log), padx=0,
             pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
             bd=1
         )
-        self.caminho_log = Entry(self.frame_de_caminhos, width=70)
-
-        self.pasta_pagamento = Button(
-            self.frame_de_caminhos, text='Comprovantes\nde pagamentos',
-            command=lambda: self.altera_caminho(self.caminho_pasta_pagamento),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
-        )
-        self.caminho_pasta_pagamento = Entry(self.frame_de_caminhos, width=70)
+        self.caminho_log = Entry(self.frame_caminhos, width=70)
 
         self.certidões_para_pagamento = Button(
-            self.frame_de_caminhos, text='Certidões para\npagamento',
+            self.frame_caminhos, text='SRSSU - APS (Investimento)',
             command=lambda: (
                 self.altera_caminho(self.caminho_certidões_para_pagamento)
             ),
@@ -305,21 +353,14 @@ class interface():
         )
 
         self.caminho_certidões_para_pagamento = Entry(
-            self.frame_de_caminhos, width=70
+            self.frame_caminhos, width=70
         )
 
         self.gravar_alterações = Button(
-            self.frame_de_caminhos, text='Gravar alterações',
+            self.frame_caminhos, text='Gravar alterações',
             command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
             fg='white', font=('Helvetica', 8, 'bold'), bd=1
         )
-
-        self.botão_criar_estrutura.grid(
-            row=0, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
-            ipady=13, sticky=W + E
-        )
-
-        self.criar_estrutura.grid(row=0, column=2, padx=20, pady=10)
 
         self.botao_xlsx.grid(
             row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
@@ -349,16 +390,8 @@ class interface():
             ipady=13, sticky=W + E
         )
 
-        self.caminho_certidões_para_pagamento.insert(0, self.urls[4][1])
+        self.caminho_certidões_para_pagamento.insert(0, self.urls[3][1])
         self.caminho_certidões_para_pagamento.grid(row=4, column=2, padx=20)
-
-        self.pasta_pagamento.grid(
-            row=5, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
-        )
-
-        self.caminho_pasta_pagamento.insert(0, self.urls[3][1])
-        self.caminho_pasta_pagamento.grid(row=5, column=2, padx=20)
 
         self.gravar_alterações.grid(
             row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
