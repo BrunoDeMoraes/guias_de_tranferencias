@@ -2,6 +2,8 @@ import os
 import sqlite3
 from comandos_sql import CONSULTA_TABELAS
 
+from comandos_sql import URLS
+
 class Contas:
 
     CODIGOS = {
@@ -31,14 +33,13 @@ class Contas:
                 direcionador.execute(args[0])
             return direcionador
 
-    def consultar_bd(self, comando):
-        #comando = ('SELECT * FROM contas')
+    def consultar_registros(self, comando):
         direcionador = self.conexao(comando)
         registros = direcionador.fetchall()
         return registros
 
-    def consulta_tabelas(self):
-        tabs = self.consulta_bd(CONSULTA_TABELAS)
+    def consultar_tabelas(self):
+        tabs = self.consultar_registros(CONSULTA_TABELAS)
         return tabs
 
     def pegar_conta(self, origem, codigo):
@@ -64,7 +65,25 @@ class Contas:
                 self.conexao(tabela)
         else:
             print('Banco de dados localizado.')
-            #self.consultar_bd()
+            #self.consultar_registros()
+
+    def configura_bd(self):
+        caminho = self.caminho_do_arquivo()
+        enderecos = {
+            'SRSSU': f'{caminho}/SRSSU.xlsx',
+            'SRSSU - APS': f'{caminho}/SRSSU - APS.xlsx',
+            'SRSSU (Investimento)': f'{caminho}/SRSSU (Investimento).xlsx',
+            'SRSSU - APS (Investimento)': f'{caminho}/SRSSU - APS (Investimento).xlsx',
+
+        }
+        for endereco in enderecos:
+            comando = 'INSERT INTO urls VALUES (:variavel, :url)'
+            substituto = {"variavel": endereco, "url": enderecos[endereco]}
+            caminho_do_banco_de_dados = self.caminho_do_bd()
+            with sqlite3.connect(caminho_do_banco_de_dados) as conexao:
+                direcionador = conexao.cursor()
+                direcionador.execute(comando, substituto)
+        #self.consulta_urls()
 
 
     def cadastrar_conta(self, origem, recurso, tipo, banco, agencia, numero, cnpj):
@@ -84,6 +103,10 @@ class Contas:
 
 if __name__ == '__main__':
     c = Contas()
-    a = c.consultar_bd(("SELECT name FROM sqlite_master WHERE type='table';"))
-    for i in a:
-        print(i)
+    # a = c.consultar_registros(("SELECT name FROM sqlite_master WHERE type='table';"))
+    # for i in a:
+    #     print(i)
+    #c.configura_bd()
+    d = c.consultar_registros(URLS)
+    print(d)
+
