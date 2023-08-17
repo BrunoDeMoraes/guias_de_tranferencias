@@ -1,5 +1,6 @@
 import os
 import sqlite3
+from comandos_sql import CONSULTA_TABELAS
 
 class Contas:
 
@@ -17,7 +18,7 @@ class Contas:
 
     def caminho_do_bd(self):
         caminho = self.caminho_do_arquivo()
-        banco_de_dados = f'{caminho}/contas.db'
+        banco_de_dados = f'{caminho}/guias.db'
         return banco_de_dados
 
     def conexao(self, *args):
@@ -30,14 +31,15 @@ class Contas:
                 direcionador.execute(args[0])
             return direcionador
 
-    def listar_contas(self):
-        comando = ('SELECT * FROM contas')
+    def consultar_bd(self, comando):
+        #comando = ('SELECT * FROM contas')
         direcionador = self.conexao(comando)
         registros = direcionador.fetchall()
-        # for i in registros:
-        #  print(i)
-        #  print(type(registros))
         return registros
+
+    def consulta_tabelas(self):
+        tabs = self.consulta_bd(CONSULTA_TABELAS)
+        return tabs
 
     def pegar_conta(self, origem, codigo):
         print(origem)
@@ -55,14 +57,14 @@ class Contas:
         print(f"ncontas {registro}")
         return registro
 
-    def criar_bd(self, comando):
+    def criar_bd(self, tabelas):
         banco_de_dados = self.caminho_do_bd()
         if not os.path.exists(banco_de_dados):
-            #comando = 'CREATE TABLE contas (origem text, recurso text, tipo text, banco text, agencia text, numero text, cnpj texto)'
-            self.conexao(comando)
+            for tabela in tabelas:
+                self.conexao(tabela)
         else:
             print('Banco de dados localizado.')
-            #self.listar_contas()
+            #self.consultar_bd()
 
 
     def cadastrar_conta(self, origem, recurso, tipo, banco, agencia, numero, cnpj):
@@ -79,3 +81,9 @@ class Contas:
         self.conexao(comando)
         print("Conta excluída")
 
+
+if __name__ == '__main__':
+    c = Contas()
+    a = c.consultar_bd(("SELECT name FROM sqlite_master WHERE type='table';"))
+    for i in a:
+        print(i)
