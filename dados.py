@@ -2,6 +2,8 @@ import pandas as pd
 from num2words import num2words
 
 class Dados:
+
+    #def
     def dados_de_pagamento(self):
         df = pd.read_excel("Matrix_2023_HRG.xlsx", skiprows=[0])
         filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
