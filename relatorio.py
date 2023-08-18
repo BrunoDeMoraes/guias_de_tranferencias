@@ -14,14 +14,14 @@ from comandos_sql import URLS
 
 class Relatorio(Contas, Dados):
     def __init__(self):
+        self.pasta = self.caminho_do_arquivo()
         self.criar_bd(TABELAS)
-        self.pagamentos = self.listar_pagamentos()
-        self.empresas = self.fornecedores()
         self.contas = self.consultar_registros(CONTAS)
         self.urls = self.consultar_registros(URLS)
+        self.pagamentos = self.listar_pagamentos(self.urls[0][1])
+        self.empresas = self.fornecedores(self.urls[0][1])
         self.data = date.today()
         self.data_formatada = self.data.strftime('%d/%m/%Y')
-        self.pasta = self.caminho_do_arquivo()
 
     def formatar_relatorio(self, iteravel):
         valores_impressao = ""
