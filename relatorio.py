@@ -416,9 +416,11 @@ class Relatorio(Contas, Dados):
         cnv.save()
 
     def gerar_teds(self, origem):
+        self.pagamentos = self.listar_pagamentos(self.definir_fonte(origem))
+        self.empresas = self.fornecedores(self.definir_fonte(origem))
         for pagamento in self.pagamentos.values():
-            print(pagamento[1])
-            print(self.empresas)
+            #print(pagamento[1])
+            #print(self.empresas)
 
             dados_empresa = self.empresas[pagamento[1]]
             codigo = pagamento[5]
@@ -426,10 +428,10 @@ class Relatorio(Contas, Dados):
             banco = self.empresas[pagamento[1]][5]
             nome_empresa = pagamento[1]
             if (banco) == "BRB":
-                print(f"{nome_empresa} - É BRB, porra! Transferência intena")
+                #print(f"{nome_empresa} - É BRB, porra! Transferência intena")
                 self.cria_transferencia(pagamento, dados_empresa, conta, origem)
             else:
-                print(f"{nome_empresa} - Banco: {banco} - melhor fazer uma TED!, ")
+                #print(f"{nome_empresa} - Banco: {banco} - melhor fazer uma TED!, ")
                 self.criar_ted(pagamento, dados_empresa, conta, origem)
 
 

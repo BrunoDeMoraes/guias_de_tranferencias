@@ -38,15 +38,25 @@ class Contas:
         registros = direcionador.fetchall()
         return registros
 
+    def definir_fonte(self, fonte):
+        caminhos = self.consultar_registros(URLS)
+        origens = {}
+        for caminho in caminhos:
+            origens[caminho[0]] = caminho[1]
+        print(origens)
+        print(origens[fonte])
+        return origens[fonte]
+
+
     def consultar_tabelas(self):
         tabs = self.consultar_registros(CONSULTA_TABELAS)
         return tabs
 
     def pegar_conta(self, origem, codigo):
-        print(origem)
+        #print(origem)
         especificador = self.CODIGOS[codigo]
         comando = f"SELECT * FROM contas WHERE origem = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
-        print(comando)
+        #print(comando)
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         return registro
@@ -55,7 +65,7 @@ class Contas:
         comando = f"SELECT numero FROM contas"
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
-        print(f"ncontas {registro}")
+        #print(f"ncontas {registro}")
         return registro
 
     def criar_bd(self, tabelas):
@@ -107,6 +117,7 @@ if __name__ == '__main__':
     # for i in a:
     #     print(i)
     #c.configura_bd()
-    d = c.consultar_registros(URLS)
+    #d = c.consultar_registros(URLS)
+    e = c.definir_fonte()
     print(d)
 

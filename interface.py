@@ -10,6 +10,7 @@ from tkinter import messagebox
 #from dados import Dados
 from relatorio import Relatorio
 
+from comandos_sql import CONTAS
 from comandos_sql import URLS
 from comandos_sql import ATUALIZAR_CAMINHOS
 from comandos_sql import CAMINHOS_ATUALIZADOS
@@ -98,7 +99,7 @@ class interface():
         self.display(self.relatorio.formatar_relatorio(self.relatorio.empresas.values()))
 
     def exibir_contas(self):
-        self.display(self.relatorio.formatar_relatorio(self.relatorio.consultar_bd()))
+        self.display(self.relatorio.formatar_relatorio(self.relatorio.consultar_registros(CONTAS)))
 
     def imprimir_teds(self):
         origem = self.local.get()
