@@ -3,9 +3,8 @@ from num2words import num2words
 
 class Dados:
 
-    #def
-    def dados_de_pagamento(self):
-        df = pd.read_excel("Matrix_2023_HRG.xlsx", skiprows=[0])
+    def dados_de_pagamento(self, fonte):
+        df = pd.read_excel(fonte, skiprows=[0])
         filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
         dados = filtro.filter(
             ['Cotação', 'Item', 'Empresa ', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI', 'Conta']
@@ -17,8 +16,8 @@ class Dados:
             extenso = num2words(valor[3], lang='pt_BR', to='currency')
             valor.append(extenso)
 
-    def listar_pagamentos(self):
-        pagamentos = self.dados_de_pagamento()
+    def listar_pagamentos(self, fonte):
+        pagamentos = self.dados_de_pagamento(fonte)
         duplicados = pagamentos[pagamentos.duplicated(subset=['Cotação', 'Empresa ', 'Nº DANFE'], keep=False)]
         itens_somados = {}
         checagem = []
@@ -47,8 +46,8 @@ class Dados:
         self.valor_por_extenso(itens_somados)
         return itens_somados
 
-    def fornecedores(self):
-        df = pd.read_excel("Matrix_2023_HRG.xlsx", sheet_name='Fornecedores')
+    def fornecedores(self, fonte):
+        df = pd.read_excel(fonte, sheet_name='Fornecedores')
         empresas = {}
         for indice, linha in df.iterrows():
             a = linha.to_list()
