@@ -260,50 +260,46 @@ class interface():
 
     def atualizar_caminhos(self):
         pass
-        # resposta = messagebox.askyesno(
-        #     ATUALIZAR_CAMINHOS[0], ATUALIZAR_CAMINHOS[1]
-        # )
-        #
-        # itens_para_atualizacao = [
-        #     ['caminho_xlsx',
-        #      '1',
-        #      self.caminho_xlsx.get()],
-        #
-        #     ['pasta_de_certidões',
-        #      '2',
-        #      self.caminho_pasta_de_certidões.get()],
-        #
-        #     ['caminho_de_log',
-        #      '3',
-        #      self.caminho_log.get()],
-        #
-        #     ['comprovantes_de_pagamento',
-        #      '4',
-        #      self.caminho_pasta_pagamento.get()],
-        #
-        #     ['certidões_para_pagamento',
-        #      '5',
-        #      self.caminho_certidões_para_pagamento.get()]
-        # ]
-        #
-        # if resposta:
-        #     arquivo = self.caminho_do_arquivo()
-        #     with sqlite3.connect(f'{arquivo}/caminhos.db') as conexao:
-        #         direcionador = conexao.cursor()
-        #         for item in itens_para_atualizacao:
-        #             linha_update = (
-        #                 f'UPDATE urls SET '
-        #                 f'url = :{item[0]} WHERE oid = {item[1]}'
-        #             )
-        #             direcionador.execute(linha_update, {item[0]: item[2]})
-        #         conexao.commit()
-        #     self.janela_de_caminhos.destroy()
-        #     messagebox.showinfo(
-        #         CAMINHOS_ATUALIZADOS[0],
-        #         (CAMINHOS_ATUALIZADOS[1])
-        #     )
-        # else:
-        #     self.janela_de_caminhos.destroy()
+        resposta = messagebox.askyesno(
+            ATUALIZAR_CAMINHOS[0], ATUALIZAR_CAMINHOS[1]
+        )
+
+        itens_para_atualizacao = [
+            ['SRSSU',
+             '1',
+             self.caminho_srssu.get()],
+
+            ['SRSSU - APS',
+             '2',
+             self.caminho_aps.get()],
+
+            ['SRSSU (Investimento)',
+             '3',
+             self.caminho_srssu_i.get()],
+
+            ['SRSSU - APS (Investimento)',
+             '4',
+             self.caminho_aps_i.get()]
+        ]
+
+        if resposta:
+            arquivo = self.relatorio.caminho_do_arquivo()
+            with sqlite3.connect(f'{arquivo}/guias.db') as conexao:
+                direcionador = conexao.cursor()
+                for item in itens_para_atualizacao:
+                    linha_update = (
+                        f'UPDATE urls SET url = :nova_url WHERE variavel = "{item[0]}"'
+                    )
+                    print(f"0{item[0]} 1{item[1]} 2{item[2]}")
+                    direcionador.execute(linha_update, {'nova_url': item[2]})
+                conexao.commit()
+            self.caminhos.destroy()
+            messagebox.showinfo(
+                CAMINHOS_ATUALIZADOS[0],
+                (CAMINHOS_ATUALIZADOS[1])
+            )
+        else:
+            self.caminhos.destroy()
 
     def abrir_caminhos(self):
         self.caminhos = Toplevel()
@@ -318,41 +314,41 @@ class interface():
 
         self.botao_xlsx = Button(
             self.frame_caminhos, text='SRSSU',
-            command=lambda: self.altera_caminho(self.caminho_xlsx, True),
+            command=lambda: self.altera_caminho(self.caminho_srssu, True),
             padx=0, pady=0, bg='green', fg='white',
             font=('Helvetica', 8, 'bold'), bd=1
         )
-        self.caminho_xlsx = Entry(self.frame_caminhos, width=70)
+        self.caminho_srssu = Entry(self.frame_caminhos, width=70)
 
         self.botao_pasta_de_certidões = Button(
             self.frame_caminhos, text='SRSSU - APS',
             command=lambda: (
-                self.altera_caminho(self.caminho_pasta_de_certidões)),
+                self.altera_caminho(self.caminho_aps, True)),
             padx=0, pady=0, bg='green', fg='white',
             font=('Helvetica', 8, 'bold'), bd=1
         )
-        self.caminho_pasta_de_certidões = Entry(
+        self.caminho_aps = Entry(
             self.frame_caminhos, width=70
         )
 
         self.botao_log = Button(
             self.frame_caminhos, text='SRSSU (Investimento)',
-            command=lambda: self.altera_caminho(self.caminho_log), padx=0,
+            command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
             pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
             bd=1
         )
-        self.caminho_log = Entry(self.frame_caminhos, width=70)
+        self.caminho_srssu_i = Entry(self.frame_caminhos, width=70)
 
         self.certidões_para_pagamento = Button(
             self.frame_caminhos, text='SRSSU - APS (Investimento)',
             command=lambda: (
-                self.altera_caminho(self.caminho_certidões_para_pagamento)
+                self.altera_caminho(self.caminho_aps_i, True)
             ),
             padx=0, pady=0, bg='green', fg='white',
             font=('Helvetica', 8, 'bold'), bd=1
         )
 
-        self.caminho_certidões_para_pagamento = Entry(
+        self.caminho_aps_i = Entry(
             self.frame_caminhos, width=70
         )
 
@@ -366,32 +362,32 @@ class interface():
             row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
             ipady=13, sticky=W + E
         )
-        self.caminho_xlsx.insert(0, self.urls[0][1])
-        self.caminho_xlsx.grid(row=1, column=2, padx=20)
+        self.caminho_srssu.insert(0, self.urls[0][1])
+        self.caminho_srssu.grid(row=1, column=2, padx=20)
 
         self.botao_pasta_de_certidões.grid(
             row=2, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
             ipady=13, sticky=W + E
         )
 
-        self.caminho_pasta_de_certidões.insert(0, self.urls[1][1])
-        self.caminho_pasta_de_certidões.grid(row=2, column=2, padx=20)
+        self.caminho_aps.insert(0, self.urls[1][1])
+        self.caminho_aps.grid(row=2, column=2, padx=20)
 
         self.botao_log.grid(
             row=3, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
             ipady=13, sticky=W + E
         )
 
-        self.caminho_log.insert(0, self.urls[2][1])
-        self.caminho_log.grid(row=3, column=2, padx=20)
+        self.caminho_srssu_i.insert(0, self.urls[2][1])
+        self.caminho_srssu_i.grid(row=3, column=2, padx=20)
 
         self.certidões_para_pagamento.grid(
             row=4, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
             ipady=13, sticky=W + E
         )
 
-        self.caminho_certidões_para_pagamento.insert(0, self.urls[3][1])
-        self.caminho_certidões_para_pagamento.grid(row=4, column=2, padx=20)
+        self.caminho_aps_i.insert(0, self.urls[3][1])
+        self.caminho_aps_i.grid(row=4, column=2, padx=20)
 
         self.gravar_alterações.grid(
             row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
