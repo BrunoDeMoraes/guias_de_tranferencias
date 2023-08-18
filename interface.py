@@ -288,7 +288,7 @@ class interface():
                 direcionador = conexao.cursor()
                 for item in itens_para_atualizacao:
                     linha_update = (
-                        f'UPDATE urls SET url = :nova_url WHERE variavel = "{item[0]}"'
+                        f"UPDATE urls SET url = :nova_url WHERE variavel = '{item[0]}'"
                     )
                     print(f"0{item[0]} 1{item[1]} 2{item[2]}")
                     direcionador.execute(linha_update, {'nova_url': item[2]})
