@@ -7,7 +7,7 @@ class Dados:
         df = pd.read_excel(fonte, skiprows=[0])
         filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
         dados = filtro.filter(
-            ['Cotação', 'Item', 'Empresa ', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI', 'Conta']
+            ['Cotação', 'Item', 'Empresa', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI', 'Conta']
         )
         return dados
 
@@ -18,25 +18,25 @@ class Dados:
 
     def listar_pagamentos(self, fonte):
         pagamentos = self.dados_de_pagamento(fonte)
-        duplicados = pagamentos[pagamentos.duplicated(subset=['Cotação', 'Empresa ', 'Nº DANFE'], keep=False)]
+        duplicados = pagamentos[pagamentos.duplicated(subset=['Cotação', 'Empresa', 'Nº DANFE'], keep=False)]
         itens_somados = {}
         checagem = []
         for indice, linha in duplicados.iterrows():
-            palavra_checagem = str(linha['Cotação']) + '-' + str(linha['Empresa ']) + '-' + str(linha['Nº DANFE'])
+            palavra_checagem = str(linha['Cotação']) + '-' + str(linha['Empresa']) + '-' + str(linha['Nº DANFE'])
             if palavra_checagem in checagem:
                 continue
             else:
                 checagem.append(palavra_checagem)
                 duplicados_subset1 = duplicados[
                     (duplicados['Cotação'] == linha['Cotação']) &
-                    (duplicados['Empresa '] == linha['Empresa ']) &
+                    (duplicados['Empresa'] == linha['Empresa']) &
                     (duplicados['Nº DANFE'] == linha['Nº DANFE'])
                 ]
                 soma = duplicados_subset1['V. Total'].sum()
                 descricao = palavra_checagem.split('-')
                 itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma, linha['Nº de processo SEI'], linha['Conta']]
         for indice, linha in pagamentos.iterrows():
-            palavra_checagem = str(linha['Cotação']) + '-' + str(linha['Empresa ']) + '-' + str(linha['Nº DANFE'])
+            palavra_checagem = str(linha['Cotação']) + '-' + str(linha['Empresa']) + '-' + str(linha['Nº DANFE'])
             if palavra_checagem in checagem:
                 continue
             else:
