@@ -18,6 +18,7 @@ class Relatorio(Contas, Dados):
         self.criar_bd(TABELAS)
         self.contas = self.consultar_registros(CONTAS)
         self.urls = self.consultar_registros(URLS)
+        print(f"Estas são as URLs {self.urls}")
         self.pagamentos = self.listar_pagamentos(self.urls[0][1])
         self.empresas = self.fornecedores(self.urls[0][1])
         self.data = date.today()
@@ -79,6 +80,7 @@ class Relatorio(Contas, Dados):
 
         contador = 0
         for i in range(0, 2):
+            print(empresa)
             cnv.drawImage(
                 f'{self.pasta}/Imagens/Logo_brb.jpg', self.mm(0), self.mm(276 - contador), width=self.mm(85),
                 height=self.mm(18
@@ -202,6 +204,8 @@ class Relatorio(Contas, Dados):
             cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
             cnv.drawString(self.mm(104), self.mm(269 - contador), 'Instituição Financeira Destinatária')
             cnv.drawString(self.mm(84), self.mm(155 - contador), 'Assinatura do Remetente')
+
+            print(f"{conta} empresa {empresa}")
 
             #contas
             cnv.drawString(self.mm(10), self.mm(260 - contador), f"{conta[0][3]}") #banco

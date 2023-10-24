@@ -92,7 +92,13 @@ class interface():
     def limpar_tela(self):
         self.mycanvas.delete("all")
 
+    def atualizar_dados(self):
+        origem = self.local.get()
+        self.relatorio.pagamentos = self.relatorio.listar_pagamentos(self.relatorio.definir_fonte(origem))
+        self.relatorio.empresas = self.relatorio.fornecedores(self.relatorio.definir_fonte(origem))
+
     def exibir_pagamentos(self):
+        self.atualizar_dados()
         self.display(self.relatorio.formatar_relatorio(self.relatorio.pagamentos.values()))
 
     def exibir_fornecedores(self):

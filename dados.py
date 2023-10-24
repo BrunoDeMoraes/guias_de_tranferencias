@@ -4,7 +4,7 @@ from num2words import num2words
 class Dados:
 
     def dados_de_pagamento(self, fonte):
-        df = pd.read_excel(fonte, skiprows=[0])
+        df = pd.read_excel(fonte, sheet_name='Controle', skiprows=[0])
         filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
         dados = filtro.filter(
             ['Cotação', 'Item', 'Empresa', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI', 'Conta']
