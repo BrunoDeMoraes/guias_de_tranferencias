@@ -99,7 +99,7 @@ class Interface():
 
     def exibir_pagamentos(self):
         self.atualizar_dados()
-        self.display(self.relatorio.formatar_relatorio(self.relatorio.pagamentos.values()))
+        self.display(self.relatorio.formatar_relatorio(self.relatorio.pagamentos_formatados()))
 
     def exibir_fornecedores(self):
         self.display(self.relatorio.formatar_relatorio(self.relatorio.empresas.values()))
