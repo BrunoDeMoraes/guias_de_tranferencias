@@ -24,6 +24,14 @@ class Relatorio(Contas, Dados):
         self.data = date.today()
         self.data_formatada = self.data.strftime('%d/%m/%Y')
 
+
+    def pagamentos_formatados(self):
+        pagamentos_listados = []
+        for pagamento in self.pagamentos.values():
+            resumo = f'''Cotação: {pagamento[0]}\nEmpresa: {pagamento[1]}\nNota Fiscal nº: {pagamento[2]}\nValor: R$ {self.formartar_valor(pagamento[3])} ({pagamento[6]})\nProcesso SEI nº: {pagamento[4]}\nTipo de verba: {pagamento[5]}'''
+            pagamentos_listados.append(resumo)
+        return pagamentos_listados
+
     def formatar_relatorio(self, iteravel):
         valores_impressao = ""
         for i in iteravel:
