@@ -54,7 +54,7 @@ class Interface():
         self.rolagem.pack(side=RIGHT, fill=Y)
 
         self.mycanvas.config(yscrollcommand=self.rolagem.set)
-        self.mycanvas.bind('<Configure>', lambda e: self.mycanvas.config(scrollregion=(0, 0, 2000, 3000)))
+        self.mycanvas.bind('<Configure>', lambda e: self.mycanvas)
         self.mycanvas.bind("<MouseWheel>", lambda event: self.mycanvas.yview_scroll(-int(event.delta / 60), "units"))
 
         self.frame_display = Frame(self.mycanvas, padx=0, pady=0)
@@ -87,7 +87,7 @@ class Interface():
         # self.teste5.grid(row=0, column=6)
 
     def display(self, valor):
-        self.mycanvas.create_text((530, 470), text=valor, fill="green", font=("Helvetica", 10, "bold"))
+        self.mycanvas.create_text((360, 0), text=valor, fill="green", font=("Helvetica", 12, "bold"))
 
     def limpar_tela(self):
         self.mycanvas.delete("all")
@@ -407,7 +407,7 @@ if __name__ == '__main__':
     rel = Relatorio()
     tela = Tk()
     tela.geometry("1100x600")
-    tela.resizable(False, False)
+    tela.resizable(1, 1)
     objeto_tela = Interface(tela, rel)
     #tela.title()
     tela.config(menu=objeto_tela.menu)
