@@ -15,7 +15,7 @@ from comandos_sql import URLS
 from comandos_sql import ATUALIZAR_CAMINHOS
 from comandos_sql import CAMINHOS_ATUALIZADOS
 
-class interface():
+class Interface():
     ORIGEM = ["SRSSU", "SRSSU - APS", "SRSSU (Investimento)", "SRSSU - APS (Investimento)"]
     RECURSO = ["Regular", "Emenda"]
     TIPO = ["Custeio", "Investimento"]
@@ -63,9 +63,9 @@ class interface():
         self.mycanvas.create_window((0, 0), window=self.frame_display, anchor="nw")
 
         self.local = StringVar()
-        self.local.set(interface.ORIGEM[0])
+        self.local.set(Interface.ORIGEM[0])
 
-        self.conta_origem = OptionMenu(self.frame_1, self.local, *interface.ORIGEM)
+        self.conta_origem = OptionMenu(self.frame_1, self.local, *Interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
         self.teste1 = Button(self.frame_2, text='Listar', command=self.exibir_pagamentos)
@@ -137,27 +137,27 @@ class interface():
         self.titulo_origem = Label(self.frame_de_cadastro, text="Origem")
 
         self.origem_bd = StringVar()
-        self.origem_bd.set(interface.ORIGEM[0])
-        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *interface.ORIGEM)
+        self.origem_bd.set(Interface.ORIGEM[0])
+        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *Interface.ORIGEM)
         self.lista_origem_bd.config(width=15)
 
         self.titulo_recurso = Label(self.frame_de_cadastro, text="Recurso")
 
         self.recurso_bd = StringVar()
-        self.recurso_bd.set(interface.RECURSO[0])
-        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *interface.RECURSO)
+        self.recurso_bd.set(Interface.RECURSO[0])
+        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *Interface.RECURSO)
         self.lista_recurso_bd.config(width=15)
 
         self.titulo_tipo = Label(self.frame_de_cadastro, text="Tipo")
         self.tipo_bd = StringVar()
-        self.tipo_bd.set(interface.TIPO[0])
-        self.lista_tipo_bd = OptionMenu(self.frame_de_cadastro, self.tipo_bd, *interface.TIPO)
+        self.tipo_bd.set(Interface.TIPO[0])
+        self.lista_tipo_bd = OptionMenu(self.frame_de_cadastro, self.tipo_bd, *Interface.TIPO)
         self.lista_tipo_bd.config(width=15)
 
         self.titulo_banco = Label(self.frame_de_cadastro, text="Banco")
 
         self.bancos = []
-        for banco in interface.BANCO.keys():
+        for banco in Interface.BANCO.keys():
             self.bancos.append(banco)
         self.banco_bd = StringVar()
         self.banco_bd.set("BRB")
@@ -235,7 +235,7 @@ class interface():
         self.v_contas_bd.grid(row=1, column=1, padx=30)
 
     def submeter_conta(self):
-        self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
+        self.relatorio.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), Interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
         self.atualizar_contas()
         self.n_agencia.delete(0, END)
         self.n_conta.delete(0, END)
@@ -408,7 +408,7 @@ if __name__ == '__main__':
     tela = Tk()
     tela.geometry("1100x600")
     tela.resizable(False, False)
-    objeto_tela = interface(tela, rel)
+    objeto_tela = Interface(tela, rel)
     #tela.title()
     tela.config(menu=objeto_tela.menu)
     tela.mainloop()
