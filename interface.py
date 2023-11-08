@@ -16,7 +16,7 @@ from comandos_sql import ATUALIZAR_CAMINHOS
 from comandos_sql import CAMINHOS_ATUALIZADOS
 
 class Interface():
-    ORIGEM = ["SRSSU", "SRSSU - APS", "SRSSU (Investimento)", "SRSSU - APS (Investimento)"]
+    ORIGEM = ["SRSSU", "SRSSU - APS", "Provisória", "SRSSU - APS (Investimento)"]
     RECURSO = ["Regular", "Emenda"]
     TIPO = ["Custeio", "Investimento"]
     BANCO = {"BRB": "070"}
@@ -280,7 +280,7 @@ class Interface():
              '2',
              self.caminho_aps.get()],
 
-            ['SRSSU (Investimento)',
+            ['Provisória',
              '3',
              self.caminho_srssu_i.get()],
 
@@ -339,7 +339,7 @@ class Interface():
         )
 
         self.botao_log = Button(
-            self.frame_caminhos, text='SRSSU (Investimento)',
+            self.frame_caminhos, text='Provisória',
             command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
             pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
             bd=1

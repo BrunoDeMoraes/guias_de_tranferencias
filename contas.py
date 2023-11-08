@@ -73,6 +73,7 @@ class Contas:
         if not os.path.exists(banco_de_dados):
             for tabela in tabelas:
                 self.conexao(tabela)
+            self.configura_bd()
         else:
             print('Banco de dados localizado.')
             #self.consultar_registros()
@@ -82,7 +83,7 @@ class Contas:
         enderecos = {
             'SRSSU': f'{caminho}/SRSSU.xlsx',
             'SRSSU - APS': f'{caminho}/SRSSU - APS.xlsx',
-            'SRSSU (Investimento)': f'{caminho}/SRSSU (Investimento).xlsx',
+            'Provisória': f'{caminho}/Provisória.xlsx',
             'SRSSU - APS (Investimento)': f'{caminho}/SRSSU - APS (Investimento).xlsx',
 
         }
@@ -93,7 +94,7 @@ class Contas:
             with sqlite3.connect(caminho_do_banco_de_dados) as conexao:
                 direcionador = conexao.cursor()
                 direcionador.execute(comando, substituto)
-        #self.consulta_urls()
+        self.consulta_urls()
 
 
     def cadastrar_conta(self, origem, recurso, tipo, banco, agencia, numero, cnpj):
@@ -116,8 +117,8 @@ if __name__ == '__main__':
     # a = c.consultar_registros(("SELECT name FROM sqlite_master WHERE type='table';"))
     # for i in a:
     #     print(i)
-    #c.configura_bd()
+    c.configura_bd()
     #d = c.consultar_registros(URLS)
-    e = c.definir_fonte()
+    #e = c.definir_fonte()
     print(d)
 
