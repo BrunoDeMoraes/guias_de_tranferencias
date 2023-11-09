@@ -7,14 +7,16 @@ from datetime import date
 
 from contas import Contas
 from dados import Dados
+from estrutura import Estrutura
 
 from comandos_sql import TABELAS
 from comandos_sql import CONTAS
 from comandos_sql import URLS
 
-class Relatorio(Contas, Dados):
+class Relatorio(Contas, Dados, Estrutura):
     def __init__(self):
         self.pasta = self.caminho_do_arquivo()
+        self.criar_pastas(self.pasta)
         self.criar_bd(TABELAS)
         self.contas = self.consultar_registros(CONTAS)
         self.urls = self.consultar_registros(URLS)
@@ -23,6 +25,8 @@ class Relatorio(Contas, Dados):
         self.empresas = self.fornecedores(self.urls[0][1])
         self.data = date.today()
         self.data_formatada = self.data.strftime('%d/%m/%Y')
+
+
 
 
     def pagamentos_formatados(self):
