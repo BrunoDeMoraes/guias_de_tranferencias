@@ -5,6 +5,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
+from tkcalendar import Calendar
+from datetime import date
 
 #from contas import Contas
 #from dados import Dados
@@ -41,6 +43,9 @@ class Interface():
         self.frame_1 = LabelFrame(self.frame_mestre, padx=0, pady=0)
         self.frame_1.pack(fill="both", padx=10, pady=0, ipady=0)
 
+        self.frame_calendario = LabelFrame(self.frame_mestre, padx=0, pady=0)
+        self.frame_calendario.pack(fill="both", padx=10, pady=0, ipady=0)
+
         self.frame_2 = LabelFrame(self.frame_mestre, padx=0, pady=0)
         self.frame_2.pack(fill="both", padx=10, pady=10)
 
@@ -69,10 +74,10 @@ class Interface():
         self.conta_origem.grid(row=0, column=0)
 
         self.teste1 = Button(self.frame_2, text='Listar', command=self.exibir_pagamentos)
-        self.teste1.grid(row=0, column=0)
+        self.teste1.grid(row=0, column=1)
 
         self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpar_tela)
-        self.teste2.grid(row=0, column=1)
+        self.teste2.grid(row=0, column=2)
 
         self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
         self.teste3.grid(row=0, column=3)
@@ -83,8 +88,26 @@ class Interface():
         self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
         self.teste4.grid(row=0, column=5)
 
+        self.data_hoje = date.today()
+        dia = int(self.data_hoje.strftime('%d'))
+        mes = int(self.data_hoje.strftime('%m'))
+        ano = int(self.data_hoje.strftime('%Y'))
+        self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
+        self.calendario.grid(row=0, column=0)
+
+        btn_mostrar_data = Button(self.frame_calendario, text="Mostrar Data Selecionada", command=self.mostra_data)
+        btn_mostrar_data.grid(row=1, column=0)
+
         # self.teste5 = Button(self.frame_2, text='pegar contas', command=self.relatorio.pegar_n_cotas)
         # self.teste5.grid(row=0, column=6)
+
+    def mostra_data(self):
+        data_selecionada = self.calendario.get_date()
+
+        print(data_selecionada)
+        print(f"dia: {data_selecionada[0:2]}")
+        print(f"mês: {data_selecionada[3:5]}")
+        print(f"ano: {data_selecionada[6:]}")
 
     def display(self, valor):
         self.mycanvas.create_text((360, 0), text=valor, fill="green", font=("Helvetica", 12, "bold"))
