@@ -1,3 +1,5 @@
+import os
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import fonts
@@ -86,8 +88,11 @@ class Relatorio(Contas, Dados, Estrutura):
                 texto_alinhado.append(linha)
         return texto_alinhado
 
-    def criar_ted(self, pagamento, empresa, conta, origem):
-        cnv = canvas.Canvas(f'{self.pasta}/pagamentos/TEDS/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
+    def criar_ted(self, pagamento, empresa, conta, origem, data_pagamento):
+        if not os.path.exists(f'{self.pasta}/guias/{origem}/{data_pagamento}/TEDS'):
+            os.makedirs(f'{self.pasta}/guias/{origem}/{data_pagamento}/TEDS')
+
+        cnv = canvas.Canvas(f'{self.pasta}/guias/{origem}/{data_pagamento}/TEDS/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
         cnv.setPageSize(A4)
 
         contador = 0
@@ -260,8 +265,11 @@ class Relatorio(Contas, Dados, Estrutura):
         cnv.line(self.mm(8), self.mm(149), self.mm(196), self.mm(149))
         cnv.save()
 
-    def cria_transferencia(self, pagamento, empresa, conta, origem):
-        cnv = canvas.Canvas(f'{self.pasta}/pagamentos/TBRB/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
+    def cria_transferencia(self, pagamento, empresa, conta, origem, data_pagamento):
+        if not os.path.exists(f'{self.pasta}/guias/{origem}/{data_pagamento}/TBRB'):
+            os.makedirs(f'{self.pasta}/guias/{origem}/{data_pagamento}/TBRB')
+
+        cnv = canvas.Canvas(f'{self.pasta}/guias/{origem}/{data_pagamento}/TBRB/{pagamento[0][0:3]}-{pagamento[1]}-{pagamento[2]}.pdf')
         cnv.setPageSize(A4)
 
         contador = 0
@@ -431,7 +439,7 @@ class Relatorio(Contas, Dados, Estrutura):
         cnv.line(self.mm(8), self.mm(155), self.mm(196), self.mm(155))
         cnv.save()
 
-    def gerar_teds(self, origem):
+    def gerar_teds(self, origem, data_pagamento):
         self.pagamentos = self.listar_pagamentos(self.definir_fonte(origem))
         self.empresas = self.fornecedores(self.definir_fonte(origem))
         for pagamento in self.pagamentos.values():
@@ -445,10 +453,10 @@ class Relatorio(Contas, Dados, Estrutura):
             nome_empresa = pagamento[1]
             if (banco) == "BRB":
                 #print(f"{nome_empresa} - É BRB, porra! Transferência intena")
-                self.cria_transferencia(pagamento, dados_empresa, conta, origem)
+                self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
             else:
                 #print(f"{nome_empresa} - Banco: {banco} - melhor fazer uma TED!, ")
-                self.criar_ted(pagamento, dados_empresa, conta, origem)
+                self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
 
 
 if __name__ == '__main__':
