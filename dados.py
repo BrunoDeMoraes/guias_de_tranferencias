@@ -15,7 +15,14 @@ class Dados:
         print(itens_somados)
         for chave, valor in sorted(itens_somados.items()):
             extenso = num2words(valor[3], lang='pt_BR', to='currency')
+            print(extenso)
+            extenso2 = num2words(valor[6], lang='pt_BR', to='currency')
+            print(extenso2)
+            extenso3 = num2words(valor[7], lang='pt_BR', to='currency')
+            print(extenso3)
             valor.append(extenso)
+            valor.append(extenso2)
+            valor.append(extenso3)
 
     def listar_pagamentos(self, fonte):
         pagamentos = self.dados_de_pagamento(fonte)
