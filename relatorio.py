@@ -32,7 +32,7 @@ class Relatorio(Contas, Dados, Estrutura):
         pagamentos_listados = []
         for pagamento in self.pagamentos.values():
             print(f'Esse é o pagamento {pagamento}')
-            resumo = f'''Cotação: {pagamento[0]}\nEmpresa: {pagamento[1]}\nNota Fiscal nº: {pagamento[2]}\nValor: R$ {self.formartar_valor(pagamento[3])} ({pagamento[6]})\nProcesso SEI nº: {pagamento[4]}\nTipo de verba: {pagamento[5]}'''
+            resumo = f'''Cotação: {pagamento[0]}\nEmpresa: {pagamento[1]}\nNota Fiscal nº: {pagamento[2]}\nValor: R$ {self.formartar_valor(pagamento[3])} ({pagamento[8]})\nProcesso SEI nº: {pagamento[4]}\nTipo de verba: {pagamento[5]}'''
             pagamentos_listados.append(resumo)
         return pagamentos_listados
 
@@ -247,7 +247,7 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(121), self.mm(189 - contador), f"{pagamento[0]}") #cotação
             cnv.drawString(self.mm(161), self.mm(189 - contador), f"{pagamento[2]}") #danfe
 
-            valor_teste = f"{pagamento[6]}"
+            valor_teste = f"{pagamento[8]}"
             v_nome = self.alinhar_texto(valor_teste)
 
             calc = 0
@@ -421,7 +421,7 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(121), self.mm(199 - contador), f"{pagamento[0]}")  # cotação
             cnv.drawString(self.mm(161), self.mm(199 - contador), f"{pagamento[2]}")  # danfe
 
-            valor_teste = f"{pagamento[6]}"
+            valor_teste = f"{pagamento[8]}"
             v_nome = self.alinhar_texto(valor_teste)
 
             calc = 0
@@ -450,6 +450,19 @@ class Relatorio(Contas, Dados, Estrutura):
                 self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
             else:
                 self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
+            if pagamento[6] != 0:
+                dados_iss = self.empresas['ISS ()']
+                pagamento[1] = pagamento[1] + ' ISS'
+                pagamento[3] = pagamento[6]
+                pagamento[8] = pagamento[9]
+                self.cria_transferencia(pagamento, dados_iss, conta, origem, data_pagamento)
+            if pagamento[7] != 0:
+                dados_ir = self.empresas['IR ()']
+                pagamento[1] = pagamento[1][0:-3] + ' IR'
+                pagamento[3] = pagamento[7]
+                pagamento[8] = pagamento[10]
+                self.cria_transferencia(pagamento, dados_ir, conta, origem, data_pagamento)
+
 
 
 if __name__ == '__main__':
