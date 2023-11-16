@@ -7,11 +7,12 @@ class Dados:
         df = pd.read_excel(fonte, sheet_name='Controle', skiprows=[0])
         filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
         dados = filtro.filter(
-            ['Cotação', 'Item', 'Empresa', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI', 'Conta']
+            ['Cotação', 'Item', 'Empresa', 'Nº DANFE', 'V. Total', 'Nº TED', 'Nº de processo SEI', 'Conta', 'ISS', 'IR', 'Liquido']
         )
         return dados
 
     def valor_por_extenso(self, itens_somados):
+        print(itens_somados)
         for chave, valor in sorted(itens_somados.items()):
             extenso = num2words(valor[3], lang='pt_BR', to='currency')
             valor.append(extenso)
@@ -32,9 +33,11 @@ class Dados:
                     (duplicados['Empresa'] == linha['Empresa']) &
                     (duplicados['Nº DANFE'] == linha['Nº DANFE'])
                 ]
-                soma = duplicados_subset1['V. Total'].sum()
+                soma = duplicados_subset1['Liquido'].sum()
+                soma_iss = duplicados_subset1['ISS'].sum()
+                soma_ir = duplicados_subset1['IR'].sum()
                 descricao = palavra_checagem.split('-')
-                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma, linha['Nº de processo SEI'], linha['Conta']]
+                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma, linha['Nº de processo SEI'], linha['Conta'], soma_iss, soma_ir]
         for indice, linha in pagamentos.iterrows():
             palavra_checagem = str(linha['Cotação']) + '-' + str(linha['Empresa']) + '-' + str(linha['Nº DANFE'])
             if palavra_checagem in checagem:
@@ -42,7 +45,7 @@ class Dados:
             else:
                 checagem.append(palavra_checagem)
                 descricao = palavra_checagem.split('-')
-                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['V. Total'], linha['Nº de processo SEI'], linha['Conta']]
+                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['Liquido'], linha['Nº de processo SEI'], linha['Conta'], linha['ISS'], linha['IR']]
         self.valor_por_extenso(itens_somados)
         return itens_somados
 

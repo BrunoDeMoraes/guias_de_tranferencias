@@ -28,12 +28,10 @@ class Relatorio(Contas, Dados, Estrutura):
         self.data = date.today()
         self.data_formatada = self.data.strftime('%d/%m/%Y')
 
-
-
-
     def pagamentos_formatados(self):
         pagamentos_listados = []
         for pagamento in self.pagamentos.values():
+            print(f'Esse é o pagamento {pagamento}')
             resumo = f'''Cotação: {pagamento[0]}\nEmpresa: {pagamento[1]}\nNota Fiscal nº: {pagamento[2]}\nValor: R$ {self.formartar_valor(pagamento[3])} ({pagamento[6]})\nProcesso SEI nº: {pagamento[4]}\nTipo de verba: {pagamento[5]}'''
             pagamentos_listados.append(resumo)
         return pagamentos_listados
@@ -443,19 +441,14 @@ class Relatorio(Contas, Dados, Estrutura):
         self.pagamentos = self.listar_pagamentos(self.definir_fonte(origem))
         self.empresas = self.fornecedores(self.definir_fonte(origem))
         for pagamento in self.pagamentos.values():
-            #print(pagamento[1])
-            #print(self.empresas)
-
             dados_empresa = self.empresas[pagamento[1]]
             codigo = pagamento[5]
             conta = self.pegar_conta(origem, codigo)
             banco = self.empresas[pagamento[1]][5]
             nome_empresa = pagamento[1]
             if (banco) == "BRB":
-                #print(f"{nome_empresa} - É BRB, porra! Transferência intena")
                 self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
             else:
-                #print(f"{nome_empresa} - Banco: {banco} - melhor fazer uma TED!, ")
                 self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
 
 
