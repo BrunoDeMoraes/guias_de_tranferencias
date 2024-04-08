@@ -12,14 +12,11 @@ class Dados:
         return dados
 
     def valor_por_extenso(self, itens_somados):
-        print(itens_somados)
         for chave, valor in sorted(itens_somados.items()):
             extenso = num2words(valor[3], lang='pt_BR', to='currency')
-            print(extenso)
             extenso2 = num2words(valor[6], lang='pt_BR', to='currency')
-            print(extenso2)
             extenso3 = num2words(valor[7], lang='pt_BR', to='currency')
-            print(extenso3)
+
             valor.append(extenso)
             valor.append(extenso2)
             valor.append(extenso3)
@@ -52,9 +49,20 @@ class Dados:
             else:
                 checagem.append(palavra_checagem)
                 descricao = palavra_checagem.split('-')
-                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['Liquido'], linha['Nº de processo SEI'], linha['Conta'], linha['ISS'], linha['IR']]
+                itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], linha['Liquido'],
+                                                   linha['Nº de processo SEI'], linha['Conta'], linha['ISS'],
+                                                   linha['IR'], linha['V. Total']]
         self.valor_por_extenso(itens_somados)
         return itens_somados
+
+
+    def aglutinar_por_empresa(self, fonte):
+        pagamentos = self.listar_pagamentos(fonte)
+        for pagamento in pagamentos.values():
+            print(pagamento)
+
+
+
 
     def fornecedores(self, fonte):
         df = pd.read_excel(fonte, sheet_name='Fornecedores')
@@ -64,3 +72,8 @@ class Dados:
             empresas[a[0]] = a[1:]
             #print(empresas)
         return empresas
+
+
+if __name__ == "__main__":
+    teste = Dados()
+    teste.aglutinar_por_empresa('//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx')
