@@ -23,7 +23,7 @@ class Relatorio(Contas, Dados, Estrutura):
         self.contas = self.consultar_registros(CONTAS)
         self.urls = self.consultar_registros(URLS)
         print(f"Estas são as URLs {self.urls}")
-        self.pagamentos = self.listar_pagamentos(self.urls[0][1])
+        self.pagamentos = self.soma_valor_liquido(self.urls[0][1])
         self.empresas = self.fornecedores(self.urls[0][1])
         self.data = date.today()
         self.data_formatada = self.data.strftime('%d/%m/%Y')
@@ -438,38 +438,40 @@ class Relatorio(Contas, Dados, Estrutura):
         cnv.save()
 
     def gerar_teds(self, origem, data_pagamento):
-        self.pagamentos = self.listar_pagamentos(self.definir_fonte(origem))
+        self.pagamentos = self.soma_valor_liquido(self.definir_fonte(origem))
         self.empresas = self.fornecedores(self.definir_fonte(origem))
-        for pagamento in self.pagamentos.values():
-            dados_empresa = self.empresas[pagamento[1]]
-            codigo = pagamento[5]
-            conta = self.pegar_conta(origem, codigo)
-            banco = self.empresas[pagamento[1]][5]
-            nome_empresa = pagamento[1]
-            if (banco) == "BRB":
-                self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
-            else:
-                self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
-            if pagamento[6] != 0:
-                dados_iss = self.empresas['ISS ()']
-                pagamento[1] = pagamento[1] + ' ISS'
-                pagamento[3] = pagamento[6]
-                pagamento[8] = pagamento[9]
-                self.cria_transferencia(pagamento, dados_iss, conta, origem, data_pagamento)
-            if pagamento[7] != 0:
-                dados_ir = self.empresas['IR ()']
-                pagamento[1] = pagamento[1][0:-3] + ' IR'
-                pagamento[3] = pagamento[7]
-                pagamento[8] = pagamento[10]
-                self.cria_transferencia(pagamento, dados_ir, conta, origem, data_pagamento)
+        print(self.pagamentos)
+        for empresa in self.pagamentos.values():
+            for pagamento in empresa:
+                dados_empresa = self.empresas[pagamento[1]]
+                codigo = pagamento[5]
+                conta = self.pegar_conta(origem, codigo)
+                banco = self.empresas[pagamento[1]][5]
+                nome_empresa = pagamento[1]
+                if (banco) == "BRB":
+                    self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
+                else:
+                    self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
+                if pagamento[6] != 0:
+                    dados_iss = self.empresas['ISS ()']
+                    pagamento[1] = pagamento[1] + ' ISS'
+                    pagamento[3] = pagamento[6]
+                    pagamento[8] = pagamento[9]
+                    self.cria_transferencia(pagamento, dados_iss, conta, origem, data_pagamento)
+                if pagamento[7] != 0:
+                    dados_ir = self.empresas['IR ()']
+                    pagamento[1] = pagamento[1][0:-3] + ' IR'
+                    pagamento[3] = pagamento[7]
+                    pagamento[8] = pagamento[10]
+                    self.cria_transferencia(pagamento, dados_ir, conta, origem, data_pagamento)
 
 
 
 if __name__ == '__main__':
     r = Relatorio()
     #a = r.fornecedores()
-    #r.listar_pagamentos()
+    #a = r.soma_valor_liquido()
     #print(a)
-    r.criar_ted()
+    #r.criar_ted()
     #nome_teste = "CIA SUPRIMENTOS (AEJ IMPORTAÇÃO E EXPORTAÇÃO DE MATERIAIS HOSPITALARES E EDUCACIONAIS LTDA textoextragrandao para testar se o código realemente funciona com qualquer palavra enorme)"
     #r.alinhar_texto(nome_teste)

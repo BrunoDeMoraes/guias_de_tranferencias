@@ -1,6 +1,8 @@
 import pandas as pd
 from num2words import num2words
 
+from typing import Dict
+
 class Dados:
 
     def dados_de_pagamento(self, fonte):
@@ -56,13 +58,31 @@ class Dados:
         return itens_somados
 
 
-    def aglutinar_por_empresa(self, fonte):
+    def aglutinar_por_empresa(self, fonte) -> Dict:
         pagamentos = self.listar_pagamentos(fonte)
+        pagamento_por_empresa = {}
         for pagamento in pagamentos.values():
-            print(pagamento)
+            #print(pagamento)
+            if pagamento[1] not in pagamento_por_empresa.keys():
+                pagamento_por_empresa[pagamento[1]] = []
+                pagamento_por_empresa[pagamento[1]].append(pagamento)
+            else:
+                pagamento_por_empresa[pagamento[1]].append(pagamento)
 
 
+        return pagamento_por_empresa
 
+    def soma_valor_liquido(self, fonte):
+        lista_de_pagamentos = self.aglutinar_por_empresa(fonte)
+        for item in lista_de_pagamentos.values():
+            total_liquido = 0
+            for lista in item:
+                total_liquido += lista[3]
+            item.append(total_liquido)
+
+        for item in lista_de_pagamentos.items():
+            print(f'{item[0]} - {item[1][-1]}')
+        return lista_de_pagamentos
 
     def fornecedores(self, fonte):
         df = pd.read_excel(fonte, sheet_name='Fornecedores')
@@ -76,4 +96,4 @@ class Dados:
 
 if __name__ == "__main__":
     teste = Dados()
-    teste.aglutinar_por_empresa('//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx')
+    teste.soma_valor_liquido('//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx')

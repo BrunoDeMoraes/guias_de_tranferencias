@@ -1,5 +1,6 @@
 import os
 from datetime import date
+
 class Estrutura():
 
     def criar_pastas(self, pasta_de_trabalho):
