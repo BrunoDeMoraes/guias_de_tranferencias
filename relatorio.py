@@ -440,30 +440,42 @@ class Relatorio(Contas, Dados, Estrutura):
     def gerar_teds(self, origem, data_pagamento):
         self.pagamentos = self.soma_valor_liquido(self.definir_fonte(origem))
         self.empresas = self.fornecedores(self.definir_fonte(origem))
-        print(self.pagamentos)
-        for empresa in self.pagamentos.values():
-            for pagamento in empresa:
-                dados_empresa = self.empresas[pagamento[1]]
-                codigo = pagamento[5]
-                conta = self.pegar_conta(origem, codigo)
-                banco = self.empresas[pagamento[1]][5]
-                nome_empresa = pagamento[1]
-                if (banco) == "BRB":
-                    self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
-                else:
-                    self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
-                if pagamento[6] != 0:
-                    dados_iss = self.empresas['ISS ()']
-                    pagamento[1] = pagamento[1] + ' ISS'
-                    pagamento[3] = pagamento[6]
-                    pagamento[8] = pagamento[9]
-                    self.cria_transferencia(pagamento, dados_iss, conta, origem, data_pagamento)
-                if pagamento[7] != 0:
-                    dados_ir = self.empresas['IR ()']
-                    pagamento[1] = pagamento[1][0:-3] + ' IR'
-                    pagamento[3] = pagamento[7]
-                    pagamento[8] = pagamento[10]
-                    self.cria_transferencia(pagamento, dados_ir, conta, origem, data_pagamento)
+
+        for pag in self.pagamentos.keys():
+            print(f'{pag} - valor total: R$ {self.pagamentos[pag]}')
+
+        for empresa in self.pagamentos.keys():
+             print(empresa)
+             contador = 0
+             for pagamento in self.pagamentos[empresa]:
+                 if isinstance(pagamento, int):
+                     continue
+                 else:
+                     print(f'   {contador} - {pagamento}')
+                     contador += 1
+
+        #         dados_empresa = self.empresas[pagamento[0][1]]
+        #         print(dados_empresa)
+        #         codigo = pagamento[5]
+        #         conta = self.pegar_conta(origem, codigo)
+        #         banco = self.empresas[pagamento[1]][5]
+        #         nome_empresa = pagamento[1]
+        #         if (banco) == "BRB":
+        #             self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
+        #         else:
+        #             self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
+        #         if pagamento[6] != 0:
+        #             dados_iss = self.empresas['ISS ()']
+        #             pagamento[1] = pagamento[1] + ' ISS'
+        #             pagamento[3] = pagamento[6]
+        #             pagamento[8] = pagamento[9]
+        #             self.cria_transferencia(pagamento, dados_iss, conta, origem, data_pagamento)
+        #         if pagamento[7] != 0:
+        #             dados_ir = self.empresas['IR ()']
+        #             pagamento[1] = pagamento[1][0:-3] + ' IR'
+        #             pagamento[3] = pagamento[7]
+        #             pagamento[8] = pagamento[10]
+        #             self.cria_transferencia(pagamento, dados_ir, conta, origem, data_pagamento)
 
 
 

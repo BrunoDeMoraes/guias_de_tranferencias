@@ -117,7 +117,7 @@ class Interface():
 
     def atualizar_dados(self):
         origem = self.local.get()
-        self.relatorio.pagamentos = self.relatorio.listar_pagamentos(self.relatorio.definir_fonte(origem))
+        self.relatorio.pagamentos = self.relatorio.soma_valor_liquido(self.relatorio.definir_fonte(origem))
         self.relatorio.empresas = self.relatorio.fornecedores(self.relatorio.definir_fonte(origem))
 
     def exibir_pagamentos(self):
