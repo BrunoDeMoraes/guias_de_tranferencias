@@ -440,23 +440,37 @@ class Relatorio(Contas, Dados, Estrutura):
     def gerar_teds(self, origem, data_pagamento):
         self.pagamentos = self.soma_valor_liquido(self.definir_fonte(origem))
         self.empresas = self.fornecedores(self.definir_fonte(origem))
+        self.separar_por_origem_de_recurso()
 
-        for pag in self.pagamentos.keys():
-            print(f'{pag} - valor total: R$ {self.pagamentos[pag]}')
-
+    def separar_por_origem_de_recurso(self):
+        pagamentos_por_origem = {}
         for empresa in self.pagamentos.keys():
-             print(empresa)
-             contador = 0
-             for pagamento in self.pagamentos[empresa]:
-                 if isinstance(pagamento, int):
-                     continue
-                 else:
-                     print(f'   {contador} - {pagamento}')
-                     contador += 1
+            regular_custeio = []
+            emenda_custeio = []
+            regular_investimento = []
+            emenda_investimento = []
+            codigos = {'RC': regular_custeio, 'EC': emenda_custeio, 'RI': regular_investimento, 'EI': emenda_investimento}
+            for pagamento in self.pagamentos[empresa]:
+                if not isinstance(pagamento, list):
+                    continue
+                else:
+                    try:
+                        codigos[pagamento[5]].append(pagamento)
+                    except:
+                        raise Exception(f'Código {pagamento[5]} não existente.')
+            pagamentos_por_origem[empresa] = [regular_custeio, emenda_custeio, regular_investimento, emenda_investimento]
+        for e in pagamentos_por_origem.keys():
+            print(
+                f'Empresa: {e}\nRegular_custeio: {pagamentos_por_origem[e][0]}\n'
+                f'Emenda_custeio: {pagamentos_por_origem[e][1]}\n'
+                f'Regular_investimento: {pagamentos_por_origem[e][2]}\n'
+                f'Emenda_investimento: {pagamentos_por_origem[e][3]}\n'
+            )
 
-        #         dados_empresa = self.empresas[pagamento[0][1]]
-        #         print(dados_empresa)
-        #         codigo = pagamento[5]
+
+        # codigo = self.pagamentos[empresa]
+        # dados_empresa = self.empresas[empresa]
+        #
         #         conta = self.pegar_conta(origem, codigo)
         #         banco = self.empresas[pagamento[1]][5]
         #         nome_empresa = pagamento[1]
