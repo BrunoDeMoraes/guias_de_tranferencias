@@ -6,6 +6,7 @@ from reportlab.lib import fonts
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus import Table
 from datetime import date
+from typing import Dict
 
 from contas import Contas
 from dados import Dados
@@ -440,15 +441,15 @@ class Relatorio(Contas, Dados, Estrutura):
     def gerar_teds(self, origem, data_pagamento):
         self.pagamentos = self.soma_valor_liquido(self.definir_fonte(origem))
         self.empresas = self.fornecedores(self.definir_fonte(origem))
-        self.separar_por_origem_de_recurso()
+        self.separar_por_origem_de_recurso(origem)
 
-    def separar_por_origem_de_recurso(self):
+    def separar_por_origem_de_recurso(self, origem):
         pagamentos_por_origem = {}
         for empresa in self.pagamentos.keys():
-            regular_custeio = []
-            emenda_custeio = []
-            regular_investimento = []
-            emenda_investimento = []
+            regular_custeio = ['RC']
+            emenda_custeio = ['EC']
+            regular_investimento = ['RI']
+            emenda_investimento = ['EI']
             codigos = {'RC': regular_custeio, 'EC': emenda_custeio, 'RI': regular_investimento, 'EI': emenda_investimento}
             for pagamento in self.pagamentos[empresa]:
                 if not isinstance(pagamento, list):
@@ -459,13 +460,38 @@ class Relatorio(Contas, Dados, Estrutura):
                     except:
                         raise Exception(f'Código {pagamento[5]} não existente.')
             pagamentos_por_origem[empresa] = [regular_custeio, emenda_custeio, regular_investimento, emenda_investimento]
-        for e in pagamentos_por_origem.keys():
-            print(
-                f'Empresa: {e}\nRegular_custeio: {pagamentos_por_origem[e][0]}\n'
-                f'Emenda_custeio: {pagamentos_por_origem[e][1]}\n'
-                f'Regular_investimento: {pagamentos_por_origem[e][2]}\n'
-                f'Emenda_investimento: {pagamentos_por_origem[e][3]}\n'
-            )
+        # for e in pagamentos_por_origem.keys():
+        #     print(
+        #         f'Empresa: {e}\nRegular_custeio: {pagamentos_por_origem[e][0]}\n'
+        #         f'Emenda_custeio: {pagamentos_por_origem[e][1]}\n'
+        #         f'Regular_investimento: {pagamentos_por_origem[e][2]}\n'
+        #         f'Emenda_investimento: {pagamentos_por_origem[e][3]}\n'
+        #     )
+        self.dados_bancários(pagamentos_por_origem, origem)
+        return pagamentos_por_origem
+
+
+    def dados_bancários(self, pagamentos: Dict, origem):
+        for empresa in pagamentos.items():
+            print(f'{empresa[0]}:')
+            for pagamento in empresa[1]:
+
+                if len(pagamento) == 1:
+                    continue
+                else:
+                    conta = self.pegar_conta(origem, pagamento[0])
+                    print(f'Esta é a conta {conta}')
+                    contador = 1
+                    for compra in pagamento:
+                        print(f'    {contador} - {compra}')
+                        contador += 1
+
+                # for compra in pagamento:
+                #
+
+
+
+
 
 
         # codigo = self.pagamentos[empresa]
