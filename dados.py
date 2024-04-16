@@ -60,7 +60,8 @@ class Dados:
                 soma = duplicados_subset1['Liquido'].sum()
                 soma_iss = duplicados_subset1['ISS'].sum()
                 soma_ir = duplicados_subset1['IR'].sum()
-                Dados.itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma, linha['Nº de processo SEI'], linha['Conta'], soma_iss, soma_ir, linha['V. Total']]
+                soma_valor_total = duplicados_subset1['V. Total'].sum()
+                Dados.itens_somados[palavra_checagem] = [descricao[0], descricao[1], descricao[2], soma, linha['Nº de processo SEI'], linha['Conta'], soma_iss, soma_ir, soma_valor_total]
 
         pagamentos = self.carregar_dados_de_pagamento(fonte)
         for indice, linha in pagamentos.iterrows():
@@ -94,6 +95,7 @@ class Dados:
                 pagamento_por_empresa[pagamento[1]].append(pagamento)
             else:
                 pagamento_por_empresa[pagamento[1]].append(pagamento)
+        print(pagamento_por_empresa)
         return pagamento_por_empresa
 
     def soma_valor_liquido(self, fonte):
@@ -117,5 +119,5 @@ class Dados:
 if __name__ == "__main__":
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
     teste = Dados()
-    teste.soma_valor_liquido(fonte)
+    teste.aglutinar_por_empresa(fonte)
     #teste.soma_valor_liquido()
