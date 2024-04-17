@@ -438,10 +438,11 @@ class Relatorio(Contas, Dados, Estrutura):
         cnv.line(self.mm(8), self.mm(155), self.mm(196), self.mm(155))
         cnv.save()
 
-    def gerar_teds(self, origem, data_pagamento):
+    def compilar_dados_de_pagamento(self, origem, data_pagamento):
         self.pagamentos = self.soma_valor_liquido(self.definir_fonte(origem))
         self.empresas = self.fornecedores(self.definir_fonte(origem))
-        self.separar_por_origem_de_recurso(origem)
+        pagamentos = self.separar_por_origem_de_recurso(origem)
+        self.selecionar_tipo_pagamento(pagamentos)
 
     def separar_por_origem_de_recurso(self, origem):
         pagamentos_por_origem = {}
@@ -460,62 +461,55 @@ class Relatorio(Contas, Dados, Estrutura):
                     except:
                         raise Exception(f'Código {pagamento[5]} não existente.')
             pagamentos_por_origem[empresa] = [regular_custeio, emenda_custeio, regular_investimento, emenda_investimento]
-        # for e in pagamentos_por_origem.keys():
-        #     print(
-        #         f'Empresa: {e}\nRegular_custeio: {pagamentos_por_origem[e][0]}\n'
-        #         f'Emenda_custeio: {pagamentos_por_origem[e][1]}\n'
-        #         f'Regular_investimento: {pagamentos_por_origem[e][2]}\n'
-        #         f'Emenda_investimento: {pagamentos_por_origem[e][3]}\n'
-        #     )
-        self.dados_bancários(pagamentos_por_origem, origem)
-        return pagamentos_por_origem
+        Pagamentos_e_contas = self.inserir_dados_bancários(pagamentos_por_origem, origem)
+        return Pagamentos_e_contas
 
 
-    def dados_bancários(self, pagamentos: Dict, origem):
+    def inserir_dados_bancários(self, pagamentos: Dict, origem):
         for empresa in pagamentos.items():
-            print(f'{empresa[0]}:')
             for pagamento in empresa[1]:
-
                 if len(pagamento) == 1:
                     continue
                 else:
                     conta = self.pegar_conta(origem, pagamento[0])
-                    print(f'Esta é a conta {conta}')
-                    contador = 1
-                    for compra in pagamento:
-                        print(f'    {contador} - {compra}')
-                        contador += 1
+                    for conta in conta:
+                        pagamento.append(conta)
+        for i in pagamentos.items():
+            print(i)
+        return pagamentos
 
-                # for compra in pagamento:
-                #
+    def selecionar_tipo_pagamento(self, pagamentos):
+        for empresa in pagamentos.items():
+            for origem in empresa[1]:
+                if len(origem) == 1:
+                    continue
+                else:
+                    print(f'{empresa[0]} - {origem} - {type(origem)}\n')
 
 
 
 
 
 
-        # codigo = self.pagamentos[empresa]
-        # dados_empresa = self.empresas[empresa]
-        #
-        #         conta = self.pegar_conta(origem, codigo)
-        #         banco = self.empresas[pagamento[1]][5]
-        #         nome_empresa = pagamento[1]
-        #         if (banco) == "BRB":
-        #             self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
-        #         else:
-        #             self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
-        #         if pagamento[6] != 0:
-        #             dados_iss = self.empresas['ISS ()']
-        #             pagamento[1] = pagamento[1] + ' ISS'
-        #             pagamento[3] = pagamento[6]
-        #             pagamento[8] = pagamento[9]
-        #             self.cria_transferencia(pagamento, dados_iss, conta, origem, data_pagamento)
-        #         if pagamento[7] != 0:
-        #             dados_ir = self.empresas['IR ()']
-        #             pagamento[1] = pagamento[1][0:-3] + ' IR'
-        #             pagamento[3] = pagamento[7]
-        #             pagamento[8] = pagamento[10]
-        #             self.cria_transferencia(pagamento, dados_ir, conta, origem, data_pagamento)
+
+                # banco = self.empresas[pagamento[1]][5]
+                # nome_empresa = pagamento[1]
+                # if (banco) == "BRB":
+                #     self.cria_transferencia(pagamento, dados_empresa, conta, origem, data_pagamento)
+                # else:
+                #     self.criar_ted(pagamento, dados_empresa, conta, origem, data_pagamento)
+                # if pagamento[6] != 0:
+                #     dados_iss = self.empresas['ISS ()']
+                #     pagamento[1] = pagamento[1] + ' ISS'
+                #     pagamento[3] = pagamento[6]
+                #     pagamento[8] = pagamento[9]
+                #     self.cria_transferencia(pagamento, dados_iss, conta, origem, data_pagamento)
+                # if pagamento[7] != 0:
+                #     dados_ir = self.empresas['IR ()']
+                #     pagamento[1] = pagamento[1][0:-3] + ' IR'
+                #     pagamento[3] = pagamento[7]
+                #     pagamento[8] = pagamento[10]
+                #     self.cria_transferencia(pagamento, dados_ir, conta, origem, data_pagamento)
 
 
 
