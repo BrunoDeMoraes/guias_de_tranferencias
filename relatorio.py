@@ -474,17 +474,21 @@ class Relatorio(Contas, Dados, Estrutura):
                     conta = self.pegar_conta(origem, pagamento[0])
                     for conta in conta:
                         pagamento.append(conta)
-        for i in pagamentos.items():
-            print(i)
         return pagamentos
 
     def selecionar_tipo_pagamento(self, pagamentos):
         for empresa in pagamentos.items():
+            dados_empresa = self.empresas[empresa[0]]
+            pagamento = []
             for origem in empresa[1]:
-                if len(origem) == 1:
-                    continue
-                else:
-                    print(f'{empresa[0]} - {origem} - {type(origem)}\n')
+                for item in origem:
+                    if not empresa[0] in item:
+                        continue
+                    else:
+                        pagamento.append(item)
+            print(f'{empresa[0]}')
+            for i in pagamento:
+                print(f'    {i}')
 
 
 
