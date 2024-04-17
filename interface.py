@@ -132,12 +132,17 @@ class Interface():
 
     def imprimir_teds(self):
         origem = self.local.get()
+        data_pagamento = self.data_de_pagamento()
+        pagamentos = self.relatorio.compilar_dados_de_pagamento(origem, data_pagamento)
+
+    def data_de_pagamento(self):
         data_calendario = self.calendario.get_date()
         dia = data_calendario[0:2]
         mes = data_calendario[3:5]
         ano = data_calendario[6:]
-        data_pagamento = f'{ano}-{mes}-{dia}'
-        self.relatorio.gerar_teds(origem, data_pagamento)
+        data_de_pagamento = f'{ano}-{mes}-{dia}'
+        return data_de_pagamento
+
 
     def abrir_janela_cadastro(self):
         self.janela_de_cadastro = Toplevel()
