@@ -77,14 +77,33 @@ class Dados:
         self.valor_por_extenso(Dados.itens_somados)
         return Dados.itens_somados
 
+    def pagamentos_filtrados(self, fonte, indice):
+        pagamentos_filtrados = {}
+        pagamentos = self.listar_pagamentos(fonte)
+        for i in pagamentos.items():
+            if i[1][indice] == 0:
+                continue
+            else:
+                pagamentos_filtrados[i[0]] = i[1]
+        for pagamento in pagamentos_filtrados.items():
+            print(pagamento)
+        return pagamentos_filtrados
+
+    def soma_indice(self, pagamentos, indice):
+        indice_somado = 0
+        for pagamento in pagamentos.values():
+            if pagamento[indice] == 0:
+                continue
+            else:
+                indice_somado += float(pagamento[indice])
+                print(f'total = {indice_somado}')
+        return indice_somado
+
+
     def valor_por_extenso(self, itens_somados):
         for chave, valor in sorted(itens_somados.items()):
             extenso = num2words(valor[3], lang='pt_BR', to='currency')
-            extenso2 = num2words(valor[6], lang='pt_BR', to='currency')
-            extenso3 = num2words(valor[7], lang='pt_BR', to='currency')
             valor.append(extenso)
-            valor.append(extenso2)
-            valor.append(extenso3)
 
     def aglutinar_por_empresa(self, fonte):
         pagamentos = self.listar_pagamentos(fonte)
@@ -119,5 +138,10 @@ class Dados:
 if __name__ == "__main__":
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
     teste = Dados()
-    teste.aglutinar_por_empresa(fonte)
+    pagamentos_iss = teste.pagamentos_filtrados(fonte, 6)
+    teste.soma_indice(pagamentos_iss, 6)
+    pagamentos_ir = teste.pagamentos_filtrados(fonte, 7)
+    teste.soma_indice(pagamentos_ir, 7)
+
+
     #teste.soma_valor_liquido()
