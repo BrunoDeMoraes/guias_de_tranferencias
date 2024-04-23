@@ -504,7 +504,7 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(168), self.mm(86), "Valor líquido")
 
             cnv.setFont("Times-Bold", 12)
-            cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[0][1]} - {conta[0][2]}")
+            cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[1]} - {conta[2]}")
 
             contador += 100
 
