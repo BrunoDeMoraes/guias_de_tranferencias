@@ -435,6 +435,7 @@ class Relatorio(Contas, Dados, Estrutura):
                 calc += 3
 
             cnv.setFont("Times-Roman", 8)
+            cnv.drawString(self.mm(21), self.mm(231 - contador), f'{pagamento[0][1][0:-9]}')
             cnv.drawString(self.mm(45), self.mm(226 - contador), "Pesssoa Física")
             cnv.drawString(self.mm(75), self.mm(226 - contador), "Pesssoa Jurídica")
             cnv.drawString(self.mm(45), self.mm(221 - contador), "Conta Corrente")
@@ -443,10 +444,6 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(175), self.mm(226 - contador), "Pesssoa Jurídica")
             cnv.drawString(self.mm(145), self.mm(221 - contador), "Conta Corrente")
             cnv.drawString(self.mm(175), self.mm(221 - contador), "Conta Poupança")
-
-            # cnv.drawString(self.mm(40), self.mm(211 - contador), "SEI:")
-            # cnv.drawString(self.mm(110), self.mm(211 - contador), "Cotação:")
-            # cnv.drawString(self.mm(150), self.mm(211 - contador), "DANFE:")
 
             cnv.setFont("Times-Bold", 8)
             cnv.drawString(self.mm(71), self.mm(227 - contador), "\u2713")
@@ -514,14 +511,6 @@ class Relatorio(Contas, Dados, Estrutura):
         cnv.setDash([3, 1])
         cnv.line(self.mm(8), self.mm(192), self.mm(196), self.mm(192))
         cnv.save()
-
-
-
-
-
-
-
-        #
 
 
     def compilar_dados_de_pagamento(self, origem, data_pagamento):
