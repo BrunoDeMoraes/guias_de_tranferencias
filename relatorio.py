@@ -348,24 +348,37 @@ class Relatorio(Contas, Dados, Estrutura):
 
 
             cnv.rect(self.mm(12), self.mm(84), width=self.mm(180), height=self.mm(5))
-            cnv.line(self.mm(70), self.mm(84), self.mm(70),
+            cnv.line(self.mm(60), self.mm(84), self.mm(60),
                      self.mm(89))
-            cnv.line(self.mm(100), self.mm(84), self.mm(100),
+            cnv.line(self.mm(85), self.mm(84), self.mm(85),
                      self.mm(89))
-            cnv.line(self.mm(130), self.mm(84), self.mm(130),
+            cnv.line(self.mm(110), self.mm(84), self.mm(110),
+                     self.mm(89))
+            cnv.line(self.mm(135), self.mm(84), self.mm(135),
                      self.mm(89))
             cnv.line(self.mm(160), self.mm(84), self.mm(160),
                      self.mm(89))
 
-
+            cnv.setFont("Times-Roman", 8)
             altura = 0
-            for i in range(0, 16):
+            total_pagamento = 0
+            for dados in pagamento:
+                cnv.drawString(self.mm(21), self.mm(81 - altura), f'{dados[4]}')
+                cnv.drawString(self.mm(69), self.mm(81 - altura), f'{dados[0]}')
+                cnv.drawString(self.mm(91), self.mm(81 - altura), f'{dados[2]}')
+                cnv.drawString(self.mm(113), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[8])}')
+                cnv.drawString(self.mm(138), self.mm(81 - altura), f'R$ {self.formartar_valor((dados[6] + dados[7]))}')
+                cnv.drawString(self.mm(163), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[3])}')
+                total_pagamento += dados[3]
+
                 cnv.rect(self.mm(12), self.mm(79 - altura), width=self.mm(180), height=self.mm(5))
-                cnv.line(self.mm(70), self.mm(79 - altura), self.mm(70),
+                cnv.line(self.mm(60), self.mm(79 - altura), self.mm(60),
                          self.mm(84 - altura))
-                cnv.line(self.mm(100), self.mm(79 - altura), self.mm(100),
+                cnv.line(self.mm(85), self.mm(79 - altura), self.mm(85),
                          self.mm(84 - altura))
-                cnv.line(self.mm(130), self.mm(79 - altura), self.mm(130),
+                cnv.line(self.mm(110), self.mm(79 - altura), self.mm(110),
+                         self.mm(84 - altura))
+                cnv.line(self.mm(135), self.mm(79 - altura), self.mm(135),
                          self.mm(84 - altura))
                 cnv.line(self.mm(160), self.mm(79 - altura), self.mm(160),
                          self.mm(84 - altura))
@@ -473,25 +486,25 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(82), self.mm(256 - contador), "(61) 2017-1821")  # telefone
 
             # dados
-            cnv.drawString(self.mm(176), self.mm(265 - contador), 'R$ 9.999.999,99')#f"R$ {self.formartar_valor(pagamento[3])}")  # valor
+            cnv.drawString(self.mm(176), self.mm(265 - contador), f"R$ {self.formartar_valor(total_pagamento)}")  # valor
             # cnv.drawString(self.mm(46), self.mm(199 - contador), f"{pagamento[4]}")  #nº SEI
             # cnv.drawString(self.mm(121), self.mm(199 - contador), f"{pagamento[0]}")  # cotação
             # cnv.drawString(self.mm(161), self.mm(199 - contador), f"{pagamento[2]}")  # danfe
 
-            extenso = num2words('4444444.44', lang='pt_BR', to='currency')
-            # valor_teste = f"{pagamento[8]}"
-            v_nome = self.alinhar_texto(extenso)
+            total_extenso = num2words(total_pagamento, lang='pt_BR', to='currency')
+            v_nome = self.alinhar_texto(total_extenso)
 
             calc = 0
             for i in v_nome:
                 cnv.drawString(self.mm(104), self.mm((242 - contador) - calc), i)
                 calc += 4
 
-            cnv.drawString(self.mm(40), self.mm(86), "SEI")
-            cnv.drawString(self.mm(80), self.mm(86), "Cotação")
-            cnv.drawString(self.mm(108), self.mm(86), "Valor total")
-            cnv.drawString(self.mm(136), self.mm(86), "Impostos retidos")
-            cnv.drawString(self.mm(167), self.mm(86), "Valor líquido")
+            cnv.drawString(self.mm(35), self.mm(86), "SEI")
+            cnv.drawString(self.mm(68), self.mm(86), "Cotação")
+            cnv.drawString(self.mm(93), self.mm(86), "DANFE")
+            cnv.drawString(self.mm(116), self.mm(86), "Valor total")
+            cnv.drawString(self.mm(141), self.mm(86), "IRRF / ISS")
+            cnv.drawString(self.mm(168), self.mm(86), "Valor líquido")
 
             cnv.setFont("Times-Bold", 12)
             cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[0][1]} - {conta[0][2]}")
