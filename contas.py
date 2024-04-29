@@ -89,7 +89,7 @@ class Contas:
             with sqlite3.connect(caminho_do_banco_de_dados) as conexao:
                 direcionador = conexao.cursor()
                 direcionador.execute(comando, substituto)
-        self.consulta_urls()
+        #self.consulta_urls()
 
 
     def cadastrar_conta(self, origem, recurso, tipo, banco, agencia, numero, cnpj):
@@ -109,11 +109,4 @@ class Contas:
 
 if __name__ == '__main__':
     c = Contas()
-    # a = c.consultar_registros(("SELECT name FROM sqlite_master WHERE type='table';"))
-    # for i in a:
-    #     print(i)
-    c.configura_bd()
-    #d = c.consultar_registros(URLS)
-    #e = c.definir_fonte()
-    print(d)
 
