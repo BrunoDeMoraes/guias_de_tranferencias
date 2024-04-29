@@ -20,15 +20,24 @@ from comandos_sql import URLS
 class Relatorio(Contas, Dados, Estrutura):
     def __init__(self):
         self.pasta = self.caminho_do_arquivo()
-        self.criar_pastas(self.pasta)
-        self.criar_bd(TABELAS)
-        self.contas = self.consultar_registros(CONTAS)
-        self.urls = self.consultar_registros(URLS)
-        print(f"Estas são as URLs {self.urls}")
-        self.pagamentos = self.soma_valor_liquido(self.urls[0][1])
-        self.empresas = self.fornecedores(self.urls[0][1])
-        self.data = date.today()
-        self.data_formatada = self.data.strftime('%d/%m/%Y')
+
+
+        # self.criar_pastas(self.pasta)
+        # self.criar_bd(TABELAS)
+
+
+        #self.contas = self.consultar_registros(CONTAS)
+        # self.urls = self.consultar_registros(URLS)
+        # print(f"Estas são as URLs {self.urls}")
+        # print(f'Está é a URL[0][1] {self.urls[1][1]}')
+        #self.pagamentos = self.soma_valor_liquido(self.urls[0][1])
+        #self.empresas = self.fornecedores(self.urls[0][1])
+
+
+    def data_formatada(self):
+        data = date.today()
+        data_formatada = data.strftime('%d/%m/%Y')
+        return data_formatada
 
     def pagamentos_formatados(self):
         pagamentos_listados = []
@@ -244,7 +253,7 @@ class Relatorio(Contas, Dados, Estrutura):
 
             # cnv.drawString(self.mm(155), self.mm(195 - contador),
             #                f"{pagamento[0][0:3]}-{self.formatar_nome(pagamento[1])} {pagamento[2]}")
-            cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada}")
+            cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada()}")
             cnv.drawString(self.mm(76), self.mm(216 - contador),
                            "Preencher somente nas transferências de recursos para deposito judicial")
             cnv.drawString(self.mm(10), self.mm(211 - contador),
@@ -476,7 +485,7 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(10), self.mm(217 - contador), "Nº Identificação Depósito")
             # cnv.drawString(self.mm(155), self.mm(195 - contador),
             #                f"{pagamento[0][0:3]}-{self.formatar_nome(pagamento[1])} {pagamento[2]}")
-            cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada}")
+            cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada()}")
             cnv.drawString(self.mm(76), self.mm(216 - contador),
                            "Preencher somente nas transferências de recursos para deposito judicial")
             cnv.drawString(self.mm(10), self.mm(211 - contador),
