@@ -33,7 +33,6 @@ class Relatorio(Contas, Dados, Estrutura):
     def pagamentos_formatados(self):
         pagamentos_listados = []
         for pagamento in self.pagamentos.values():
-            print(f'Esse é o pagamento {pagamento}')
             resumo = f'''Cotação: {pagamento[0]}\nEmpresa: {pagamento[1]}\nNota Fiscal nº: {pagamento[2]}\nValor: R$ {self.formartar_valor(pagamento[3])} ({pagamento[8]})\nProcesso SEI nº: {pagamento[4]}\nTipo de verba: {pagamento[5]}'''
             pagamentos_listados.append(resumo)
         return pagamentos_listados
@@ -517,7 +516,7 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(10), self.mm(242 - contador),
                            "Área especial nº 01, Lote Único - Setor Central Gama/DF. CEP: 72.405-901")
 
-            cnv.setFont("Times-Bold", 8)
+            cnv.setFont("Times-Bold", 9)
             cnv.drawString(self.mm(129), self.mm(278 - contador), 'Autorização para transferência de valores')
             cnv.drawString(self.mm(138), self.mm(274 - contador), 'entre contas no âmbito do BRB')
 
