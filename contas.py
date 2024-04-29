@@ -47,16 +47,13 @@ class Contas:
         print(origens[fonte])
         return origens[fonte]
 
-
     def consultar_tabelas(self):
         tabs = self.consultar_registros(CONSULTA_TABELAS)
         return tabs
 
     def pegar_conta(self, origem, codigo):
-        #print(origem)
         especificador = self.CODIGOS[codigo]
         comando = f"SELECT * FROM contas WHERE origem = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
-        #print(comando)
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         return registro
@@ -65,7 +62,6 @@ class Contas:
         comando = f"SELECT numero FROM contas"
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
-        #print(f"ncontas {registro}")
         return registro
 
     def criar_bd(self, tabelas):
@@ -76,7 +72,6 @@ class Contas:
             self.configura_bd()
         else:
             print('Banco de dados localizado.')
-            #self.consultar_registros()
 
     def configura_bd(self):
         caminho = self.caminho_do_arquivo()
