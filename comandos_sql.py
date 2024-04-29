@@ -18,3 +18,4 @@ CAMINHOS_ATUALIZADOS = (
     'Fez porque quis!',
     'Caminhos de pastas e arquivos utilizados pelo sistema atualizados.'
 )
+
