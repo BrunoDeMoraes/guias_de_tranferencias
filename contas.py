@@ -72,7 +72,7 @@ class Contas:
             self.configura_bd()
         else:
             print('Banco de dados localizado.')
-    
+
 
     def configura_bd(self):
         caminho = self.caminho_do_arquivo()
