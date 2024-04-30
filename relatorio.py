@@ -1,4 +1,5 @@
 import os
+import pdb
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
@@ -19,15 +20,19 @@ from comandos_sql import URLS
 
 class Relatorio(Contas, Dados, Estrutura):
     def __init__(self):
+
         self.pasta = self.caminho_do_arquivo()
 
 
-        # self.criar_pastas(self.pasta)
-        # self.criar_bd(TABELAS)
+        self.criar_pastas(self.pasta)
+        self.criar_bd(TABELAS)
 
 
         #self.contas = self.consultar_registros(CONTAS)
         # self.urls = self.consultar_registros(URLS)
+
+
+
         # print(f"Estas são as URLs {self.urls}")
         # print(f'Está é a URL[0][1] {self.urls[1][1]}')
         #self.pagamentos = self.soma_valor_liquido(self.urls[0][1])
@@ -544,6 +549,7 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.drawString(self.mm(10), self.mm(256 - contador), f"{origem}")  # origem
 
             cnpj_regional = self.formatar_cnpj(conta[6])
+            print(f'Este é o problema {cnpj_regional}')
             cnv.drawString(self.mm(25), self.mm(251 - contador), f"{cnpj_regional}")  # CNPJ - regional
 
             # fornecedor
