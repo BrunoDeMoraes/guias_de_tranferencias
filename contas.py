@@ -72,14 +72,15 @@ class Contas:
             self.configura_bd()
         else:
             print('Banco de dados localizado.')
+    
 
     def configura_bd(self):
         caminho = self.caminho_do_arquivo()
         enderecos = {
-            'SRSSU': f'{caminho}/SRSSU.xlsx',
-            'SRSSU - APS': f'{caminho}/SRSSU - APS.xlsx',
-            'Provisória': f'{caminho}/Provisória.xlsx',
-            'SRSSU - APS (Investimento)': f'{caminho}/SRSSU - APS (Investimento).xlsx',
+            'HRG': '-',
+            'APS': '-',
+            'HRG (investimento)': '-',
+            'APS (investimento)': '-',
 
         }
         for endereco in enderecos:
