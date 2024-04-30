@@ -1,3 +1,5 @@
+from tkinter import messagebox
+
 import pandas as pd
 from num2words import num2words
 
@@ -20,10 +22,16 @@ class Dados:
     itens_somados = {}
 
     def carregar_dados_de_pagamento(self, fonte):
-        df = pd.read_excel(fonte, sheet_name='Controle', skiprows=[0])
-        filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
-        dados = filtro.filter(Dados.colunas)
-        return dados
+        try:
+            df = pd.read_excel(fonte, sheet_name='Controle', skiprows=[0])
+            filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
+            dados = filtro.filter(Dados.colunas)
+            return dados
+        except FileNotFoundError:
+            messagebox.showerror(
+                'Tem arquivo não!',
+                'Configura os caminhos das planilhas, Doidão!'
+            )
 
     def filtrar_danfe(self, fonte):
         pagamentos = self.carregar_dados_de_pagamento(fonte)
