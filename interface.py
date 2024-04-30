@@ -18,10 +18,10 @@ from comandos_sql import ATUALIZAR_CAMINHOS
 from comandos_sql import CAMINHOS_ATUALIZADOS
 
 class Interface():
-    ORIGEM = ["HRG", "APS", "HRG (investimento)", "APS (investimento)"]
-    RECURSO = ["Regular", "Emenda"]
-    TIPO = ["Custeio", "Investimento"]
-    BANCO = {"BRB": "070"}
+    ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']
+    RECURSO = ['Regular', 'Emenda']
+    TIPO = ['Custeio', 'Investimento']
+    BANCO = {'BRB': '070'}
 
     def __init__(self, tela, relatorio):
         self.relatorio = relatorio
@@ -49,23 +49,23 @@ class Interface():
         self.frame_2 = LabelFrame(self.frame_mestre, padx=0, pady=0)
         self.frame_2.pack(fill="both", padx=10, pady=10)
 
-        self.frame_3 = LabelFrame(self.frame_mestre, padx=0, pady=0)
-        self.frame_3.pack(fill="both", expand=1, padx=10, pady=10)
+        # self.frame_3 = LabelFrame(self.frame_mestre, padx=0, pady=0)
+        # self.frame_3.pack(fill="both", expand=1, padx=10, pady=10)
 
-        self.mycanvas = Canvas(self.frame_3, bg="black")
-        self.mycanvas.pack(side=LEFT, fill=BOTH, expand=1)
+        # self.mycanvas = Canvas(self.frame_3, bg="black")
+        # self.mycanvas.pack(side=LEFT, fill=BOTH, expand=1)
 
-        self.rolagem = ttk.Scrollbar(self.frame_3, orient=VERTICAL, command=self.mycanvas.yview)
-        self.rolagem.pack(side=RIGHT, fill=Y)
+        # self.rolagem = ttk.Scrollbar(self.frame_3, orient=VERTICAL, command=self.mycanvas.yview)
+        # self.rolagem.pack(side=RIGHT, fill=Y)
 
-        self.mycanvas.config(yscrollcommand=self.rolagem.set)
-        self.mycanvas.bind('<Configure>', lambda e: self.mycanvas)
-        self.mycanvas.bind("<MouseWheel>", lambda event: self.mycanvas.yview_scroll(-int(event.delta / 60), "units"))
+        # self.mycanvas.config(yscrollcommand=self.rolagem.set)
+        # self.mycanvas.bind('<Configure>', lambda e: self.mycanvas)
+        # self.mycanvas.bind("<MouseWheel>", lambda event: self.mycanvas.yview_scroll(-int(event.delta / 60), "units"))
 
-        self.frame_display = Frame(self.mycanvas, padx=0, pady=0)
-        self.frame_display.pack(padx=0, pady=0)
+        # self.frame_display = Frame(self.mycanvas, padx=0, pady=0)
+        # self.frame_display.pack(padx=0, pady=0)
 
-        self.mycanvas.create_window((0, 0), window=self.frame_display, anchor="nw")
+        # self.mycanvas.create_window((0, 0), window=self.frame_display, anchor="nw")
 
         self.local = StringVar()
         self.local.set(Interface.ORIGEM[0])
@@ -73,17 +73,17 @@ class Interface():
         self.conta_origem = OptionMenu(self.frame_1, self.local, *Interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
-        self.teste1 = Button(self.frame_2, text='Listar', command=self.exibir_pagamentos)
-        self.teste1.grid(row=0, column=1)
+        # self.teste1 = Button(self.frame_2, text='Listar', command=self.exibir_pagamentos)
+        # self.teste1.grid(row=0, column=1)
 
-        self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpar_tela)
-        self.teste2.grid(row=0, column=2)
+        # self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpar_tela)
+        # self.teste2.grid(row=0, column=2)
 
-        self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
-        self.teste3.grid(row=0, column=3)
+        # self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
+        # self.teste3.grid(row=0, column=3)
 
-        self.teste3 = Button(self.frame_2, text='Contas', command=self.exibir_contas)
-        self.teste3.grid(row=0, column=4)
+        # self.teste3 = Button(self.frame_2, text='Contas', command=self.exibir_contas)
+        # self.teste3.grid(row=0, column=4)
 
         self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
         self.teste4.grid(row=0, column=5)
@@ -95,8 +95,8 @@ class Interface():
         self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
         self.calendario.grid(row=0, column=0)
 
-        btn_mostrar_data = Button(self.frame_calendario, text="Mostrar Data Selecionada", command=self.mostra_data)
-        btn_mostrar_data.grid(row=1, column=0)
+        # btn_mostrar_data = Button(self.frame_calendario, text="Mostrar Data Selecionada", command=self.mostra_data)
+        # btn_mostrar_data.grid(row=1, column=0)
 
         # self.teste5 = Button(self.frame_2, text='pegar contas', command=self.relatorio.pegar_n_cotas)
         # self.teste5.grid(row=0, column=6)
@@ -109,26 +109,26 @@ class Interface():
         print(f"mês: {data_selecionada[3:5]}")
         print(f"ano: {data_selecionada[6:]}")
 
-    def display(self, valor):
-        self.mycanvas.create_text((360, 0), text=valor, fill="green", font=("Helvetica", 12, "bold"))
+    # def display(self, valor):
+    #     self.mycanvas.create_text((360, 0), text=valor, fill="green", font=("Helvetica", 12, "bold"))
 
-    def limpar_tela(self):
-        self.mycanvas.delete("all")
+    # def limpar_tela(self):
+    #     self.mycanvas.delete("all")
 
-    def atualizar_dados(self):
-        origem = self.local.get()
-        self.relatorio.pagamentos = self.relatorio.soma_valor_liquido(self.relatorio.definir_fonte(origem))
-        self.relatorio.empresas = self.relatorio.fornecedores(self.relatorio.definir_fonte(origem))
-
-    def exibir_pagamentos(self):
-        self.atualizar_dados()
-        self.display(self.relatorio.formatar_relatorio(self.relatorio.pagamentos_formatados()))
-
-    def exibir_fornecedores(self):
-        self.display(self.relatorio.formatar_relatorio(self.relatorio.empresas.values()))
-
-    def exibir_contas(self):
-        self.display(self.relatorio.formatar_relatorio(self.relatorio.consultar_registros(CONTAS)))
+    # def atualizar_dados(self):
+    #     origem = self.local.get()
+    #     self.relatorio.pagamentos = self.relatorio.soma_valor_liquido(self.relatorio.definir_fonte(origem))
+    #     self.relatorio.empresas = self.relatorio.fornecedores(self.relatorio.definir_fonte(origem))
+    #
+    # def exibir_pagamentos(self):
+    #     self.atualizar_dados()
+    #     self.display(self.relatorio.formatar_relatorio(self.relatorio.pagamentos_formatados()))
+    #
+    # def exibir_fornecedores(self):
+    #     self.display(self.relatorio.formatar_relatorio(self.relatorio.empresas.values()))
+    #
+    # def exibir_contas(self):
+    #     self.display(self.relatorio.formatar_relatorio(self.relatorio.consultar_registros(CONTAS)))
 
     def imprimir_teds(self):
         origem = self.local.get()
@@ -298,28 +298,32 @@ class Interface():
         entrada.insert(0, caminho)
 
 
+    def itens_para_atualização(self):
+        itens = [
+            [Interface.ORIGEM[0],
+             '1',
+             self.caminho_srssu.get()],
+
+            [Interface.ORIGEM[1],
+             '2',
+             self.caminho_aps.get()],
+
+            [Interface.ORIGEM[2],
+             '3',
+             self.caminho_srssu_i.get()],
+
+            [Interface.ORIGEM[3],
+             '4',
+             self.caminho_aps_i.get()]
+        ]
+        return itens
+
     def atualizar_caminhos(self):
         resposta = messagebox.askyesno(
             ATUALIZAR_CAMINHOS[0], ATUALIZAR_CAMINHOS[1]
         )
 
-        itens_para_atualizacao = [
-            ['HRG',
-             '1',
-             self.caminho_srssu.get()],
-
-            ['APS',
-             '2',
-             self.caminho_aps.get()],
-
-            ['HRG (investimento)',
-             '3',
-             self.caminho_srssu_i.get()],
-
-            ['APS (investimento)',
-             '4',
-             self.caminho_aps_i.get()]
-        ]
+        itens_para_atualizacao = self.itens_para_atualização()
 
         if resposta:
             arquivo = self.relatorio.caminho_do_arquivo()
@@ -438,8 +442,8 @@ class Interface():
 if __name__ == '__main__':
     rel = Relatorio()
     tela = Tk()
-    tela.geometry("1100x600")
-    tela.resizable(1, 1)
+    tela.geometry("300x500")
+    tela.resizable(0, 0)
     objeto_tela = Interface(tela, rel)
     #tela.title()
     tela.config(menu=objeto_tela.menu)
