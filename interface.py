@@ -18,7 +18,7 @@ from comandos_sql import ATUALIZAR_CAMINHOS
 from comandos_sql import CAMINHOS_ATUALIZADOS
 
 class Interface():
-    ORIGEM = ["SRSSU", "SRSSU - APS", "Provisória", "SRSSU - APS (Investimento)"]
+    ORIGEM = ["HRG", "APS", "HRG (investimento)", "APS (investimento)"]
     RECURSO = ["Regular", "Emenda"]
     TIPO = ["Custeio", "Investimento"]
     BANCO = {"BRB": "070"}
@@ -142,7 +142,6 @@ class Interface():
         ano = data_calendario[6:]
         data_de_pagamento = f'{ano}-{mes}-{dia}'
         return data_de_pagamento
-
 
     def abrir_janela_cadastro(self):
         self.janela_de_cadastro = Toplevel()
@@ -298,26 +297,26 @@ class Interface():
         entrada.delete(0, 'end')
         entrada.insert(0, caminho)
 
+
     def atualizar_caminhos(self):
-        pass
         resposta = messagebox.askyesno(
             ATUALIZAR_CAMINHOS[0], ATUALIZAR_CAMINHOS[1]
         )
 
         itens_para_atualizacao = [
-            ['SRSSU',
+            ['HRG',
              '1',
              self.caminho_srssu.get()],
 
-            ['SRSSU - APS',
+            ['APS',
              '2',
              self.caminho_aps.get()],
 
-            ['Provisória',
+            ['HRG (investimento)',
              '3',
              self.caminho_srssu_i.get()],
 
-            ['SRSSU - APS (Investimento)',
+            ['APS (investimento)',
              '4',
              self.caminho_aps_i.get()]
         ]
