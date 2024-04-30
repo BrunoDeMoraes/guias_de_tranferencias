@@ -29,8 +29,8 @@ class Dados:
             return dados
         except FileNotFoundError:
             messagebox.showerror(
-                'Tem arquivo não!',
-                'Configura os caminhos das planilhas, Doidão!'
+                'Tem planilha aqui não!',
+                f'Não foi encontrado a planilha referente ao cominho .\nAcesse "Configurações >URLs" e aponte para o desejado e depois pressione "Gravar alterações".'
             )
 
     def filtrar_danfe(self, fonte):
