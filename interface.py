@@ -7,6 +7,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 from tkcalendar import Calendar
 from datetime import date
+from typing import Dict
 
 #from contas import Contas
 #from dados import Dados
@@ -23,8 +24,8 @@ class Interface():
     TIPO = ['Custeio', 'Investimento']
     BANCO = {'BRB': '070'}
 
-    def __init__(self, tela, relatorio):
-        self.relatorio = relatorio
+    def __init__(self, tela): #, relatorio
+        #self.relatorio = relatorio
 
         self.menu = Menu(tela)
         self.menu_configurações = Menu(self.menu)
@@ -34,8 +35,8 @@ class Interface():
         self.menu_configurações.add_command(
             label='Cadastro de fornecedores', command=self.abrir_janela_cadastro)
         self.menu_configurações.add_separator()
-        self.menu_configurações.add_command(
-            label='URLs', command=self.abrir_caminhos)
+        # self.menu_configurações.add_command(
+        #     label='URLs', command=self.abrir_caminhos)
 
         self.frame_mestre = LabelFrame(tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
@@ -85,13 +86,15 @@ class Interface():
         # self.teste3 = Button(self.frame_2, text='Contas', command=self.exibir_contas)
         # self.teste3.grid(row=0, column=4)
 
-        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.imprimir_teds)
+        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.dados_de_entrada)
         self.teste4.grid(row=0, column=5)
 
         self.data_hoje = date.today()
         dia = int(self.data_hoje.strftime('%d'))
         mes = int(self.data_hoje.strftime('%m'))
         ano = int(self.data_hoje.strftime('%Y'))
+
+
         self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
         self.calendario.grid(row=0, column=0)
 
@@ -130,10 +133,7 @@ class Interface():
     # def exibir_contas(self):
     #     self.display(self.relatorio.formatar_relatorio(self.relatorio.consultar_registros(CONTAS)))
 
-    def imprimir_teds(self):
-        origem = self.local.get()
-        data_pagamento = self.data_de_pagamento()
-        pagamentos = self.relatorio.compilar_dados_de_pagamento(origem, data_pagamento)
+
 
     def data_de_pagamento(self):
         data_calendario = self.calendario.get_date()
@@ -142,6 +142,21 @@ class Interface():
         ano = data_calendario[6:]
         data_de_pagamento = f'{ano}-{mes}-{dia}'
         return data_de_pagamento
+
+    def dados_de_entrada(self) -> Dict:
+        entradas = {
+            'origem': self.local.get(),
+            'data': self.data_de_pagamento()
+        }
+        print(entradas)
+        return entradas
+
+
+    def imprimir_teds(self):
+        origem = self.local.get()
+        data_pagamento = self.data_de_pagamento()
+        pagamentos = self.relatorio.compilar_dados_de_pagamento(origem, data_pagamento)
+
 
     def abrir_janela_cadastro(self):
         self.janela_de_cadastro = Toplevel()
@@ -255,7 +270,6 @@ class Interface():
         self.botao_excluir.grid(row=1, column=2, padx=30)
 
 
-
     def atualizar_contas(self):
         if self.numero_contas() == []:
             a = ["Nenhuma conta cadastrada"]
@@ -344,107 +358,107 @@ class Interface():
         else:
             self.caminhos.destroy()
 
-    def abrir_caminhos(self):
-        self.caminhos = Toplevel()
-        self.urls = self.relatorio.consultar_registros(URLS)
-        print(self.urls)
-        self.caminhos.title('Caminhos')
-        self.caminhos.resizable(False, False)
-        self.frame_caminhos = LabelFrame(
-            self.caminhos, padx=0, pady=0
-        )
-        self.frame_caminhos.pack(padx=1, pady=1)
-
-        self.botao_xlsx = Button(
-            self.frame_caminhos, text='SRSSU',
-            command=lambda: self.altera_caminho(self.caminho_srssu, True),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
-        )
-        self.caminho_srssu = Entry(self.frame_caminhos, width=70)
-
-        self.botao_pasta_de_certidões = Button(
-            self.frame_caminhos, text='SRSSU - APS',
-            command=lambda: (
-                self.altera_caminho(self.caminho_aps, True)),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
-        )
-        self.caminho_aps = Entry(
-            self.frame_caminhos, width=70
-        )
-
-        self.botao_log = Button(
-            self.frame_caminhos, text='Provisória',
-            command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
-            pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
-            bd=1
-        )
-        self.caminho_srssu_i = Entry(self.frame_caminhos, width=70)
-
-        self.certidões_para_pagamento = Button(
-            self.frame_caminhos, text='SRSSU - APS (Investimento)',
-            command=lambda: (
-                self.altera_caminho(self.caminho_aps_i, True)
-            ),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
-        )
-
-        self.caminho_aps_i = Entry(
-            self.frame_caminhos, width=70
-        )
-
-        self.gravar_alterações = Button(
-            self.frame_caminhos, text='Gravar alterações',
-            command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
-            fg='white', font=('Helvetica', 8, 'bold'), bd=1
-        )
-
-        self.botao_xlsx.grid(
-            row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
-            ipady=13, sticky=W + E
-        )
-        self.caminho_srssu.insert(0, self.urls[0][1])
-        self.caminho_srssu.grid(row=1, column=2, padx=20)
-
-        self.botao_pasta_de_certidões.grid(
-            row=2, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
-        )
-
-        self.caminho_aps.insert(0, self.urls[1][1])
-        self.caminho_aps.grid(row=2, column=2, padx=20)
-
-        self.botao_log.grid(
-            row=3, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
-        )
-
-        self.caminho_srssu_i.insert(0, self.urls[2][1])
-        self.caminho_srssu_i.grid(row=3, column=2, padx=20)
-
-        self.certidões_para_pagamento.grid(
-            row=4, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
-        )
-
-        self.caminho_aps_i.insert(0, self.urls[3][1])
-        self.caminho_aps_i.grid(row=4, column=2, padx=20)
-
-        self.gravar_alterações.grid(
-            row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13
-        )
+    # def abrir_caminhos(self):
+    #     self.caminhos = Toplevel()
+    #     self.urls = self.relatorio.consultar_registros(URLS)
+    #     print(self.urls)
+    #     self.caminhos.title('Caminhos')
+    #     self.caminhos.resizable(False, False)
+    #     self.frame_caminhos = LabelFrame(
+    #         self.caminhos, padx=0, pady=0
+    #     )
+    #     self.frame_caminhos.pack(padx=1, pady=1)
+    #
+    #     self.botao_xlsx = Button(
+    #         self.frame_caminhos, text='SRSSU',
+    #         command=lambda: self.altera_caminho(self.caminho_srssu, True),
+    #         padx=0, pady=0, bg='green', fg='white',
+    #         font=('Helvetica', 8, 'bold'), bd=1
+    #     )
+    #     self.caminho_srssu = Entry(self.frame_caminhos, width=70)
+    #
+    #     self.botao_pasta_de_certidões = Button(
+    #         self.frame_caminhos, text='SRSSU - APS',
+    #         command=lambda: (
+    #             self.altera_caminho(self.caminho_aps, True)),
+    #         padx=0, pady=0, bg='green', fg='white',
+    #         font=('Helvetica', 8, 'bold'), bd=1
+    #     )
+    #     self.caminho_aps = Entry(
+    #         self.frame_caminhos, width=70
+    #     )
+    #
+    #     self.botao_log = Button(
+    #         self.frame_caminhos, text='Provisória',
+    #         command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
+    #         pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
+    #         bd=1
+    #     )
+    #     self.caminho_srssu_i = Entry(self.frame_caminhos, width=70)
+    #
+    #     self.certidões_para_pagamento = Button(
+    #         self.frame_caminhos, text='SRSSU - APS (Investimento)',
+    #         command=lambda: (
+    #             self.altera_caminho(self.caminho_aps_i, True)
+    #         ),
+    #         padx=0, pady=0, bg='green', fg='white',
+    #         font=('Helvetica', 8, 'bold'), bd=1
+    #     )
+    #
+    #     self.caminho_aps_i = Entry(
+    #         self.frame_caminhos, width=70
+    #     )
+    #
+    #     self.gravar_alterações = Button(
+    #         self.frame_caminhos, text='Gravar alterações',
+    #         command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
+    #         fg='white', font=('Helvetica', 8, 'bold'), bd=1
+    #     )
+    #
+    #     self.botao_xlsx.grid(
+    #         row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
+    #         ipady=13, sticky=W + E
+    #     )
+    #     self.caminho_srssu.insert(0, self.urls[0][1])
+    #     self.caminho_srssu.grid(row=1, column=2, padx=20)
+    #
+    #     self.botao_pasta_de_certidões.grid(
+    #         row=2, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+    #         ipady=13, sticky=W + E
+    #     )
+    #
+    #     self.caminho_aps.insert(0, self.urls[1][1])
+    #     self.caminho_aps.grid(row=2, column=2, padx=20)
+    #
+    #     self.botao_log.grid(
+    #         row=3, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+    #         ipady=13, sticky=W + E
+    #     )
+    #
+    #     self.caminho_srssu_i.insert(0, self.urls[2][1])
+    #     self.caminho_srssu_i.grid(row=3, column=2, padx=20)
+    #
+    #     self.certidões_para_pagamento.grid(
+    #         row=4, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+    #         ipady=13, sticky=W + E
+    #     )
+    #
+    #     self.caminho_aps_i.insert(0, self.urls[3][1])
+    #     self.caminho_aps_i.grid(row=4, column=2, padx=20)
+    #
+    #     self.gravar_alterações.grid(
+    #         row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
+    #         ipady=13
+    #     )
 
 
 
 if __name__ == '__main__':
-    rel = Relatorio()
+    #rel = Relatorio()
     tela = Tk()
     tela.geometry("300x500")
     tela.resizable(0, 0)
-    objeto_tela = Interface(tela, rel)
+    objeto_tela = Interface(tela)
     #tela.title()
     tela.config(menu=objeto_tela.menu)
     tela.mainloop()
