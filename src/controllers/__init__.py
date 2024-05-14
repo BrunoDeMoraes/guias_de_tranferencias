@@ -1,0 +1,1 @@
+from src.constantes import COLUNAS

@@ -25,18 +25,18 @@ class Relatorio(Contas, Dados, Estrutura):
 
 
         self.criar_pastas(self.pasta)
-        self.criar_bd(TABELAS)
+        #self.criar_bd(TABELAS)
 
 
-        #self.contas = self.consultar_registros(CONTAS)
-        # self.urls = self.consultar_registros(URLS)
+        self.contas = self.consultar_registros(CONTAS)
+        self.urls = self.consultar_registros(URLS)
 
 
 
-        # print(f"Estas são as URLs {self.urls}")
-        # print(f'Está é a URL[0][1] {self.urls[1][1]}')
-        #self.pagamentos = self.soma_valor_liquido(self.urls[0][1])
-        #self.empresas = self.fornecedores(self.urls[0][1])
+        print(f"Estas são as URLs {self.urls}")
+        print(f'Está é a URL[0][1] {self.urls[1][1]}')
+        self.pagamentos = self.soma_valor_liquido(self.urls[0][1])
+        self.empresas = self.fornecedores(self.urls[0][1])
 
 
     def data_formatada(self):
