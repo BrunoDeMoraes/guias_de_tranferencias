@@ -11,6 +11,46 @@ class DadosDePagamentoController:
         self.lista_de_pagamentos = {}
 
 
+    def soma_valor_liquido(self, fonte):
+        lista_de_pagamentos = self.aglutinar_por_empresa(fonte)
+        for pagamento_geral in lista_de_pagamentos.values():
+            total_liquido = 0
+            for lista in pagamento_geral:
+                total_liquido += lista[3]
+            pagamento_geral.append(total_liquido)
+        for i in lista_de_pagamentos.items():
+            print(f'{i[0]}')
+            for pag in i[1]:
+                print(f'{pag}')
+            print('\n')
+        return lista_de_pagamentos
+
+    def aglutinar_por_empresa(self, fonte):
+        pagamentos = self.listar_pagamentos(fonte)
+        pagamento_por_empresa = {}
+        for pagamento in pagamentos.values():
+            if pagamento[1] not in pagamento_por_empresa.keys():
+                pagamento_por_empresa[pagamento[1]] = []
+                pagamento_por_empresa[pagamento[1]].append(pagamento)
+            else:
+                pagamento_por_empresa[pagamento[1]].append(pagamento)
+        for i in pagamento_por_empresa.items():
+            print(f'{i[0]}')
+            for pag in i[1]:
+                print(f'{pag}')
+            print('\n')
+        return pagamento_por_empresa
+
+
+    def listar_pagamentos(self, fonte):
+        danfes_complexas = self.filtrar_danfe(fonte)
+        self.inserir_pagamento(danfes_complexas)
+        danfes_simples = self.carregar_dados_de_pagamento(fonte)
+        self.inserir_pagamento(danfes_simples)
+        self.valor_por_extenso()
+        return self.lista_de_pagamentos
+
+
     def carregar_dados_de_pagamento(self, fonte):
         try:
             df = pd.read_excel(fonte, sheet_name='Controle', skiprows=[0])
@@ -32,17 +72,6 @@ class DadosDePagamentoController:
             )
         ]
         return duplicados
-
-
-    def listar_pagamentos(self, fonte):
-        danfes_complexas = self.filtrar_danfe(fonte)
-        self.inserir_pagamento(danfes_complexas)
-        danfes_simples = self.carregar_dados_de_pagamento(fonte)
-        self.inserir_pagamento(danfes_simples)
-        self.valor_por_extenso()
-        for item in self.lista_de_pagamentos.items():
-            print(f'{item[0]}\n    {item[1]}\n')
-        return self.lista_de_pagamentos
 
 
     def inserir_pagamento(self, data_frame):
@@ -70,6 +99,7 @@ class DadosDePagamentoController:
         )
         return id
 
+
     def gerar_subset(self, data_frame, linha_de_pagamento):
         subset = data_frame[
             (data_frame['Cotação'] == linha_de_pagamento['Cotação']) &
@@ -87,33 +117,21 @@ class DadosDePagamentoController:
         somas = [soma, soma_iss, soma_ir, soma_valor_total]
         return somas
 
-    def compilar_linha_de_pagamento(self, descricao, linha, colunas_somadas=None):
-        if colunas_somadas != None:
-            dados_compilados_soma = [
-                descricao[0],
-                descricao[1],
-                descricao[2],
-                colunas_somadas[0],
-                linha['Nº de processo SEI'],
-                linha['Conta'],
-                colunas_somadas[1],
-                colunas_somadas[2],
-                colunas_somadas[3]
-            ]
-            return dados_compilados_soma
-        else:
-            dados_compilados = [
-                descricao[0],
-                descricao[1],
-                descricao[2],
-                linha['Liquido'],
-                linha['Nº de processo SEI'],
-                linha['Conta'],
-                linha['ISS'],
-                linha['IR'],
-                linha['V. Total']
-            ]
-            return dados_compilados
+
+    def compilar_linha_de_pagamento(self, descricao, linha, colunas_somadas):
+        dados_compilados_soma = [
+            descricao[0],
+            descricao[1],
+            descricao[2],
+            colunas_somadas[0],
+            linha['Nº de processo SEI'],
+            linha['Conta'],
+            colunas_somadas[1],
+            colunas_somadas[2],
+            colunas_somadas[3]
+        ]
+        return dados_compilados_soma
+
 
     def valor_por_extenso(self):
         for chave, valor in sorted(self.lista_de_pagamentos.items()):
@@ -121,8 +139,9 @@ class DadosDePagamentoController:
             valor.append(extenso)
 
 
+
 if __name__ == "__main__":
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
     teste = DadosDePagamentoController()
-    pagamentos = teste.listar_pagamentos(fonte)
+    pagamentos = teste.aglutinar_por_empresa(fonte)
 
