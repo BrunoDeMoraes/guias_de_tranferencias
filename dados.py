@@ -93,8 +93,6 @@ class Dados:
                 continue
             else:
                 pagamentos_filtrados[i[0]] = i[1]
-        for pagamento in pagamentos_filtrados.items():
-            print(pagamento)
         return pagamentos_filtrados
 
     def soma_indice(self, pagamentos, indice):
@@ -104,7 +102,6 @@ class Dados:
                 continue
             else:
                 indice_somado += float(pagamento[indice])
-                print(f'total = {indice_somado}')
         return indice_somado
 
 
@@ -122,7 +119,6 @@ class Dados:
                 pagamento_por_empresa[pagamento[1]].append(pagamento)
             else:
                 pagamento_por_empresa[pagamento[1]].append(pagamento)
-        print(pagamento_por_empresa)
         return pagamento_por_empresa
 
     def soma_valor_liquido(self, fonte):
@@ -146,10 +142,12 @@ class Dados:
 if __name__ == "__main__":
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
     teste = Dados()
-    pagamentos_iss = teste.pagamentos_filtrados(fonte, 6)
-    teste.soma_indice(pagamentos_iss, 6)
-    pagamentos_ir = teste.pagamentos_filtrados(fonte, 7)
-    teste.soma_indice(pagamentos_ir, 7)
+    a = teste.fornecedores(fonte)
+    print(a)
+    # pagamentos_iss = teste.pagamentos_filtrados(fonte, 6)
+    # teste.soma_indice(pagamentos_iss, 6)
+    # pagamentos_ir = teste.pagamentos_filtrados(fonte, 7)
+    # teste.soma_indice(pagamentos_ir, 7)
 
 
     #teste.soma_valor_liquido()
