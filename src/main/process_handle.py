@@ -9,7 +9,7 @@ from tkcalendar import Calendar
 from datetime import date
 from typing import Dict
 
-from .constructor.transfer_constructor import transfer_constructor
+from src.main.constructor.transfer_constructor import transfer_constructor
 
 class Process_handle():
     ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']
@@ -28,11 +28,12 @@ class Process_handle():
         self.menu_configurações.add_command(
             label='Cadastro de fornecedores', command=self.dados_de_entrada)
         self.menu_configurações.add_separator()
+        self.firstview()
 
+
+    def firstview(self):
         self.frame_mestre = LabelFrame(self.tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
-
-
         self.frame_1 = LabelFrame(self.frame_mestre, padx=0, pady=0)
         self.frame_1.pack(fill="both", padx=10, pady=0, ipady=0)
 
@@ -48,7 +49,7 @@ class Process_handle():
         self.conta_origem = OptionMenu(self.frame_1, self.local, *Process_handle.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
-        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.dados_de_entrada)
+        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.gerar_constructor)
         self.teste4.grid(row=0, column=1)
 
         self.teste5 = Button(self.frame_2, text='Gerar pagamentos', command=self.dados_de_entrada)
@@ -76,6 +77,7 @@ class Process_handle():
     def gerar_constructor(self):
         entrada = self.dados_de_entrada()
         transfer_constructor(entrada)
+        self.tranfer_text()
 
 
     def data_de_pagamento(self):
@@ -90,7 +92,6 @@ class Process_handle():
             'origem': self.local.get(),
             'data': self.data_de_pagamento()
         }
-        self.tranfer_text()
         print(entradas)
         return entradas
 
@@ -100,7 +101,13 @@ class Process_handle():
         self.frame_mestre = LabelFrame(self.tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
         self.texto = Label(self.frame_mestre, text='Tá aí')
+        self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
         self.texto.pack()
+        self.Bvoltar.pack()
 
+
+    def voltar(self):
+        self.frame_mestre.destroy()
+        self.firstview()
 
 
