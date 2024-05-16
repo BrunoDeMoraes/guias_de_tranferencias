@@ -1,31 +1,27 @@
 import pandas as pd
 from tkinter import messagebox
 from num2words import num2words
+from typing import Dict
 
 from src import *
 
 
-class DadosDePagamentoController:
+class DadosDePagamentoRepository:
     def __init__(self):
         self.colunas = COLUNAS
         self.lista_de_pagamentos = {}
 
 
-    def soma_valor_liquido(self, fonte):
-        lista_de_pagamentos = self.aglutinar_por_empresa(fonte)
+    def soma_valor_liquido(self, fonte: str) -> Dict:
+        lista_de_pagamentos = self.agupar_por_empresa(fonte)
         for pagamento_geral in lista_de_pagamentos.values():
             total_liquido = 0
             for lista in pagamento_geral:
                 total_liquido += lista[3]
             pagamento_geral.append(total_liquido)
-        for i in lista_de_pagamentos.items():
-            print(f'{i[0]}')
-            for pag in i[1]:
-                print(f'{pag}')
-            print('\n')
         return lista_de_pagamentos
 
-    def aglutinar_por_empresa(self, fonte):
+    def agupar_por_empresa(self, fonte: str) -> Dict:
         pagamentos = self.listar_pagamentos(fonte)
         pagamento_por_empresa = {}
         for pagamento in pagamentos.values():
@@ -139,9 +135,8 @@ class DadosDePagamentoController:
             valor.append(extenso)
 
 
-
 if __name__ == "__main__":
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
     teste = DadosDePagamentoController()
-    pagamentos = teste.aglutinar_por_empresa(fonte)
+    pagamentos = teste.agupar_por_empresa(fonte)
 

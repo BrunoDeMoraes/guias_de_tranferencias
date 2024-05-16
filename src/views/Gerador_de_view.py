@@ -11,7 +11,7 @@ from typing import Dict
 
 from src.main.constructor.transfer_constructor import transfer_constructor
 
-class Process_handle():
+class Gerador_de_views:
     ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']
     RECURSO = ['Regular', 'Emenda']
     TIPO = ['Custeio', 'Investimento']
@@ -44,9 +44,9 @@ class Process_handle():
         self.frame_2.pack(fill="both", padx=10, pady=10)
 
         self.local = StringVar()
-        self.local.set(Process_handle.ORIGEM[0])
+        self.local.set(Gerador_de_views.ORIGEM[0])
 
-        self.conta_origem = OptionMenu(self.frame_1, self.local, *Process_handle.ORIGEM)
+        self.conta_origem = OptionMenu(self.frame_1, self.local, *Gerador_de_views.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
         self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command=self.gerar_constructor)
@@ -87,6 +87,8 @@ class Process_handle():
         ano = data_calendario[6:]
         data_de_pagamento = f'{ano}-{mes}-{dia}'
         return data_de_pagamento
+
+
     def dados_de_entrada(self) -> Dict:
         entradas = {
             'origem': self.local.get(),
