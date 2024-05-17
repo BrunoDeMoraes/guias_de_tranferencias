@@ -8,8 +8,10 @@ def transfer_constructor(entrada: Dict):
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
     teste = DadosDePagamentoRepository()
     pagamentos = teste.agupar_por_empresa(fonte)
-
-    print(f'Esta é a entrada {entrada}')
+    if pagamentos:
+        return 'DEU CERTO!!!'
+    else:
+        return 'Deu merda!!!'
 
 
     #dados_de_entrada(origem, data_de_pagamento)

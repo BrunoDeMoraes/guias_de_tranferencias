@@ -93,7 +93,5 @@ class Gerador_de_views(Tk):
 
 
 
-    # def voltar(self):
-    #     self.frame_mestre.destroy()
-    #     self.firstview()
+
 
