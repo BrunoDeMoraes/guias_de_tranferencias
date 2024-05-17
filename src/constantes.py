@@ -15,3 +15,9 @@ PLANILHA_INEXISTENTE = [
      'ione "Gravar alterações".'
      )
 ]
+
+
+ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']
+RECURSO = ['Regular', 'Emenda']
+TIPO = ['Custeio', 'Investimento']
+BANCO = {'BRB': '070'}
