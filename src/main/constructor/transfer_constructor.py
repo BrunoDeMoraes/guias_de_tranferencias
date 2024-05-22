@@ -1,25 +1,31 @@
 from typing import Dict
 # import dados_da_view
 # import transfer_controller
+from src.models.repository.dados_de_conta import DadosDeContas
+from src.models.repository.dados_de_fornecedores import DadosDeFornecedores
 from src.models.repository.dados_de_pagamento_repository import DadosDePagamentoRepository
+
 
 def transfer_constructor(entrada: Dict):
 
-    fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
-    teste = DadosDePagamentoRepository()
-    pagamentos = teste.agupar_por_empresa(fonte)
+    contas = DadosDeContas()
+    data_pagameto = entrada['data']
+    fornecedores = DadosDeFornecedores()
+    origem = entrada['origem']
+    pagamementos = DadosDePagamentoRepository()
+
+
+
+
+
+
     if pagamentos:
         return 'DEU CERTO!!!'
     else:
         return 'Deu merda!!!'
 
 
-    #dados_de_entrada(origem, data_de_pagamento)
-    #
-    #
-    #
-    # enviar_dados_pra_view((self, pagamento, empresa, conta, origem, data_pagamento))
-
+    # enviar_dados_pra_view((self, pagamentos, empresa, conta, origem, data_pagamento))
 
 
 

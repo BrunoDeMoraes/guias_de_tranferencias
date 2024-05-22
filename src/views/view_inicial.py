@@ -54,9 +54,9 @@ class ViewInicial(Frame):
         self.teste6.grid(row=2, column=1)
         self.calendario.grid(row=0, column=0)
 
-    def gerar_constructor(self, construtor):
+    def gerar_constructor(self, constructor):
         entrada = self.dados_de_entrada()
-        resposta = construtor(entrada)
+        resposta = constructor(entrada)
         self.transfer_text(resposta)
 
     def dados_de_entrada(self) -> Dict:

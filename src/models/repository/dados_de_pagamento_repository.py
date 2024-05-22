@@ -6,7 +6,7 @@ from typing import Dict
 from src import *
 
 
-class DadosDePagamentoRepository:
+class DadosDePagamentoRepository():
     def __init__(self):
         self.colunas = COLUNAS
         self.lista_de_pagamentos = {}
@@ -21,8 +21,9 @@ class DadosDePagamentoRepository:
             pagamento_geral.append(total_liquido)
         return lista_de_pagamentos
 
+
     def agupar_por_empresa(self, fonte: str) -> Dict:
-        pagamentos = self.listar_pagamentos(fonte)
+        pagamentos = self.__listar_pagamentos(fonte)
         pagamento_por_empresa = {}
         for pagamento in pagamentos.values():
             if pagamento[1] not in pagamento_por_empresa.keys():
@@ -38,16 +39,16 @@ class DadosDePagamentoRepository:
         return pagamento_por_empresa
 
 
-    def listar_pagamentos(self, fonte):
-        danfes_complexas = self.filtrar_danfe(fonte)
-        self.inserir_pagamento(danfes_complexas)
-        danfes_simples = self.carregar_dados_de_pagamento(fonte)
-        self.inserir_pagamento(danfes_simples)
+    def __listar_pagamentos(self, fonte):
+        danfes_complexas = self.__filtrar_danfe(fonte)
+        self.__inserir_pagamento(danfes_complexas)
+        danfes_simples = self.__carregar_dados_de_pagamento(fonte)
+        self.__inserir_pagamento(danfes_simples)
         self.valor_por_extenso()
         return self.lista_de_pagamentos
 
 
-    def carregar_dados_de_pagamento(self, fonte):
+    def __carregar_dados_de_pagamento(self, fonte):
         try:
             df = pd.read_excel(fonte, sheet_name='Controle', skiprows=[0])
             filtro = df.loc[df['Nº DANFE'].notna() & df['Nº TED'].isna()]
@@ -60,8 +61,8 @@ class DadosDePagamentoRepository:
             )
 
 
-    def filtrar_danfe(self, fonte):
-        pagamentos = self.carregar_dados_de_pagamento(fonte)
+    def __filtrar_danfe(self, fonte):
+        pagamentos = self.__carregar_dados_de_pagamento(fonte)
         duplicados = pagamentos[
             pagamentos.duplicated(
                 subset=['Cotação', 'Empresa', 'Nº DANFE'], keep=False
@@ -70,16 +71,16 @@ class DadosDePagamentoRepository:
         return duplicados
 
 
-    def inserir_pagamento(self, data_frame):
+    def __inserir_pagamento(self, data_frame):
         for indice, linha in data_frame.iterrows():
-            id_pagamento = self.gerar_id_de_pagamento(linha)
+            id_pagamento = self.__gerar_id_de_pagamento(linha)
             if id_pagamento in self.lista_de_pagamentos.keys():
                 continue
             else:
                 descricao = id_pagamento.split('-')
-                subset = self.gerar_subset(data_frame, linha)
-                colunas_somadas = self.somar_valores_subset(subset)
-                linha_de_pagamento = self.compilar_linha_de_pagamento(
+                subset = self.__gerar_subset(data_frame, linha)
+                colunas_somadas = self.__somar_valores_subset(subset)
+                linha_de_pagamento = self.__compilar_linha_de_pagamento(
                     descricao,
                     linha,
                     colunas_somadas
@@ -87,7 +88,7 @@ class DadosDePagamentoRepository:
                 self.lista_de_pagamentos[id_pagamento] = linha_de_pagamento
 
 
-    def gerar_id_de_pagamento(self, linha_de_pagamento):
+    def __gerar_id_de_pagamento(self, linha_de_pagamento):
         id = (
                 str(linha_de_pagamento['Cotação']) + '-' +
                 str(linha_de_pagamento['Empresa']) + '-' +
@@ -96,7 +97,7 @@ class DadosDePagamentoRepository:
         return id
 
 
-    def gerar_subset(self, data_frame, linha_de_pagamento):
+    def __gerar_subset(self, data_frame, linha_de_pagamento):
         subset = data_frame[
             (data_frame['Cotação'] == linha_de_pagamento['Cotação']) &
             (data_frame['Empresa'] == linha_de_pagamento['Empresa']) &
@@ -105,7 +106,7 @@ class DadosDePagamentoRepository:
         return subset
 
 
-    def somar_valores_subset(self, subset):
+    def __somar_valores_subset(self, subset):
         soma = subset['Liquido'].sum()
         soma_iss = subset['ISS'].sum()
         soma_ir = subset['IR'].sum()
@@ -114,7 +115,7 @@ class DadosDePagamentoRepository:
         return somas
 
 
-    def compilar_linha_de_pagamento(self, descricao, linha, colunas_somadas):
+    def __compilar_linha_de_pagamento(self, descricao, linha, colunas_somadas):
         dados_compilados_soma = [
             descricao[0],
             descricao[1],
@@ -137,6 +138,6 @@ class DadosDePagamentoRepository:
 
 if __name__ == "__main__":
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
-    teste = DadosDePagamentoController()
+    teste = DadosDePagamentoRepository()
     pagamentos = teste.agupar_por_empresa(fonte)
 
