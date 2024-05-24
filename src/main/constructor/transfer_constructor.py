@@ -12,13 +12,7 @@ def transfer_constructor(entrada: Dict):
     data_pagameto = entrada['data']
     fornecedores = DadosDeFornecedores()
     origem = entrada['origem']
-    pagamementos = DadosDePagamentoRepository()
-
-
-
-
-
-
+    pagamentos = DadosDePagamentoRepository()
     if pagamentos:
         return 'DEU CERTO!!!'
     else:
@@ -27,7 +21,10 @@ def transfer_constructor(entrada: Dict):
 
     # enviar_dados_pra_view((self, pagamentos, empresa, conta, origem, data_pagamento))
 
-
+fonte = 'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/src/models/repository'
+c = DadosDeContas()
+print(c.caminho_do_bd())
+# print(c.pegar_n_contas())
 
 
 
