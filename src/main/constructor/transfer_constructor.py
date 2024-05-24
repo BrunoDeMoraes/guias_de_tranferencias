@@ -7,12 +7,14 @@ from src.models.repository.dados_de_pagamento_repository import DadosDePagamento
 
 
 def transfer_constructor(entrada: Dict):
-
     contas = DadosDeContas()
     data_pagameto = entrada['data']
     fornecedores = DadosDeFornecedores()
     origem = entrada['origem']
     pagamentos = DadosDePagamentoRepository()
+
+    a = contas.pegar_conta(origem,'RC')
+    print(a)
     if pagamentos:
         return 'DEU CERTO!!!'
     else:
@@ -24,7 +26,7 @@ def transfer_constructor(entrada: Dict):
 fonte = 'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/src/models/repository'
 c = DadosDeContas()
 print(c.caminho_do_bd())
-# print(c.pegar_n_contas())
+print(c.consultar_tabelas())
 
 
 

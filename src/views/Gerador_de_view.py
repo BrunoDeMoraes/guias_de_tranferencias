@@ -18,11 +18,13 @@ from comandos_sql import URLS
 from comandos_sql import ATUALIZAR_CAMINHOS
 from comandos_sql import CAMINHOS_ATUALIZADOS
 
-from contas import Contas
+# from contas import Contas
 
+
+from src.models.repository.dados_de_conta import DadosDeContas
 from src.main.constructor.transfer_constructor import transfer_constructor
 
-class Interface(Contas):
+class Interface(DadosDeContas):
     ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']
     RECURSO = ['Regular', 'Emenda']
     TIPO = ['Custeio', 'Investimento']
@@ -161,6 +163,8 @@ class Interface(Contas):
 
 
     def abrir_janela_cadastro(self):
+
+        #print(f'Esse é o caminho do BD {self.}')
         self.janela_de_cadastro = Toplevel()
         self.janela_de_cadastro.title('Lista de caminhos')
         self.janela_de_cadastro.resizable(True, True)
