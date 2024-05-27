@@ -15,7 +15,8 @@ def transfer_constructor(entrada: Dict):
     origem = entrada['origem']
     fonte = entrada['fonte']
     pagamentos = DadosDePagamentoRepository()
-    a = contas.pegar_conta(origem,'RC')
+
+    tranferencias = TransferController(contas, data_pagameto, fornecedores, origem, pagamentos)
 
     if pagamentos:
         return 'DEU CERTO!!!'

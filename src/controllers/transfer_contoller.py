@@ -11,11 +11,11 @@ from src.models.repository.dados_de_pagamento_repository import DadosDePagamento
 class TransferController(InterfaceController):
     def __init__(
             self,
-            contas: Type[DadosDeContas],
+            contas: DadosDeContas,
             data: str,
-            fornecedores: Type[DadosDeFornecedores],
+            fornecedores: DadosDeFornecedores,
             origem: str,
-            pagamento: Type[DadosDePagamentoRepository]
+            pagamento: DadosDePagamentoRepository
     ):
         super().__init__(contas, data, fornecedores, origem, pagamento)
 
