@@ -1,8 +1,5 @@
-import os
 import sqlite3
-import threading
 from tkinter import *
-from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 from tkcalendar import Calendar
@@ -13,16 +10,16 @@ from typing import Dict
 #from dados import Dados
 from relatorio import Relatorio
 
-from comandos_sql import CONTAS
-from comandos_sql import URLS
-from comandos_sql import ATUALIZAR_CAMINHOS
-from comandos_sql import CAMINHOS_ATUALIZADOS
-
-# from contas import Contas
-
+# from src.comandos_sql import URLS
+# from src.comandos_sql import ATUALIZAR_CAMINHOS
+# from src.comandos_sql import CAMINHOS_ATUALIZADOS
 
 from src.models.repository.dados_de_conta import DadosDeContas
 from src.main.constructor.transfer_constructor import transfer_constructor
+
+from src import comandos_sql
+from src import constantes
+
 
 class Interface(DadosDeContas):
     ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']
@@ -98,16 +95,19 @@ class Interface(DadosDeContas):
         # self.teste5.grid(row=0, column=6)
 
     def gerar_constructor(self, constructor):
+        #urls = self.selecionar_fonte()
         entrada = self.dados_de_entrada()
         resposta = constructor(entrada)
         self.transfer_text(resposta)
 
+
     def dados_de_entrada(self) -> Dict:
+        #fonte = self.definir_fonte(self.local.get())
         entradas = {
             'origem': self.local.get(),
-            'data': self.data_de_pagamento()
+            'data': self.data_de_pagamento(),
+        #    'fonte': fonte
         }
-        print(entradas)
         return entradas
 
     def data_de_pagamento(self):

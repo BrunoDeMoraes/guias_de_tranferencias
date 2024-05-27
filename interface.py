@@ -1,8 +1,5 @@
-import os
 import sqlite3
-import threading
 from tkinter import *
-from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 from tkcalendar import Calendar
@@ -13,10 +10,9 @@ from typing import Dict
 #from dados import Dados
 from relatorio import Relatorio
 
-from comandos_sql import CONTAS
-from comandos_sql import URLS
-from comandos_sql import ATUALIZAR_CAMINHOS
-from comandos_sql import CAMINHOS_ATUALIZADOS
+from src.comandos_sql import URLS
+from src.comandos_sql import ATUALIZAR_CAMINHOS
+from src.comandos_sql import CAMINHOS_ATUALIZADOS
 
 class Interface():
     ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']

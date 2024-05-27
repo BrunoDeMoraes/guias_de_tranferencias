@@ -1,8 +1,8 @@
 import os
 import sqlite3
-from comandos_sql import CONSULTA_TABELAS
+from src.comandos_sql import CONSULTA_TABELAS
 
-from comandos_sql import URLS
+from src.comandos_sql import URLS
 
 class Contas:
 
@@ -54,6 +54,12 @@ class Contas:
     def pegar_conta(self, origem, codigo):
         especificador = self.CODIGOS[codigo]
         comando = f"SELECT * FROM contas WHERE origem = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
+        direcionador = self.conexao(comando)
+        registro = direcionador.fetchall()
+        return registro
+
+    def xxx(self, origem):
+        comando = f"SELECT * FROM urls WHERE origem = '{origem}' AND recurso = '{especificador[0]}' AND tipo = '{especificador[1]}';"
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         return registro

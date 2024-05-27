@@ -23,8 +23,6 @@ class TransferController(InterfaceController):
     def filtrar_dados(self):
         pass
 
-    def qua(self):
-        print('qua')
 
 
 if __name__ == "__main__":
@@ -34,6 +32,5 @@ if __name__ == "__main__":
     origem = 'SRSSU'
     pagamementos = DadosDePagamentoRepository()
     a = TransferController(contas, data_pagameto, fornecedores, origem, pagamementos)
-    a.qua()
     print(a.origem)
 

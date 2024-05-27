@@ -1,8 +1,8 @@
 import os
 import sqlite3
-from comandos_sql import CONSULTA_TABELAS
+from src.comandos_sql import CONSULTA_TABELAS
 
-from comandos_sql import URLS
+from src.comandos_sql import URLS
 
 class DadosDeContas:
 
@@ -43,8 +43,6 @@ class DadosDeContas:
         origens = {}
         for caminho in caminhos:
             origens[caminho[0]] = caminho[1]
-        print(origens)
-        print(origens[fonte])
         return origens[fonte]
 
     def consultar_tabelas(self):

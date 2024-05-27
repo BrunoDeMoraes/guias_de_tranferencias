@@ -1,11 +1,7 @@
 import os
-import pdb
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
-from reportlab.lib import fonts
-from reportlab.platypus import SimpleDocTemplate
-from reportlab.platypus import Table
 from datetime import date
 from typing import Dict
 from num2words import num2words
@@ -14,9 +10,8 @@ from contas import Contas
 from dados import Dados
 from estrutura import Estrutura
 
-from comandos_sql import TABELAS
-from comandos_sql import CONTAS
-from comandos_sql import URLS
+from src.comandos_sql import CONTAS
+from src.comandos_sql import URLS
 
 class Relatorio(Contas, Dados, Estrutura):
     def __init__(self):
