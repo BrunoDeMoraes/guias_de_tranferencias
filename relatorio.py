@@ -419,16 +419,16 @@ class Relatorio(Contas, Dados, Estrutura):
 
 
             cnv.rect(self.mm(12), self.mm(84), width=self.mm(180), height=self.mm(5))
-            cnv.line(self.mm(60), self.mm(84), self.mm(60),
-                     self.mm(89))
-            cnv.line(self.mm(85), self.mm(84), self.mm(85),
-                     self.mm(89))
-            cnv.line(self.mm(110), self.mm(84), self.mm(110),
-                     self.mm(89))
-            cnv.line(self.mm(135), self.mm(84), self.mm(135),
-                     self.mm(89))
-            cnv.line(self.mm(160), self.mm(84), self.mm(160),
-                     self.mm(89))
+            # cnv.line(self.mm(60), self.mm(84), self.mm(60),
+            #          self.mm(89))
+            # cnv.line(self.mm(85), self.mm(84), self.mm(85),
+            #          self.mm(89))
+            # cnv.line(self.mm(110), self.mm(84), self.mm(110),
+            #          self.mm(89))
+            # cnv.line(self.mm(135), self.mm(84), self.mm(135),
+            #          self.mm(89))
+            # cnv.line(self.mm(160), self.mm(84), self.mm(160),
+            #          self.mm(89))
 
             cnv.setFont("Times-Roman", 8)
             altura = 0
