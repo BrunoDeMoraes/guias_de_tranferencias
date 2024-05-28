@@ -25,3 +25,4 @@ LINHAS = [
     (8, 199, 196, 199),  # linha horizontal assinatura
     (102, 207, 102, 199)  # linha vertical assinatura
 ]
+
