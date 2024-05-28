@@ -12,7 +12,8 @@ class DadosDeFornecedores:
         return self.empresas
 
 
-    def retorna_empresa(self, empresa):
+    def retorna_empresa(self, empresa, fonte):
+        self.fornecedores(fonte)
         beneficiario = self.empresas[empresa]
         return beneficiario
 

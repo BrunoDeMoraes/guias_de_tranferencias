@@ -182,8 +182,8 @@ class Relatorio(Contas, Dados, Estrutura):
             cnv.rect(self.mm(170), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
             cnv.rect(self.mm(21), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
             cnv.rect(self.mm(66), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
-
             cnv.rect(self.mm(12), self.mm(84), width=self.mm(180), height=self.mm(5))
+
             cnv.line(self.mm(60), self.mm(84), self.mm(60),
                      self.mm(89))
             cnv.line(self.mm(85), self.mm(84), self.mm(85),

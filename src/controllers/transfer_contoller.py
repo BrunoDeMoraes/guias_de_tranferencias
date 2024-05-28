@@ -11,26 +11,31 @@ from src.models.repository.dados_de_pagamento_repository import DadosDePagamento
 class TransferController(InterfaceController):
     def __init__(
             self,
-            contas: DadosDeContas,
+            contas: Type[DadosDeContas],
             data: str,
-            fornecedores: DadosDeFornecedores,
+            fornecedores: Type[DadosDeFornecedores],
             origem: str,
-            pagamento: DadosDePagamentoRepository
+            pagamento: Type[DadosDePagamentoRepository]
     ):
         super().__init__(contas, data, fornecedores, origem, pagamento)
 
 
     def filtrar_dados(self):
-        pass
+        fonte = self.contas.definir_fonte(self.origem)
+        pagamentos = self.pagametos.agupar_por_empresa(fonte).items()
+        transferencias = {}
+        for pagamento in pagamentos:
+            empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
+            if empresa[5] == 'BRB':
+                transferencias[pagamento[0]] = pagamento[1]
 
+        for i in transferencias.items():
+            print(f'{i[0]}\n')
+            for pag in i[1]:
+                print(f'{pag}')
+            print('\n')
+        return transferencias
 
+filtra
 
-if __name__ == "__main__":
-    contas = DadosDeContas()
-    data_pagameto = '25/05/2024'
-    fornecedores = DadosDeFornecedores()
-    origem = 'SRSSU'
-    pagamementos = DadosDePagamentoRepository()
-    a = TransferController(contas, data_pagameto, fornecedores, origem, pagamementos)
-    print(a.origem)
 

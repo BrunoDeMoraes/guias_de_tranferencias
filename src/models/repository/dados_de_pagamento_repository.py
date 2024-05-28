@@ -31,11 +31,6 @@ class DadosDePagamentoRepository():
                 pagamento_por_empresa[pagamento[1]].append(pagamento)
             else:
                 pagamento_por_empresa[pagamento[1]].append(pagamento)
-        for i in pagamento_por_empresa.items():
-            print(f'{i[0]}')
-            for pag in i[1]:
-                print(f'{pag}')
-            print('\n')
         return pagamento_por_empresa
 
 
