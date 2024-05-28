@@ -36,6 +36,6 @@ class TransferController(InterfaceController):
             print('\n')
         return transferencias
 
-filtra
+
 
 
