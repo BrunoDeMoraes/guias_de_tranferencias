@@ -72,11 +72,6 @@ TIMES7 = [
     (10, 232, "Histórico"),
     (10, 217, "Nº Identificação Depósito"),
     (155, 217, f"Impresso em {'self.data_formatada()'}"),
-    (76, 21, (
-        "Preencher somente nas transferências "
-        "de recursos para deposito judicial"
-    )
-     ),
     (76, 216, (
         "Preencher somente nas transferências "
         "de recursos para deposito judicial"
@@ -112,6 +107,43 @@ TIMES8 = [
     (145, 221, "Conta Corrente"),
     (175, 221, "Conta Poupança")
 ]
+
+TIMESB8 = [
+    (71, 227, "\u2713"),
+    (41, 222, "\u2713"),
+    (171, 227, "\u2713"),
+    (141, 222, "\u2713"),
+    (67, 237, "\u2713"),
+    (10, 242, (
+        "Área especial nº 01, Lote Único - "
+        "Setor Central Gama/DF. CEP: 72.405-901"
+    )
+     )
+]
+
+TIMESB9 = [
+    (129, 278, 'Autorização para transferência de valores'),
+    (138, 274, 'entre contas no âmbito do BRB'),
+    (10, 269, 'Conta Remetente'),
+    (104, 269, 'Conta Destinatária'),
+    (84, 196, 'Assinatura do Remetente'),
+    (35, 86, "SEI"),
+    (68, 86, "Cotação"),
+    (93, 86, "DANFE"),
+    (116, 86, "Valor total"),
+    (141, 86, "IRRF / ISS"),
+    (168, 86, "Valor líquido")
+]
+
+
+
+
+
+
+
+
+
+
 
 
 

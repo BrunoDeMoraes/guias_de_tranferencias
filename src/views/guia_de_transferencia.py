@@ -1,5 +1,5 @@
-from coordenadas.coordenadas_transferencia import *
-from guia import Guia
+from src.views.coordenadas.coordenadas_transferencia import *
+from src.views.guia import Guia
 
 from typing import List
 
@@ -8,7 +8,7 @@ from reportlab.lib.pagesizes import A4
 
 class Guia_de_transferencia(Guia):
     def __init__(self):
-        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/teste18.pdf')
+        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/teste3.pdf')
         self.cnv.setPageSize(A4)
         self.imagens = f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/Imagens/'
         self.contador = 0
@@ -22,6 +22,8 @@ class Guia_de_transferencia(Guia):
             self.inserir_strings('Times-Roman', 6, TIMES6)
             self.inserir_strings('Times-Roman', 7, TIMES7)
             self.inserir_strings('Times-Roman', 8, TIMES8)
+            self.inserir_strings('Times-Bold', 8, TIMESB8)
+            self.inserir_strings('Times-Bold', 9, TIMESB9)
             self.contador += 100
         self.inserir_pontilhado()
         self.cnv.save()
