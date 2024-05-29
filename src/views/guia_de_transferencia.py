@@ -1,12 +1,14 @@
 from coordenadas.coordenadas_transferencia import *
 from guia import Guia
 
+from typing import List
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 
 class Guia_de_transferencia(Guia):
     def __init__(self):
-        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/teste8.pdf')
+        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/teste16.pdf')
         self.cnv.setPageSize(A4)
         self.imagens = f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/Imagens/'
         self.contador = 0
@@ -16,6 +18,8 @@ class Guia_de_transferencia(Guia):
         for i in range(0, 2):
             self.inserir_logo()
             self.gerar_linhas()
+            self.gerar_retangulos()
+            self.inserir_strings('Times-Roman', 6, TIMES6)
             self.contador += 100
         self.inserir_pontilhado()
         self.cnv.save()
@@ -46,6 +50,23 @@ class Guia_de_transferencia(Guia):
         self.cnv.setDash([3, 1])
         self.cnv.line(self.mm(8), self.mm(192), self.mm(196), self.mm(192))
 
+    def gerar_retangulos(self):
+        for coordenda in RETANGULOS:
+            self.cnv.rect(
+                self.mm(coordenda[0]),
+                self.mm(coordenda[1] - self.contador),
+                width=self.mm(coordenda[2]),
+                height=self.mm(coordenda[3])
+            )
+
+    def inserir_strings(self, fonte: str, tamanho: int, coordenadas: List):
+        self.cnv.setFont(fonte, tamanho)
+        for coordenada in coordenadas:
+            self.cnv.drawString(
+                self.mm(coordenada[0]),
+                self.mm(coordenada[1] - self.contador),
+                f'{coordenada[2]}'
+            )
 
 if __name__ == "__main__":
     teste = Guia_de_transferencia()

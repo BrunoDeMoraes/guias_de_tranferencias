@@ -365,60 +365,61 @@ class Relatorio(Contas, Dados, Estrutura):
 
         contador = 0
         for i in range(0, 2):
-            cnv.drawImage(
-                f'{self.pasta}/Imagens/logo.png', self.mm(10), self.mm(275 - contador), width=self.mm(45),
-                 height=self.mm(14))
+            # cnv.drawImage(
+            #     f'{self.pasta}/Imagens/logo.png', self.mm(10), self.mm(275 - contador), width=self.mm(45),
+            #      height=self.mm(14))
 
-            cnv.line(self.mm(8), self.mm(273 - contador), self.mm(196), self.mm(273 - contador)) # primeira linha superior
+            # cnv.line(self.mm(8), self.mm(273 - contador), self.mm(196), self.mm(273 - contador)) # primeira linha superior
+            #
+            # cnv.line(self.mm(102), self.mm(268 - contador), self.mm(102), self.mm(220 - contador))  # Linha central
+            # cnv.line(self.mm(196), self.mm(268 - contador), self.mm(196), self.mm(220 - contador))  # linha direita
+            # cnv.line(self.mm(8), self.mm(268 - contador), self.mm(8), self.mm(220 - contador))  # linha esquerda
+            #
+            # #cnv.line(self.mm(25), self.mm(268 - contador), self.mm(25), self.mm(258 - contador))  # divisão linha 1.1
+            # cnv.line(self.mm(30), self.mm(268 - contador), self.mm(30), self.mm(264 - contador))  # divisão linha 1.2
+            # #cnv.line(self.mm(78), self.mm(268 - contador), self.mm(78), self.mm(258 - contador))  # divisão linha 1.3
+            # #cnv.line(self.mm(119), self.mm(268 - contador), self.mm(119), self.mm(258 - contador))  # divisão linha 1.4
+            # cnv.line(self.mm(124), self.mm(268 - contador), self.mm(124), self.mm(264 - contador))  # divisão linha 1.5
+            # cnv.line(self.mm(168), self.mm(268 - contador), self.mm(168), self.mm(264 - contador))  # divisão linha 1.6
+            #
+            # cnv.line(self.mm(8), self.mm(264 - contador), self.mm(196), self.mm(264 - contador))  # linha horizontal 1 258
+            # cnv.line(self.mm(80), self.mm(264 - contador), self.mm(80), self.mm(254 - contador))  # linha vertical telefone
+            # cnv.line(self.mm(8), self.mm(254 - contador), self.mm(196), self.mm(254 - contador))  # linha horizontal 2 248
+            # cnv.line(self.mm(8), self.mm(250 - contador), self.mm(196), self.mm(250 - contador))  # linha horizontal 3 238
+            # cnv.line(self.mm(8), self.mm(240 - contador), self.mm(102),
+            #          self.mm(240 - contador))  # meia linha horizontal 1
+            # cnv.line(self.mm(8), self.mm(235 - contador), self.mm(102), self.mm(235 - contador))  # linha horizontal 4
+            # cnv.line(self.mm(8), self.mm(230 - contador), self.mm(196), self.mm(230 - contador))  # linha horizontal 4.5
+            # cnv.line(self.mm(8), self.mm(225 - contador), self.mm(196), self.mm(225 - contador))  # linha horizontal 5
+            # cnv.line(self.mm(8), self.mm(220 - contador), self.mm(196), self.mm(220 - contador))  # linha horizontal 6
+            #
+            # cnv.line(self.mm(8), self.mm(214 - contador), self.mm(8),
+            #          self.mm(219 - contador))  # linha vertical id esquerda
+            # cnv.line(self.mm(75), self.mm(214 - contador), self.mm(75),
+            #          self.mm(219 - contador))  # linha vertica id direita
+            # cnv.line(self.mm(8), self.mm(214 - contador), self.mm(75), self.mm(214 - contador))  # linha horizontal id
+            #
+            #
+            # cnv.line(self.mm(8), self.mm(199 - contador), self.mm(196),
+            #          self.mm(199 - contador))  # linha horizontal assinatura
+            # cnv.line(self.mm(102), self.mm(207 - contador), self.mm(102),
+            #          self.mm(199 - contador))  # linha vertical assinatura
 
-            cnv.line(self.mm(102), self.mm(268 - contador), self.mm(102), self.mm(220 - contador))  # Linha central
-            cnv.line(self.mm(196), self.mm(268 - contador), self.mm(196), self.mm(220 - contador))  # linha direita
-            cnv.line(self.mm(8), self.mm(268 - contador), self.mm(8), self.mm(220 - contador))  # linha esquerda
-
-            #cnv.line(self.mm(25), self.mm(268 - contador), self.mm(25), self.mm(258 - contador))  # divisão linha 1.1
-            cnv.line(self.mm(30), self.mm(268 - contador), self.mm(30), self.mm(264 - contador))  # divisão linha 1.2
-            #cnv.line(self.mm(78), self.mm(268 - contador), self.mm(78), self.mm(258 - contador))  # divisão linha 1.3
-            #cnv.line(self.mm(119), self.mm(268 - contador), self.mm(119), self.mm(258 - contador))  # divisão linha 1.4
-            cnv.line(self.mm(124), self.mm(268 - contador), self.mm(124), self.mm(264 - contador))  # divisão linha 1.5
-            cnv.line(self.mm(168), self.mm(268 - contador), self.mm(168), self.mm(264 - contador))  # divisão linha 1.6
-
-            cnv.line(self.mm(8), self.mm(264 - contador), self.mm(196), self.mm(264 - contador))  # linha horizontal 1 258
-            cnv.line(self.mm(80), self.mm(264 - contador), self.mm(80), self.mm(254 - contador))  # linha vertical telefone
-            cnv.line(self.mm(8), self.mm(254 - contador), self.mm(196), self.mm(254 - contador))  # linha horizontal 2 248
-            cnv.line(self.mm(8), self.mm(250 - contador), self.mm(196), self.mm(250 - contador))  # linha horizontal 3 238
-            cnv.line(self.mm(8), self.mm(240 - contador), self.mm(102),
-                     self.mm(240 - contador))  # meia linha horizontal 1
-            cnv.line(self.mm(8), self.mm(235 - contador), self.mm(102), self.mm(235 - contador))  # linha horizontal 4
-            cnv.line(self.mm(8), self.mm(230 - contador), self.mm(196), self.mm(230 - contador))  # linha horizontal 4.5
-            cnv.line(self.mm(8), self.mm(225 - contador), self.mm(196), self.mm(225 - contador))  # linha horizontal 5
-            cnv.line(self.mm(8), self.mm(220 - contador), self.mm(196), self.mm(220 - contador))  # linha horizontal 6
-
-            cnv.line(self.mm(8), self.mm(214 - contador), self.mm(8),
-                     self.mm(219 - contador))  # linha vertical id esquerda
-            cnv.line(self.mm(75), self.mm(214 - contador), self.mm(75),
-                     self.mm(219 - contador))  # linha vertica id direita
-            cnv.line(self.mm(8), self.mm(214 - contador), self.mm(75), self.mm(214 - contador))  # linha horizontal id
+            # cnv.rect(self.mm(126), self.mm(281 - contador), width=self.mm(70), height=self.mm(7))
+            # cnv.rect(self.mm(40), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(70), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(40), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(70), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(140), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(170), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(140), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(170), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(21), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(66), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(12), self.mm(84), width=self.mm(180), height=self.mm(5))
 
 
-            cnv.line(self.mm(8), self.mm(199 - contador), self.mm(196),
-                     self.mm(199 - contador))  # linha horizontal assinatura
-            cnv.line(self.mm(102), self.mm(207 - contador), self.mm(102),
-                     self.mm(199 - contador))  # linha vertical assinatura
 
-            cnv.rect(self.mm(126), self.mm(281 - contador), width=self.mm(70), height=self.mm(7))
-            cnv.rect(self.mm(40), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(70), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(40), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(70), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(140), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(170), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(140), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(170), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(21), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(66), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
-
-
-            cnv.rect(self.mm(12), self.mm(84), width=self.mm(180), height=self.mm(5))
             # cnv.line(self.mm(60), self.mm(84), self.mm(60),
             #          self.mm(89))
             # cnv.line(self.mm(85), self.mm(84), self.mm(85),
