@@ -51,6 +51,74 @@ TIMES6 = [
     (70, 237, "00005 - Pagamentos de fornecedores")
 ]
 
+TIMES7 = [
+    (10, 265, "Agência"),
+    (32, 265, "Nº Conta Remetente"),
+    (104, 265, "Agência"),
+    (126, 265, "Nº Conta Favorecido"),
+    (170, 265, "Valor"),
+    (10, 261, "Nome do(s) Remetente(s)"),
+    (104, 261, "Nome do(s) Destinatário(s)"),
+    (10, 251, "CNPJ/CPF(s)"),
+    (104, 251, "CNPJ/CPF(s)"),
+    (104, 247, "Valor por Extenso"),
+    (10, 247, "Endereço"),
+    (82, 261, "Telefone(s)"),
+    (10, 227, "Tipo Pessoa Debitada"),
+    (10, 222, "Tipo Conta Debitada"),
+    (104, 227, "Tipo Pessoa Creditada"),
+    (104, 222, "Tipo Conta Creditada"),
+    (10, 237, "Finalidade"),
+    (10, 232, "Histórico"),
+    (10, 217, "Nº Identificação Depósito"),
+    (155, 217, f"Impresso em {'self.data_formatada()'}"),
+    (76, 21, (
+        "Preencher somente nas transferências "
+        "de recursos para deposito judicial"
+    )
+     ),
+    (76, 216, (
+        "Preencher somente nas transferências "
+        "de recursos para deposito judicial"
+    )
+     ),
+    (10, 211, (
+        "Autorizo o Banco a DEBITAR em minha Conta"
+        " de Depósitos, nesta Agência, o valor da "
+        "presente transferência de fundos."
+    )
+     ),
+    (17, 201, (
+        "Diego Fernandes da Silva - "
+        "Diretor Administrativo - Ma"
+        "trícula: 1.693.844-5"
+    )
+     ),
+    (114, 201, (
+        "Willy Pereira da Silva Filho - "
+        "Superintendente - Matrícula 1.680.762-6"
+    )
+     )
+]
+
+TIMES8 = [
+    (21, 231, f'Não sei o que é'),
+    (45, 226, "Pesssoa Física"),
+    (75, 226, "Pesssoa Jurídica"),
+    (45, 221, "Conta Corrente"),
+    (75, 221, "Conta Poupança"),
+    (145, 226, "Pesssoa Física"),
+    (175, 226, "Pesssoa Jurídica"),
+    (145, 221, "Conta Corrente"),
+    (175, 221, "Conta Poupança")
+]
+
+
+
+
+
+
+
 
 
 

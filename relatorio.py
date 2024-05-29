@@ -457,44 +457,44 @@ class Relatorio(Contas, Dados, Estrutura):
                 altura += 5
 
 
-            cnv.setFont("Times-Roman", 6)
-            cnv.drawString(self.mm(25), self.mm(237 - contador), "00001 - Pagamento de ipostos, tributos e taxas")
-            cnv.drawString(self.mm(70), self.mm(237 - contador), "00005 - Pagamentos de fornecedores")
+            # cnv.setFont("Times-Roman", 6)
+            # cnv.drawString(self.mm(25), self.mm(237 - contador), "00001 - Pagamento de ipostos, tributos e taxas")
+            # cnv.drawString(self.mm(70), self.mm(237 - contador), "00005 - Pagamentos de fornecedores")
 
             #
-            cnv.setFont("Times-Roman", 7)
-            cnv.drawString(self.mm(10), self.mm(265 - contador), "Agência")
-            cnv.drawString(self.mm(32), self.mm(265 - contador), "Nº Conta Remetente")
-            cnv.drawString(self.mm(104), self.mm(265 - contador), "Agência")
-            cnv.drawString(self.mm(126), self.mm(265 - contador), "Nº Conta Favorecido")
-            cnv.drawString(self.mm(170), self.mm(265 - contador), "Valor")
-            cnv.drawString(self.mm(10), self.mm(261 - contador), "Nome do(s) Remetente(s)")
-            cnv.drawString(self.mm(104), self.mm(261 - contador), "Nome do(s) Destinatário(s)")
-            cnv.drawString(self.mm(10), self.mm(251 - contador), "CNPJ/CPF(s)")
-            cnv.drawString(self.mm(104), self.mm(251 - contador), "CNPJ/CPF(s)")
-            #cnv.drawString(self.mm(10), self.mm(235 - contador), "Nº identidade / Órgão expedidor / UF")
-            cnv.drawString(self.mm(104), self.mm(247 - contador), "Valor por Extenso")
-            cnv.drawString(self.mm(10), self.mm(247 - contador), "Endereço")
-            cnv.drawString(self.mm(82), self.mm(261 - contador), "Telefone(s)")
-            #cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº Identidade / Órgão expedidor / UF")
-            cnv.drawString(self.mm(10), self.mm(227 - contador), "Tipo Pessoa Debitada")
-            cnv.drawString(self.mm(10), self.mm(222 - contador), "Tipo Conta Debitada")
-            cnv.drawString(self.mm(104), self.mm(227 - contador), "Tipo Pessoa Creditada")
-            cnv.drawString(self.mm(104), self.mm(222 - contador), "Tipo Conta Creditada")
-            cnv.drawString(self.mm(10), self.mm(237 - contador), "Finalidade")
-            cnv.drawString(self.mm(10), self.mm(232 - contador), "Histórico")
-            cnv.drawString(self.mm(10), self.mm(217 - contador), "Nº Identificação Depósito")
-            # cnv.drawString(self.mm(155), self.mm(195 - contador),
-            #                f"{pagamento[0][0:3]}-{self.formatar_nome(pagamento[1])} {pagamento[2]}")
-            cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada()}")
-            cnv.drawString(self.mm(76), self.mm(216 - contador),
-                           "Preencher somente nas transferências de recursos para deposito judicial")
-            cnv.drawString(self.mm(10), self.mm(211 - contador),
-                           "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
-            cnv.drawString(self.mm(17), self.mm(201 - contador),
-                           "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
-            cnv.drawString(self.mm(114), self.mm(201 - contador),
-                           "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
+            # cnv.setFont("Times-Roman", 7)
+            # cnv.drawString(self.mm(10), self.mm(265 - contador), "Agência")
+            # cnv.drawString(self.mm(32), self.mm(265 - contador), "Nº Conta Remetente")
+            # cnv.drawString(self.mm(104), self.mm(265 - contador), "Agência")
+            # cnv.drawString(self.mm(126), self.mm(265 - contador), "Nº Conta Favorecido")
+            # cnv.drawString(self.mm(170), self.mm(265 - contador), "Valor")
+            # cnv.drawString(self.mm(10), self.mm(261 - contador), "Nome do(s) Remetente(s)")
+            # cnv.drawString(self.mm(104), self.mm(261 - contador), "Nome do(s) Destinatário(s)")
+            # cnv.drawString(self.mm(10), self.mm(251 - contador), "CNPJ/CPF(s)")
+            # cnv.drawString(self.mm(104), self.mm(251 - contador), "CNPJ/CPF(s)")
+            # #cnv.drawString(self.mm(10), self.mm(235 - contador), "Nº identidade / Órgão expedidor / UF")
+            # cnv.drawString(self.mm(104), self.mm(247 - contador), "Valor por Extenso")
+            # cnv.drawString(self.mm(10), self.mm(247 - contador), "Endereço")
+            # cnv.drawString(self.mm(82), self.mm(261 - contador), "Telefone(s)")
+            # #cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº Identidade / Órgão expedidor / UF")
+            # cnv.drawString(self.mm(10), self.mm(227 - contador), "Tipo Pessoa Debitada")
+            # cnv.drawString(self.mm(10), self.mm(222 - contador), "Tipo Conta Debitada")
+            # cnv.drawString(self.mm(104), self.mm(227 - contador), "Tipo Pessoa Creditada")
+            # cnv.drawString(self.mm(104), self.mm(222 - contador), "Tipo Conta Creditada")
+            # cnv.drawString(self.mm(10), self.mm(237 - contador), "Finalidade")
+            # cnv.drawString(self.mm(10), self.mm(232 - contador), "Histórico")
+            # cnv.drawString(self.mm(10), self.mm(217 - contador), "Nº Identificação Depósito")
+            # # cnv.drawString(self.mm(155), self.mm(195 - contador),
+            # #                f"{pagamento[0][0:3]}-{self.formatar_nome(pagamento[1])} {pagamento[2]}")
+            # cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada()}")
+            # cnv.drawString(self.mm(76), self.mm(216 - contador),
+            #                "Preencher somente nas transferências de recursos para deposito judicial")
+            # cnv.drawString(self.mm(10), self.mm(211 - contador),
+            #                "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
+            # cnv.drawString(self.mm(17), self.mm(201 - contador),
+            #                "Diego Fernandes da Silva - Diretor Administrativo - Matrícula: 1.693.844-5")
+            # cnv.drawString(self.mm(114), self.mm(201 - contador),
+            #                "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
             # nome_destinatário
             cnv.setFont("Times-Bold", 7)
@@ -507,7 +507,7 @@ class Relatorio(Contas, Dados, Estrutura):
                 calc += 3
 
             cnv.setFont("Times-Roman", 8)
-            cnv.drawString(self.mm(21), self.mm(231 - contador), f'{pagamento[0][1][0:-9]}')
+            cnv.drawString(self.mm(21), self.mm(231 - contador), f'Não sei o que é')
             cnv.drawString(self.mm(45), self.mm(226 - contador), "Pesssoa Física")
             cnv.drawString(self.mm(75), self.mm(226 - contador), "Pesssoa Jurídica")
             cnv.drawString(self.mm(45), self.mm(221 - contador), "Conta Corrente")
