@@ -23,23 +23,43 @@ class TransferController(InterfaceController):
 
     def construir_guia(self):
         pagamentos = self.filtrar_dados()
-        for pagamento in pagamentos.items():
-            print(f'{pagamento[0]}\n')
-            for pag in pagamento[1]:
-                print(f'{pag}')
+        # pagamentos = self.separar_por_origem_de_recurso()
+        for pagamento in pagamentos:
+            for pag in pagamento.items():
+                print(f'{pag[0]}: {pag[1]}')
             print('\n')
+        # print(self.produto)
             #Guia_de_transferencia()
 
 
     def filtrar_dados(self):
         fonte = self.contas.definir_fonte(self.origem)
-        pagamentos = self.pagametos.agupar_por_empresa(fonte).items()
-        transferencias = {}
-        for pagamento in pagamentos:
+        pagamentos = self.pagametos.agupar_por_empresa(fonte)
+        transferencias = []
+        for pagamento in pagamentos.items():
+            transferencia = {}
             empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
             if empresa[5] == 'BRB':
-                transferencias[pagamento[0]] = pagamento[1]
+                dados_empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
+                transferencia['Empresa'] = pagamento[0]
+                transferencia['Pagamentos'] = pagamento[1]
+                transferencia['Dados_empresa'] = dados_empresa
+                transferencias.append(transferencia)
         return transferencias
+
+
+    # def separar_por_origem_de_recurso(self):
+    #     fonte = self.contas.definir_fonte(self.origem)
+    #     pagamentos = self.pagametos.agupar_por_empresa(fonte)
+    #     for pagamento in pagamentos.items():
+    #         regular_custeio = []
+    #         emenda_custeio = []
+    #         regular_investimento = []
+    #         emenda_investimento = []
+    #         for pag in pagamento:
+
+
+
 
 
 

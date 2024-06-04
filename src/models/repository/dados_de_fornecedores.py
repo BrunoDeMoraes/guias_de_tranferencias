@@ -14,7 +14,7 @@ class DadosDeFornecedores:
 
     def retorna_empresa(self, empresa, fonte):
         self.fornecedores(fonte)
-        beneficiario = self.empresas[empresa]
+        beneficiario = self.empresas[empresa[0:-2]]
         return beneficiario
 
 

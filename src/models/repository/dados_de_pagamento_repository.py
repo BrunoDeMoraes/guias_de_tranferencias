@@ -22,15 +22,25 @@ class DadosDePagamentoRepository():
         return lista_de_pagamentos
 
 
+    # def separar_por_origem(self, fonte: str) -> Dict:
+    #     empresas = self.agupar_por_empresa(fonte)
+    #     regular_custeio = []
+    #     emenda_custeio = []
+    #     regular_investimento = []
+    #     emenda_investimento = []
+    #     for empresa in empresas.items():
+
+
     def agupar_por_empresa(self, fonte: str) -> Dict:
         pagamentos = self.__listar_pagamentos(fonte)
         pagamento_por_empresa = {}
         for pagamento in pagamentos.values():
-            if pagamento[1] not in pagamento_por_empresa.keys():
-                pagamento_por_empresa[pagamento[1]] = []
-                pagamento_por_empresa[pagamento[1]].append(pagamento)
+            chave = (pagamento[1] + pagamento[5])
+            if chave not in pagamento_por_empresa.keys():
+                pagamento_por_empresa[chave] = []
+                pagamento_por_empresa[chave].append(pagamento)
             else:
-                pagamento_por_empresa[pagamento[1]].append(pagamento)
+                pagamento_por_empresa[chave].append(pagamento)
         return pagamento_por_empresa
 
 

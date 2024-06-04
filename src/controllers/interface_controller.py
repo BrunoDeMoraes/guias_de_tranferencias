@@ -22,6 +22,7 @@ class InterfaceController(ABC):
         self.fornecedores = fornecedores
         self.origem = origem
         self.pagametos = pagamento
+        self.produto = {}
 
 
     @abstractmethod
