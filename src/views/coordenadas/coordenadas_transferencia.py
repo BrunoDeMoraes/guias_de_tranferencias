@@ -1,4 +1,4 @@
-LINHAS = [
+LINHAS_ESTRUTURA = [
     (8, 273, 196, 273), # primeira linha superior
     (102, 268, 102, 220),  # Linha central
     (196, 268, 196, 220),  # linha direita
@@ -27,6 +27,13 @@ LINHAS = [
     (160, 84, 160, 89)
 ]
 
+LINHAS_PAGAMENTOS = [
+    (60, 79, 60, 84),
+    (85, 79, 85, 84),
+    (110, 79, 110, 84),
+    (135, 79, 135, 84),
+    (160, 79, 160, 84)
+]
 
 RETANGULOS = [
     (126, 281, 70, 7),
@@ -43,6 +50,11 @@ RETANGULOS = [
     (66, 236, 3, 3),
     (12, 84, 180, 5),
 ]
+
+RETANGULO_PAGAMENTO = [
+    (12, 79, 180, 5)
+]
+
 
 # Strings
 
@@ -119,6 +131,16 @@ TIMESB8 = [
         "Setor Central Gama/DF. CEP: 72.405-901"
     )
      )
+]
+
+
+#(138, 81, f'R$ {self.formartar_valor((dados[6] + dados[7]))}') #ISS + IR
+TIMES8_PAGAMENTOS = [
+    (21, 81, 4), #CNPJ
+    (69, 81, 0), #cotação
+    (91, 81, 2), #empresa
+    (113, 81, 8), #valor bruto
+    (163, 81, 3) #valor liquido
 ]
 
 TIMESB9 = [

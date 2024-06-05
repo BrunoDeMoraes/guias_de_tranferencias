@@ -9,6 +9,7 @@ class Guia(ABC):
     def gerar_guia(self):
         pass
 
-    def gerar_linhas(self):
+    @abstractmethod
+    def gerar_linhas(self, linhas, contador):
         pass
 

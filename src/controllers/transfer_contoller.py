@@ -1,6 +1,7 @@
 from src.controllers.interface_controller import InterfaceController
-from typing import Type
+from typing import Dict
 from typing import List
+from typing import Type
 
 from src.models.repository.dados_de_conta import DadosDeContas
 from src.models.repository.dados_de_fornecedores import DadosDeFornecedores
@@ -18,12 +19,7 @@ class TransferController(InterfaceController):
         super().__init__(contas, data, fornecedores, origem, pagamento)
 
 
-    # def construir_guia(self):
-    #     pagamentos = self.filtrar_dados()
-    #
-
-
-    def filtrar_dados(self):
+    def filtrar_dados(self) -> Dict:
         fonte = self.contas.definir_fonte(self.origem)
         pagamentos = self.pagametos.agupar_por_empresa(fonte)
         transferencias = []

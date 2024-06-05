@@ -9,10 +9,10 @@ from src.controllers.transfer_contoller import TransferController
 
 
 def transfer_constructor(entrada: Dict):
-    contas = DadosDeContas()
     data_pagameto = entrada['data']
-    fornecedores = DadosDeFornecedores()
     origem = entrada['origem']
+    contas = DadosDeContas()
+    fornecedores = DadosDeFornecedores()
     pagamentos = DadosDePagamentoRepository()
 
     tranferencias = TransferController(contas, data_pagameto, fornecedores, origem, pagamentos)

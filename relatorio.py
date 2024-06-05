@@ -441,20 +441,20 @@ class Relatorio(Contas, Dados, Estrutura):
                 cnv.drawString(self.mm(113), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[8])}') #valor bruto
                 cnv.drawString(self.mm(138), self.mm(81 - altura), f'R$ {self.formartar_valor((dados[6] + dados[7]))}') #ISS + IR
                 cnv.drawString(self.mm(163), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[3])}') #valor liquido
-                total_pagamento += dados[3]
+                # total_pagamento += dados[3]
 
-                cnv.rect(self.mm(12), self.mm(79 - altura), width=self.mm(180), height=self.mm(5))
-                cnv.line(self.mm(60), self.mm(79 - altura), self.mm(60),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(85), self.mm(79 - altura), self.mm(85),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(110), self.mm(79 - altura), self.mm(110),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(135), self.mm(79 - altura), self.mm(135),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(160), self.mm(79 - altura), self.mm(160),
-                         self.mm(84 - altura))
-                altura += 5
+                # cnv.rect(self.mm(12), self.mm(79 - altura), width=self.mm(180), height=self.mm(5))
+                # cnv.line(self.mm(60), self.mm(79 - altura), self.mm(60),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(85), self.mm(79 - altura), self.mm(85),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(110), self.mm(79 - altura), self.mm(110),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(135), self.mm(79 - altura), self.mm(135),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(160), self.mm(79 - altura), self.mm(160),
+                #          self.mm(84 - altura))
+                # altura += 5
 
 
             # cnv.setFont("Times-Roman", 6)
