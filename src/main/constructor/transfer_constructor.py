@@ -16,24 +16,12 @@ def transfer_constructor(entrada: Dict):
     pagamentos = DadosDePagamentoRepository()
 
     tranferencias = TransferController(contas, data_pagameto, fornecedores, origem, pagamentos)
-    tranferencias.construir_guia()
+    dados_de_tranferencias = tranferencias.filtrar_dados()
 
-    # for tranferencia in tranferencias_prep:
-    #     dados_de_compra
-    #     dados_fornecedor
-    #     dados_da_conta_ses
-    #     Valor_tolta
-
-
+    for dicionario in dados_de_tranferencias:
+        guia = Guia_de_transferencia(dicionario)
+        guia.gerar_guia()
     if pagamentos:
         return 'DEU CERTO!!!'
     else:
         return 'Deu merda!!!'
-
-
-# fonte = 'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/src/models/repository'
-
-
-
-
-

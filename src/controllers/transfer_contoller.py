@@ -18,12 +18,9 @@ class TransferController(InterfaceController):
         super().__init__(contas, data, fornecedores, origem, pagamento)
 
 
-    def construir_guia(self):
-        pagamentos = self.filtrar_dados()
-        for pagamento in pagamentos:
-            for pag in pagamento.items():
-                print(f'{pag[0]}: {pag[1]}')
-            print('\n')
+    # def construir_guia(self):
+    #     pagamentos = self.filtrar_dados()
+    #
 
 
     def filtrar_dados(self):
@@ -43,13 +40,30 @@ class TransferController(InterfaceController):
                 transferencia['Conta_origem'] = conta_origem
                 transferencia['Valor_total'] = valor_total
                 transferencias.append(transferencia)
+        for p in transferencias:
+            for pag in p.items():
+                print(f'{pag[0]}: {pag[1]}')
+            print('\n')
         return transferencias
 
     def valor_total(self, pagamentos: List) -> float:
-        total = 0
+        soma = 0
         for pagamento in pagamentos:
-            total += pagamento[3]
+            soma += pagamento[3]
+        total = self.formartar_valor(soma)
         return total
+
+    def formartar_valor(self, valor):
+        arredondado = f"{valor:.2f}"
+        virgula = arredondado.replace(".", ",")
+        if len(virgula) >= 10:
+            milhao = virgula[0:-9] + "." + virgula[-9:-6] + "." + virgula[-6:]
+            return milhao
+        elif len(virgula) >= 7:
+            mil = virgula[0:-6] + "." + virgula[-6:]
+            return (mil)
+        else:
+            return virgula
 
 
 

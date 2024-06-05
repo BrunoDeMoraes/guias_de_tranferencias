@@ -6,7 +6,7 @@ from typing import Dict
 from src import *
 
 
-class DadosDePagamentoRepository():
+class DadosDePagamentoRepository:
     def __init__(self):
         self.colunas = COLUNAS
         self.lista_de_pagamentos = {}

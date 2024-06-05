@@ -1,17 +1,19 @@
 from src.views.coordenadas.coordenadas_transferencia import *
 from src.views.guia import Guia
 
+from typing import Dict
 from typing import List
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 
 class Guia_de_transferencia(Guia):
-    def __init__(self):
-        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/teste3.pdf')
-        self.cnv.setPageSize(A4)
-        self.imagens = f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/Imagens/'
+    def __init__(self, dados: Dict):
         self.contador = 0
+        self.dados = dados
+        self.imagens = f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/Imagens/'
+        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/{self.dados["Empresa"]}.pdf')
+        self.cnv.setPageSize(A4)
 
 
     def gerar_guia(self):
