@@ -22,15 +22,6 @@ class DadosDePagamentoRepository():
         return lista_de_pagamentos
 
 
-    # def separar_por_origem(self, fonte: str) -> Dict:
-    #     empresas = self.agupar_por_empresa(fonte)
-    #     regular_custeio = []
-    #     emenda_custeio = []
-    #     regular_investimento = []
-    #     emenda_investimento = []
-    #     for empresa in empresas.items():
-
-
     def agupar_por_empresa(self, fonte: str) -> Dict:
         pagamentos = self.__listar_pagamentos(fonte)
         pagamento_por_empresa = {}
