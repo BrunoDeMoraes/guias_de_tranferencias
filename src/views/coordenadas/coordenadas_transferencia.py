@@ -134,14 +134,17 @@ TIMESB8 = [
 ]
 
 
-#(138, 81, f'R$ {self.formartar_valor((dados[6] + dados[7]))}') #ISS + IR
+
 TIMES8_PAGAMENTOS = [
     (21, 81, 4), #CNPJ
     (69, 81, 0), #cotação
     (91, 81, 2), #empresa
     (113, 81, 8), #valor bruto
-    (163, 81, 3) #valor liquido
+    (163, 81, 3), #valor liquido
+    (138, 81, -1) #ISS+IR
 ]
+
+TIMES8_PAGAMENTOS_VALOR_ISS_IR = [] #ISS + Ir
 
 TIMESB9 = [
     (129, 278, 'Autorização para transferência de valores'),

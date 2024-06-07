@@ -58,6 +58,7 @@ class Guia_de_transferencia(Guia):
         self.cnv.setDash([3, 1])
         self.cnv.line(self.mm(8), self.mm(192), self.mm(196), self.mm(192))
 
+
     def gerar_retangulos(self, retangulos, contador):
         for coordenda in retangulos:
             self.cnv.rect(
@@ -67,25 +68,35 @@ class Guia_de_transferencia(Guia):
                 height=self.mm(coordenda[3])
             )
 
-    def inserir_strings(self, fonte: str, tamanho: int, coordenadas: List, contador):
+    def inserir_strings(
+            self,
+            fonte: str,
+            tamanho: int,
+            coordenadas: List,
+            contador,
+            entrada=None
+    ):
         self.cnv.setFont(fonte, tamanho)
         for coordenada in coordenadas:
+            texto = self.selecionar_tipo_de_entrada(entrada, coordenada)
             self.cnv.drawString(
                 self.mm(coordenada[0]),
                 self.mm(coordenada[1] - contador),
-                f'{coordenada[2]}'
+                f'{texto}'
             )
 
-    def inserir_fstring(self, fonte: str, tamanho: int, coordenadas: List, contador, pagamento):
-        self.cnv.setFont(fonte, tamanho)
-        for coordenada in coordenadas:
-            print(f'esse é a coordenada {coordenada}\n')
-            self.cnv.drawString(
-                self.mm(coordenada[0]),
-                self.mm(coordenada[1] - contador),
-                f'{pagamento[coordenada[2]]}'
-            )
 
+    def selecionar_tipo_de_entrada(self, entrada, coordenada):
+        if entrada == None:
+            return coordenada[2]
+        elif (
+                isinstance(entrada, list) or
+                isinstance(entrada, tuple) or
+                isinstance(entrada, dict)
+        ):
+            return entrada[coordenada[2]]
+        else:
+            print('Deu alguma merda')
 
 
     def gerar_area_de_pagamentos(self):
@@ -93,7 +104,13 @@ class Guia_de_transferencia(Guia):
             print(f'Esse é o pagamento {pagamento}')
             self.gerar_linhas(LINHAS_PAGAMENTOS, self.altura)
             self.gerar_retangulos(RETANGULO_PAGAMENTO, self.altura)
-            self.inserir_fstring('Times-Roman', 8, TIMES8_PAGAMENTOS, self.altura, pagamento)
+            self.inserir_strings(
+                'Times-Roman',
+                8,
+                TIMES8_PAGAMENTOS,
+                self.altura,
+                pagamento
+            )
             self.altura += 5
         self.altura = 0
 
