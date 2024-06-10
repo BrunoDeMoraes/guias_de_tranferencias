@@ -431,17 +431,17 @@ class Relatorio(Contas, Dados, Estrutura):
             # cnv.line(self.mm(160), self.mm(84), self.mm(160),
             #          self.mm(89))
 
-            cnv.setFont("Times-Roman", 8)
-            altura = 0
-            total_pagamento = 0
-            for dados in pagamento:
-                cnv.drawString(self.mm(21), self.mm(81 - altura), f'{dados[4]}') #CNPJ
-                cnv.drawString(self.mm(69), self.mm(81 - altura), f'{dados[0]}') #cotação
-                cnv.drawString(self.mm(91), self.mm(81 - altura), f'{dados[2]}') #empresa
-                cnv.drawString(self.mm(113), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[8])}') #valor bruto
-                cnv.drawString(self.mm(138), self.mm(81 - altura), f'R$ {self.formartar_valor((dados[6] + dados[7]))}') #ISS + IR
-                cnv.drawString(self.mm(163), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[3])}') #valor liquido
-                # total_pagamento += dados[3]
+            # cnv.setFont("Times-Roman", 8)
+            # altura = 0
+            # total_pagamento = 0
+            # for dados in pagamento:
+            #     cnv.drawString(self.mm(21), self.mm(81 - altura), f'{dados[4]}') #CNPJ
+            #     cnv.drawString(self.mm(69), self.mm(81 - altura), f'{dados[0]}') #cotação
+            #     cnv.drawString(self.mm(91), self.mm(81 - altura), f'{dados[2]}') #empresa
+            #     cnv.drawString(self.mm(113), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[8])}') #valor bruto
+            #     cnv.drawString(self.mm(138), self.mm(81 - altura), f'R$ {self.formartar_valor((dados[6] + dados[7]))}') #ISS + IR
+            #     cnv.drawString(self.mm(163), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[3])}') #valor liquido
+            #     # total_pagamento += dados[3]
 
                 # cnv.rect(self.mm(12), self.mm(79 - altura), width=self.mm(180), height=self.mm(5))
                 # cnv.line(self.mm(60), self.mm(79 - altura), self.mm(60),
@@ -538,25 +538,25 @@ class Relatorio(Contas, Dados, Estrutura):
 
             # contas
 
-            conta_tratada = self.formatar_conta(conta[5])
-            #cnv.drawString(self.mm(10), self.mm(260 - contador), f"{conta[0][3]}")  # banco
-            cnv.drawString(self.mm(19), self.mm(265 - contador), f"{conta[4]}")  # agência
-            cnv.drawString(self.mm(53), self.mm(265 - contador), f"{conta_tratada}")  # conta
-            cnv.drawString(self.mm(10), self.mm(256 - contador), f"{origem}")  # origem
-
-            cnpj_regional = self.formatar_cnpj(conta[6])
-            print(f'Este é o problema {cnpj_regional}')
-            cnv.drawString(self.mm(25), self.mm(251 - contador), f"{cnpj_regional}")  # CNPJ - regional
+            # conta_tratada = self.formatar_conta(conta[5])
+            # #cnv.drawString(self.mm(10), self.mm(260 - contador), f"{conta[0][3]}")  # banco
+            # cnv.drawString(self.mm(19), self.mm(265 - contador), f"{conta[4]}")  # agência
+            # cnv.drawString(self.mm(53), self.mm(265 - contador), f"{conta_tratada}")  # conta
+            # cnv.drawString(self.mm(10), self.mm(256 - contador), f"{origem}")  # origem
+            #
+            # cnpj_regional = self.formatar_cnpj(conta[6])
+            # print(f'Este é o problema {cnpj_regional}')
+            # cnv.drawString(self.mm(25), self.mm(251 - contador), f"{cnpj_regional}")  # CNPJ - regional
 
             # fornecedor
             #cnv.drawString(self.mm(104), self.mm(260 - contador), f"{empresa[6]}")  # banco
-            cnv.drawString(self.mm(113), self.mm(265 - contador), f"{empresa[7]}")  # agência
-            cnv.drawString(self.mm(148), self.mm(265 - contador), f"{empresa[8]}")  # conta
-            cnv.drawString(self.mm(119), self.mm(251 - contador), f"{empresa[4]}")  # CNPJ - fornecedor
-            cnv.drawString(self.mm(82), self.mm(256 - contador), "(61) 2017-1821")  # telefone
+            # # cnv.drawString(self.mm(113), self.mm(265 - contador), f"{empresa[7]}")  # agência
+            # # cnv.drawString(self.mm(148), self.mm(265 - contador), f"{empresa[8]}")  # conta
+            # # cnv.drawString(self.mm(119), self.mm(251 - contador), f"{empresa[4]}")  # CNPJ - fornecedor
+            # cnv.drawString(self.mm(82), self.mm(256 - contador), "(61) 2017-1821")  # telefone
 
             # dados
-            cnv.drawString(self.mm(176), self.mm(265 - contador), f"R$ {self.formartar_valor(total_pagamento)}")  # valor
+            # cnv.drawString(self.mm(176), self.mm(265 - contador), f"R$ {self.formartar_valor(total_pagamento)}")  # valor
             # cnv.drawString(self.mm(46), self.mm(199 - contador), f"{pagamento[4]}")  #nº SEI
             # cnv.drawString(self.mm(121), self.mm(199 - contador), f"{pagamento[0]}")  # cotação
             # cnv.drawString(self.mm(161), self.mm(199 - contador), f"{pagamento[2]}")  # danfe

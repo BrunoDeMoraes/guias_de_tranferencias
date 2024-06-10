@@ -57,7 +57,6 @@ RETANGULO_PAGAMENTO = [
 
 
 # Strings
-
 TIMES6 = [
     (25, 237, "00001 - Pagamento de ipostos, tributos e taxas"),
     (70, 237, "00005 - Pagamentos de fornecedores")
@@ -130,10 +129,9 @@ TIMESB8 = [
         "Área especial nº 01, Lote Único - "
         "Setor Central Gama/DF. CEP: 72.405-901"
     )
-     )
+     ),
+    (82, 256, "(61) 2017-1821")  #telefone
 ]
-
-
 
 TIMES8_PAGAMENTOS = [
     (21, 81, 4), #CNPJ
@@ -144,7 +142,24 @@ TIMES8_PAGAMENTOS = [
     (138, 81, -1) #ISS+IR
 ]
 
-TIMES8_PAGAMENTOS_VALOR_ISS_IR = [] #ISS + Ir
+TIMESB8CONTA = [
+            (19, 265, 4), #agência
+            (53, 265, 5), #conta
+            (10, 256, 0),  #origem
+            (25, 251, 6),  #CNPJ - regional
+]
+
+TIMESB8FORNECEDOR = [
+    (113, 265, 7), #agência
+    (148, 265, 8), #conta
+    (119, 251, 4)  #CNPJ - fornecedor
+]
+
+TIMESBVALORTOTAL = [(176, 265, 'Valor_total')]  #valor
+
+TIMESB8ALINHADO = [
+    (104, 258, 'Nome_empresa')
+]
 
 TIMESB9 = [
     (129, 278, 'Autorização para transferência de valores'),
@@ -157,8 +172,11 @@ TIMESB9 = [
     (93, 86, "DANFE"),
     (116, 86, "Valor total"),
     (141, 86, "IRRF / ISS"),
-    (168, 86, "Valor líquido")
+    (168, 86, "Valor líquido"),
+
+
 ]
+
 
 
 

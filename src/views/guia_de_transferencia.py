@@ -27,6 +27,10 @@ class Guia_de_transferencia(Guia):
             self.inserir_strings('Times-Roman', 8, TIMES8, self.contador)
             self.inserir_strings('Times-Bold', 8, TIMESB8, self.contador)
             self.inserir_strings('Times-Bold', 9, TIMESB9, self.contador)
+            self.inserir_strings('Times-Bold', 8, TIMESB8CONTA, self.contador, self.dados['Conta_origem'])
+            self.inserir_strings('Times-Bold', 8, TIMESB8FORNECEDOR, self.contador, self.dados['Dados_empresa'])
+            self.inserir_strings('Times-Bold', 8, TIMESBVALORTOTAL, self.contador, self.dados)
+            self.gerar_linhas_nome_da_empresa()
             self.contador += 100
         self.contador = 0
         self.gerar_area_de_pagamentos()
@@ -74,7 +78,7 @@ class Guia_de_transferencia(Guia):
             tamanho: int,
             coordenadas: List,
             contador,
-            entrada=None
+            entrada=None,
     ):
         self.cnv.setFont(fonte, tamanho)
         for coordenada in coordenadas:
@@ -101,7 +105,6 @@ class Guia_de_transferencia(Guia):
 
     def gerar_area_de_pagamentos(self):
         for pagamento in self.dados['Pagamentos']:
-            #print(f'Esse é o pagamento {pagamento}')
             self.gerar_linhas(LINHAS_PAGAMENTOS, self.altura)
             self.gerar_retangulos(RETANGULO_PAGAMENTO, self.altura)
             self.inserir_strings(
@@ -113,6 +116,20 @@ class Guia_de_transferencia(Guia):
             )
             self.altura += 5
         self.altura = 0
+
+
+    def gerar_linhas_nome_da_empresa(self):
+        corretor = 0
+        for linha in self.dados['Nome_empresa']:
+            self.cnv.drawString(
+                self.mm(104),
+                self.mm((258 - self.contador) - corretor),
+                linha
+            )
+            corretor += 3
+
+
+
 
 if __name__ == "__main__":
     teste = Guia_de_transferencia()
