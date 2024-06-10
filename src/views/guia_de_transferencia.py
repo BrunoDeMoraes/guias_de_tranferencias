@@ -101,7 +101,7 @@ class Guia_de_transferencia(Guia):
 
     def gerar_area_de_pagamentos(self):
         for pagamento in self.dados['Pagamentos']:
-            print(f'Esse é o pagamento {pagamento}')
+            #print(f'Esse é o pagamento {pagamento}')
             self.gerar_linhas(LINHAS_PAGAMENTOS, self.altura)
             self.gerar_retangulos(RETANGULO_PAGAMENTO, self.altura)
             self.inserir_strings(
