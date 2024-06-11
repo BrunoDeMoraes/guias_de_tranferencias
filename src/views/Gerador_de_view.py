@@ -16,6 +16,7 @@ from src.comandos_sql import CAMINHOS_ATUALIZADOS
 
 from src.models.repository.dados_de_conta import DadosDeContas
 from src.main.constructor.transfer_constructor import transfer_constructor
+from src.main.constructor.ted_constructor import ted_constructor
 
 from src import comandos_sql
 from src import constantes
@@ -72,7 +73,7 @@ class Interface(DadosDeContas):
 
         self.botao_ted = Button(
             self.frame_2, text='Gerar TED',
-            command=lambda: self.gerar_constructor(transfer_constructor)
+            command=lambda: self.gerar_constructor(ted_constructor)
         )
         self.botao_ted.grid(row=1, column=1)
 

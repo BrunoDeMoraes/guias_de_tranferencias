@@ -2,12 +2,9 @@ from src.views.coordenadas.coordenadas_transferencia import *
 from src.views.guia import Guia
 
 from typing import Dict
-from typing import List
 
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
 
-class Guia_de_transferencia(Guia):
+class GuiaDeTransferencia(Guia):
     def __init__(self, dados: Dict, logo):
         super().__init__(dados, logo)
 
@@ -34,9 +31,6 @@ class Guia_de_transferencia(Guia):
         self.gerar_area_de_pagamentos(LINHAS_PAGAMENTOS, RETANGULO_PAGAMENTO, TIMES8_PAGAMENTOS)
         self.inserir_pontilhado()
         self.cnv.save()
-
-
-
 
 
 if __name__ == "__main__":
