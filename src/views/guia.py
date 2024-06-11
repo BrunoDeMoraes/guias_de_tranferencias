@@ -6,13 +6,25 @@ from typing import List
 
 
 class Guia(ABC):
-    def __init__(self, dados: Dict):
+    def __init__(self, dados: Dict, logo):
         self.contador = 0
         self.altura = 0
         self.dados = dados
         self.imagens = f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/Imagens/'
         self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/{self.dados["Empresa"]}.pdf')
         self.cnv.setPageSize(A4)
+        self.logo = logo
+
+
+    def inserir_logo(self):
+        self.cnv.drawImage(
+            f'{self.imagens}{self.logo}',
+            self.mm(10),
+            self.mm(275 - self.contador),
+            width=self.mm(45),
+            height=self.mm(14)
+        )
+
 
     def mm(self, medida):
         return (medida/0.352777)

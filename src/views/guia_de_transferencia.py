@@ -8,8 +8,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 
 class Guia_de_transferencia(Guia):
-    def __init__(self, dados: Dict):
-        super().__init__(dados)
+    def __init__(self, dados: Dict, logo):
+        super().__init__(dados, logo)
 
     def gerar_guia(self):
         for i in range(0, 2):
@@ -34,16 +34,6 @@ class Guia_de_transferencia(Guia):
         self.gerar_area_de_pagamentos(LINHAS_PAGAMENTOS, RETANGULO_PAGAMENTO, TIMES8_PAGAMENTOS)
         self.inserir_pontilhado()
         self.cnv.save()
-
-
-    def inserir_logo(self):
-        self.cnv.drawImage(
-            f'{self.imagens}logo.png',
-            self.mm(10),
-            self.mm(275 - self.contador),
-            width=self.mm(45),
-            height=self.mm(14)
-        )
 
 
 
