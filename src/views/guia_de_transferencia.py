@@ -9,13 +9,7 @@ from reportlab.lib.pagesizes import A4
 
 class Guia_de_transferencia(Guia):
     def __init__(self, dados: Dict):
-        self.contador = 0
-        self.altura = 0
-        self.dados = dados
-        self.imagens = f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/Imagens/'
-        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/{self.dados["Empresa"]}.pdf')
-        self.cnv.setPageSize(A4)
-
+        super().__init__(dados)
 
     def gerar_guia(self):
         for i in range(0, 2):
@@ -37,7 +31,7 @@ class Guia_de_transferencia(Guia):
             self.gerar_linhas_texto_alinhado('Times-Bold', 9, TIMESB7EXTENSO, 'Total_extenso', 4)
             self.contador += 100
         self.contador = 0
-        self.gerar_area_de_pagamentos()
+        self.gerar_area_de_pagamentos(LINHAS_PAGAMENTOS, RETANGULO_PAGAMENTO, TIMES8_PAGAMENTOS)
         self.inserir_pontilhado()
         self.cnv.save()
 
@@ -52,87 +46,7 @@ class Guia_de_transferencia(Guia):
         )
 
 
-    def gerar_linhas(self, linhas, contador):
-            for linha in linhas:
-                self.cnv.line(
-                    self.mm(linha[0]),
-                    self.mm(linha[1] - contador),
-                    self.mm(linha[2]),
-                    self.mm(linha[3] - contador)
-                )
 
-
-    def inserir_pontilhado(self):
-        self.cnv.setDash([3, 1])
-        self.cnv.line(self.mm(8), self.mm(192), self.mm(196), self.mm(192))
-
-
-    def gerar_retangulos(self, retangulos, contador):
-        for coordenda in retangulos:
-            self.cnv.rect(
-                self.mm(coordenda[0]),
-                self.mm(coordenda[1] - contador),
-                width=self.mm(coordenda[2]),
-                height=self.mm(coordenda[3])
-            )
-
-
-    def inserir_strings(
-            self,
-            fonte: str,
-            tamanho: int,
-            coordenadas: List,
-            contador,
-            entrada=None,
-    ):
-        self.cnv.setFont(fonte, tamanho)
-        for coordenada in coordenadas:
-            texto = self.selecionar_tipo_de_entrada(entrada, coordenada)
-            self.cnv.drawString(
-                self.mm(coordenada[0]),
-                self.mm(coordenada[1] - contador),
-                f'{texto}'
-            )
-
-
-    def selecionar_tipo_de_entrada(self, entrada, coordenada):
-        if entrada == None:
-            return coordenada[2]
-        elif (
-                isinstance(entrada, list) or
-                isinstance(entrada, tuple) or
-                isinstance(entrada, dict)
-        ):
-            return entrada[coordenada[2]]
-        else:
-            print('Deu alguma merda')
-
-
-    def gerar_area_de_pagamentos(self):
-        for pagamento in self.dados['Pagamentos']:
-            self.gerar_linhas(LINHAS_PAGAMENTOS, self.altura)
-            self.gerar_retangulos(RETANGULO_PAGAMENTO, self.altura)
-            self.inserir_strings(
-                'Times-Roman',
-                8,
-                TIMES8_PAGAMENTOS,
-                self.altura,
-                pagamento
-            )
-            self.altura += 5
-        self.altura = 0
-
-
-    def gerar_linhas_texto_alinhado(self, fonte, tamanho, coordenadas, entrada, fator):
-        self.cnv.setFont(fonte, tamanho)
-        corretor = 0
-        for linha in self.dados[entrada]:
-            self.cnv.drawString(
-                self.mm(coordenadas[0]),
-                self.mm((coordenadas[1] - self.contador) - corretor),
-                linha
-            )
-            corretor += fator
 
 
 if __name__ == "__main__":

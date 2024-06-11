@@ -64,10 +64,19 @@ class Interface(DadosDeContas):
         self.conta_origem = OptionMenu(self.frame_1, self.local, *Interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
-        # self.teste1 = Button(self.frame_2, text='Listar', command=self.exibir_pagamentos)
-        # self.teste1.grid(row=0, column=1)
+        self.botao_transferencia = Button(
+            self.frame_2, text='Gerar transferencias',
+            command=lambda: self.gerar_constructor(transfer_constructor)
+        )
+        self.botao_transferencia.grid(row=0, column=1)
 
-        # self.teste2 = Button(self.frame_2, text='Limpar', command=self.limpar_tela)
+        self.botao_ted = Button(
+            self.frame_2, text='Gerar TED',
+            command=lambda: self.gerar_constructor(transfer_constructor)
+        )
+        self.botao_ted.grid(row=1, column=1)
+
+        # self.botao_ted = Button(self.frame_2, text='Limpar', command=self.limpar_tela)
         # self.teste2.grid(row=0, column=2)
 
         # self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
@@ -76,8 +85,6 @@ class Interface(DadosDeContas):
         # self.teste3 = Button(self.frame_2, text='Contas', command=self.exibir_contas)
         # self.teste3.grid(row=0, column=4)
 
-        self.teste4 = Button(self.frame_2, text='Gerar pagamentos', command= lambda: self.gerar_constructor(transfer_constructor))
-        self.teste4.grid(row=0, column=5)
 
         self.data_hoje = date.today()
         dia = int(self.data_hoje.strftime('%d'))
