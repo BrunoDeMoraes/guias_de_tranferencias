@@ -1,3 +1,4 @@
+from datetime import date
 from num2words import num2words
 
 from src.controllers.interface_controller import InterfaceController
@@ -45,6 +46,7 @@ class TransferController(InterfaceController):
                 transferencia['Valor_total'] = self.formartar_valor(valor_total)
                 transferencia['Nome_empresa'] = nome_empresa
                 transferencia['Total_extenso'] = total_extenso
+                transferencia['Data_impressão'] = self.data_formatada()
                 transferencias.append(transferencia)
         for p in transferencias:
             for pag in p.items():
@@ -57,7 +59,6 @@ class TransferController(InterfaceController):
         soma = 0
         for pagamento in pagamentos:
             soma += pagamento[indice]
-        #total = self.formartar_valor(soma)
         print(f'essa é a soma {soma}')
         return soma
 
@@ -130,3 +131,10 @@ class TransferController(InterfaceController):
         valor_extenso = self.alinhar_texto(extenso)
         print(f'Valor por extenso {valor_extenso}')
         return valor_extenso
+
+
+    def data_formatada(self):
+        data = date.today()
+        data_formatada = data.strftime('%d/%m/%Y')
+        texto_data = f"Impresso em {data_formatada}"
+        return texto_data

@@ -3,6 +3,7 @@ import sqlite3
 from src.comandos_sql import CONSULTA_TABELAS
 
 from src.comandos_sql import URLS
+from  src.comandos_sql import TABELAS
 
 class DadosDeContas:
 
@@ -40,6 +41,7 @@ class DadosDeContas:
 
     def definir_fonte(self, fonte):
         caminhos = self.consultar_registros(URLS)
+        print(f'Caminhos {caminhos}')
         origens = {}
         for caminho in caminhos:
             origens[caminho[0]] = caminho[1]
@@ -75,10 +77,10 @@ class DadosDeContas:
     def configura_bd(self):
         caminho = self.caminho_do_arquivo()
         enderecos = {
-            'HRG': '-',
-            'APS': '-',
-            'HRG (investimento)': '-',
-            'APS (investimento)': '-',
+            'SRSSU - HRG': '-',
+            'SRSSU - APS': '-',
+            'SRSSU - HRG (investimento)': '-',
+            'SRSSU - APS (investimento)': '-',
 
         }
         for endereco in enderecos:
@@ -108,5 +110,5 @@ class DadosDeContas:
 
 if __name__ == '__main__':
     c = DadosDeContas()
-    a = c.pegar_conta('SRSSU', 'RC')
-    print(a)
+    c.criar_bd(TABELAS)
+    c.configura_bd()

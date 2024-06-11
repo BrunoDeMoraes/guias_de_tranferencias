@@ -24,12 +24,15 @@ class Guia_de_transferencia(Guia):
             self.gerar_retangulos(RETANGULOS, self.contador)
             self.inserir_strings('Times-Roman', 6, TIMES6, self.contador)
             self.inserir_strings('Times-Roman', 7, TIMES7, self.contador)
+            self.inserir_strings('Times-Roman', 7, TIMES7DATA, self.contador, self.dados)
             self.inserir_strings('Times-Roman', 8, TIMES8, self.contador)
             self.inserir_strings('Times-Bold', 8, TIMESB8, self.contador)
+            self.inserir_strings('Times-Bold', 7, TIMESB8HISTORICO, self.contador, self.dados)
             self.inserir_strings('Times-Bold', 9, TIMESB9, self.contador)
             self.inserir_strings('Times-Bold', 8, TIMESB8CONTA, self.contador, self.dados['Conta_origem'])
             self.inserir_strings('Times-Bold', 8, TIMESB8FORNECEDOR, self.contador, self.dados['Dados_empresa'])
             self.inserir_strings('Times-Bold', 8, TIMESBVALORTOTAL, self.contador, self.dados)
+            self.inserir_strings('Times-Bold', 12, TIMESB12, self.contador, self.dados['Conta_origem'])
             self.gerar_linhas_texto_alinhado('Times-Bold', 7, TIMESB7NOMEEMPRESA, 'Nome_empresa', 3)
             self.gerar_linhas_texto_alinhado('Times-Bold', 9, TIMESB7EXTENSO, 'Total_extenso', 4)
             self.contador += 100
@@ -72,6 +75,7 @@ class Guia_de_transferencia(Guia):
                 width=self.mm(coordenda[2]),
                 height=self.mm(coordenda[3])
             )
+
 
     def inserir_strings(
             self,
@@ -129,8 +133,6 @@ class Guia_de_transferencia(Guia):
                 linha
             )
             corretor += fator
-
-
 
 
 if __name__ == "__main__":

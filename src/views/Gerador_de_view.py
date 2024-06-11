@@ -8,11 +8,11 @@ from typing import Dict
 
 #from contas import Contas
 #from dados import Dados
-from relatorio import Relatorio
+#from relatorio import Relatorio
 
-# from src.comandos_sql import URLS
-# from src.comandos_sql import ATUALIZAR_CAMINHOS
-# from src.comandos_sql import CAMINHOS_ATUALIZADOS
+from src.comandos_sql import URLS
+from src.comandos_sql import ATUALIZAR_CAMINHOS
+from src.comandos_sql import CAMINHOS_ATUALIZADOS
 
 from src.models.repository.dados_de_conta import DadosDeContas
 from src.main.constructor.transfer_constructor import transfer_constructor
@@ -22,7 +22,7 @@ from src import constantes
 
 
 class Interface(DadosDeContas):
-    ORIGEM = ['HRG', 'APS', 'HRG (investimento)', 'APS (investimento)']
+    ORIGEM = ['SRSSU - HRG', 'SRSSU - APS', 'SRSSU - HRG (investimento)', 'SRSSU - APS (investimento)']
     RECURSO = ['Regular', 'Emenda']
     TIPO = ['Custeio', 'Investimento']
     BANCO = {'BRB': '070'}

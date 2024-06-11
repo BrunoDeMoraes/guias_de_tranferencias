@@ -561,13 +561,13 @@ class Relatorio(Contas, Dados, Estrutura):
             # cnv.drawString(self.mm(121), self.mm(199 - contador), f"{pagamento[0]}")  # cotação
             # cnv.drawString(self.mm(161), self.mm(199 - contador), f"{pagamento[2]}")  # danfe
 
-            total_extenso = num2words(total_pagamento, lang='pt_BR', to='currency')
-            v_nome = self.alinhar_texto(total_extenso)
-
-            calc = 0
-            for i in v_nome:
-                cnv.drawString(self.mm(104), self.mm((242 - contador) - calc), i)
-                calc += 4
+            # total_extenso = num2words(total_pagamento, lang='pt_BR', to='currency')
+            # v_nome = self.alinhar_texto(total_extenso)
+            #
+            # calc = 0
+            # for i in v_nome:
+            #     cnv.drawString(self.mm(104), self.mm((242 - contador) - calc), i)
+            #     calc += 4
 
             # cnv.drawString(self.mm(35), self.mm(86), "SEI")
             # cnv.drawString(self.mm(68), self.mm(86), "Cotação")
@@ -576,11 +576,11 @@ class Relatorio(Contas, Dados, Estrutura):
             # cnv.drawString(self.mm(141), self.mm(86), "IRRF / ISS")
             # cnv.drawString(self.mm(168), self.mm(86), "Valor líquido")
 
-            cnv.setFont("Times-Bold", 12)
-            cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[1]} - {conta[2]}")
-
-            contador += 100
-
+        #     cnv.setFont("Times-Bold", 12)
+        #     cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[1]} - {conta[2]}")
+        #
+        #     contador += 100
+        #
         cnv.setDash([3, 1])
         cnv.line(self.mm(8), self.mm(192), self.mm(196), self.mm(192))
         cnv.save()
