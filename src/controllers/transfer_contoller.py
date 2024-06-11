@@ -1,3 +1,5 @@
+from num2words import num2words
+
 from src.controllers.interface_controller import InterfaceController
 from typing import Dict
 from typing import List
@@ -33,6 +35,7 @@ class TransferController(InterfaceController):
                 conta_origem = self.contas.pegar_conta(self.origem, pagamento[0][-2:])
                 conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
                 valor_total = self.somar_indice(pagamento[1], 3)
+                total_extenso = self.valor_por_extenso(valor_total)
                 nome_empresa = self.alinhar_texto(dados_empresa[0])
                 self.converter_valores_em_string(pagamento[1])
                 transferencia['Empresa'] = pagamento[0]
@@ -41,6 +44,7 @@ class TransferController(InterfaceController):
                 transferencia['Conta_origem'] = conta_origem_fomatado
                 transferencia['Valor_total'] = self.formartar_valor(valor_total)
                 transferencia['Nome_empresa'] = nome_empresa
+                transferencia['Total_extenso'] = total_extenso
                 transferencias.append(transferencia)
         for p in transferencias:
             for pag in p.items():
@@ -53,7 +57,8 @@ class TransferController(InterfaceController):
         soma = 0
         for pagamento in pagamentos:
             soma += pagamento[indice]
-        total = self.formartar_valor(soma)
+        #total = self.formartar_valor(soma)
+        print(f'essa é a soma {soma}')
         return soma
 
 
@@ -111,7 +116,7 @@ class TransferController(InterfaceController):
         linha = ""
         texto_alinhado = []
         for palavra in palavras:
-            if len((linha + palavra)) > 50:
+            if len((linha + palavra)) > 60:
                 texto_alinhado.append(linha)
                 linha = palavra + " "
             else:
@@ -119,3 +124,9 @@ class TransferController(InterfaceController):
             if palavra == palavras[-1]:
                 texto_alinhado.append(linha)
         return texto_alinhado
+
+    def valor_por_extenso(self, valor):
+        extenso = num2words(valor, lang='pt_BR', to='currency')
+        valor_extenso = self.alinhar_texto(extenso)
+        print(f'Valor por extenso {valor_extenso}')
+        return valor_extenso

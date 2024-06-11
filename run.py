@@ -12,4 +12,3 @@ if __name__ == '__main__':
     tela.title()
     tela.config(menu=objeto_tela.menu)
     tela.mainloop()
-

@@ -107,6 +107,10 @@ TIMES7 = [
      )
 ]
 
+TIMESB7NOMEEMPRESA = [104, 258]
+
+TIMESB7EXTENSO = [104, 242]
+
 TIMES8 = [
     (21, 231, f'Não sei o que é'),
     (45, 226, "Pesssoa Física"),
@@ -172,9 +176,7 @@ TIMESB9 = [
     (93, 86, "DANFE"),
     (116, 86, "Valor total"),
     (141, 86, "IRRF / ISS"),
-    (168, 86, "Valor líquido"),
-
-
+    (168, 86, "Valor líquido")
 ]
 
 

@@ -497,14 +497,14 @@ class Relatorio(Contas, Dados, Estrutura):
             #                "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
             # nome_destinatário
-            cnv.setFont("Times-Bold", 7)
-            nome_teste = f"{empresa[0]}"
-            nome = self.alinhar_texto(nome_teste)
-
-            calc = 0
-            for i in nome:
-                cnv.drawString(self.mm(104), self.mm((258 - contador) - calc), i)
-                calc += 3
+            # cnv.setFont("Times-Bold", 7)
+            # nome_teste = f"{empresa[0]}"
+            # nome = self.alinhar_texto(nome_teste)
+            #
+            # calc = 0
+            # for i in nome:
+            #     cnv.drawString(self.mm(104), self.mm((258 - contador) - calc), i)
+            #     calc += 3
 
             # cnv.setFont("Times-Roman", 8)
             # cnv.drawString(self.mm(21), self.mm(231 - contador), f'Não sei o que é')

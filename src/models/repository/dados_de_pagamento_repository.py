@@ -61,7 +61,8 @@ class DadosDePagamentoRepository:
         pagamentos = self.__carregar_dados_de_pagamento(fonte)
         duplicados = pagamentos[
             pagamentos.duplicated(
-                subset=['Cotação', 'Empresa', 'Nº DANFE'], keep=False
+                subset=['Cotação', 'Empresa', 'Nº DANFE'],
+                keep=False
             )
         ]
         return duplicados
