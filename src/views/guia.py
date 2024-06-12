@@ -16,13 +16,13 @@ class Guia(ABC):
         self.logo = logo
 
 
-    def inserir_logo(self):
+    def inserir_logo(self, coordenadas):
         self.cnv.drawImage(
             f'{self.imagens}{self.logo}',
-            self.mm(10),
-            self.mm(275 - self.contador),
-            width=self.mm(45),
-            height=self.mm(14)
+            self.mm(coordenadas[0]),
+            self.mm(coordenadas[1] - self.contador),
+            width=self.mm(coordenadas[2]),
+            height=self.mm(coordenadas[3])
         )
 
 

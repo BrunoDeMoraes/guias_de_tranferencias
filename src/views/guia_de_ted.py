@@ -1,4 +1,4 @@
-from src.views.coordenadas.coordenadas_transferencia import *
+from src.views.coordenadas.coordenadas_ted import *
 from src.views.guia import Guia
 
 from typing import Dict
@@ -9,7 +9,7 @@ class GuiaDeTED(Guia):
 
     def gerar_guia(self):
         for i in range(0, 2):
-            self.inserir_logo()
+            self.inserir_logo(LOGO)
             self.gerar_linhas(LINHAS_ESTRUTURA, self.contador)
             self.gerar_retangulos(RETANGULOS, self.contador)
             self.inserir_strings('Times-Roman', 6, TIMES6, self.contador)

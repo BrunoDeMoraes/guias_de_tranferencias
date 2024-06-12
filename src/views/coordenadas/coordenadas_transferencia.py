@@ -1,3 +1,5 @@
+LOGO = (10, 275, 45, 14)
+
 LINHAS_ESTRUTURA = [
     (8, 273, 196, 273), #primeira linha superior
     (102, 268, 102, 220),  #Linha central

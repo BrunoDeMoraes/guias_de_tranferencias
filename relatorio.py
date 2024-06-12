@@ -117,16 +117,16 @@ class Relatorio(Contas, Dados, Estrutura):
         cnv = canvas.Canvas(f'{self.pasta}/guias/{origem}/{data_pagamento}/TEDS/{pagamento[0][1]}-{conta[1]}-{conta[2]}.pdf')
         cnv.setPageSize(A4)
 
-        contador = 0
-        for i in range(0, 2):
-            print(empresa)
-            cnv.drawImage(
-                f'{self.pasta}/Imagens/Logo_brb.jpg',
-                self.mm(0),
-                self.mm(276 - contador),
-                width=self.mm(85),
-                height=self.mm(18)
-            )
+        # contador = 0
+        # for i in range(0, 2):
+        #     print(empresa)
+        #     cnv.drawImage(
+        #         f'{self.pasta}/Imagens/Logo_brb.jpg',
+        #         self.mm(0),
+        #         self.mm(276 - contador),
+        #         width=self.mm(85),
+        #         height=self.mm(18)
+        #     )
 
             # cnv.line(self.mm(8), self.mm(273 - contador), self.mm(196),
             #          self.mm(273 - contador))  # primeira linha superior
@@ -171,97 +171,97 @@ class Relatorio(Contas, Dados, Estrutura):
             # cnv.line(self.mm(102), self.mm(207 - contador), self.mm(102),
             #          self.mm(199 - contador))  # linha vertical assinatura
 
-            cnv.rect(self.mm(126), self.mm(281 - contador), width=self.mm(70), height=self.mm(7))
-            cnv.rect(self.mm(40), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(70), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(40), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(70), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(140), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(170), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(140), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(170), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(21), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(66), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
-            cnv.rect(self.mm(12), self.mm(84), width=self.mm(180), height=self.mm(5))
+            # cnv.rect(self.mm(126), self.mm(281 - contador), width=self.mm(70), height=self.mm(7))
+            # cnv.rect(self.mm(40), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(70), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(40), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(70), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(140), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(170), self.mm(226 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(140), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(170), self.mm(221 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(21), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(66), self.mm(236 - contador), width=self.mm(3), height=self.mm(3))
+            # cnv.rect(self.mm(12), self.mm(84), width=self.mm(180), height=self.mm(5))
 
-            cnv.line(self.mm(60), self.mm(84), self.mm(60),
-                     self.mm(89))
-            cnv.line(self.mm(85), self.mm(84), self.mm(85),
-                     self.mm(89))
-            cnv.line(self.mm(110), self.mm(84), self.mm(110),
-                     self.mm(89))
-            cnv.line(self.mm(135), self.mm(84), self.mm(135),
-                     self.mm(89))
-            cnv.line(self.mm(160), self.mm(84), self.mm(160),
-                     self.mm(89))
+            # cnv.line(self.mm(60), self.mm(84), self.mm(60),
+            #          self.mm(89))
+            # cnv.line(self.mm(85), self.mm(84), self.mm(85),
+            #          self.mm(89))
+            # cnv.line(self.mm(110), self.mm(84), self.mm(110),
+            #          self.mm(89))
+            # cnv.line(self.mm(135), self.mm(84), self.mm(135),
+            #          self.mm(89))
+            # cnv.line(self.mm(160), self.mm(84), self.mm(160),
+            #          self.mm(89))
 
             cnv.setFont("Times-Roman", 8)
             altura = 0
             total_pagamento = 0
             for dados in pagamento:
-                cnv.drawString(self.mm(21), self.mm(81 - altura), f'{dados[4]}')
-                cnv.drawString(self.mm(69), self.mm(81 - altura), f'{dados[0]}')
-                cnv.drawString(self.mm(91), self.mm(81 - altura), f'{dados[2]}')
-                cnv.drawString(self.mm(113), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[8])}')
-                cnv.drawString(self.mm(138), self.mm(81 - altura), f'R$ {self.formartar_valor((dados[6] + dados[7]))}')
-                cnv.drawString(self.mm(163), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[3])}')
-                total_pagamento += dados[3]
+                # cnv.drawString(self.mm(21), self.mm(81 - altura), f'{dados[4]}')
+                # cnv.drawString(self.mm(69), self.mm(81 - altura), f'{dados[0]}')
+                # cnv.drawString(self.mm(91), self.mm(81 - altura), f'{dados[2]}')
+                # cnv.drawString(self.mm(113), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[8])}')
+                # cnv.drawString(self.mm(138), self.mm(81 - altura), f'R$ {self.formartar_valor((dados[6] + dados[7]))}')
+                # cnv.drawString(self.mm(163), self.mm(81 - altura), f'R$ {self.formartar_valor(dados[3])}')
+                # total_pagamento += dados[3]
 
-                cnv.rect(self.mm(12), self.mm(79 - altura), width=self.mm(180), height=self.mm(5))
-                cnv.line(self.mm(60), self.mm(79 - altura), self.mm(60),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(85), self.mm(79 - altura), self.mm(85),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(110), self.mm(79 - altura), self.mm(110),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(135), self.mm(79 - altura), self.mm(135),
-                         self.mm(84 - altura))
-                cnv.line(self.mm(160), self.mm(79 - altura), self.mm(160),
-                         self.mm(84 - altura))
-                altura += 5
+                # cnv.rect(self.mm(12), self.mm(79 - altura), width=self.mm(180), height=self.mm(5))
+                # cnv.line(self.mm(60), self.mm(79 - altura), self.mm(60),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(85), self.mm(79 - altura), self.mm(85),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(110), self.mm(79 - altura), self.mm(110),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(135), self.mm(79 - altura), self.mm(135),
+                #          self.mm(84 - altura))
+                # cnv.line(self.mm(160), self.mm(79 - altura), self.mm(160),
+                # #          self.mm(84 - altura))
+                # altura += 5
 
-            cnv.setFont("Times-Roman", 6)
-            cnv.drawString(self.mm(25), self.mm(237 - contador), "00001 - Pagamento de ipostos, tributos e taxas")
-            cnv.drawString(self.mm(70), self.mm(237 - contador), "00005 - Pagamentos de fornecedores")
+            # cnv.setFont("Times-Roman", 6)
+            # cnv.drawString(self.mm(25), self.mm(237 - contador), "00001 - Pagamento de ipostos, tributos e taxas")
+            # cnv.drawString(self.mm(70), self.mm(237 - contador), "00005 - Pagamentos de fornecedores")
 
-            cnv.setFont("Times-Roman", 7)
-
-            cnv.drawString(self.mm(10), self.mm(265 - contador), "Banco")
-            cnv.drawString(self.mm(26), self.mm(265 - contador), "Agência")
-            cnv.drawString(self.mm(44), self.mm(265 - contador), "Conta")
-            cnv.drawString(self.mm(104), self.mm(265 - contador), "Banco")
-            cnv.drawString(self.mm(120), self.mm(265 - contador), "Agência")
-            cnv.drawString(self.mm(144), self.mm(265 - contador), "Conta")
-            cnv.drawString(self.mm(170), self.mm(265 - contador), "Valor")
-            cnv.drawString(self.mm(10), self.mm(261 - contador), "Nome do(s) Remetente(s)")
-            cnv.drawString(self.mm(104), self.mm(261 - contador), "Nome do(s) Destinatário(s)")
-            cnv.drawString(self.mm(10), self.mm(251 - contador), "CNPJ/CPF(s)")
-            cnv.drawString(self.mm(104), self.mm(251 - contador), "CNPJ/CPF(s)")
-
-            # cnv.drawString(self.mm(10), self.mm(235 - contador), "Nº identidade / Órgão expedidor / UF")
-            cnv.drawString(self.mm(104), self.mm(247 - contador), "Valor por Extenso")
-            cnv.drawString(self.mm(10), self.mm(247 - contador), "Endereço")
-            cnv.drawString(self.mm(82), self.mm(261 - contador), "Telefone(s)")
-            # cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº Identidade / Órgão expedidor / UF")
-            cnv.drawString(self.mm(10), self.mm(227 - contador), "Tipo Pessoa Debitada")
-            cnv.drawString(self.mm(10), self.mm(222 - contador), "Tipo Conta Debitada")
-            cnv.drawString(self.mm(104), self.mm(227 - contador), "Tipo Pessoa Creditada")
-            cnv.drawString(self.mm(104), self.mm(222 - contador), "Tipo Conta Creditada")
-            cnv.drawString(self.mm(10), self.mm(237 - contador), "Finalidade")
-            cnv.drawString(self.mm(10), self.mm(232 - contador), "Histórico")
-            cnv.drawString(self.mm(10), self.mm(217 - contador), "Nº Identificação Depósito")
-
-            # cnv.drawString(self.mm(155), self.mm(195 - contador),
-            #                f"{pagamento[0][0:3]}-{self.formatar_nome(pagamento[1])} {pagamento[2]}")
-            cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada()}")
-            cnv.drawString(self.mm(76), self.mm(216 - contador),
-                           "Preencher somente nas transferências de recursos para deposito judicial")
-            cnv.drawString(self.mm(10), self.mm(211 - contador),
-                           "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
-            cnv.drawString(self.mm(17), self.mm(201 - contador),
-                           "Luiz Antônio Roriz Bueno - Diretor Administrativo - Matrícula: 1.659.430-4")
-            cnv.drawString(self.mm(114), self.mm(201 - contador),
-                           "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
+            # cnv.setFont("Times-Roman", 7)
+            #
+            # cnv.drawString(self.mm(10), self.mm(265 - contador), "Banco")
+            # cnv.drawString(self.mm(26), self.mm(265 - contador), "Agência")
+            # cnv.drawString(self.mm(44), self.mm(265 - contador), "Conta")
+            # cnv.drawString(self.mm(104), self.mm(265 - contador), "Banco")
+            # cnv.drawString(self.mm(120), self.mm(265 - contador), "Agência")
+            # cnv.drawString(self.mm(144), self.mm(265 - contador), "Conta")
+            # cnv.drawString(self.mm(170), self.mm(265 - contador), "Valor")
+            # cnv.drawString(self.mm(10), self.mm(261 - contador), "Nome do(s) Remetente(s)")
+            # cnv.drawString(self.mm(104), self.mm(261 - contador), "Nome do(s) Destinatário(s)")
+            # cnv.drawString(self.mm(10), self.mm(251 - contador), "CNPJ/CPF(s)")
+            # cnv.drawString(self.mm(104), self.mm(251 - contador), "CNPJ/CPF(s)")
+            #
+            # # cnv.drawString(self.mm(10), self.mm(235 - contador), "Nº identidade / Órgão expedidor / UF")
+            # cnv.drawString(self.mm(104), self.mm(247 - contador), "Valor por Extenso")
+            # cnv.drawString(self.mm(10), self.mm(247 - contador), "Endereço")
+            # cnv.drawString(self.mm(82), self.mm(261 - contador), "Telefone(s)")
+            # # cnv.drawString(self.mm(104), self.mm(215 - contador), "Nº Identidade / Órgão expedidor / UF")
+            # cnv.drawString(self.mm(10), self.mm(227 - contador), "Tipo Pessoa Debitada")
+            # cnv.drawString(self.mm(10), self.mm(222 - contador), "Tipo Conta Debitada")
+            # cnv.drawString(self.mm(104), self.mm(227 - contador), "Tipo Pessoa Creditada")
+            # cnv.drawString(self.mm(104), self.mm(222 - contador), "Tipo Conta Creditada")
+            # cnv.drawString(self.mm(10), self.mm(237 - contador), "Finalidade")
+            # cnv.drawString(self.mm(10), self.mm(232 - contador), "Histórico")
+            # cnv.drawString(self.mm(10), self.mm(217 - contador), "Nº Identificação Depósito")
+            #
+            # # cnv.drawString(self.mm(155), self.mm(195 - contador),
+            # #                f"{pagamento[0][0:3]}-{self.formatar_nome(pagamento[1])} {pagamento[2]}")
+            # cnv.drawString(self.mm(155), self.mm(217 - contador), f"Impresso em {self.data_formatada()}")
+            # cnv.drawString(self.mm(76), self.mm(216 - contador),
+            #                "Preencher somente nas transferências de recursos para deposito judicial")
+            # cnv.drawString(self.mm(10), self.mm(211 - contador),
+            #                "Autorizo o Banco a DEBITAR em minha Conta de Depósitos, nesta Agência, o valor da presente transferência de fundos.")
+            # cnv.drawString(self.mm(17), self.mm(201 - contador),
+            #                "Luiz Antônio Roriz Bueno - Diretor Administrativo - Matrícula: 1.659.430-4")
+            # cnv.drawString(self.mm(114), self.mm(201 - contador),
+            #                "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
             # nome_destinatário
             cnv.setFont("Times-Bold", 7)
