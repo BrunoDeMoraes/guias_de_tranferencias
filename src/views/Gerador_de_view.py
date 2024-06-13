@@ -17,6 +17,7 @@ from src.comandos_sql import CAMINHOS_ATUALIZADOS
 from src.models.repository.dados_de_conta import DadosDeContas
 from src.main.constructor.transfer_constructor import transfer_constructor
 from src.main.constructor.ted_constructor import ted_constructor
+from src.main.constructor.iss_constructor import iss_constructor
 
 from src import comandos_sql
 from src import constantes
@@ -77,8 +78,11 @@ class Interface(DadosDeContas):
         )
         self.botao_ted.grid(row=1, column=1)
 
-        # self.botao_ted = Button(self.frame_2, text='Limpar', command=self.limpar_tela)
-        # self.teste2.grid(row=0, column=2)
+        self.botao_iss = Button(
+            self.frame_2, text='Gerar ISS',
+            command=lambda: self.gerar_constructor(iss_constructor)
+        )
+        self.botao_iss.grid(row=2, column=1)
 
         # self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
         # self.teste3.grid(row=0, column=3)
