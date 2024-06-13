@@ -23,7 +23,7 @@ class DadosDePagamentoRepository:
 
 
     def agupar_por_empresa(self, fonte: str) -> Dict:
-        pagamentos = self.__listar_pagamentos(fonte)
+        pagamentos = self.listar_pagamentos(fonte)
         pagamento_por_empresa = {}
         for pagamento in pagamentos.values():
             chave = (pagamento[1] + pagamento[5])
@@ -35,7 +35,7 @@ class DadosDePagamentoRepository:
         return pagamento_por_empresa
 
 
-    def __listar_pagamentos(self, fonte):
+    def listar_pagamentos(self, fonte):
         danfes_complexas = self.__filtrar_danfe(fonte)
         self.__inserir_pagamento(danfes_complexas)
         danfes_simples = self.__carregar_dados_de_pagamento(fonte)
