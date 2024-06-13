@@ -264,64 +264,57 @@ class Relatorio(Contas, Dados, Estrutura):
             #                "Willy Pereira da Silva Filho - Superintendente - Matrícula 1.680.762-6")
 
             # nome_destinatário
-            cnv.setFont("Times-Bold", 7)
-            nome_teste = f"{empresa[0]}"
-            nome = self.alinhar_texto(nome_teste)
-
-            calc = 0
-            for i in nome:
-                cnv.drawString(self.mm(104), self.mm((258 - contador) - calc), i)
-                calc += 3
+            # cnv.setFont("Times-Bold", 7)
+            # nome_teste = f"{empresa[0]}"
+            # nome = self.alinhar_texto(nome_teste)
+            #
+            # calc = 0
+            # for i in nome:
+            #     cnv.drawString(self.mm(104), self.mm((258 - contador) - calc), i)
+            #     calc += 3
 
             cnv.setFont("Times-Roman", 8)
             cnv.drawString(self.mm(21), self.mm(231 - contador), f'{pagamento[0][1][0:-9]}')
-            cnv.drawString(self.mm(45), self.mm(226 - contador), "Pesssoa Física")
-            cnv.drawString(self.mm(75), self.mm(226 - contador), "Pesssoa Jurídica")
-            cnv.drawString(self.mm(45), self.mm(221 - contador), "Conta Corrente")
-            cnv.drawString(self.mm(75), self.mm(221 - contador), "Conta Poupança")
-            cnv.drawString(self.mm(145), self.mm(226 - contador), "Pesssoa Física")
-            cnv.drawString(self.mm(175), self.mm(226 - contador), "Pesssoa Jurídica")
-            cnv.drawString(self.mm(145), self.mm(221 - contador), "Conta Corrente")
-            cnv.drawString(self.mm(175), self.mm(221 - contador), "Conta Poupança")
 
-            cnv.setFont("Times-Bold", 8)
-            cnv.drawString(self.mm(9), self.mm(275 - contador), "ISPB -00.000.208")
-            cnv.drawString(self.mm(71), self.mm(227 - contador), "\u2713")
-            cnv.drawString(self.mm(41), self.mm(222 - contador), "\u2713")
-            cnv.drawString(self.mm(171), self.mm(227 - contador), "\u2713")
-            cnv.drawString(self.mm(141), self.mm(222 - contador), "\u2713")
-            cnv.drawString(self.mm(67), self.mm(237 - contador), "\u2713")
-            cnv.drawString(self.mm(10), self.mm(242 - contador),
-                           "Área especial nº 01, Lote Único - Setor Central Gama/DF. CEP: 72.405-901")
+
+            # cnv.setFont("Times-Bold", 8)
+            # cnv.drawString(self.mm(9), self.mm(275 - contador), "ISPB -00.000.208")
+            # cnv.drawString(self.mm(71), self.mm(227 - contador), "\u2713")
+            # cnv.drawString(self.mm(41), self.mm(222 - contador), "\u2713")
+            # cnv.drawString(self.mm(171), self.mm(227 - contador), "\u2713")
+            # cnv.drawString(self.mm(141), self.mm(222 - contador), "\u2713")
+            # cnv.drawString(self.mm(67), self.mm(237 - contador), "\u2713")
+            # cnv.drawString(self.mm(10), self.mm(242 - contador),
+            #                "Área especial nº 01, Lote Único - Setor Central Gama/DF. CEP: 72.405-901")
 
 
 
             cnv.setFont("Times-Bold", 8)
-            cnv.drawString(self.mm(115), self.mm(275 - contador), 'Transferência Eletrônica Disponível - TED -"E"')
-
-            cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
-            cnv.drawString(self.mm(82), self.mm(269 - contador), "Uso do Banco")
-            cnv.drawString(self.mm(104), self.mm(269 - contador), 'Instituição Financeira Destinatária')
-            cnv.drawString(self.mm(84), self.mm(196 - contador), 'Assinatura do Remetente')
+            # cnv.drawString(self.mm(115), self.mm(275 - contador), 'Transferência Eletrônica Disponível - TED -"E"')
+            #
+            # cnv.drawString(self.mm(10), self.mm(269 - contador), 'Instituição Financeira Remetente')
+            # cnv.drawString(self.mm(82), self.mm(269 - contador), "Uso do Banco")
+            # cnv.drawString(self.mm(104), self.mm(269 - contador), 'Instituição Financeira Destinatária')
+            # cnv.drawString(self.mm(84), self.mm(196 - contador), 'Assinatura do Remetente')
 
             # contas
 
-            cnv.setFont("Times-Bold", 7)
-            conta_tratada = self.formatar_conta(conta[5])
-            cnv.drawString(self.mm(17), self.mm(265 - contador), f"{conta[3]}")  # banco
-            cnv.drawString(self.mm(35), self.mm(265 - contador), f"{conta[4]}")  # agência
-            cnv.drawString(self.mm(51), self.mm(265 - contador), f"{conta_tratada}")  # conta
-            cnv.drawString(self.mm(10), self.mm(256 - contador), f"{origem}")  # origem
+            # cnv.setFont("Times-Bold", 7)
+            # conta_tratada = self.formatar_conta(conta[5])
+            # cnv.drawString(self.mm(17), self.mm(265 - contador), f"{conta[3]}")  # banco
+            # cnv.drawString(self.mm(35), self.mm(265 - contador), f"{conta[4]}")  # agência
+            # cnv.drawString(self.mm(51), self.mm(265 - contador), f"{conta_tratada}")  # conta
+            # cnv.drawString(self.mm(10), self.mm(256 - contador), f"{origem}")  # origem
 
-            cnpj_regional = self.formatar_cnpj(conta[6])
-            cnv.drawString(self.mm(25), self.mm(251 - contador), f"{cnpj_regional}")  # CNPJ - regional
-
-            # fornecedor
-            cnv.drawString(self.mm(111), self.mm(265 - contador), f"{empresa[6]}")  # banco
-            cnv.drawString(self.mm(129), self.mm(265 - contador), f"{empresa[7]}")  # agência
-            cnv.drawString(self.mm(151), self.mm(265 - contador), f"{empresa[8]}")  # conta
-            cnv.drawString(self.mm(119), self.mm(251 - contador), f"{empresa[4]}")  # CNPJ - fornecedor
-            cnv.drawString(self.mm(82), self.mm(256 - contador), "(61) 2017-1821")  # telefone
+            # cnpj_regional = self.formatar_cnpj(conta[6])
+            # cnv.drawString(self.mm(25), self.mm(251 - contador), f"{cnpj_regional}")  # CNPJ - regional
+            #
+            # # fornecedor
+            # cnv.drawString(self.mm(111), self.mm(265 - contador), f"{empresa[6]}")  # banco
+            # cnv.drawString(self.mm(129), self.mm(265 - contador), f"{empresa[7]}")  # agência
+            # cnv.drawString(self.mm(151), self.mm(265 - contador), f"{empresa[8]}")  # conta
+            # cnv.drawString(self.mm(119), self.mm(251 - contador), f"{empresa[4]}")  # CNPJ - fornecedor
+            # cnv.drawString(self.mm(82), self.mm(256 - contador), "(61) 2017-1821")  # telefone
 
             # dados
             cnv.drawString(self.mm(176), self.mm(265 - contador),
@@ -338,17 +331,17 @@ class Relatorio(Contas, Dados, Estrutura):
                 cnv.drawString(self.mm(104), self.mm((242 - contador) - calc), i)
                 calc += 4
 
-            cnv.drawString(self.mm(35), self.mm(86), "SEI")
-            cnv.drawString(self.mm(68), self.mm(86), "Cotação")
-            cnv.drawString(self.mm(93), self.mm(86), "DANFE")
-            cnv.drawString(self.mm(116), self.mm(86), "Valor total")
-            cnv.drawString(self.mm(141), self.mm(86), "IRRF / ISS")
-            cnv.drawString(self.mm(168), self.mm(86), "Valor líquido")
+            # cnv.drawString(self.mm(35), self.mm(86), "SEI")
+            # cnv.drawString(self.mm(68), self.mm(86), "Cotação")
+            # cnv.drawString(self.mm(93), self.mm(86), "DANFE")
+            # cnv.drawString(self.mm(116), self.mm(86), "Valor total")
+            # cnv.drawString(self.mm(141), self.mm(86), "IRRF / ISS")
+            # cnv.drawString(self.mm(168), self.mm(86), "Valor líquido")
 
-            cnv.setFont("Times-Bold", 12)
-            cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[1]} - {conta[2]}")
-
-            contador += 100
+            # cnv.setFont("Times-Bold", 12)
+            # cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[1]} - {conta[2]}")
+            #
+            # contador += 100
 
         cnv.setDash([3, 1])
         cnv.line(self.mm(8), self.mm(192), self.mm(196), self.mm(192))

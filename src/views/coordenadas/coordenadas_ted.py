@@ -6,7 +6,7 @@ LINHAS_ESTRUTURA = [
     (196, 268, 196, 220),  #linha direita
     (8, 268, 8, 220),  #linha esquerda
     (24, 268, 24, 264),  # divisão linha 1.1
-    (42, 268, 42, 264),  # divisão linha 1.2
+    (44, 268, 44, 264),  # divisão linha 1.2
     (80, 268, 80, 264),  # divisão linha 1.3
     (118, 268, 118, 264),  # divisão linha 1.4
     (142, 268, 142, 264),  # divisão linha 1.5
@@ -25,11 +25,11 @@ LINHAS_ESTRUTURA = [
     (8, 214, 75, 214),  #linha horizontal id
     (8, 199, 196, 199),  #linha horizontal assinatura
     (102, 207, 102, 199),  #linha vertical assinatura
-    (60, 79, 60, 84),
-    (85, 79, 85, 84),
-    (110, 79, 110, 84),
-    (135, 79, 135, 84),
-    (160, 79, 160, 84)
+    (60, 79, 60, 89),
+    (85, 79, 85, 89),
+    (110, 79, 110, 89),
+    (135, 79, 135, 89),
+    (160, 79, 160, 89)
 ]
 
 LINHAS_PAGAMENTOS = [
@@ -41,7 +41,7 @@ LINHAS_PAGAMENTOS = [
 ]
 
 RETANGULOS = [
-    (126, 281, 70, 7),
+    (126, 281, 72, 7),
     (40, 226, 3, 3),
     (70, 226, 3, 3),
     (40, 221, 3, 3),
@@ -71,7 +71,7 @@ TIMES6 = [
 TIMES7 = [
     (10, 265, "Banco"),
     (26, 265, "Agência"),
-    (44, 265, "Conta"),
+    (46, 265, "Conta"),
     (104, 265, "Banco"),
     (120, 265, "Agência"),
     (144, 265, "Conta"),
@@ -132,6 +132,7 @@ TIMES8 = [
 ]
 
 TIMESB8 = [
+    (9, 275, "ISPB -00.000.208"),
     (71, 227, "\u2713"),
     (41, 222, "\u2713"),
     (171, 227, "\u2713"),
@@ -155,17 +156,20 @@ TIMES8_PAGAMENTOS = [
 ]
 
 TIMESB8CONTA = [
-    (19, 265, 4), #agência
+    (17, 265, 3),  # banco
+    (35, 265, 4), #agência
     (53, 265, 5), #conta
     (10, 256, 0),  #origem
     (25, 251, 6),  #CNPJ - regional
 ]
 
 TIMESB8FORNECEDOR = [
-    (113, 265, 7), #agência
-    (148, 265, 8), #conta
+    (111, 265, 6),  #banco
+    (129, 265, 7), #agência
+    (151, 265, 8), #conta
     (119, 251, 4)  #CNPJ - fornecedor
 ]
+
 
 TIMESBVALORTOTAL = [(176, 265, 'Valor_total')]  #valor
 
@@ -176,10 +180,10 @@ TIMESB8ALINHADO = [
 TIMESB8HISTORICO = [(21, 231, 'Empresa')]
 
 TIMESB9 = [
-    (129, 278, 'Autorização para transferência de valores'),
-    (138, 274, 'entre contas no âmbito do BRB'),
-    (10, 269, 'Conta Remetente'),
-    (104, 269, 'Conta Destinatária'),
+    (115, 275, 'Transferência Eletrônica Disponível - TED -"E"'),
+    (10, 269, 'Instituição Financeira Remetente'),
+    (104, 269, 'Instituição Financeira Destinatária'),
+    (82, 269, "Uso do Banco"),
     (84, 196, 'Assinatura do Remetente'),
     (35, 86, "SEI"),
     (68, 86, "Cotação"),
@@ -190,7 +194,9 @@ TIMESB9 = [
 ]
 
 TIMESB12 = [
-    (121, 283, 0),
-    (176, 283, 1)
+    (127, 283, 0),
+    (181, 283, 1)
 
 ]
+
+#cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[1]} - {conta[2]}")
