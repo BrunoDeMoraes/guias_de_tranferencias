@@ -6,10 +6,6 @@ from tkcalendar import Calendar
 from datetime import date
 from typing import Dict
 
-#from contas import Contas
-#from dados import Dados
-#from relatorio import Relatorio
-
 from src.comandos_sql import URLS
 from src.comandos_sql import ATUALIZAR_CAMINHOS
 from src.comandos_sql import CAMINHOS_ATUALIZADOS
@@ -24,13 +20,13 @@ from src import constantes
 
 
 class Interface(DadosDeContas):
-    ORIGEM = ['SRSSU - HRG', 'SRSSU - APS', 'SRSSU - HRG (investimento)', 'SRSSU - APS (investimento)']
+    ORIGEM = ['SRSSU - HRG Custeio', 'SRSSU - APS - Custeio', 'SRSSU - HRG Investimento', 'SRSSU - APS Investimento']
     RECURSO = ['Regular', 'Emenda']
     TIPO = ['Custeio', 'Investimento']
     BANCO = {'BRB': '070'}
 
-    def __init__(self, tela): #,, relatorio
-        #self.relatorio = relatorio
+    def __init__(self, tela):
+
 
         self.tela = tela
 
@@ -142,36 +138,6 @@ class Interface(DadosDeContas):
     def voltar(self):
         self.frame_mestre.destroy()
         self.criar_widgets()
-
-    # def mostra_data(self):
-    #     data_selecionada = self.calendario.get_date()
-    #
-    #     print(data_selecionada)
-    #     print(f"dia: {data_selecionada[0:2]}")
-    #     print(f"mês: {data_selecionada[3:5]}")
-    #     print(f"ano: {data_selecionada[6:]}")
-    #
-    # def data_de_pagamento(self):
-    #     data_calendario = self.calendario.get_date()
-    #     dia = data_calendario[0:2]
-    #     mes = data_calendario[3:5]
-    #     ano = data_calendario[6:]
-    #     data_de_pagamento = f'{ano}-{mes}-{dia}'
-    #     return data_de_pagamento
-    #
-    # def dados_de_entrada(self) -> Dict:
-    #     entradas = {
-    #         'origem': self.local.get(),
-    #         'data': self.data_de_pagamento()
-    #     }
-    #     print(entradas)
-    #     return entradas
-
-
-    # def imprimir_teds(self):
-    #     origem = self.local.get()
-    #     data_pagamento = self.data_de_pagamento()
-    #     pagamentos = self.relatorio.compilar_dados_de_pagamento(origem, data_pagamento)
 
 
     def abrir_janela_cadastro(self):
@@ -313,7 +279,7 @@ class Interface(DadosDeContas):
     def excluir_conta(self):
         conta = self.v_contas.get()
         print(f"Esta é a {conta[1:-2]}")
-        self.relatorio.deletar_conta(conta[1:-2])
+        self.deletar_conta(conta[1:-2])
         self.atualizar_contas()
 
     def altera_caminho(self, entrada, xlsx=False):
@@ -470,13 +436,5 @@ class Interface(DadosDeContas):
         )
 
 
-
 if __name__ == '__main__':
-    rel = Relatorio()
-    tela = Tk()
-    tela.geometry("300x500")
-    tela.resizable(0, 0)
-    objeto_tela = Interface(tela, rel)
-    #tela.title()
-    tela.config(menu=objeto_tela.menu)
-    tela.mainloop()
+    pass

@@ -77,10 +77,10 @@ class DadosDeContas:
     def configura_bd(self):
         caminho = self.caminho_do_arquivo()
         enderecos = {
-            'SRSSU - HRG': '-',
-            'SRSSU - APS': '-',
-            'SRSSU - HRG (investimento)': '-',
-            'SRSSU - APS (investimento)': '-',
+            'SRSSU - HRG Custeio': '-',
+            'SRSSU - APS Custeio': '-',
+            'SRSSU - HRG Investimento': '-',
+            'SRSSU - APS Investimento': '-',
 
         }
         for endereco in enderecos:
