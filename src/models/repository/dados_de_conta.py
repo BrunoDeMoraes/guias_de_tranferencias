@@ -41,7 +41,6 @@ class DadosDeContas:
 
     def definir_fonte(self, fonte):
         caminhos = self.consultar_registros(URLS)
-        print(f'Caminhos {caminhos}')
         origens = {}
         for caminho in caminhos:
             origens[caminho[0]] = caminho[1]
@@ -77,11 +76,12 @@ class DadosDeContas:
     def configura_bd(self):
         caminho = self.caminho_do_arquivo()
         enderecos = {
-            'SRSSU - HRG Custeio': '-',
-            'SRSSU - APS Custeio': '-',
-            'SRSSU - HRG Investimento': '-',
-            'SRSSU - APS Investimento': '-',
-
+            'HRG Custeio': '-',
+            'APS Custeio': '-',
+            'HRG Investimento': '-',
+            'APS Investimento': '-',
+            'SRSSU Custeio': '-',
+            'SRSSU Investimento': '-'
         }
         for endereco in enderecos:
             comando = 'INSERT INTO urls VALUES (:variavel, :url)'
@@ -112,3 +112,4 @@ if __name__ == '__main__':
     c = DadosDeContas()
     c.criar_bd(TABELAS)
     c.configura_bd()
+    #print(c.pegar_n_contas())

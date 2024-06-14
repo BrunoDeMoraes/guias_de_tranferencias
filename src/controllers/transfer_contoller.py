@@ -29,7 +29,9 @@ class TransferController(InterfaceController):
             if empresa[5] == 'BRB':
                 self.soma_iss_ir(pagamento[1])
                 dados_empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
+                print(self.origem)
                 conta_origem = self.contas.pegar_conta(self.origem, pagamento[0][-2:])
+                print(conta_origem)
                 conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
                 valor_total = self.somar_indice(pagamento[1], 3)
                 total_extenso = self.valor_por_extenso(valor_total)

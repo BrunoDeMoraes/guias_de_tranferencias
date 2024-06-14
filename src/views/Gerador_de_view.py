@@ -20,7 +20,13 @@ from src import constantes
 
 
 class Interface(DadosDeContas):
-    ORIGEM = ['SRSSU - HRG Custeio', 'SRSSU - APS - Custeio', 'SRSSU - HRG Investimento', 'SRSSU - APS Investimento']
+    ORIGEM = ['HRG Custeio',
+              'APS Custeio',
+              'HRG Investimento',
+              'APS Investimento',
+              'SRSSU Custeio',
+              'SRSSU Investimento'
+              ]
     RECURSO = ['Regular', 'Emenda']
     TIPO = ['Custeio', 'Investimento']
     BANCO = {'BRB': '070'}
@@ -244,6 +250,7 @@ class Interface(DadosDeContas):
 
         a = self.numero_contas()
         self.v_contas.set('Selecione uma conta')
+        print(a)
         self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
         self.v_contas_bd.config(width=20)
 
@@ -345,7 +352,7 @@ class Interface(DadosDeContas):
     def abrir_caminhos(self):
         self.caminhos = Toplevel()
         self.urls = self.consultar_registros(URLS)
-        print(self.urls)
+        print(f'Estas são as {self.urls}')
         self.caminhos.title('Caminhos')
         self.caminhos.resizable(False, False)
         self.frame_caminhos = LabelFrame(
@@ -354,7 +361,7 @@ class Interface(DadosDeContas):
         self.frame_caminhos.pack(padx=1, pady=1)
 
         self.botao_xlsx = Button(
-            self.frame_caminhos, text='SRSSU',
+            self.frame_caminhos, text='HRG Custeio',
             command=lambda: self.altera_caminho(self.caminho_srssu, True),
             padx=0, pady=0, bg='green', fg='white',
             font=('Helvetica', 8, 'bold'), bd=1
@@ -362,7 +369,7 @@ class Interface(DadosDeContas):
         self.caminho_srssu = Entry(self.frame_caminhos, width=70)
 
         self.botao_pasta_de_certidões = Button(
-            self.frame_caminhos, text='SRSSU - APS',
+            self.frame_caminhos, text='APS Custeio',
             command=lambda: (
                 self.altera_caminho(self.caminho_aps, True)),
             padx=0, pady=0, bg='green', fg='white',
@@ -373,7 +380,7 @@ class Interface(DadosDeContas):
         )
 
         self.botao_log = Button(
-            self.frame_caminhos, text='Provisória',
+            self.frame_caminhos, text='HRG Investimento',
             command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
             pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
             bd=1
@@ -381,7 +388,7 @@ class Interface(DadosDeContas):
         self.caminho_srssu_i = Entry(self.frame_caminhos, width=70)
 
         self.certidões_para_pagamento = Button(
-            self.frame_caminhos, text='SRSSU - APS (Investimento)',
+            self.frame_caminhos, text='APS Investimento',
             command=lambda: (
                 self.altera_caminho(self.caminho_aps_i, True)
             ),
