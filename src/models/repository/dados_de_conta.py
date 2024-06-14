@@ -111,5 +111,4 @@ class DadosDeContas:
 if __name__ == '__main__':
     c = DadosDeContas()
     c.criar_bd(TABELAS)
-    c.configura_bd()
     #print(c.pegar_n_contas())
