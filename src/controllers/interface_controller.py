@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from datetime import date
 from num2words import num2words
 
+from typing import Dict
 from typing import List
 from typing import Type
 
@@ -34,6 +35,13 @@ class InterfaceController(ABC):
             soma += pagamento[indice]
         print(f'essa é a soma {soma}')
         return soma
+
+
+    def extrair_pagamentos(self, lista: Dict):
+        lista_de_pagamentos = []
+        for pagamento in lista.items():
+            lista_de_pagamentos.append(pagamento[1])
+        return lista_de_pagamentos
 
 
     def converter_valores_em_string(self, pagamentos: List):

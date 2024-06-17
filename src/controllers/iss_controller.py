@@ -21,33 +21,42 @@ class IssController(InterfaceController):
     def filtrar_dados(self) -> Dict:
         fonte = self.contas.definir_fonte(self.origem)
         pagamentos = self.pagametos.listar_pagamentos(fonte)
-        # for pagamento in pagamentos.items():
-        #     print(f'{pagamento[0]}\n    {pagamento[1]}\n\n')
+        lista_de_pagamentos = self.extrair_pagamentos(pagamentos)
         transferencias = []
+        iss_somado = self.somar_indice(lista_de_pagamentos, 6)
+        valor_total = self.formartar_valor(iss_somado)
+
+        transferencias.append(valor_total)
+
+        
+
         for pagamento in pagamentos.items():
-            # print(f'Esse é fornecedor --- {pagamento[1][1]}')
             transferencia = {}
             empresa = self.fornecedores.retorna_empresa((pagamento[1][1] + '  '), fonte)
             if pagamento[1][6] != 0:
-                # self.soma_iss_ir(pagamento[1])
-                # dados_empresa = empresa
-                # conta_origem = self.contas.pegar_conta(self.origem, pagamento[0][-2:])
-                # conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
-                # valor_total = self.somar_indice(pagamento[1], 3)
-                # total_extenso = self.valor_por_extenso(valor_total)
-                # nome_empresa = self.alinhar_texto(dados_empresa[0])
+                dados_empresa = empresa
+                conta_origem = self.contas.pegar_conta(self.origem, pagamento[1][5])
+                conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
+
+
+                nome_empresa = self.alinhar_texto(dados_empresa[0])
                 # self.converter_valores_em_string(pagamento[1])
                 transferencia['Empresa'] = pagamento[0]
                 transferencia['Pagamentos'] = pagamento[1]
-                # transferencia['Dados_empresa'] = dados_empresa
-                # transferencia['Conta_origem'] = conta_origem_fomatado
-                # transferencia['Valor_total'] = self.formartar_valor(valor_total)
-                # transferencia['Nome_empresa'] = nome_empresa
+                transferencia['Dados_empresa'] = dados_empresa
+                transferencia['Conta_origem'] = conta_origem_fomatado
+
+                transferencia['Nome_empresa'] = nome_empresa
                 # transferencia['Total_extenso'] = total_extenso
-                # transferencia['Data_impressão'] = self.data_formatada()
+                transferencia['Data_impressão'] = self.data_formatada()
                 transferencias.append(transferencia)
         for p in transferencias:
-            for pag in p.items():
-                print(f'{pag[0]}: {pag[1]}')
-            print('\n')
+            if isinstance(p, dict):
+                for pag in p.items():
+                    print(f'{pag[0]}: {pag[1]}')
+                print('\n')
+            else:
+                print(f'{p}\n\n')
         return transferencias
+
+# ['2034', 'HOSPFAR 0002 (702680)', '130883121', 1852.7, '00060-00014121/2024-09', 'RC', 22.5, 0.0, 1875.2, 'mil, oitocentos e cinquenta e dois reais e setenta centavos']
