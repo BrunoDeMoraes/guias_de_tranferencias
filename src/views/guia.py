@@ -91,7 +91,7 @@ class Guia(ABC):
             self.gerar_linhas(linhas_pagamento, self.altura)
             self.gerar_retangulos(retangulo_pagamentos, self.altura)
             self.inserir_strings(
-                'Times-Roman',
+            'Times-Roman',
                 8,
                 times8_pagamento,
                 self.altura,

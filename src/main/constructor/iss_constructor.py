@@ -17,10 +17,10 @@ def iss_constructor(entrada: Dict):
     tranferencias = IssController(contas, data_pagameto, fornecedores, origem, pagamentos)
     dados_de_tranferencias = tranferencias.filtrar_dados()
 
-    # for dicionario in dados_de_tranferencias:
-    #     logo = 'logo.png'
-    #     guia = GuiaDeISS(dicionario, logo)
-    #     guia.gerar_guia()
+    # # for dicionario in dados_de_tranferencias:
+    # logo = 'logo.png'
+    # guia = GuiaDeISS(dicionario, logo)
+    # guia.gerar_guia()
     # if pagamentos:
     #     return 'DEU CERTO!!!'
     # else:

@@ -37,22 +37,37 @@ class InterfaceController(ABC):
         return soma
 
 
-    def extrair_pagamentos(self, lista: Dict):
+    def listar_pagamentos_de_imposto(self, pagamentos: Dict, indice: int):
+        lista_de_pagamentos = self.extrair_pagamentos(pagamentos)
+        pagamentos_validos = []
+        for pagamento in lista_de_pagamentos:
+            if pagamento[indice] != 0:
+                pagamentos_validos.append(pagamento)
+        return pagamentos_validos
+
+
+    def extrair_pagamentos(self, dicionário_de_pagamentos: Dict):
         lista_de_pagamentos = []
-        for pagamento in lista.items():
+        for pagamento in dicionário_de_pagamentos.items():
             lista_de_pagamentos.append(pagamento[1])
         return lista_de_pagamentos
 
 
+
     def converter_valores_em_string(self, pagamentos: List):
         for pagamento in pagamentos:
-            indice = 0
-            for dado in pagamento:
-                print(f'Dado {dado}')
-                if isinstance(dado, float):
-                    valor_formatado = self.formartar_valor(dado)
-                    pagamento[indice] = valor_formatado
-                indice += 1
+            self.converter_valores_em_string_lista_simples(pagamento)
+
+
+
+    def converter_valores_em_string_lista_simples(self, pagamento):
+        indice = 0
+        for dado in pagamento:
+            print(f'Dado {dado}')
+            if isinstance(dado, float):
+                valor_formatado = self.formartar_valor(dado)
+                pagamento[indice] = valor_formatado
+            indice += 1
 
 
     def soma_iss_ir(self, pagamentos: list):

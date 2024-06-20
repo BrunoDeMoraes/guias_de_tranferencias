@@ -3,7 +3,7 @@ import sqlite3
 from src.comandos_sql import CONSULTA_TABELAS
 
 from src.comandos_sql import URLS
-from  src.comandos_sql import TABELAS
+from src.comandos_sql import TABELAS
 
 class DadosDeContas:
 
