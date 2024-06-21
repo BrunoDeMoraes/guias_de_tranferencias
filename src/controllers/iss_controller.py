@@ -25,7 +25,6 @@ class IssController(InterfaceController):
         regular_investimento = []
         emenda_custeio = []
         emenda_investimento = []
-        lista_de_contas = [regular_custeio, regular_investimento, emenda_custeio, emenda_investimento]
         contas = {
             'RC': regular_custeio,
             'RI': regular_investimento,
@@ -42,16 +41,19 @@ class IssController(InterfaceController):
             contas[pagamento[5]].append(pagamento)
 
 
-        for conta in lista_de_contas:
+        for conta in contas.items():
             transferencia = {}
-            if len(conta) == 0:
+            if len(conta[1]) == 0:
                 continue
             else:
-                iss_somado = self.somar_indice(conta, 6)
+                iss_somado = self.somar_indice(conta[1], 6)
                 valor_total = self.formartar_valor(iss_somado)
                 total_extenso = self.valor_por_extenso(iss_somado)
+                conta_origem = self.contas.pegar_conta(self.origem, conta[0])
+                conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
 
-                print(f'{iss_somado} - {valor_total}\n\n {total_extenso}\n\n')
+
+                print(f'{iss_somado} - {valor_total}\n\n {total_extenso}\n\n{conta_origem_fomatado}')
 
 
 
@@ -65,8 +67,7 @@ class IssController(InterfaceController):
 
 
         #     dados_empresa = self.fornecedores.retorna_empresa((pagamento[1][1] + '  '), fonte)
-        # conta_origem = self.contas.pegar_conta(self.origem, pagamento[1][5])
-        # conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
+
         # nome_empresa = self.alinhar_texto(dados_empresa[0])
         # print(f'Esse é o pagamento karai {pagamento[1]}')
         # self.converter_valores_em_string_lista_simples(pagamento[1])
