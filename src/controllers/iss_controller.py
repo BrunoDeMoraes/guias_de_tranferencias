@@ -51,52 +51,29 @@ class IssController(InterfaceController):
                 total_extenso = self.valor_por_extenso(iss_somado)
                 conta_origem = self.contas.pegar_conta(self.origem, conta[0])
                 conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
+                pagamentos_por_origem = conta[1]
+                for lista in pagamentos_por_origem:
+                    fornecedor = self.fornecedores.retorna_empresa(lista[1], fonte)[4]
+                    lista.append(fornecedor)
+                self.converter_valores_em_string(pagamentos_por_origem)
 
+                transferencia['Empresa'] = (f'ISS-{conta[0]}')
+                transferencia['Pagamentos'] = pagamentos_por_origem
+                transferencia['Conta_origem'] = conta_origem_fomatado
+                transferencia['Valor_total'] = valor_total
+                transferencia['Total_extenso'] = total_extenso
+                transferencia['Data_impressão'] = self.data_formatada()
+                transferencias.append(transferencia)
 
-                print(f'{iss_somado} - {valor_total}\n\n {total_extenso}\n\n{conta_origem_fomatado}')
-
-
-
-
-
-
-
-
-
-
-
-
-        #     dados_empresa = self.fornecedores.retorna_empresa((pagamento[1][1] + '  '), fonte)
-
-        # nome_empresa = self.alinhar_texto(dados_empresa[0])
-        # print(f'Esse é o pagamento karai {pagamento[1]}')
-        # self.converter_valores_em_string_lista_simples(pagamento[1])
-
-
-
-
-        # transferencias.append(valor_total)
-        # transferencias.append(total_extenso)
-
-
-
-
-                # # transferencia['Empresa'] = pagamento[0]
-                # transferencia['CNPJ'] = dados_empresa[4]
-                # transferencia['Pagamentos'] = pagamento[1]
-                # # transferencia['Dados_empresa'] = dados_empresa
-                # transferencia['Conta_origem'] = conta_origem_fomatado
-                # # transferencia['Nome_empresa'] = nome_empresa
-                # transferencia['Data_impressão'] = self.data_formatada()
-                # transferencias.append(transferencia)
-        # for p in transferencias:
-        #     if isinstance(p, dict):
-        #         for pag in p.items():
-        #             print(f'{pag[0]}: {pag[1]}')
-        #         print('\n')
-        #     else:
-        #         print(f'{p}\n\n')
-        # return transferencias
+        for p in transferencias:
+            if isinstance(p, dict):
+                for pag in p.items():
+                    print(f'{pag[0]}: {pag[1]}')
+                print('\n')
+            else:
+                print(f'{p}\n\n')
+        print(transferencias)
+        return transferencias
 
 
 

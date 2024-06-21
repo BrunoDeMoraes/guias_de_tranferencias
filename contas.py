@@ -43,8 +43,6 @@ class Contas:
         origens = {}
         for caminho in caminhos:
             origens[caminho[0]] = caminho[1]
-        print(origens)
-        print(origens[fonte])
         return origens[fonte]
 
     def consultar_tabelas(self):

@@ -21,10 +21,10 @@ class GuiaDeISS(Guia):
             self.inserir_strings('Times-Bold', 7, TIMESB8HISTORICO, self.contador, self.dados)
             self.inserir_strings('Times-Bold', 9, TIMESB9, self.contador)
             self.inserir_strings('Times-Bold', 8, TIMESB8CONTA, self.contador, self.dados['Conta_origem'])
-            self.inserir_strings('Times-Bold', 8, TIMESB8FORNECEDOR, self.contador, self.dados['Dados_empresa'])
+            #self.inserir_strings('Times-Bold', 8, TIMESB8FORNECEDOR, self.contador, self.dados['Dados_empresa'])
             self.inserir_strings('Times-Bold', 8, TIMESBVALORTOTAL, self.contador, self.dados)
             self.inserir_strings('Times-Bold', 12, TIMESB12, self.contador, self.dados['Conta_origem'])
-            self.gerar_linhas_texto_alinhado('Times-Bold', 7, TIMESB7NOMEEMPRESA, 'Nome_empresa', 3)
+            #self.gerar_linhas_texto_alinhado('Times-Bold', 7, TIMESB7NOMEEMPRESA, 'Nome_empresa', 3)
             self.gerar_linhas_texto_alinhado('Times-Bold', 9, TIMESB7EXTENSO, 'Total_extenso', 4)
             self.contador += 100
         self.contador = 0

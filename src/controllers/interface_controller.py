@@ -33,7 +33,6 @@ class InterfaceController(ABC):
         soma = 0
         for pagamento in pagamentos:
             soma += pagamento[indice]
-        print(f'essa é a soma {soma}')
         return soma
 
 
@@ -63,7 +62,6 @@ class InterfaceController(ABC):
     def converter_valores_em_string_lista_simples(self, pagamento):
         indice = 0
         for dado in pagamento:
-            print(f'Dado {dado}')
             if isinstance(dado, float):
                 valor_formatado = self.formartar_valor(dado)
                 pagamento[indice] = valor_formatado
@@ -125,7 +123,6 @@ class InterfaceController(ABC):
     def valor_por_extenso(self, valor):
         extenso = num2words(valor, lang='pt_BR', to='currency')
         valor_extenso = self.alinhar_texto(extenso)
-        print(f'Valor por extenso {valor_extenso}')
         return valor_extenso
 
 
