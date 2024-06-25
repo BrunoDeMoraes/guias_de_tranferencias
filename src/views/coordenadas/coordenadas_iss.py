@@ -199,12 +199,13 @@ TIMESB9 = [
 ]
 
 TIMESB9PAGAMENTO = [
-    (35, 130, "SEI"),
-    (68, 130, "Cotação"),
-    (93, 130, "DANFE"),
-    (116, 130, "Valor total"),
-    (141, 130, "IRRF / ISS"),
-    (168, 130, "Valor líquido")
+    (15, 130, "SEI"),
+    (40, 130, "Cotação"),
+    (65, 130, "Empresa"),
+    (98, 130, "CNPJ"),
+    (120, 130, "DANFE"),
+    (140, 130, "Valor total"),
+    (165, 130, "IRRF / ISS"),
 ]
 
 TIMESB12 = [
