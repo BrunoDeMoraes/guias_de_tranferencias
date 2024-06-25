@@ -199,4 +199,5 @@ TIMESB12 = [
 
 ]
 
+PONTILHADO = (8, 192, 196, 192)
 #cnv.drawString(self.mm(146), self.mm(283 - contador), f"{conta[1]} - {conta[2]}")

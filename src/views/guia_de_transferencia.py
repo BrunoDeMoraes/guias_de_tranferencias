@@ -29,7 +29,7 @@ class GuiaDeTransferencia(Guia):
             self.contador += 100
         self.contador = 0
         self.gerar_area_de_pagamentos(LINHAS_PAGAMENTOS, RETANGULO_PAGAMENTO, TIMES8_PAGAMENTOS)
-        self.inserir_pontilhado()
+        self.inserir_pontilhado(PONTILHADO)
         self.cnv.save()
 
 

@@ -40,9 +40,9 @@ class Guia(ABC):
                 )
 
 
-    def inserir_pontilhado(self):
+    def inserir_pontilhado(self, coordenadas):
         self.cnv.setDash([3, 1])
-        self.cnv.line(self.mm(8), self.mm(192), self.mm(196), self.mm(192))
+        self.cnv.line(self.mm(coordenadas[0]), self.mm(coordenadas[1]), self.mm(coordenadas[2]), self.mm(coordenadas[3]))
 
 
     def gerar_retangulos(self, retangulos, contador):

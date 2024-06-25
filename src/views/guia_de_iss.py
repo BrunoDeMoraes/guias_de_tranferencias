@@ -26,10 +26,13 @@ class GuiaDeISS(Guia):
             self.inserir_strings('Times-Bold', 12, TIMESB12, self.contador, self.dados['Conta_origem'])
             #self.gerar_linhas_texto_alinhado('Times-Bold', 7, TIMESB7NOMEEMPRESA, 'Nome_empresa', 3)
             self.gerar_linhas_texto_alinhado('Times-Bold', 9, TIMESB7EXTENSO, 'Total_extenso', 4)
-            self.contador += 100
+            self.contador += 80
         self.contador = 0
+        self.gerar_retangulos(RETANGULOSTITULO, self.contador)
+        self.gerar_linhas(LINHASTPGAMENTO, self.contador)
+        self.inserir_strings('Times-Bold', 9, TIMESB9PAAMENTO, self.contador)
         self.gerar_area_de_pagamentos(LINHAS_PAGAMENTOS, RETANGULO_PAGAMENTO, TIMES8_PAGAMENTOS)
-        self.inserir_pontilhado()
+        self.inserir_pontilhado(PONTILHADO)
         self.cnv.save()
 
 

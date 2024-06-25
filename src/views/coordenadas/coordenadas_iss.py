@@ -21,21 +21,24 @@ LINHAS_ESTRUTURA = [
     # (8, 214, 8, 219),  #linha vertical id esquerda
     # (75, 214, 75, 219),  #linha vertica id direita
     # (8, 214, 75, 214),  #linha horizontal id
-    (8, 199, 196, 199),  #linha horizontal assinatura
-    (102, 207, 102, 199),  #linha vertical assinatura
-    (60, 84, 60, 89),
-    (85, 84, 85, 89),
-    (110, 84, 110, 89),
-    (135, 84, 135, 89),
-    (160, 84, 160, 89)
+    (8, 220, 196, 220),  #linha horizontal assinatura
+    (102, 228, 102, 220),  #linha vertical assinatura
 ]
 
 LINHAS_PAGAMENTOS = [
-    (60, 79, 60, 84),
-    (85, 79, 85, 84),
-    (110, 79, 110, 84),
-    (135, 79, 135, 84),
-    (160, 79, 160, 84)
+    (60, 124, 60, 129),
+    (85, 124, 85, 129),
+    (110, 124, 110, 129),
+    (135, 124, 135, 129),
+    (160, 124, 160, 129)
+]
+
+LINHASTPGAMENTO = [
+    (60, 129, 60, 134),
+    (85, 129, 85, 134),
+    (110, 129, 110, 134),
+    (135, 129, 135, 134),
+    (160, 129, 160, 134)
 ]
 
 RETANGULOS = [
@@ -50,11 +53,14 @@ RETANGULOS = [
     # (170, 221, 3, 3),
     # (21, 236, 3, 3),
     # (66, 236, 3, 3),
-    (12, 84, 180, 5),
+]
+
+RETANGULOSTITULO = [
+    (12, 129, 180, 5)
 ]
 
 RETANGULO_PAGAMENTO = [
-    (12, 79, 180, 5)
+    (12, 124, 180, 5)
 ]
 
 
@@ -94,26 +100,29 @@ TIMES7 = [
     #     "de recursos para deposito judicial"
     # # )
     #  ),
-    (10, 227, (
+    (10, 237, (
         "Autorizo o Banco a DEBITAR em minha Conta"
         " de Depósitos, nesta Agência, o valor da "
+    )
+     ),
+    (10, 234, (
         "presente transferência de fundos."
     )
      ),
-    (17, 201, (
+    (17, 221, (
         "Luiz Antônio Roriz Bueno - "
         "Diretor Administrativo - Ma"
         "trícula: 1.659.430-4"
     )
      ),
-    (114, 201, (
+    (114, 221, (
         "Willy Pereira da Silva Filho - "
         "Superintendente - Matrícula 1.680.762-6"
     )
      )
 ]
 
-TIMES7DATA = [(155, 217, 'Data_impressão')]
+TIMES7DATA = [(75, 231, 'Data_impressão')]
 
 TIMESB7NOMEEMPRESA = (104, 258)
 
@@ -150,12 +159,12 @@ TIMESB8 = [
 ]
 
 TIMES8_PAGAMENTOS = [
-    (21, 81, 4), #CNPJ
-    (69, 81, 0), #cotação
-    (91, 81, 2), #empresa
-    (113, 81, 8), #valor bruto
-    (163, 81, 3), #valor liquido
-    (138, 81, -1) #ISS+IR
+    (21, 125, 4), #CNPJ
+    (69, 125, 0), #cotação
+    (91, 125, 2), #empresa
+    (113, 125, 8), #valor bruto
+    (163, 125, 3), #valor liquido
+    (138, 125, -1) #ISS+IR
 ]
 
 TIMESB8CONTA = [
@@ -186,16 +195,21 @@ TIMESB9 = [
     (138, 274, 'entre contas no âmbito do BRB'),
     (10, 269, 'Conta Remetente'),
     (104, 269, 'Destinação'),
-    (84, 196, 'Assinatura do Remetente'),
-    (35, 86, "SEI"),
-    (68, 86, "Cotação"),
-    (93, 86, "DANFE"),
-    (116, 86, "Valor total"),
-    (141, 86, "IRRF / ISS"),
-    (168, 86, "Valor líquido")
+    (84, 216, 'Assinatura do Remetente'),
+]
+
+TIMESB9PAAMENTO = [
+    (35, 130, "SEI"),
+    (68, 130, "Cotação"),
+    (93, 130, "DANFE"),
+    (116, 130, "Valor total"),
+    (141, 130, "IRRF / ISS"),
+    (168, 130, "Valor líquido")
 ]
 
 TIMESB12 = [
     (121, 283, 0),
     (176, 283, 1)
 ]
+
+PONTILHADO = (8, 213, 196, 213)
