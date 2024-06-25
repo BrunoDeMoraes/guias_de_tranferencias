@@ -25,6 +25,9 @@ LINHAS_ESTRUTURA = [
     (8, 214, 75, 214),  #linha horizontal id
     (8, 199, 196, 199),  #linha horizontal assinatura
     (102, 207, 102, 199),  #linha vertical assinatura
+]
+
+LINHASTPGAMENTO = [
     (60, 79, 60, 89),
     (85, 79, 85, 89),
     (110, 79, 110, 89),
@@ -53,7 +56,10 @@ RETANGULOS = [
     (170, 221, 3, 3),
     (21, 236, 3, 3),
     (66, 236, 3, 3),
-    (12, 84, 180, 5),
+]
+
+RETANGULOSTITULO =[
+    (12, 84, 180, 5)
 ]
 
 RETANGULO_PAGAMENTO = [
@@ -184,7 +190,10 @@ TIMESB9 = [
     (10, 269, 'Instituição Financeira Remetente'),
     (104, 269, 'Instituição Financeira Destinatária'),
     (82, 269, "Uso do Banco"),
-    (84, 196, 'Assinatura do Remetente'),
+    (84, 196, 'Assinatura do Remetente')
+]
+
+TIMESB9PAGAMENTO = [
     (35, 86, "SEI"),
     (68, 86, "Cotação"),
     (93, 86, "DANFE"),
