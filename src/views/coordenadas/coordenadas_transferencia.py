@@ -22,11 +22,6 @@ LINHAS_ESTRUTURA = [
     (8, 214, 75, 214),  #linha horizontal id
     (8, 199, 196, 199),  #linha horizontal assinatura
     (102, 207, 102, 199),  #linha vertical assinatura
-    (60, 84, 60, 89),
-    (85, 84, 85, 89),
-    (110, 84, 110, 89),
-    (135, 84, 135, 89),
-    (160, 84, 160, 89)
 ]
 
 LINHAS_PAGAMENTOS = [
@@ -35,6 +30,14 @@ LINHAS_PAGAMENTOS = [
     (110, 79, 110, 84),
     (135, 79, 135, 84),
     (160, 79, 160, 84)
+]
+
+LINHASTPGAMENTO = [
+    (60, 84, 60, 89),
+    (85, 84, 85, 89),
+    (110, 84, 110, 89),
+    (135, 84, 135, 89),
+    (160, 84, 160, 89)
 ]
 
 RETANGULOS = [
@@ -49,8 +52,11 @@ RETANGULOS = [
     (140, 221, 3, 3),
     (170, 221, 3, 3),
     (21, 236, 3, 3),
-    (66, 236, 3, 3),
-    (12, 84, 180, 5),
+    (66, 236, 3, 3)
+]
+
+RETANGULOSTITULO = [
+    (12, 84, 180, 5)
 ]
 
 RETANGULO_PAGAMENTO = [
@@ -174,7 +180,10 @@ TIMESB9 = [
     (138, 274, 'entre contas no âmbito do BRB'),
     (10, 269, 'Conta Remetente'),
     (104, 269, 'Conta Destinatária'),
-    (84, 196, 'Assinatura do Remetente'),
+    (84, 196, 'Assinatura do Remetente')
+]
+
+TIMESB9PAAMENTO = [
     (35, 86, "SEI"),
     (68, 86, "Cotação"),
     (93, 86, "DANFE"),
@@ -182,6 +191,7 @@ TIMESB9 = [
     (141, 86, "IRRF / ISS"),
     (168, 86, "Valor líquido")
 ]
+
 
 TIMESB12 = [
     (121, 283, 0),
