@@ -68,6 +68,17 @@ class InterfaceController(ABC):
             indice += 1
 
 
+    def formatar_empresa(self, pagamentos: list) -> None:
+        for pagamento in pagamentos:
+            print(pagamento)
+            palavras = pagamento[1].split()
+            fornecedor = ' '.join(palavras[:-1])
+            if len(fornecedor) > 25:
+                pagamento[1] = f'{fornecedor[:22]}...'
+            else:
+                pagamento[1] = fornecedor
+
+
     def soma_iss_ir(self, pagamentos: list):
         for pagamento in pagamentos:
             soma = pagamento[6] + pagamento[7]

@@ -7,99 +7,66 @@ LINHAS_ESTRUTURA = [
     (8, 268, 8, 230),  #linha esquerda
     (30, 268, 30, 264),  #divisão linha 1.2
     (148, 254, 148, 264),  #divisão linha 2.5
-    (168, 268, 168, 264),  #divisão linha 1.6
+    (160, 268, 160, 264),  #divisão linha 1.6
     (8, 264, 196, 264),  #linha horizontal 1 258
     (80, 264, 80, 254),  #linha vertical telefone
     (8, 254, 196, 254),  #linha horizontal 2 248
     (135, 250, 135, 254),  #divisão linha 2.5
     (8, 250, 196, 250), #linha horizontal 3 238
     (8, 240, 102, 240),  #meia linha horizontal 1
-    # (8, 235, 102, 235),  #linha horizontal 4
     (102, 230, 196, 230),  #linha horizontal 4.5
-    # (8, 225, 196, 225),  #linha horizontal 5
-    # (8, 220, 196, 220),  #linha horizontal 6
-    # (8, 214, 8, 219),  #linha vertical id esquerda
-    # (75, 214, 75, 219),  #linha vertica id direita
-    # (8, 214, 75, 214),  #linha horizontal id
     (8, 220, 196, 220),  #linha horizontal assinatura
     (102, 228, 102, 220),  #linha vertical assinatura
 ]
 
 LINHAS_PAGAMENTOS = [
-    (60, 124, 60, 129),
-    (85, 124, 85, 129),
-    (110, 124, 110, 129),
-    (135, 124, 135, 129),
-    (160, 124, 160, 129)
+    (44, 128, 44, 131),
+    (58, 128, 58, 131),
+    (99, 128, 99, 131),
+    (124, 128, 124, 131),
+    (142, 128, 142, 131),
+    (166, 128, 166, 131),
 ]
 
 LINHASTPGAMENTO = [
-    (60, 129, 60, 134),
-    (85, 129, 85, 134),
-    (110, 129, 110, 134),
-    (135, 129, 135, 134),
-    (160, 129, 160, 134)
+    (44, 129, 44, 134),
+    (58, 129, 58, 134),
+    (99, 129, 99, 134),
+    (124, 129, 124, 134),
+    (142, 129, 142, 134),
+    (166, 129, 166, 134),
 ]
 
 RETANGULOS = [
-    (120, 281, 75, 7),
-    # (40, 226, 3, 3),
-    # (70, 226, 3, 3),
-    # (40, 221, 3, 3),
-    # (70, 221, 3, 3),
-    # (140, 226, 3, 3),
-    # (170, 226, 3, 3),
-    # (140, 221, 3, 3),
-    # (170, 221, 3, 3),
-    # (21, 236, 3, 3),
-    # (66, 236, 3, 3),
+    (120, 281, 75, 7)
 ]
 
 RETANGULOSTITULO = [
-    (12, 129, 180, 5)
+    (12, 131, 180, 3.5)
 ]
 
 RETANGULO_PAGAMENTO = [
-    (12, 124, 180, 5)
+    (12, 128, 180, 3)
 ]
 
 
 # Strings
-TIMES6 = [
-    # (25, 237, "00001 - Pagamento de ipostos, tributos e taxas"),
-    # (70, 237, "00005 - Pagamentos de fornecedores")
-]
+TIMES6 = []
 
 TIMES7 = [
     (10, 265, "Agência"),
     (32, 265, "Nº Conta Remetente"),
-    # (104, 265, "Agência"),
-    # (126, 265, "Nº Conta Favorecido"),
-    (170, 265, "Valor"),
+    (162, 265, "Valor"),
     (10, 261, "Nome do(s) Remetente(s)"),
-    # (104, 261, "Nome do(s) Destinatário(s)"),
     (104, 261, "Tipo Conta Debitada"),
     (150, 261, "Tipo Conta Creditada"),
     (10, 251, "CNPJ/CPF(s)"),
-    # (104, 251, "CNPJ/CPF(s)"),
     (104, 251, "Histórico"),
     (137, 251, "Finalidade"),
     (148, 251, " Pagamento de ipostos, tributos e taxas"),
     (104, 247, "Valor por Extenso"),
     (10, 247, "Endereço"),
     (82, 261, "Telefone(s)"),
-    # (10, 227, "Tipo Pessoa Debitada"),
-    # (10, 222, "Tipo Conta Debitada"),
-    # (104, 227, "Tipo Pessoa Creditada"),
-    # (104, 222, "Tipo Conta Creditada"),
-    # (10, 237, "Finalidade"),
-    # (10, 232, "Histórico"),
-    # (10, 217, "Nº Identificação Depósito"),
-    # (76, 216, (
-    #     "Preencher somente nas transferências "
-    #     "de recursos para deposito judicial"
-    # # )
-    #  ),
     (10, 237, (
         "Autorizo o Banco a DEBITAR em minha Conta"
         " de Depósitos, nesta Agência, o valor da "
@@ -128,23 +95,9 @@ TIMESB7NOMEEMPRESA = (104, 258)
 
 TIMESB7EXTENSO = (104, 242)
 
-TIMES8 = [
-    # (45, 226, "Pesssoa Física"),
-    # (75, 226, "Pesssoa Jurídica"),
-    # (45, 221, "Conta Corrente"),
-    # (75, 221, "Conta Poupança"),
-    # (145, 226, "Pesssoa Física"),
-    # (175, 226, "Pesssoa Jurídica"),
-    # (145, 221, "Conta Corrente"),
-    # (175, 221, "Conta Poupança")
-]
+TIMES8 = []
 
 TIMESB8 = [
-    # (71, 227, "\u2713"),
-    # (41, 222, "\u2713"),
-    # (171, 227, "\u2713"),
-    # (141, 222, "\u2713"),
-    # (67, 237, "\u2713"),
     (10, 242, (
         "Área especial nº 01, Lote Único - "
         "Setor Central Gama/DF. CEP: 72.405-901"
@@ -153,18 +106,18 @@ TIMESB8 = [
     (82, 256, "(61) 2017-1821"),  #telefone
     (104, 265, "Retenção de ISS"),
     (104, 256, "Conta corrente/Pessoa Jurídica"),
-    (150, 256, "Conta corrente/Pessoa Jurídica"),
-
-# (104, 258, 'Nome_empresa')
+    (150, 256, "Conta corrente/Pessoa Jurídica")
 ]
 
 TIMES8_PAGAMENTOS = [
-    (21, 125, 4), #CNPJ
-    (69, 125, 0), #cotação
-    (91, 125, 2), #empresa
-    (113, 125, 8), #valor bruto
-    (163, 125, 3), #valor liquido
-    (138, 125, -1) #ISS+IR
+    (13, 129, 4), #Nº processo SEI
+    (45, 129, 0), #cotação
+    (59, 129, 1), #empresa
+    (100, 129, -1), #CNPJ
+    (125, 129, 2), #DANFE
+    (145, 129, 8), #valor total
+    (170, 129, 6), #ISS
+
 ]
 
 TIMESB8CONTA = [
@@ -180,15 +133,13 @@ TIMESB8FORNECEDOR = [
     (119, 251, 4)  #CNPJ - fornecedor
 ]
 
-TIMESBVALORTOTAL = [(176, 265, 'Valor_total')]  #valor
+TIMESBVALORTOTAL = [(169, 265, 'Valor_total')]  #valor
 
 TIMESB8ALINHADO = [
     (104, 258, 'Nome_empresa')
 ]
 
 TIMESB8HISTORICO = [(114, 251, 'Empresa')]
-
-# (104, 251, "Histórico"),
 
 TIMESB9 = [
     (129, 278, 'Autorização para transferência de valores'),
@@ -199,13 +150,13 @@ TIMESB9 = [
 ]
 
 TIMESB9PAGAMENTO = [
-    (15, 130, "SEI"),
-    (40, 130, "Cotação"),
-    (65, 130, "Empresa"),
-    (98, 130, "CNPJ"),
-    (120, 130, "DANFE"),
-    (140, 130, "Valor total"),
-    (165, 130, "IRRF / ISS"),
+    (27, 132, "SEI"),
+    (46, 132, "Cotação"),
+    (73, 132, "Empresa"),
+    (108, 132, "CNPJ"),
+    (127, 132, "DANFE"),
+    (146, 132, "Valor total"),
+    (176, 132, "ISS"),
 ]
 
 TIMESB12 = [

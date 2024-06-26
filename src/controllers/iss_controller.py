@@ -56,6 +56,7 @@ class IssController(InterfaceController):
                     fornecedor = self.fornecedores.retorna_empresa(lista[1], fonte)[4]
                     lista.append(fornecedor)
                 self.converter_valores_em_string(pagamentos_por_origem)
+                self.formatar_empresa(pagamentos_por_origem)
 
                 transferencia['Empresa'] = (f'ISS-{conta[0]}')
                 transferencia['Pagamentos'] = pagamentos_por_origem

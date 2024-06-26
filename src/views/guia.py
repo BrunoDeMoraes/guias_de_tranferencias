@@ -92,12 +92,12 @@ class Guia(ABC):
             self.gerar_retangulos(retangulo_pagamentos, self.altura)
             self.inserir_strings(
             'Times-Roman',
-                8,
+                6,
                 times8_pagamento,
                 self.altura,
                 pagamento
             )
-            self.altura += 5
+            self.altura += 3
         self.altura = 0
 
 
