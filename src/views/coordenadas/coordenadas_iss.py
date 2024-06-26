@@ -90,7 +90,9 @@ TIMES7 = [
 
 TIMES7DATA = [(75, 231, 'Data_impressão')]
 
-TIMESB7NOMEEMPRESA = (104, 258)
+TIMESB7NOMEEMPRESA = (
+    # 104, 258
+)
 
 TIMESB7EXTENSO = (104, 242)
 
@@ -129,9 +131,9 @@ TIMESB8CONTA = [
 ]
 
 TIMESB8FORNECEDOR = [
-    (113, 265, 7), #agência
-    (148, 265, 8), #conta
-    (119, 251, 4)  #CNPJ - fornecedor
+    # (113, 265, 7), #agência
+    # (148, 265, 8), #conta
+    # (119, 251, 4)  #CNPJ - fornecedor
 ]
 
 TIMESBVALORTOTAL = [(169, 265, 'Valor_total')]  #valor

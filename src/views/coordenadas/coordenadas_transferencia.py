@@ -183,7 +183,7 @@ TIMESB9 = [
     (84, 196, 'Assinatura do Remetente')
 ]
 
-TIMESB9PAAMENTO = [
+TIMESB9PAGAMENTO = [
     (35, 86, "SEI"),
     (68, 86, "Cotação"),
     (93, 86, "DANFE"),

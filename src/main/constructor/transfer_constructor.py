@@ -20,7 +20,7 @@ def transfer_constructor(entrada: Dict):
     for dicionario in dados_de_tranferencias:
         logo = 'logo.png'
         guia = GuiaDeTransferencia(dicionario, logo)
-        guia.gerar_guia()
+        guia.gerar_guia(100)
     if pagamentos:
         return 'DEU CERTO!!!'
     else:

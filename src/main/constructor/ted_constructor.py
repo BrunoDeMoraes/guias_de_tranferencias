@@ -20,7 +20,7 @@ def ted_constructor(entrada: Dict):
     for dicionario in dados_de_ted:
         logo = 'Logo_brb.jpg'
         guia = GuiaDeTED(dicionario, logo)
-        guia.gerar_guia()
+        guia.gerar_guia(100)
     if pagamentos:
         return 'DEU CERTO!!!'
     else:

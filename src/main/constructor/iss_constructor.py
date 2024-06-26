@@ -20,7 +20,7 @@ def iss_constructor(entrada: Dict):
     for dicionario in dados_de_tranferencias:
         logo = 'logo.png'
         guia = GuiaDeISS(dicionario, logo)
-        guia.gerar_guia()
+        guia.gerar_guia(80, True)
     if pagamentos:
         return 'DEU CERTO!!!'
     else:
