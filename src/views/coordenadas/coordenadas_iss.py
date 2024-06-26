@@ -38,7 +38,7 @@ LINHASTPGAMENTO = [
 ]
 
 RETANGULOS = [
-    (120, 281, 75, 7)
+    (140, 281, 56, 7)
 ]
 
 RETANGULOSTITULO = [
@@ -55,25 +55,24 @@ TIMES6 = []
 
 TIMES7 = [
     (10, 265, "Agência"),
-    (32, 265, "Nº Conta Remetente"),
+    (32, 265, "Conta"),
     (162, 265, "Valor"),
-    (10, 261, "Nome do(s) Remetente(s)"),
+    (10, 261, "Identificação de conta"),
     (104, 261, "Tipo Conta Debitada"),
     (150, 261, "Tipo Conta Creditada"),
     (10, 251, "CNPJ/CPF(s)"),
     (104, 251, "Histórico"),
     (137, 251, "Finalidade"),
-    (148, 251, " Pagamento de ipostos, tributos e taxas"),
     (104, 247, "Valor por Extenso"),
     (10, 247, "Endereço"),
     (82, 261, "Telefone(s)"),
     (10, 237, (
         "Autorizo o Banco a DEBITAR em minha Conta"
-        " de Depósitos, nesta Agência, o valor da "
+        " de Depósitos, nesta Agência, o valor total"
     )
      ),
     (10, 234, (
-        "presente transferência de fundos."
+        "indicado para realizar o presente pagamento."
     )
      ),
     (17, 221, (
@@ -103,10 +102,11 @@ TIMESB8 = [
         "Setor Central Gama/DF. CEP: 72.405-901"
     )
      ),
-    (82, 256, "(61) 2017-1821"),  #telefone
+    (82, 256, "(61) 3449-7105"),  #telefone
     (104, 265, "Retenção de ISS"),
     (104, 256, "Conta corrente/Pessoa Jurídica"),
-    (150, 256, "Conta corrente/Pessoa Jurídica")
+    (148, 251, " Pagamento de ipostos, tributos e taxas"),
+    (150, 256, "Conta corrente/Pessoa Jurídica"),
 ]
 
 TIMES8_PAGAMENTOS = [
@@ -122,8 +122,9 @@ TIMES8_PAGAMENTOS = [
 
 TIMESB8CONTA = [
     (19, 265, 4), #agência
-    (53, 265, 5), #conta
+    (39, 265, 5), #conta
     (10, 256, 0),  #origem
+    (35, 256, 1),  #tipo
     (25, 251, 6),  #CNPJ - regional
 ]
 
@@ -142,8 +143,8 @@ TIMESB8ALINHADO = [
 TIMESB8HISTORICO = [(114, 251, 'Empresa')]
 
 TIMESB9 = [
-    (129, 278, 'Autorização para transferência de valores'),
-    (138, 274, 'entre contas no âmbito do BRB'),
+    (150, 276, 'Autorização de pagamento'),
+    # (138, 274, 'entre contas no âmbito do BRB'),
     (10, 269, 'Conta Remetente'),
     (104, 269, 'Destinação'),
     (84, 216, 'Assinatura do Remetente'),
@@ -157,10 +158,12 @@ TIMESB9PAGAMENTO = [
     (127, 132, "DANFE"),
     (146, 132, "Valor total"),
     (176, 132, "ISS"),
+    (10, 217, "Via BRB"),
+    (10, 137, "Via Correntista"),
 ]
 
 TIMESB12 = [
-    (121, 283, 0),
+    (142, 283, 0),
     (176, 283, 1)
 ]
 
