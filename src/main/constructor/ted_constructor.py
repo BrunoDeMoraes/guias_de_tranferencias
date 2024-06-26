@@ -3,7 +3,7 @@ from typing import Dict
 from src.models.repository.dados_de_conta import DadosDeContas
 from src.models.repository.dados_de_fornecedores import DadosDeFornecedores
 from src.models.repository.dados_de_pagamento_repository import DadosDePagamentoRepository
-from src.views.guia_de_ted import GuiaDeTED
+from src.views.guia import Guia
 from src.controllers.ted_controller import TedController
 
 
@@ -19,8 +19,8 @@ def ted_constructor(entrada: Dict):
 
     for dicionario in dados_de_ted:
         logo = 'Logo_brb.jpg'
-        guia = GuiaDeTED(dicionario, logo)
-        guia.gerar_guia(100)
+        guia = Guia(dicionario, logo)
+        guia.gerar_guia(100, 'ted')
     if pagamentos:
         return 'DEU CERTO!!!'
     else:

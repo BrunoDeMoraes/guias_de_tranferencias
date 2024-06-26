@@ -3,7 +3,7 @@ from typing import Dict
 from src.models.repository.dados_de_conta import DadosDeContas
 from src.models.repository.dados_de_fornecedores import DadosDeFornecedores
 from src.models.repository.dados_de_pagamento_repository import DadosDePagamentoRepository
-from src.views.guia_de_iss import GuiaDeISS
+from src.views.guia import Guia
 from src.controllers.iss_controller import IssController
 
 
@@ -19,8 +19,8 @@ def iss_constructor(entrada: Dict):
 
     for dicionario in dados_de_tranferencias:
         logo = 'logo.png'
-        guia = GuiaDeISS(dicionario, logo)
-        guia.gerar_guia(80, True)
+        guia = Guia(dicionario, logo)
+        guia.gerar_guia(80, 'iss', True)
     if pagamentos:
         return 'DEU CERTO!!!'
     else:
