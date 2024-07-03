@@ -105,7 +105,7 @@ TIMESB8 = [
     )
      ),
     (82, 256, "(61) 3449-7105"),  #telefone
-    (104, 265, "Retenção de ISS"),
+    (104, 265, "Retenção de IR"),
     (104, 256, "Conta corrente/Pessoa Jurídica"),
     (148, 251, " Pagamento de ipostos, tributos e taxas"),
     (150, 256, "Conta corrente/Pessoa Jurídica"),
@@ -118,7 +118,7 @@ TIMES8_PAGAMENTOS = [
     (100, 128.5, -1), #CNPJ
     (125, 128.5, 2), #DANFE
     (145, 128.5, 8), #valor total
-    (170, 128.5, 6), #ISS
+    (170, 128.5, 7), #IR
 
 ]
 

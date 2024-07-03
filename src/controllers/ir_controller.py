@@ -6,7 +6,8 @@ from src.models.repository.dados_de_conta import DadosDeContas
 from src.models.repository.dados_de_fornecedores import DadosDeFornecedores
 from src.models.repository.dados_de_pagamento_repository import DadosDePagamentoRepository
 
-class IssController(InterfaceController):
+
+class IrController(InterfaceController):
     def __init__(
             self,
             contas: Type[DadosDeContas],
@@ -16,7 +17,6 @@ class IssController(InterfaceController):
             pagamento: Type[DadosDePagamentoRepository]
     ):
         super().__init__(contas, data, fornecedores, origem, pagamento)
-
 
     def filtrar_dados(self) -> Dict:
         transferencias = []
@@ -34,19 +34,17 @@ class IssController(InterfaceController):
 
         fonte = self.contas.definir_fonte(self.origem)
         pagamentos = self.pagametos.listar_pagamentos(fonte)
-        lista_de_pagamentos = self.listar_pagamentos_de_imposto(pagamentos, 6)
-
+        lista_de_pagamentos = self.listar_pagamentos_de_imposto(pagamentos, 7)
 
         for pagamento in lista_de_pagamentos:
             contas[pagamento[5]].append(pagamento)
-
 
         for conta in contas.items():
             transferencia = {}
             if len(conta[1]) == 0:
                 continue
             else:
-                imposto_somado = self.somar_indice(conta[1], 6)
+                imposto_somado = self.somar_indice(conta[1], 7)
                 valor_total = self.formartar_valor(imposto_somado)
                 total_extenso = self.valor_por_extenso(imposto_somado)
                 conta_origem = self.contas.pegar_conta(self.origem, conta[0])
@@ -58,7 +56,7 @@ class IssController(InterfaceController):
                 self.converter_valores_em_string(pagamentos_por_origem)
                 self.formatar_empresa(pagamentos_por_origem)
 
-                transferencia['Empresa'] = (f'ISS-{conta[0]}')
+                transferencia['Empresa'] = (f'IR-{conta[0]}')
                 transferencia['Pagamentos'] = pagamentos_por_origem
                 transferencia['Conta_origem'] = conta_origem_fomatado
                 transferencia['Valor_total'] = valor_total

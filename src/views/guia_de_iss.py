@@ -31,6 +31,6 @@ class GuiaDeISS(Guia):
         self.gerar_retangulos(RETANGULOSTITULO, self.contador)
         self.gerar_linhas(LINHASTPGAMENTO, self.contador)
         self.inserir_strings('Times-Bold', 7, TIMESB9PAGAMENTO, self.contador)
-        self.gerar_area_de_pagamentos(LINHAS_PAGAMENTOS, RETANGULO_PAGAMENTO, TIMES8_PAGAMENTOS)
+        self.gerar_area_de_pagamentos(LINHAS_PAGAMENTOS, RETANGULO_PAGAMENTO, TIMES8_PAGAMENTOS, 3.5, 7)
         self.inserir_pontilhado(PONTILHADO)
         self.cnv.save()

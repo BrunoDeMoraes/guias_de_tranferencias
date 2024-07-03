@@ -24,20 +24,20 @@ LINHAS_ESTRUTURA = [
     (102, 207, 102, 199),  #linha vertical assinatura
 ]
 
-LINHAS_PAGAMENTOS = [
-    (60, 79, 60, 84),
-    (85, 79, 85, 84),
-    (110, 79, 110, 84),
-    (135, 79, 135, 84),
-    (160, 79, 160, 84)
+LINHASTPGAMENTO = [
+    (60, 86, 60, 91),
+    (85, 86, 85, 91),
+    (110, 86, 110, 91),
+    (135, 86, 135, 91),
+    (160, 86, 160, 91)
 ]
 
-LINHASTPGAMENTO = [
-    (60, 84, 60, 89),
-    (85, 84, 85, 89),
-    (110, 84, 110, 89),
-    (135, 84, 135, 89),
-    (160, 84, 160, 89)
+LINHAS_PAGAMENTOS = [
+    (60, 81, 60, 86),
+    (85, 81, 85, 86),
+    (110, 81, 110, 86),
+    (135, 81, 135, 86),
+    (160, 81, 160, 86)
 ]
 
 RETANGULOS = [
@@ -56,11 +56,11 @@ RETANGULOS = [
 ]
 
 RETANGULOSTITULO = [
-    (12, 84, 180, 5)
+    (12, 86, 180, 5)
 ]
 
 RETANGULO_PAGAMENTO = [
-    (12, 79, 180, 5)
+    (12, 81, 180, 5)
 ]
 
 
@@ -146,12 +146,12 @@ TIMESB8 = [
 ]
 
 TIMES8_PAGAMENTOS = [
-    (21, 81, 4), #CNPJ
-    (69, 81, 0), #cotação
-    (91, 81, 2), #empresa
-    (113, 81, 8), #valor bruto
-    (163, 81, 3), #valor liquido
-    (138, 81, -1) #ISS+IR
+    (21, 82, 4), #CNPJ
+    (69, 82, 0), #cotação
+    (91, 82, 2), #empresa
+    (113, 82, 8), #valor bruto
+    (163, 82, 3), #valor liquido
+    (138, 82, -1) #ISS+IR
 ]
 
 TIMESB8CONTA = [
@@ -184,12 +184,12 @@ TIMESB9 = [
 ]
 
 TIMESB9PAGAMENTO = [
-    (35, 86, "SEI"),
-    (68, 86, "Cotação"),
-    (93, 86, "DANFE"),
-    (116, 86, "Valor total"),
-    (141, 86, "IRRF / ISS"),
-    (168, 86, "Valor líquido")
+    (35, 87, "SEI"),
+    (68, 87, "Cotação"),
+    (93, 87, "DANFE"),
+    (116, 87, "Valor total"),
+    (141, 87, "IRRF / ISS"),
+    (168, 87, "Valor líquido")
 ]
 
 

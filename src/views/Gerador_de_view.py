@@ -14,6 +14,7 @@ from src.models.repository.dados_de_conta import DadosDeContas
 from src.main.constructor.transfer_constructor import transfer_constructor
 from src.main.constructor.ted_constructor import ted_constructor
 from src.main.constructor.iss_constructor import iss_constructor
+from src.main.constructor.ir_constructor import ir_constructor
 
 from src import comandos_sql
 from src import constantes
@@ -86,11 +87,12 @@ class Interface(DadosDeContas):
         )
         self.botao_iss.grid(row=2, column=1)
 
-        # self.teste3 = Button(self.frame_2, text='Fornecedores', command=self.exibir_fornecedores)
-        # self.teste3.grid(row=0, column=3)
+        self.botao_ir = Button(
+            self.frame_2, text='Gerar IR',
+            command=lambda: self.gerar_constructor(ir_constructor)
+        )
+        self.botao_ir.grid(row=3, column=1)
 
-        # self.teste3 = Button(self.frame_2, text='Contas', command=self.exibir_contas)
-        # self.teste3.grid(row=0, column=4)
 
 
         self.data_hoje = date.today()
