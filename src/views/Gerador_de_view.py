@@ -468,7 +468,7 @@ class Interface(DadosDeContas):
         self.remetente.set('Conta remetente')
         self.lista_remetente = OptionMenu(self.frame_remetente, self.remetente, *numero_de_contas)
         self.lista_remetente.config(width=20)
-        self.lista_remetente.grid(row=1, column=1, padx=30)
+        self.lista_remetente.grid(row=1, column=1, padx=30, pady=30)
 
         self.frame_favorecido = LabelFrame(
             self.frame_geral_contas, padx=0, pady=0
@@ -478,8 +478,10 @@ class Interface(DadosDeContas):
         self.favorecido.set('Conta favorecido')
         self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *numero_de_contas)
         self.lista_favorecido.config(width=20)
-        self.lista_favorecido.grid(row=1, column=1, padx=30)
+        self.lista_favorecido.grid(row=1, column=1, padx=30, pady=30)
 
+        self.valor_a_transferir = Entry(self.frame_geral_contas, width=10, font=('Helvetica', 14))
+        self.valor_a_transferir.pack()
 
 
 
