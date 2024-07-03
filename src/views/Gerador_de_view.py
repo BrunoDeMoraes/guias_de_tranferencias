@@ -93,6 +93,12 @@ class Interface(DadosDeContas):
         )
         self.botao_ir.grid(row=3, column=1)
 
+        self.botao_transferencia_interna = Button(
+            self.frame_2, text='Transferência interna',
+            command=self.abrir_dados_de_transferencia_interna
+        )
+        self.botao_transferencia_interna.grid(row=4, column=1)
+
 
 
         self.data_hoje = date.today()
@@ -250,10 +256,10 @@ class Interface(DadosDeContas):
 
         self.atualizar_contas()
 
-        a = self.numero_contas()
+        numeros_de_contas = self.numero_contas()
         self.v_contas.set('Selecione uma conta')
-        print(a)
-        self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
+        print(numeros_de_contas)
+        self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *numeros_de_contas)
         self.v_contas_bd.config(width=20)
 
         self.botao_excluir = Button(self.frame_de_exclusao, text="Excluir conta", command=self.excluir_conta)
@@ -443,6 +449,117 @@ class Interface(DadosDeContas):
             row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
             ipady=13
         )
+
+    def abrir_dados_de_transferencia_interna(self):
+        self.dados_de_contas = Toplevel()
+        self.dados_de_contas.title('Transferência interna')
+        self.dados_de_contas.resizable(True, True)
+
+        self.frame_geral_contas = LabelFrame(
+            self.dados_de_contas, padx=0, pady=0
+        )
+        self.frame_geral_contas.pack()
+        self.frame_remetente = LabelFrame(
+            self.frame_geral_contas, padx=0, pady=0
+        )
+        self.frame_remetente.pack(padx=1, pady=1)
+        self.remetente = StringVar()
+        numero_de_contas = self.numero_contas()
+        self.remetente.set('Conta remetente')
+        self.lista_remetente = OptionMenu(self.frame_remetente, self.remetente, *numero_de_contas)
+        self.lista_remetente.config(width=20)
+        self.lista_remetente.grid(row=1, column=1, padx=30)
+
+        self.frame_favorecido = LabelFrame(
+            self.frame_geral_contas, padx=0, pady=0
+        )
+        self.frame_favorecido.pack(padx=1, pady=1)
+        self.favorecido = StringVar()
+        self.favorecido.set('Conta favorecido')
+        self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *numero_de_contas)
+        self.lista_favorecido.config(width=20)
+        self.lista_favorecido.grid(row=1, column=1, padx=30)
+
+
+
+
+        #
+        # )
+        # self.caminho_srssu = Entry(self.frame_caminhos, width=70)
+        #
+        # self.botao_pasta_de_certidões = Button(
+        #     self.frame_caminhos, text='APS Custeio',
+        #     command=lambda: (
+        #         self.altera_caminho(self.caminho_aps, True)),
+        #     padx=0, pady=0, bg='green', fg='white',
+        #     font=('Helvetica', 8, 'bold'), bd=1
+        # )
+        # self.caminho_aps = Entry(
+        #     self.frame_caminhos, width=70
+        # )
+        #
+        # self.botao_log = Button(
+        #     self.frame_caminhos, text='HRG Investimento',
+        #     command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
+        #     pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
+        #     bd=1
+        # )
+        # self.caminho_srssu_i = Entry(self.frame_caminhos, width=70)
+        #
+        # self.certidões_para_pagamento = Button(
+        #     self.frame_caminhos, text='APS Investimento',
+        #     command=lambda: (
+        #         self.altera_caminho(self.caminho_aps_i, True)
+        #     ),
+        #     padx=0, pady=0, bg='green', fg='white',
+        #     font=('Helvetica', 8, 'bold'), bd=1
+        # )
+        #
+        # self.caminho_aps_i = Entry(
+        #     self.frame_caminhos, width=70
+        # )
+        #
+        # self.gravar_alterações = Button(
+        #     self.frame_caminhos, text='Gravar alterações',
+        #     command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
+        #     fg='white', font=('Helvetica', 8, 'bold'), bd=1
+        # )
+        #
+        # self.botao_xlsx.grid(
+        #     row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
+        #     ipady=13, sticky=W + E
+        # )
+        # self.caminho_srssu.insert(0, self.urls[0][1])
+        # self.caminho_srssu.grid(row=1, column=2, padx=20)
+        #
+        # self.botao_pasta_de_certidões.grid(
+        #     row=2, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+        #     ipady=13, sticky=W + E
+        # )
+        #
+        # self.caminho_aps.insert(0, self.urls[1][1])
+        # self.caminho_aps.grid(row=2, column=2, padx=20)
+        #
+        # self.botao_log.grid(
+        #     row=3, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+        #     ipady=13, sticky=W + E
+        # )
+        #
+        # self.caminho_srssu_i.insert(0, self.urls[2][1])
+        # self.caminho_srssu_i.grid(row=3, column=2, padx=20)
+        #
+        # self.certidões_para_pagamento.grid(
+        #     row=4, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+        #     ipady=13, sticky=W + E
+        # )
+        #
+        # self.caminho_aps_i.insert(0, self.urls[3][1])
+        # self.caminho_aps_i.grid(row=4, column=2, padx=20)
+        #
+        # self.gravar_alterações.grid(
+        #     row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
+        #     ipady=13
+        # )
 
 
 if __name__ == '__main__':
