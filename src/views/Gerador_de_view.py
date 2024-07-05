@@ -15,6 +15,7 @@ from src.main.constructor.transfer_constructor import transfer_constructor
 from src.main.constructor.ted_constructor import ted_constructor
 from src.main.constructor.iss_constructor import iss_constructor
 from src.main.constructor.ir_constructor import ir_constructor
+from src.main.constructor.interna_constructor import interna_constructor
 
 from src import comandos_sql
 from src import constantes
@@ -470,6 +471,12 @@ class Interface(DadosDeContas):
         self.lista_remetente.config(width=20)
         self.lista_remetente.grid(row=1, column=1, padx=30, pady=30)
 
+        self.valor_a_transferir_label = Label(self.frame_geral_contas, text='Valor a transferir')
+        self.valor_a_transferir_label.pack()
+
+        self.valor_a_transferir = Entry(self.frame_geral_contas, width=10, font=('Helvetica', 14))
+        self.valor_a_transferir.pack(pady=5)
+
         self.frame_favorecido = LabelFrame(
             self.frame_geral_contas, padx=0, pady=0
         )
@@ -480,88 +487,12 @@ class Interface(DadosDeContas):
         self.lista_favorecido.config(width=20)
         self.lista_favorecido.grid(row=1, column=1, padx=30, pady=30)
 
-        self.valor_a_transferir = Entry(self.frame_geral_contas, width=10, font=('Helvetica', 14))
-        self.valor_a_transferir.pack()
-
-
-
-        #
-        # )
-        # self.caminho_srssu = Entry(self.frame_caminhos, width=70)
-        #
-        # self.botao_pasta_de_certidões = Button(
-        #     self.frame_caminhos, text='APS Custeio',
-        #     command=lambda: (
-        #         self.altera_caminho(self.caminho_aps, True)),
-        #     padx=0, pady=0, bg='green', fg='white',
-        #     font=('Helvetica', 8, 'bold'), bd=1
-        # )
-        # self.caminho_aps = Entry(
-        #     self.frame_caminhos, width=70
-        # )
-        #
-        # self.botao_log = Button(
-        #     self.frame_caminhos, text='HRG Investimento',
-        #     command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
-        #     pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
-        #     bd=1
-        # )
-        # self.caminho_srssu_i = Entry(self.frame_caminhos, width=70)
-        #
-        # self.certidões_para_pagamento = Button(
-        #     self.frame_caminhos, text='APS Investimento',
-        #     command=lambda: (
-        #         self.altera_caminho(self.caminho_aps_i, True)
-        #     ),
-        #     padx=0, pady=0, bg='green', fg='white',
-        #     font=('Helvetica', 8, 'bold'), bd=1
-        # )
-        #
-        # self.caminho_aps_i = Entry(
-        #     self.frame_caminhos, width=70
-        # )
-        #
-        # self.gravar_alterações = Button(
-        #     self.frame_caminhos, text='Gravar alterações',
-        #     command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
-        #     fg='white', font=('Helvetica', 8, 'bold'), bd=1
-        # )
-        #
-        # self.botao_xlsx.grid(
-        #     row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
-        #     ipady=13, sticky=W + E
-        # )
-        # self.caminho_srssu.insert(0, self.urls[0][1])
-        # self.caminho_srssu.grid(row=1, column=2, padx=20)
-        #
-        # self.botao_pasta_de_certidões.grid(
-        #     row=2, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-        #     ipady=13, sticky=W + E
-        # )
-        #
-        # self.caminho_aps.insert(0, self.urls[1][1])
-        # self.caminho_aps.grid(row=2, column=2, padx=20)
-        #
-        # self.botao_log.grid(
-        #     row=3, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-        #     ipady=13, sticky=W + E
-        # )
-        #
-        # self.caminho_srssu_i.insert(0, self.urls[2][1])
-        # self.caminho_srssu_i.grid(row=3, column=2, padx=20)
-        #
-        # self.certidões_para_pagamento.grid(
-        #     row=4, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-        #     ipady=13, sticky=W + E
-        # )
-        #
-        # self.caminho_aps_i.insert(0, self.urls[3][1])
-        # self.caminho_aps_i.grid(row=4, column=2, padx=20)
-        #
-        # self.gravar_alterações.grid(
-        #     row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
-        #     ipady=13
-        # )
+        self.botao_submissao = Button(
+            self.frame_geral_contas, text='Criar guia',
+            command=lambda: self.gerar_constructor(interna_constructor),
+            bg='blue', fg='white', font=('Helvetica', 8, 'bold'), bd=1
+        )
+        self.botao_submissao.pack(pady=5)
 
 
 if __name__ == '__main__':
