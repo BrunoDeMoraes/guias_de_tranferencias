@@ -69,7 +69,7 @@ RETANGULO_PAGAMENTO = [
 
 # Strings
 TIMES6 = [
-    (25, 237, "00001 - Pagamento de ipostos, tributos e taxas"),
+    (25, 237, "00001 - Pagamento de impostos, tributos e taxas"),
     (70, 237, "00005 - Pagamentos de fornecedores")
 ]
 
