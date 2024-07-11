@@ -200,7 +200,9 @@ TIMESB9PAGAMENTO = [
     (93, 87, "DANFE"),
     (116, 87, "Valor total"),
     (141, 87, "IRRF / ISS"),
-    (168, 87, "Valor líquido")
+    (168, 87, "Valor líquido"),
+    (10, 196, "Via BRB"),
+    (10, 96, "Via Correntista"),
 ]
 
 TIMESB12 = [
