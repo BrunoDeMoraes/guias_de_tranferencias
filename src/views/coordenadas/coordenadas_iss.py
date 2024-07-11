@@ -117,8 +117,8 @@ TIMES8_PAGAMENTOS = [
     (59, 128.5, 1), #empresa
     (100, 128.5, -1), #CNPJ
     (125, 128.5, 2), #DANFE
-    (145, 128.5, 8), #valor total
-    (170, 128.5, 6), #ISS
+    (143, 128.5, 8), #valor total
+    (167, 128.5, 6), #ISS
 
 ]
 
