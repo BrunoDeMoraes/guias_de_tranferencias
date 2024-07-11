@@ -146,12 +146,12 @@ TIMESB8 = [
 ]
 
 TIMES8_PAGAMENTOS = [
-    (21, 82, 4), #CNPJ
-    (69, 82, 0), #cotação
-    (91, 82, 2), #empresa
-    (113, 82, 8), #valor bruto
-    (163, 82, 3), #valor liquido
-    (138, 82, -1) #ISS+IR
+    (14, 82, 4), #SEI
+    (62, 82, 0), #cotação
+    (87, 82, 2), #DANFE
+    (112, 82, 8), #valor bruto
+    (137, 82, -1), #ISS+IR
+    (162, 82, 3), #valor liquido
 ]
 
 TIMESB8CONTA = [
