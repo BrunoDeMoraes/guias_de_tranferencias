@@ -107,7 +107,7 @@ TIMESB8 = [
     (82, 256, "(61) 3449-7105"),  #telefone
     (104, 265, "Retenção de IR"),
     (104, 256, "Conta corrente/Pessoa Jurídica"),
-    (148, 251, " Pagamento de ipostos, tributos e taxas"),
+    (148, 251, " Pagamento de impostos, tributos e taxas"),
     (150, 256, "Conta corrente/Pessoa Jurídica"),
 ]
 
@@ -159,7 +159,7 @@ TIMESB9PAGAMENTO = [
     (108, 132, "CNPJ"),
     (127, 132, "DANFE"),
     (146, 132, "Valor total"),
-    (176, 132, "ISS"),
+    (176, 132, "IR"),
     (10, 217, "Via BRB"),
     (10, 137, "Via Correntista"),
 ]

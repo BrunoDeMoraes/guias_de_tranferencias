@@ -113,10 +113,11 @@ class DadosDePagamentoRepository:
 
 
     def __compilar_linha_de_pagamento(self, descricao, linha, colunas_somadas):
+        print(f'DDDD {descricao[2]} tipo {type(descricao[2])}')
         dados_compilados_soma = [
             descricao[0],
             descricao[1],
-            descricao[2],
+            self.corrigir_n_danfe(descricao[2]),
             colunas_somadas[0],
             linha['Nº de processo SEI'],
             linha['Conta'],
@@ -125,6 +126,13 @@ class DadosDePagamentoRepository:
             colunas_somadas[3]
         ]
         return dados_compilados_soma
+
+    def corrigir_n_danfe(self, danfe):
+        if '.' in danfe:
+            return danfe[0:danfe.index('.')]
+        else:
+            return danfe
+
 
 
     def valor_por_extenso(self):

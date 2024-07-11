@@ -142,7 +142,7 @@ TIMESB8 = [
         "Setor Central Gama/DF. CEP: 72.405-901"
     )
      ),
-    (82, 256, "(61) 2017-1821")  #telefone
+    (82, 256, "(61) 3449-7105")  #telefone
 ]
 
 TIMES8_PAGAMENTOS = [

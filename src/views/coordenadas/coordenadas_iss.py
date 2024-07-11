@@ -107,7 +107,7 @@ TIMESB8 = [
     (82, 256, "(61) 3449-7105"),  #telefone
     (104, 265, "Retenção de ISS"),
     (104, 256, "Conta corrente/Pessoa Jurídica"),
-    (148, 251, " Pagamento de ipostos, tributos e taxas"),
+    (148, 251, " Pagamento de impostos, tributos e taxas"),
     (150, 256, "Conta corrente/Pessoa Jurídica"),
 ]
 
