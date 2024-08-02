@@ -13,14 +13,17 @@ def interna_constructor(entrada: Dict):
     contas = DadosDeContas()
     fornecedores = None
     pagamentos = None
+    remetente = entrada['remetente'],
+    valor = entrada['valor'],
+    favorecido = entrada['favorecido']
 
-    tranferencias = TrInternaController(contas, data_pagameto, fornecedores, origem, pagamentos)
+    tranferencias = TrInternaController(contas, data_pagameto, fornecedores, origem, pagamentos, remetente, valor, favorecido)
     dados_de_tranferencias = tranferencias.filtrar_dados()
 
-    for dicionario in dados_de_tranferencias:
-        logo = 'logo.png'
-        guia = GuiaDeTransferencia(dicionario, logo)
-        guia.gerar_guia(100)
+    # for dicionario in dados_de_tranferencias:
+    #     logo = 'logo.png'
+    #     guia = GuiaDeTransferencia(dicionario, logo)
+    #     guia.gerar_guia(100)
     if pagamentos:
         return 'DEU CERTO!!!'
     else:

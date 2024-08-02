@@ -19,6 +19,8 @@ class TransferController(InterfaceController):
 
 
     def filtrar_dados(self) -> Dict:
+
+
         fonte = self.contas.definir_fonte(self.origem)
         pagamentos = self.pagametos.agupar_por_empresa(fonte)
         transferencias = []
@@ -32,6 +34,7 @@ class TransferController(InterfaceController):
                 print(self.origem)
                 conta_origem = self.contas.pegar_conta(self.origem, pagamento[0][-2:])
                 print(conta_origem)
+                print(f'erro de origem: {conta_origem[0]}')
                 conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
                 valor_total = self.somar_indice(pagamento[1], 3)
                 total_extenso = self.valor_por_extenso(valor_total)

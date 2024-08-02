@@ -117,20 +117,22 @@ class Interface(DadosDeContas):
         # self.teste5 = Button(self.frame_2, text='pegar contas', command=self.pegar_n_cotas)
         # self.teste5.grid(row=0, column=6)
 
-    def gerar_constructor(self, constructor):
-        #urls = self.selecionar_fonte()
-        entrada = self.dados_de_entrada()
+    def gerar_constructor(self, constructor, dados_internos=False):
+        entrada = self.dados_de_entrada(dados_internos)
         resposta = constructor(entrada)
         self.transfer_text(resposta)
 
 
-    def dados_de_entrada(self) -> Dict:
+    def dados_de_entrada(self, dados_internos) -> Dict:
         #fonte = self.definir_fonte(self.local.get())
         entradas = {
             'origem': self.local.get(),
-            'data': self.data_de_pagamento(),
-        #    'fonte': fonte
+            'data': self.data_de_pagamento()
         }
+        if dados_internos == True:
+            entradas['remetente'] = self.remetente.get()
+            entradas['valor'] = self.valor_a_transferir.get()
+            entradas['favorecido'] = self.favorecido.get()
         return entradas
 
     def data_de_pagamento(self):
@@ -489,7 +491,7 @@ class Interface(DadosDeContas):
 
         self.botao_submissao = Button(
             self.frame_geral_contas, text='Criar guia',
-            command=lambda: self.gerar_constructor(interna_constructor),
+            command=lambda: self.gerar_constructor(interna_constructor, True),
             bg='blue', fg='white', font=('Helvetica', 8, 'bold'), bd=1
         )
         self.botao_submissao.pack(pady=5)
