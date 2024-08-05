@@ -125,14 +125,21 @@ class Interface(DadosDeContas):
 
     def dados_de_entrada(self, dados_internos) -> Dict:
         #fonte = self.definir_fonte(self.local.get())
-        entradas = {
-            'origem': self.local.get(),
-            'data': self.data_de_pagamento()
-        }
+
         if dados_internos == True:
-            entradas['remetente'] = self.remetente.get()
-            entradas['valor'] = self.valor_a_transferir.get()
-            entradas['favorecido'] = self.favorecido.get()
+
+            entradas = {
+                'origem': self.local.get(),
+                'data': self.data_de_pagamento(),
+                'remetente': self.remetente.get(),
+                'valor': self.valor_a_transferir.get(),
+                'favorecido': self.favorecido.get()
+            }
+        else:
+            entradas = {
+                'origem': self.local.get(),
+                'data': self.data_de_pagamento()
+            }
         return entradas
 
     def data_de_pagamento(self):
@@ -485,7 +492,8 @@ class Interface(DadosDeContas):
         self.frame_favorecido.pack(padx=1, pady=1)
         self.favorecido = StringVar()
         self.favorecido.set('Conta favorecido')
-        self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *numero_de_contas)
+        numero_de_contas2 = self.numero_contas()
+        self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *numero_de_contas2)
         self.lista_favorecido.config(width=20)
         self.lista_favorecido.grid(row=1, column=1, padx=30, pady=30)
 

@@ -57,8 +57,8 @@ class DadosDeContas:
         registro = direcionador.fetchall()
         return registro
 
-    def pegar_conta_por_numero(self):
-        comando = f"SELECT * FROM contas WHERE numero = '';"
+    def pegar_conta_por_numero(self, numero):
+        comando = f"SELECT * FROM contas WHERE numero = '{numero}';"
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         return registro
