@@ -287,8 +287,18 @@ class Interface(DadosDeContas):
         self.v_contas.trace('w', self.atualiza_label_cadastro)
 
     def atualiza_label_cadastro(self, *args):
-        conta = self.v_contas.get()
-        self.display.config(text=f"Você selecionou: {conta[2:-3]}")
+        conta = self.v_contas.get()[2:-3]
+        dados_conta = self.pegar_conta_por_numero(conta)
+        print(dados_conta)
+        origem_tipo = dados_conta[0][0].split()
+        texto = (f'Origem: {origem_tipo[0]}\n'
+                 f'Tipo: {origem_tipo[1]}\n'
+                 f'Recurso: {dados_conta[0][1]}\n'
+                 f'Banco: {dados_conta[0][3]}\n'
+                 f'Agência: {dados_conta[0][4]}\n'
+                 f'Conta: {dados_conta[0][5]}\n'
+                 f'CNPJ: {dados_conta[0][6]}')
+        self.display.config(text=texto)
 
     def atualizar_contas(self):
         if self.numero_contas() == []:
