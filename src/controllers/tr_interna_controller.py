@@ -25,15 +25,6 @@ class TrInternaController(InterfaceController):
 
 
     def filtrar_dados(self) -> Dict:
-        # print(self.contas)
-        # print(self.data)
-        # print(self.fornecedores)
-        # print(self.origem)
-        # print(self.pagametos)
-        # print(self.remetente)
-        # print(self.valor)
-        # print(self.favorecido)
-
         transferencias = []
         transferencia = {}
 
