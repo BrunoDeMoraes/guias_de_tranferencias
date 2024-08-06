@@ -44,10 +44,10 @@ class Interface(DadosDeContas):
             label='Configurações', menu=self.menu_configurações)
         self.menu_configurações.add_separator()
         self.menu_configurações.add_command(
-            label='Cadastro de fornecedores', command=self.abrir_janela_cadastro)
+            label='Contas', command=self.abrir_janela_cadastro)
         self.menu_configurações.add_separator()
         self.menu_configurações.add_command(
-            label='URLs', command=self.abrir_caminhos)
+            label='Origens', command=self.abrir_caminhos)
         self.criar_widgets()
 
     def criar_widgets(self):
@@ -165,10 +165,8 @@ class Interface(DadosDeContas):
 
 
     def abrir_janela_cadastro(self):
-
-        #print(f'Esse é o caminho do BD {self.}')
         self.janela_de_cadastro = Toplevel()
-        self.janela_de_cadastro.title('Lista de caminhos')
+        self.janela_de_cadastro.title('Cadastro de contas')
         self.janela_de_cadastro.resizable(True, True)
 
         self.frame_geral = LabelFrame(
@@ -186,6 +184,11 @@ class Interface(DadosDeContas):
             self.frame_geral, padx=10, pady=0
         )
         self.frame_de_exclusao.pack(padx=1, pady=1)
+
+        self.frame_display = LabelFrame(
+            self.frame_geral, padx=10, pady=0
+        )
+        self.frame_display.pack(padx=1, pady=1)
 
         self.frame_geral.pack(padx=1, pady=1)
 
@@ -278,6 +281,14 @@ class Interface(DadosDeContas):
         self.v_contas_bd.grid(row=1, column=1, padx=30)
         self.botao_excluir.grid(row=1, column=2, padx=30)
 
+        self.display = Label(self.frame_display, text=f'{self.v_contas.get()}')
+        self.display.pack()
+
+        self.v_contas.trace('w', self.atualiza_label_cadastro)
+
+    def atualiza_label_cadastro(self, *args):
+        conta = self.v_contas.get()
+        self.display.config(text=f"Você selecionou: {conta[2:-3]}")
 
     def atualizar_contas(self):
         if self.numero_contas() == []:
