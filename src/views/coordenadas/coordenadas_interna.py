@@ -116,7 +116,7 @@ TIMES7 = [
 
 TIMES7DATA = [(155, 217, 'Data_impressão')]
 
-TIMESB7NOMEEMPRESA = (104, 258)
+TIMESB7NOMEEMPRESA = (104, 256)
 
 TIMESB7EXTENSO = (104, 242)
 
@@ -184,12 +184,6 @@ TIMESB9 = [
 ]
 
 TIMESB9PAGAMENTO = [
-    (35, 87, "SEI"),
-    (68, 87, "Cotação"),
-    (93, 87, "DANFE"),
-    (116, 87, "Valor total"),
-    (141, 87, "IRRF / ISS"),
-    (168, 87, "Valor líquido"),
     (10, 196, "Via BRB"),
     (10, 96, "Via Correntista"),
 ]

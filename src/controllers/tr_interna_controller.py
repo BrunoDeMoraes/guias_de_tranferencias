@@ -46,7 +46,7 @@ class TrInternaController(InterfaceController):
         conta_destino_formatado = self.formatar_dados_conta(conta_favorecido[0])
         valor_total = self.valor[0]
         total_extenso = self.valor_por_extenso(valor_total)
-        nome_empresa = f'{conta_destino_formatado[0]} {conta_destino_formatado[1]}'
+        nome_empresa = [f'{conta_destino_formatado[0]} {conta_destino_formatado[1]}']
 
         print(conta_origem_fomatado)
         print(conta_destino_formatado)
