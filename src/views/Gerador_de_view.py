@@ -70,35 +70,49 @@ class Interface(DadosDeContas):
         self.conta_origem = OptionMenu(self.frame_1, self.local, *Interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
-        self.botao_transferencia = Button(
-            self.frame_2, text='Gerar transferencias',
-            command=lambda: self.gerar_constructor(transfer_constructor)
-        )
-        self.botao_transferencia.grid(row=0, column=1)
+        # self.botao_transferencia = Button(
+        #     self.frame_2, text='Gerar transferencias',
+        #     command=lambda: self.gerar_constructor(transfer_constructor)
+        # )
+        # self.botao_transferencia.grid(row=0, column=1)
+        #
+        # self.botao_ted = Button(
+        #     self.frame_2, text='Gerar TED',
+        #     command=lambda: self.gerar_constructor(ted_constructor)
+        # )
+        # self.botao_ted.grid(row=1, column=1)
+        #
+        # self.botao_iss = Button(
+        #     self.frame_2, text='Gerar ISS',
+        #     command=lambda: self.gerar_constructor(iss_constructor)
+        # )
+        # self.botao_iss.grid(row=2, column=1)
+        #
+        # self.botao_ir = Button(
+        #     self.frame_2, text='Gerar IR',
+        #     command=lambda: self.gerar_constructor(ir_constructor)
+        # )
+        # self.botao_ir.grid(row=3, column=1)
 
-        self.botao_ted = Button(
-            self.frame_2, text='Gerar TED',
-            command=lambda: self.gerar_constructor(ted_constructor)
-        )
-        self.botao_ted.grid(row=1, column=1)
 
-        self.botao_iss = Button(
-            self.frame_2, text='Gerar ISS',
-            command=lambda: self.gerar_constructor(iss_constructor)
-        )
-        self.botao_iss.grid(row=2, column=1)
+        self.comandos = [
+            'Gerar todas as guias',
+            'Gerar transferencias',
+            'Gerar TEDs',
+            'Gerar ISS',
+            'Gerar IR',
+            'Transferência interna'
+        ]
+        self.comando = StringVar()
+        self.comando.set('Escolha um comando')
+        self.lista_de_comandos = OptionMenu(self.frame_2, self.comando, *self.comandos)
+        self.lista_de_comandos.grid(row=0, column=1)
 
-        self.botao_ir = Button(
-            self.frame_2, text='Gerar IR',
-            command=lambda: self.gerar_constructor(ir_constructor)
+        self.botao_gerar_guia = Button(
+            self.frame_2, text='Gerar guias',
+            command=self.selecionar_tipo_de_guia
         )
-        self.botao_ir.grid(row=3, column=1)
-
-        self.botao_transferencia_interna = Button(
-            self.frame_2, text='Transferência interna',
-            command=self.abrir_dados_de_transferencia_interna
-        )
-        self.botao_transferencia_interna.grid(row=4, column=1)
+        self.botao_gerar_guia.grid(row=1, column=1)
 
 
 
@@ -116,6 +130,31 @@ class Interface(DadosDeContas):
 
         # self.teste5 = Button(self.frame_2, text='pegar contas', command=self.pegar_n_cotas)
         # self.teste5.grid(row=0, column=6)
+
+
+    def selecionar_tipo_de_guia(self):
+        tipo_de_comando = {
+            'Gerar todas as guias': self.gera_todas_as_guias,
+            'Transferência interna': self.abrir_dados_de_transferencia_interna,
+            'Gerar transferencias': transfer_constructor,
+            'Gerar TEDs': ted_constructor,
+            'Gerar ISS': iss_constructor,
+            'Gerar IR': ir_constructor
+        }
+        comando_escolhido = self.comando.get()
+        print(f'blablablabla comando escolhido {comando_escolhido}')
+        if 'todas' in comando_escolhido or 'interna' in comando_escolhido:
+            tipo_de_comando[comando_escolhido]()
+        else:
+            self.gerar_constructor(tipo_de_comando[comando_escolhido])
+
+
+    def gera_todas_as_guias(self):
+        self.gerar_constructor(transfer_constructor)
+        self.gerar_constructor(ted_constructor)
+        self.gerar_constructor(iss_constructor)
+        self.gerar_constructor(ir_constructor)
+
 
     def gerar_constructor(self, constructor, dados_internos=False):
         entrada = self.dados_de_entrada(dados_internos)
@@ -263,7 +302,8 @@ class Interface(DadosDeContas):
 
         self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10, sticky=E)
 
-        self.opcoes_de_exclusao = Label(self.frame_de_exclusao, text="Caso deseje excluir uma conta, utilize a opção abaixo:")
+        self.opcoes_de_exclusao = Label(
+            self.frame_de_exclusao, text="Caso deseje excluir uma conta, utilize a opção abaixo:")
 
         self.v_contas = StringVar()
 
@@ -281,7 +321,7 @@ class Interface(DadosDeContas):
         self.v_contas_bd.grid(row=1, column=1, padx=30)
         self.botao_excluir.grid(row=1, column=2, padx=30)
 
-        self.display = Label(self.frame_display, text=f'{self.v_contas.get()}')
+        self.display = Label(self.frame_display, text='', width=30, height=8)
         self.display.pack()
 
         self.v_contas.trace('w', self.atualiza_label_cadastro)
