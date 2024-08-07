@@ -17,9 +17,6 @@ from src.main.constructor.iss_constructor import iss_constructor
 from src.main.constructor.ir_constructor import ir_constructor
 from src.main.constructor.interna_constructor import interna_constructor
 
-from src import comandos_sql
-from src import constantes
-
 
 class Interface(DadosDeContas):
     ORIGEM = ['HRG Custeio',
@@ -70,31 +67,6 @@ class Interface(DadosDeContas):
         self.conta_origem = OptionMenu(self.frame_1, self.local, *Interface.ORIGEM)
         self.conta_origem.grid(row=0, column=0)
 
-        # self.botao_transferencia = Button(
-        #     self.frame_2, text='Gerar transferencias',
-        #     command=lambda: self.gerar_constructor(transfer_constructor)
-        # )
-        # self.botao_transferencia.grid(row=0, column=1)
-        #
-        # self.botao_ted = Button(
-        #     self.frame_2, text='Gerar TED',
-        #     command=lambda: self.gerar_constructor(ted_constructor)
-        # )
-        # self.botao_ted.grid(row=1, column=1)
-        #
-        # self.botao_iss = Button(
-        #     self.frame_2, text='Gerar ISS',
-        #     command=lambda: self.gerar_constructor(iss_constructor)
-        # )
-        # self.botao_iss.grid(row=2, column=1)
-        #
-        # self.botao_ir = Button(
-        #     self.frame_2, text='Gerar IR',
-        #     command=lambda: self.gerar_constructor(ir_constructor)
-        # )
-        # self.botao_ir.grid(row=3, column=1)
-
-
         self.comandos = [
             'Gerar todas as guias',
             'Gerar transferencias',
@@ -105,16 +77,14 @@ class Interface(DadosDeContas):
         ]
         self.comando = StringVar()
         self.comando.set('Escolha um comando')
-        self.lista_de_comandos = OptionMenu(self.frame_2, self.comando, *self.comandos)
-        self.lista_de_comandos.grid(row=0, column=1)
+        self.lista_de_comandos = OptionMenu(self.frame_mestre, self.comando, *self.comandos)
+        self.lista_de_comandos.pack()
 
         self.botao_gerar_guia = Button(
-            self.frame_2, text='Gerar guias',
+            self.frame_mestre, text='Gerar guias',
             command=self.selecionar_tipo_de_guia
         )
-        self.botao_gerar_guia.grid(row=1, column=1)
-
-
+        self.botao_gerar_guia.pack(pady=10)
 
         self.data_hoje = date.today()
         dia = int(self.data_hoje.strftime('%d'))
@@ -124,12 +94,6 @@ class Interface(DadosDeContas):
 
         self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
         self.calendario.grid(row=0, column=0)
-
-        # btn_mostrar_data = Button(self.frame_calendario, text="Mostrar Data Selecionada", command=self.mostra_data)
-        # btn_mostrar_data.grid(row=1, column=0)
-
-        # self.teste5 = Button(self.frame_2, text='pegar contas', command=self.pegar_n_cotas)
-        # self.teste5.grid(row=0, column=6)
 
 
     def selecionar_tipo_de_guia(self):
@@ -280,8 +244,6 @@ class Interface(DadosDeContas):
         )
 
         self.botao_cadastro = Button(self.frame_de_cadastro, text="Cadastrar", command=self.submeter_conta)
-
-        #configurações de grid
 
         self.titulo_origem.grid(row=0, column=1)
         self.titulo_recurso.grid(row=0, column=2)
