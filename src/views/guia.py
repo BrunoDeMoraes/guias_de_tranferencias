@@ -4,14 +4,17 @@ from reportlab.lib.pagesizes import A4
 from typing import Dict
 from typing import List
 
+from src.utils.funções_suporte import caminho_do_arquivo
+
 
 class Guia(ABC):
     def __init__(self, dados: Dict, logo):
         self.contador = 0
         self.altura = 0
         self.dados = dados
-        self.imagens = f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/Imagens/'
-        self.cnv = canvas.Canvas(f'C:/Users/14343258/PycharmProjects/guias_de_tranasferência/guias/teste/{self.dados["Empresa"]}.pdf')
+        self.pasta_principal = caminho_do_arquivo()
+        self.imagens = f'{self.pasta_principal}/Imagens/'
+        self.cnv = canvas.Canvas(f'{self.pasta_principal}/guias/teste/{self.dados["Empresa"]}.pdf')
         self.cnv.setPageSize(A4)
         self.logo = logo
 
