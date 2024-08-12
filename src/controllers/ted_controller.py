@@ -42,6 +42,7 @@ class TedController(InterfaceController):
                 transferencia['Nome_empresa'] = nome_empresa
                 transferencia['Total_extenso'] = total_extenso
                 transferencia['Data_impressão'] = self.data_formatada()
+                transferencia['Data_de_pagamento'] = self.data
                 transferencias.append(transferencia)
         for p in transferencias:
             for pag in p.items():

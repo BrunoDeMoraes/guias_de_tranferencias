@@ -64,6 +64,7 @@ class IssController(InterfaceController):
                 transferencia['Valor_total'] = valor_total
                 transferencia['Total_extenso'] = total_extenso
                 transferencia['Data_impressão'] = self.data_formatada()
+                transferencia['Data_de_pagamento'] = self.data
                 transferencias.append(transferencia)
 
         for p in transferencias:

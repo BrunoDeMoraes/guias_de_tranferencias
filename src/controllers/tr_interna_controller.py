@@ -27,6 +27,7 @@ class TrInternaController(InterfaceController):
     def filtrar_dados(self) -> Dict:
         transferencias = []
         transferencia = {}
+        print(f'data do app {self.data}')
 
         numero_remetente = self.remetente[0][2:-3]
         numero_favorecida = self.favorecido[2:-3]
@@ -50,6 +51,7 @@ class TrInternaController(InterfaceController):
         transferencia['Data_impressão'] = self.data_formatada()
         transferencia['Empresa'] = 'Interna'
         transferencia['Pagamentos'] = []
+        transferencia['Data_de_pagamento'] = self.data
 
         transferencias.append(transferencia)
 

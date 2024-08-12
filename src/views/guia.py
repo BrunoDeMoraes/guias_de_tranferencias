@@ -14,7 +14,7 @@ class Guia(ABC):
         self.dados = dados
         self.pasta_principal = caminho_do_arquivo()
         self.imagens = f'{self.pasta_principal}/Imagens/'
-        self.cnv = canvas.Canvas(f'{self.pasta_principal}/guias/teste/{self.dados["Empresa"]}.pdf')
+        self.cnv = canvas.Canvas(f'{self.pasta_principal}/guias/{self.dados["Data_de_pagamento"]}/{self.dados["Conta_origem"][0].split()[0]}/{self.dados["Empresa"]}.pdf')
         self.cnv.setPageSize(A4)
         self.logo = logo
 
