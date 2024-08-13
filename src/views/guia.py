@@ -4,7 +4,7 @@ from reportlab.lib.pagesizes import A4
 from typing import Dict
 from typing import List
 
-from src.utils.funções_suporte import caminho_do_arquivo
+from src.utils.funções_suporte import caminho_do_arquivo, checar_pasta_de_guias
 
 
 class Guia(ABC):
@@ -14,7 +14,9 @@ class Guia(ABC):
         self.dados = dados
         self.pasta_principal = caminho_do_arquivo()
         self.imagens = f'{self.pasta_principal}/Imagens/'
-        self.cnv = canvas.Canvas(f'{self.pasta_principal}/guias/{self.dados["Data_de_pagamento"]}/{self.dados["Conta_origem"][0].split()[0]}/{self.dados["Empresa"]}.pdf')
+        self.url_pasta = f'{self.pasta_principal}/guias/{self.dados["Data_de_pagamento"]}/{self.dados["Conta_origem"][0].split()[0]}'
+        checar_pasta_de_guias(self.url_pasta)
+        self.cnv = canvas.Canvas(f'{self.url_pasta}/{self.dados["Empresa"]}.pdf')
         self.cnv.setPageSize(A4)
         self.logo = logo
 
