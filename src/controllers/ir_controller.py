@@ -63,6 +63,7 @@ class IrController(InterfaceController):
                 transferencia['Total_extenso'] = total_extenso
                 transferencia['Data_impressão'] = self.data_formatada()
                 transferencia['Data_de_pagamento'] = self.data
+                transferencia['Tipo'] = ''
                 transferencias.append(transferencia)
 
         for p in transferencias:
