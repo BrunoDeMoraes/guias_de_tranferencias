@@ -16,7 +16,7 @@ class Guia(ABC):
         self.imagens = f'{self.pasta_principal}/Imagens/'
         self.url_pasta = f'{self.pasta_principal}/guias/{self.dados["Data_de_pagamento"]}/{self.dados["Conta_origem"][0].split()[0]} {self.dados["Empresa"][-2:]}'
         checar_pasta_de_guias(self.url_pasta)
-        self.cnv = canvas.Canvas(f'{self.url_pasta}/{self.dados["Tipo"]} {self.dados["Empresa"]}.pdf')
+        self.cnv = canvas.Canvas(f'{self.url_pasta}/{self.dados["Tipo"]} {self.dados["Empresa"][:-5]}.pdf')
         self.cnv.setPageSize(A4)
         self.logo = logo
 
