@@ -49,7 +49,7 @@ class TrInternaController(InterfaceController):
         transferencia['Valor_total'] = self.formartar_valor(float(valor_total))
         transferencia['Total_extenso'] = total_extenso
         transferencia['Data_impressão'] = self.data_formatada()
-        transferencia['Empresa'] = f' - {conta_destino_formatado[0].split()[0]} {conta_destino_formatado[1][0]}{conta_destino_formatado[2][0]} - TI'
+        transferencia['Empresa'] = f' - {conta_destino_formatado[0].split()[0]} {conta_destino_formatado[1][0]}{conta_destino_formatado[2][0]} {valor_total} - TI'
         transferencia['Pagamentos'] = []
         transferencia['Data_de_pagamento'] = self.data
         transferencia['Tipo'] = f'{conta_origem_fomatado[0].split()[0]} {conta_origem_fomatado[1][0]}{conta_origem_fomatado[2][0]}'
