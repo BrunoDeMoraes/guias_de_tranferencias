@@ -1,7 +1,10 @@
+import os
 import sqlite3
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+
+import PyPDF2
 from tkcalendar import Calendar
 from datetime import date
 from typing import Dict
@@ -16,6 +19,8 @@ from src.main.constructor.ted_constructor import ted_constructor
 from src.main.constructor.iss_constructor import iss_constructor
 from src.main.constructor.ir_constructor import ir_constructor
 from src.main.constructor.interna_constructor import interna_constructor
+
+from src.utils.funções_suporte import caminho_do_arquivo
 
 
 class Interface(DadosDeContas):
@@ -94,6 +99,50 @@ class Interface(DadosDeContas):
 
         self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
         self.calendario.grid(row=0, column=0)
+
+        self.botao_mesclar_arquivos = Button(
+            self.frame_mestre, text='Mesclar arquivos',
+            command=self.mesclar_arquivos
+        )
+        self.botao_mesclar_arquivos.pack(pady=10)
+
+
+    def mesclar_arquivos(self):
+        caminho_para_salvar_arquivos = filedialog.askdirectory()
+        with open(
+                (
+                        f'{caminho_para_salvar_arquivos}/Mesclados {self.data_de_pagamento()}.pdf'
+                ), 'wb'
+        ) as arquivo_final:
+            criador_de_pdf = PyPDF2.PdfWriter()
+            # Iterando sobre todos os arquivos em subdiretórios
+            for raiz, diretorios, arquivos in os.walk(caminho_para_salvar_arquivos):
+                for arquivo in arquivos:
+                    if arquivo.endswith('.pdf'):
+                        print(arquivo)
+
+
+
+            # for pasta in os.chdir(caminho_para_salvar_arquivos):
+            #     #os.chdir(os.path(pasta))
+            #     for arquivo in pasta:
+            #         print(arquivo)
+
+
+                        # with open(self.lista_de_arquivos[arquivo], 'rb') as arquivo_aberto:
+                #             arquivo_lido = PyPDF2.PdfReader(
+                #                 arquivo_aberto
+                #             )
+                #             for página in range(len(arquivo_lido.pages)):
+                #                 página_do_pdf = arquivo_lido.pages[página]
+                #                 criador_de_pdf.add_page(página_do_pdf)
+                #             criador_de_pdf.write(arquivo_final)
+                #     messagebox.showinfo(
+                #         'Rolou tranquilo!',
+                #         f'Mesclagem de arquivos executada com sucesso!'
+                # )
+
+
 
 
     def selecionar_tipo_de_guia(self):
