@@ -140,7 +140,6 @@ class Interface(DadosDeContas):
 
 
 
-
     def selecionar_tipo_de_guia(self):
         tipo_de_comando = {
             'Gerar todas as guias': self.gera_todas_as_guias,
@@ -176,12 +175,14 @@ class Interface(DadosDeContas):
 
         if dados_internos == True:
 
+            print(f'cortado remetente {self.remetente.get()[-7:]}')
+
             entradas = {
                 'origem': self.local.get(),
                 'data': self.data_de_pagamento(),
-                'remetente': self.remetente.get(),
+                'remetente': self.remetente.get()[-7:],
                 'valor': self.valor_a_transferir.get(),
-                'favorecido': self.favorecido.get()
+                'favorecido': self.favorecido.get()[-7:]
             }
         else:
             entradas = {
@@ -221,7 +222,6 @@ class Interface(DadosDeContas):
             self.janela_de_cadastro, padx=50, pady=30
         )
         self.frame_geral.pack(padx=1, pady=1)
-
 
         self.frame_de_cadastro = LabelFrame(
             self.frame_geral, padx=10, pady=0
@@ -541,10 +541,14 @@ class Interface(DadosDeContas):
             self.frame_geral_contas, padx=0, pady=0
         )
         self.frame_remetente.pack(padx=1, pady=1)
+
         self.remetente = StringVar()
         numero_de_contas = self.numero_contas()
+        lista_de_contas = self.listar_dados_de_conta(numero_de_contas)
+        dados_filtrado = self.filtrar_dados_de_conta(lista_de_contas)
+
         self.remetente.set('Conta remetente')
-        self.lista_remetente = OptionMenu(self.frame_remetente, self.remetente, *numero_de_contas)
+        self.lista_remetente = OptionMenu(self.frame_remetente, self.remetente, *dados_filtrado)
         self.lista_remetente.config(width=20)
         self.lista_remetente.grid(row=1, column=1, padx=30, pady=30)
 
@@ -558,10 +562,16 @@ class Interface(DadosDeContas):
             self.frame_geral_contas, padx=0, pady=0
         )
         self.frame_favorecido.pack(padx=1, pady=1)
+
         self.favorecido = StringVar()
+        numero_de_contas2 = self.numero_contas()
+        lista_de_contas2 = self.listar_dados_de_conta(numero_de_contas2)
+        dados_filtrado2 = self.filtrar_dados_de_conta(lista_de_contas2)
+
+
         self.favorecido.set('Conta favorecido')
         numero_de_contas2 = self.numero_contas()
-        self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *numero_de_contas2)
+        self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *dados_filtrado2)
         self.lista_favorecido.config(width=20)
         self.lista_favorecido.grid(row=1, column=1, padx=30, pady=30)
 
@@ -571,6 +581,24 @@ class Interface(DadosDeContas):
             bg='blue', fg='white', font=('Helvetica', 8, 'bold'), bd=1
         )
         self.botao_submissao.pack(pady=5)
+
+
+    def filtrar_dados_de_conta(self, lista_de_dados_conta):
+        lista_filtrada = []
+        for lista in lista_de_dados_conta:
+            item = f'{lista[0]} {lista[1]} - conta: {lista[5]}'
+            lista_filtrada.append(item)
+        return lista_filtrada
+
+
+    def listar_dados_de_conta(self, lista_de_contas):
+        lista_de_dados_conta = []
+        for conta in lista_de_contas:
+            dados_de_conta = self.pegar_conta_por_numero(conta[0])
+            conta_id = dados_de_conta[0]
+            lista_de_dados_conta.append(conta_id)
+        print(f'listona:\n{lista_de_dados_conta}')
+        return lista_de_dados_conta
 
 
 if __name__ == '__main__':

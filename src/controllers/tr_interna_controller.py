@@ -29,8 +29,8 @@ class TrInternaController(InterfaceController):
         transferencia = {}
         print(f'data do app {self.data}')
 
-        numero_remetente = self.remetente[0][2:-3]
-        numero_favorecida = self.favorecido[2:-3]
+        numero_remetente = self.remetente[0]
+        numero_favorecida = self.favorecido
         conta_origem = self.contas.pegar_conta_por_numero(numero_remetente)
         conta_favorecido = self.contas.pegar_conta_por_numero(numero_favorecida)
 
