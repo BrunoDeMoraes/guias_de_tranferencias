@@ -11,3 +11,8 @@ def checar_pasta_de_guias(url):
         print('pasta Ok')
     else:
         os.makedirs(url)
+
+def inverter_barra(url):
+    url_separada = url.split('\\')
+    nova_url = ('/').join(url_separada)
+    return nova_url
