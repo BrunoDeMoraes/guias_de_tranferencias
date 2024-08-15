@@ -33,7 +33,7 @@ class TedController(InterfaceController):
                 total_extenso = self.valor_por_extenso(valor_total)
                 nome_empresa = self.alinhar_texto(dados_empresa[0])
                 self.converter_valores_em_string(pagamento[1])
-                transferencia['Empresa'] = pagamento[0]
+                transferencia['Empresa'] = f' {pagamento[0]}'
                 transferencia['Pagamentos'] = pagamento[1]
                 transferencia['Dados_empresa'] = dados_empresa
                 transferencia['Conta_origem'] = conta_origem_fomatado
