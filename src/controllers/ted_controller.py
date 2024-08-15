@@ -22,7 +22,6 @@ class TedController(InterfaceController):
         pagamentos = self.pagametos.agupar_por_empresa(fonte)
         transferencias = []
         for pagamento in pagamentos.items():
-            print(pagamento[1])
             transferencia = {}
             empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
             if empresa[5] != 'BRB':
@@ -45,8 +44,4 @@ class TedController(InterfaceController):
                 transferencia['Data_de_pagamento'] = self.data
                 transferencia['Tipo'] = 'TED'
                 transferencias.append(transferencia)
-        for p in transferencias:
-            for pag in p.items():
-                print(f'{pag[0]}: {pag[1]}')
-            print('\n')
         return transferencias

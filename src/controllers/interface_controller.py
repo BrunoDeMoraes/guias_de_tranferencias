@@ -70,7 +70,6 @@ class InterfaceController(ABC):
 
     def formatar_empresa(self, pagamentos: list) -> None:
         for pagamento in pagamentos:
-            print(pagamento)
             palavras = pagamento[1].split()
             fornecedor = ' '.join(palavras[:-1])
             if len(fornecedor) > 25:

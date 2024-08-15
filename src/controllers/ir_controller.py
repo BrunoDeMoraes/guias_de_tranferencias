@@ -65,13 +65,4 @@ class IrController(InterfaceController):
                 transferencia['Data_de_pagamento'] = self.data
                 transferencia['Tipo'] = ''
                 transferencias.append(transferencia)
-
-        for p in transferencias:
-            if isinstance(p, dict):
-                for pag in p.items():
-                    print(f'{pag[0]}: {pag[1]}')
-                print('\n')
-            else:
-                print(f'{p}\n\n')
-        print(transferencias)
         return transferencias

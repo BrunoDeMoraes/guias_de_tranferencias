@@ -27,21 +27,16 @@ class TrInternaController(InterfaceController):
     def filtrar_dados(self) -> Dict:
         transferencias = []
         transferencia = {}
-        print(f'data do app {self.data}')
 
         numero_remetente = self.remetente[0]
         numero_favorecida = self.favorecido
         conta_origem = self.contas.pegar_conta_por_numero(numero_remetente)
         conta_favorecido = self.contas.pegar_conta_por_numero(numero_favorecida)
-
         conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
         conta_destino_formatado = self.formatar_dados_conta(conta_favorecido[0])
         valor_total = self.valor[0]
         total_extenso = self.valor_por_extenso(valor_total)
         nome_empresa = [f'{conta_destino_formatado[0]} {conta_destino_formatado[1]}']
-
-        print(conta_origem_fomatado)
-        print(conta_destino_formatado)
 
         transferencia['Conta_origem'] = conta_origem_fomatado
         transferencia['Conta_destino'] = conta_destino_formatado
@@ -53,37 +48,6 @@ class TrInternaController(InterfaceController):
         transferencia['Pagamentos'] = []
         transferencia['Data_de_pagamento'] = self.data
         transferencia['Tipo'] = f'{conta_origem_fomatado[0].split()[0]} {conta_origem_fomatado[1][0]}{conta_origem_fomatado[2][0]}'
-
         transferencias.append(transferencia)
-
         return transferencias
 
-
-
-
-
-        # fonte = self.contas.definir_fonte(self.origem)
-        # pagamentos = self.pagametos.agupar_por_empresa(fonte)
-        # # for pagamento in pagamentos.items():
-        # empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
-        # # if empresa[5] == 'BRB':
-        # # self.soma_iss_ir(pagamento[1])
-        # # print(self.origem)
-        # print(conta_origem)
-        # valor_total = self.somar_indice(pagamento[1], 3)
-        # nome_empresa = self.alinhar_texto(dados_empresa[0])
-        # self.converter_valores_em_string(pagamento[1])
-
-        #
-        # transferencia['Pagamentos'] = pagamento[1]
-        # transferencia['Dados_empresa'] = dados_empresa
-
-
-        # transferencia['Nome_empresa'] = nome_empresa
-
-
-        #
-        # for p in transferencias:
-        #     for pag in p.items():
-        #         print(f'{pag[0]}: {pag[1]}')
-        #     print('\n')

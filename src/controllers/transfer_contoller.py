@@ -25,16 +25,12 @@ class TransferController(InterfaceController):
         pagamentos = self.pagametos.agupar_por_empresa(fonte)
         transferencias = []
         for pagamento in pagamentos.items():
-            print(pagamento[1])
             transferencia = {}
             empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
             if empresa[5] == 'BRB':
                 self.soma_iss_ir(pagamento[1])
                 dados_empresa = self.fornecedores.retorna_empresa(pagamento[0], fonte)
-                print(self.origem)
                 conta_origem = self.contas.pegar_conta(self.origem, pagamento[0][-2:])
-                print(conta_origem)
-                print(f'erro de origem: {conta_origem[0]}')
                 conta_origem_fomatado = self.formatar_dados_conta(conta_origem[0])
                 valor_total = self.somar_indice(pagamento[1], 3)
                 total_extenso = self.valor_por_extenso(valor_total)
@@ -51,8 +47,4 @@ class TransferController(InterfaceController):
                 transferencia['Data_de_pagamento'] = self.data
                 transferencia['Tipo'] = 'Transferência'
                 transferencias.append(transferencia)
-        for p in transferencias:
-            for pag in p.items():
-                print(f'{pag[0]}: {pag[1]}')
-            print('\n')
         return transferencias

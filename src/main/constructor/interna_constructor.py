@@ -14,7 +14,6 @@ def interna_constructor(entrada: Dict):
     fornecedores = None
     pagamentos = None
     remetente = entrada['remetente'],
-    print(f'remetente no constructor {remetente}')
     valor = entrada['valor'],
     favorecido = entrada['favorecido']
 
