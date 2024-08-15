@@ -1,8 +1,6 @@
 from typing import Dict
 
 from src.models.repository.dados_de_conta import DadosDeContas
-# from src.models.repository.dados_de_fornecedores import DadosDeFornecedores
-# from src.models.repository.dados_de_pagamento_repository import DadosDePagamentoRepository
 from src.views.guia_interna import GuiaDeTransferenciaInterna
 from src.controllers.tr_interna_controller import TrInternaController
 
