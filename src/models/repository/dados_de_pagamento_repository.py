@@ -113,7 +113,6 @@ class DadosDePagamentoRepository:
 
 
     def __compilar_linha_de_pagamento(self, descricao, linha, colunas_somadas):
-        print(f'DDDD {descricao[2]} tipo {type(descricao[2])}')
         dados_compilados_soma = [
             descricao[0],
             descricao[1],

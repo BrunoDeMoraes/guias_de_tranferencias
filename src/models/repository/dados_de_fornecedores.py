@@ -14,7 +14,6 @@ class DadosDeFornecedores:
 
     def retorna_empresa(self, empresa, fonte):
         self.fornecedores(fonte)
-        print(empresa)
         if empresa[-1] == ')':
             beneficiario = self.empresas[empresa]
         else:
@@ -26,9 +25,4 @@ if __name__ == "__main__":
     fonte = '//srv-fs/HRG_GEOF/GEOF/PAGAMENTOS/Fontes/Matrix_2023_HRG.xlsx'
     a = DadosDeFornecedores()
     b = a.fornecedores(fonte)
-    for indice, linha in b.items():
-        print(f'{indice}')
-        print(f'    {linha}\n')
-
     c = a.retorna_empresa('WL SERVIÇOS (701717)')
-    print(f'Essa é a empresa  - {c}')

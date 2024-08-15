@@ -97,7 +97,6 @@ class DadosDeContas:
             with sqlite3.connect(caminho_do_banco_de_dados) as conexao:
                 direcionador = conexao.cursor()
                 direcionador.execute(comando, substituto)
-        #self.consulta_urls()
 
 
     def cadastrar_conta(self, origem, recurso, tipo, banco, agencia, numero, cnpj):
@@ -110,12 +109,9 @@ class DadosDeContas:
     def deletar_conta(self, conta):
         comando = f'DELETE FROM contas WHERE numero = {conta}'
         banco_de_dados = self.caminho_do_bd()
-        print(comando)
         self.conexao(comando)
-        print("Conta excluída")
 
 
 if __name__ == '__main__':
     c = DadosDeContas()
     c.criar_bd(TABELAS)
-    #print(c.pegar_n_contas())
