@@ -56,13 +56,15 @@ class IrController(InterfaceController):
                 self.converter_valores_em_string(pagamentos_por_origem)
                 self.formatar_empresa(pagamentos_por_origem)
 
-                transferencia['Empresa'] = (f'IR-{conta[0]}')
+                print(f'Contas COntas contas {conta[0]}')
+
+                transferencia['Empresa'] = f'IR-{conta[0]}'
                 transferencia['Pagamentos'] = pagamentos_por_origem
                 transferencia['Conta_origem'] = conta_origem_fomatado
                 transferencia['Valor_total'] = valor_total
                 transferencia['Total_extenso'] = total_extenso
                 transferencia['Data_impressão'] = self.data_formatada()
                 transferencia['Data_de_pagamento'] = self.data
-                transferencia['Tipo'] = ''
+                transferencia['Tipo'] = f'IR-{conta[0]}'
                 transferencias.append(transferencia)
         return transferencias
