@@ -12,6 +12,7 @@ class ViewInicial(Frame):
         self.pack(expand=True, fill='both')
         self.criar_widgets()
 
+
     def criar_widgets(self):
         self.frame_mestre = LabelFrame(self, padx=0, pady=0)
 
@@ -54,18 +55,20 @@ class ViewInicial(Frame):
         self.teste6.grid(row=2, column=1)
         self.calendario.grid(row=0, column=0)
 
+
     def gerar_constructor(self, constructor):
         entrada = self.dados_de_entrada()
         resposta = constructor(entrada)
         self.transfer_text(resposta)
+
 
     def dados_de_entrada(self) -> Dict:
         entradas = {
             'origem': self.local.get(),
             'data': self.data_de_pagamento()
         }
-        print(entradas)
         return entradas
+
 
     def data_de_pagamento(self):
         data_calendario = self.calendario.get_date()
@@ -75,6 +78,7 @@ class ViewInicial(Frame):
         data_de_pagamento = f'{ano}-{mes}-{dia}'
         return data_de_pagamento
 
+
     def transfer_text(self, resposta):
         self.frame_mestre.destroy()
         self.frame_mestre = LabelFrame(self, padx=0, pady=0)
@@ -83,6 +87,7 @@ class ViewInicial(Frame):
         self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
         self.texto.pack()
         self.Bvoltar.pack()
+
 
     def voltar(self):
         self.frame_mestre.destroy()

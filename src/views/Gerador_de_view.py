@@ -36,10 +36,7 @@ class Interface(DadosDeContas):
     BANCO = {'BRB': '070'}
 
     def __init__(self, tela):
-
-
         self.tela = tela
-
         self.menu = Menu(self.tela)
         self.menu_configurações = Menu(self.menu)
         self.menu.add_cascade(
@@ -116,8 +113,6 @@ class Interface(DadosDeContas):
                     caminho_completo = os.path.join(raiz, arquivo)
                     url = inverter_barra(caminho_completo)
                     url_arquivos.append(url)
-        for i in url_arquivos:
-            print(i)
         with open(
                 (
                         f'{caminho_para_salvar_arquivos}/Mesclados {self.data_de_pagamento()}.pdf'
@@ -150,7 +145,6 @@ class Interface(DadosDeContas):
             'Gerar IR': ir_constructor
         }
         comando_escolhido = self.comando.get()
-        print(f'blablablabla comando escolhido {comando_escolhido}')
         if 'todas' in comando_escolhido or 'interna' in comando_escolhido:
             tipo_de_comando[comando_escolhido]()
         else:
@@ -171,12 +165,7 @@ class Interface(DadosDeContas):
 
 
     def dados_de_entrada(self, dados_internos) -> Dict:
-        #fonte = self.definir_fonte(self.local.get())
-
         if dados_internos == True:
-
-            print(f'cortado remetente {self.remetente.get()[-7:]}')
-
             entradas = {
                 'origem': self.local.get(),
                 'data': self.data_de_pagamento(),
@@ -191,6 +180,7 @@ class Interface(DadosDeContas):
             }
         return entradas
 
+
     def data_de_pagamento(self):
         data_calendario = self.calendario.get_date()
         dia = data_calendario[0:2]
@@ -198,6 +188,7 @@ class Interface(DadosDeContas):
         ano = data_calendario[6:]
         data_de_pagamento = f'{ano}-{mes}-{dia}'
         return data_de_pagamento
+
 
     def transfer_text(self, resposta):
         self.frame_mestre.destroy()
@@ -207,6 +198,7 @@ class Interface(DadosDeContas):
         self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
         self.texto.pack()
         self.Bvoltar.pack()
+
 
     def voltar(self):
         self.frame_mestre.destroy()
@@ -318,7 +310,6 @@ class Interface(DadosDeContas):
 
         numeros_de_contas = self.numero_contas()
         self.v_contas.set('Selecione uma conta')
-        print(numeros_de_contas)
         self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *numeros_de_contas)
         self.v_contas_bd.config(width=20)
 
@@ -333,10 +324,10 @@ class Interface(DadosDeContas):
 
         self.v_contas.trace('w', self.atualiza_label_cadastro)
 
+
     def atualiza_label_cadastro(self, *args):
         conta = self.v_contas.get()[2:-3]
         dados_conta = self.pegar_conta_por_numero(conta)
-        print(dados_conta)
         origem_tipo = dados_conta[0][0].split()
         texto = (f'Origem: {origem_tipo[0]}\n'
                  f'Tipo: {origem_tipo[1]}\n'
@@ -347,6 +338,7 @@ class Interface(DadosDeContas):
                  f'CNPJ: {dados_conta[0][6]}')
         self.display.config(text=texto)
 
+
     def atualizar_contas(self):
         if self.numero_contas() == []:
             a = ["Nenhuma conta cadastrada"]
@@ -356,6 +348,7 @@ class Interface(DadosDeContas):
         self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
         self.v_contas_bd.config(width=20)
         self.v_contas_bd.grid(row=1, column=1, padx=30)
+
 
     def submeter_conta(self):
         self.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), Interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
@@ -369,11 +362,12 @@ class Interface(DadosDeContas):
         contas = list(self.pegar_n_contas())
         return contas
 
+
     def excluir_conta(self):
         conta = self.v_contas.get()
-        print(f"Esta é a {conta[1:-2]}")
         self.deletar_conta(conta[1:-2])
         self.atualizar_contas()
+
 
     def altera_caminho(self, entrada, xlsx=False):
         if xlsx == True:
@@ -409,11 +403,11 @@ class Interface(DadosDeContas):
         ]
         return itens
 
+
     def atualizar_caminhos(self):
         resposta = messagebox.askyesno(
             ATUALIZAR_CAMINHOS[0], ATUALIZAR_CAMINHOS[1]
         )
-
         itens_para_atualizacao = self.itens_para_atualização()
 
         if resposta:
@@ -424,7 +418,6 @@ class Interface(DadosDeContas):
                     linha_update = (
                         f"UPDATE urls SET url = :nova_url WHERE variavel = '{item[0]}'"
                     )
-                    print(f"0{item[0]} 1{item[1]} 2{item[2]}")
                     direcionador.execute(linha_update, {'nova_url': item[2]})
                 conexao.commit()
             self.caminhos.destroy()
@@ -435,10 +428,10 @@ class Interface(DadosDeContas):
         else:
             self.caminhos.destroy()
 
+
     def abrir_caminhos(self):
         self.caminhos = Toplevel()
         self.urls = self.consultar_registros(URLS)
-        print(f'Estas são as {self.urls}')
         self.caminhos.title('Caminhos')
         self.caminhos.resizable(False, False)
         self.frame_caminhos = LabelFrame(
@@ -528,6 +521,7 @@ class Interface(DadosDeContas):
             ipady=13
         )
 
+
     def abrir_dados_de_transferencia_interna(self):
         self.dados_de_contas = Toplevel()
         self.dados_de_contas.title('Transferência interna')
@@ -568,9 +562,7 @@ class Interface(DadosDeContas):
         lista_de_contas2 = self.listar_dados_de_conta(numero_de_contas2)
         dados_filtrado2 = self.filtrar_dados_de_conta(lista_de_contas2)
 
-
         self.favorecido.set('Conta favorecido')
-        # numero_de_contas2 = self.numero_contas()
         self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *dados_filtrado2)
         self.lista_favorecido.config(width=50)
         self.lista_favorecido.grid(row=1, column=1, padx=30, pady=30)
@@ -582,10 +574,10 @@ class Interface(DadosDeContas):
         )
         self.botao_submissao.pack(pady=5)
 
+
     def submeter_dados_internos(self):
         self.gerar_constructor(interna_constructor, True)
         self.dados_de_contas.destroy()
-
 
 
     def filtrar_dados_de_conta(self, lista_de_dados_conta):
@@ -602,7 +594,6 @@ class Interface(DadosDeContas):
             dados_de_conta = self.pegar_conta_por_numero(conta[0])
             conta_id = dados_de_conta[0]
             lista_de_dados_conta.append(conta_id)
-        print(f'listona:\n{lista_de_dados_conta}')
         return lista_de_dados_conta
 
 

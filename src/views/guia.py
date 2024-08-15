@@ -87,8 +87,6 @@ class Guia(ABC):
                 isinstance(entrada, dict)
         ):
             return entrada[coordenada[2]]
-        else:
-            print('Deu alguma merda')
 
 
     def gerar_area_de_pagamentos(self, linhas_pagamento, retangulo_pagamentos, times8_pagamento, corretor, tamanho_fonte=9):

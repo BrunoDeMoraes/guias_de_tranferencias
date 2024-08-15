@@ -7,6 +7,7 @@ class GuiaDeTED(Guia):
     def __init__(self, dados: Dict, logo):
         super().__init__(dados, logo)
 
+
     def gerar_guia(self, contador: int, imposto=False):
         for i in range(0, 2):
             self.inserir_logo(LOGO)
