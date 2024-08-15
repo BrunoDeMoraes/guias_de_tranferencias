@@ -577,10 +577,15 @@ class Interface(DadosDeContas):
 
         self.botao_submissao = Button(
             self.frame_geral_contas, text='Criar guia',
-            command=lambda: self.gerar_constructor(interna_constructor, True),
+            command=self.submeter_dados_internos,
             bg='blue', fg='white', font=('Helvetica', 8, 'bold'), bd=1
         )
         self.botao_submissao.pack(pady=5)
+
+    def submeter_dados_internos(self):
+        self.gerar_constructor(interna_constructor, True)
+        self.dados_de_contas.destroy()
+
 
 
     def filtrar_dados_de_conta(self, lista_de_dados_conta):
