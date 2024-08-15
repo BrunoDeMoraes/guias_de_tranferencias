@@ -8,10 +8,9 @@ def caminho_do_arquivo():
 
 
 def checar_pasta_de_guias(url):
-    if os.path.exists(url):
-        print('pasta Ok')
-    else:
+    if not os.path.exists(url):
         os.makedirs(url)
+
 
 
 def inverter_barra(url):

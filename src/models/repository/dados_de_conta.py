@@ -76,8 +76,6 @@ class DadosDeContas:
             for tabela in tabelas:
                 self.conexao(tabela)
             self.configura_bd()
-        else:
-            print('Banco de dados localizado.')
 
 
     def configura_bd(self):
