@@ -14,7 +14,8 @@ class Guia(ABC):
         self.dados = dados
         self.pasta_principal = caminho_do_arquivo()
         self.imagens = f'{self.pasta_principal}/Imagens/'
-        self.url_pasta = f'{self.pasta_principal}/guias/{self.dados["Data_de_pagamento"]}/{self.dados["Conta_origem"][0].split()[0]} {self.dados["Empresa"][-2:]}'
+        self.url_pasta = f'{self.dados["Pasta_guias"]}/{self.dados["Data_de_pagamento"]}/{self.dados["Conta_origem"][0].split()[0]} {self.dados["Empresa"][-2:]}'
+        print(self.url_pasta)
         checar_pasta_de_guias(self.url_pasta)
         self.cnv = canvas.Canvas(f'{self.url_pasta}/{self.dados["Tipo"]}{self.dados["Empresa"]}.pdf')
         self.cnv.setPageSize(A4)

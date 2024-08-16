@@ -19,8 +19,6 @@ class TransferController(InterfaceController):
 
 
     def filtrar_dados(self) -> Dict:
-
-
         fonte = self.contas.definir_fonte(self.origem)
         pagamentos = self.pagametos.agupar_por_empresa(fonte)
         transferencias = []
@@ -46,5 +44,6 @@ class TransferController(InterfaceController):
                 transferencia['Data_impressão'] = self.data_formatada()
                 transferencia['Data_de_pagamento'] = self.data
                 transferencia['Tipo'] = 'Transferência'
+                transferencia['Pasta_guias'] = self.pasta_guias
                 transferencias.append(transferencia)
         return transferencias

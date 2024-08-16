@@ -27,6 +27,8 @@ class InterfaceController(ABC):
         self.origem = origem
         self.pagametos = pagamento
         self.produto = {}
+        self.consuta_urls = list(self.contas.conexao('SELECT * FROM urls'))
+        self.pasta_guias = self.consuta_urls[4][1]
 
 
     def somar_indice(self, pagamentos: List, indice) -> float:

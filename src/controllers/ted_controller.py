@@ -43,5 +43,6 @@ class TedController(InterfaceController):
                 transferencia['Data_impressão'] = self.data_formatada()
                 transferencia['Data_de_pagamento'] = self.data
                 transferencia['Tipo'] = 'TED'
+                transferencia['Pasta_guias'] = self.pasta_guias
                 transferencias.append(transferencia)
         return transferencias

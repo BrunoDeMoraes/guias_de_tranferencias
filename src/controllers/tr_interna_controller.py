@@ -48,6 +48,7 @@ class TrInternaController(InterfaceController):
         transferencia['Pagamentos'] = []
         transferencia['Data_de_pagamento'] = self.data
         transferencia['Tipo'] = f'{conta_origem_fomatado[0].split()[0]} {conta_origem_fomatado[1][0]}{conta_origem_fomatado[2][0]}'
+        transferencia['Pasta_guias'] = self.pasta_guias
         transferencias.append(transferencia)
         return transferencias
 
