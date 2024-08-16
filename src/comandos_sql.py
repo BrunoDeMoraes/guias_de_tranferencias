@@ -3,6 +3,7 @@ TABELAS = (
     'CREATE TABLE urls (variavel text, url text)'
 )
 
+
 CONTAS = ('SELECT * FROM contas')
 
 URLS = ('SELECT * FROM urls')

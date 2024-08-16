@@ -399,7 +399,10 @@ class Interface(DadosDeContas):
 
             [Interface.ORIGEM[3],
              '4',
-             self.caminho_aps_i.get()]
+             self.caminho_aps_i.get()],
+            ['Guias',
+             5,
+             self.pasta_guias.get()]
         ]
         return itens
 
@@ -479,6 +482,20 @@ class Interface(DadosDeContas):
             self.frame_caminhos, width=70
         )
 
+        self.botao_pasta_guias = Button(
+            self.frame_caminhos, text='Pasta destino para guias',
+            command=lambda: (
+                self.altera_caminho(self.pasta_guias)
+            ),
+            padx=0, pady=0, bg='green', fg='white',
+            font=('Helvetica', 8, 'bold'), bd=1
+        )
+
+        self.pasta_guias = Entry(
+            self.frame_caminhos, width=70
+        )
+
+
         self.gravar_alterações = Button(
             self.frame_caminhos, text='Gravar alterações',
             command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
@@ -516,10 +533,20 @@ class Interface(DadosDeContas):
         self.caminho_aps_i.insert(0, self.urls[3][1])
         self.caminho_aps_i.grid(row=4, column=2, padx=20)
 
+        self.botao_pasta_guias.grid(
+            row=5, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
+            ipady=13, sticky=W + E
+        )
+
+        self.pasta_guias.insert(0, self.urls[4][1])
+        self.pasta_guias.grid(row=5, column=2, padx=20)
+
+
         self.gravar_alterações.grid(
             row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
             ipady=13
         )
+
 
 
     def abrir_dados_de_transferencia_interna(self):
