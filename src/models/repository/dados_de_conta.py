@@ -19,10 +19,12 @@ class DadosDeContas:
         caminho_de_uso = ('/').join(caminho_do_dir[0:-1])
         return caminho_de_uso
 
+
     def caminho_do_bd(self):
         caminho = self.caminho_do_arquivo()
         banco_de_dados = f'{caminho}/guias.db'
         return banco_de_dados
+
 
     def conexao(self, *args):
         banco_de_dados = self.caminho_do_bd()
@@ -34,10 +36,12 @@ class DadosDeContas:
                 direcionador.execute(args[0])
             return direcionador
 
+
     def consultar_registros(self, comando):
         direcionador = self.conexao(comando)
         registros = direcionador.fetchall()
         return registros
+
 
     def definir_fonte(self, fonte):
         caminhos = self.consultar_registros(URLS)
@@ -46,9 +50,11 @@ class DadosDeContas:
             origens[caminho[0]] = caminho[1]
         return origens[fonte]
 
+
     def consultar_tabelas(self):
         tabs = self.consultar_registros(CONSULTA_TABELAS)
         return tabs
+
 
     def pegar_conta(self, origem, codigo):
         especificador = self.CODIGOS[codigo]
@@ -56,6 +62,7 @@ class DadosDeContas:
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         return registro
+
 
     def pegar_conta_por_numero(self, numero):
         comando = f"SELECT * FROM contas WHERE numero = '{numero}';"
@@ -69,6 +76,7 @@ class DadosDeContas:
         direcionador = self.conexao(comando)
         registro = direcionador.fetchall()
         return registro
+
 
     def criar_bd(self, tabelas):
         banco_de_dados = self.caminho_do_bd()
@@ -85,8 +93,7 @@ class DadosDeContas:
             'APS Custeio': '-',
             'HRG Investimento': '-',
             'APS Investimento': '-',
-            'SRSSU Custeio': '-',
-            'SRSSU Investimento': '-'
+            'Guias': '-',
         }
         for endereco in enderecos:
             comando = 'INSERT INTO urls VALUES (:variavel, :url)'
@@ -110,6 +117,11 @@ class DadosDeContas:
         self.conexao(comando)
 
 
+
 if __name__ == '__main__':
     c = DadosDeContas()
-    c.criar_bd(TABELAS)
+    # c.criar_bd(TABELAS)
+    consulta = 'SELECT * FROM urls'
+    a = c.conexao(consulta)
+    for i in a:
+        print(i)
