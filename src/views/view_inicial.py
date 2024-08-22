@@ -1,5 +1,6 @@
 from datetime import date
 from tkinter import *
+from tkinter import ttk
 from tkcalendar import Calendar
 from typing import Dict
 
@@ -81,12 +82,28 @@ class ViewInicial(Frame):
 
     def transfer_text(self, resposta):
         self.frame_mestre.destroy()
-        self.frame_mestre = LabelFrame(self, padx=0, pady=0)
-        self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
-        self.texto = Label(self.frame_mestre, text=resposta)
-        self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
-        self.texto.pack()
-        self.Bvoltar.pack()
+
+        # self.frame_mestre = LabelFrame(self, padx=0, pady=0)
+        # self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
+
+        # self.texto = Label(self.frame_mestre, text=resposta)
+        # self.texto.pack()
+
+        # self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
+        # self.Bvoltar.pack()
+        #
+        self.frame_barra = LabelFrame(self, padx=0, pady=0, bg='red')
+        self.frame_barra.pack(padx=10, pady=10)
+
+        self.barra = ttk.Progressbar(self.frame_barra, orient=HORIZONTAL, length=300)
+        self.barra['value'] = 80
+        self.barra.pack()
+
+        self.valor_executado = Label(
+            self.frame_barra,
+            text=f'Total executado xx'
+        )
+        self.valor_executado.pack()
 
 
     def voltar(self):
