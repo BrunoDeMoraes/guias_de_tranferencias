@@ -38,6 +38,7 @@ class Interface(DadosDeContas):
     TIPO = ['Custeio', 'Investimento']
     BANCO = {'BRB': '070'}
 
+
     def __init__(self, tela):
         self.tela = tela
         self.menu = Menu(self.tela)
@@ -52,6 +53,7 @@ class Interface(DadosDeContas):
             label='Origens', command=self.abrir_caminhos)
         self.criar_widgets()
 
+
     def criar_widgets(self):
         self.frame_mestre = LabelFrame(self.tela, padx=0, pady=0)
         self.frame_mestre.pack(fill="both", expand=1, padx=10, pady=10)
@@ -64,7 +66,6 @@ class Interface(DadosDeContas):
 
         self.frame_2 = LabelFrame(self.frame_mestre, padx=0, pady=0)
         self.frame_2.pack(fill="both", padx=10, pady=10)
-
 
         self.local = StringVar()
         self.local.set(Interface.ORIGEM[0])
@@ -106,7 +107,6 @@ class Interface(DadosDeContas):
         self.valor_progresso.trace('w', self.atualizar_progresso)
 
         self.criar_barra_de_progresso()
-
 
 
     def mesclar_arquivos(self):
@@ -157,12 +157,12 @@ class Interface(DadosDeContas):
             self.gerar_constructor(tipo_de_comando[comando_escolhido])
 
 
-
     def thread_barra_de_progresso(self):
         print('iniciando thred')
         tr = threading.Thread(target=self.gera_todas_as_guias)
         tr.start()
         print('finalizando thread')
+
 
     def checagem_de_progresso(self):
         while self.executor:
@@ -190,6 +190,7 @@ class Interface(DadosDeContas):
         self.valor_progresso.set(0)
         self.executor = False
 
+
     def gerar_constructor(self, constructor, dados_internos=False):
         entrada = self.dados_de_entrada(dados_internos)
         print(f'Essa é a entrada {entrada}')
@@ -199,18 +200,13 @@ class Interface(DadosDeContas):
 
 
     def criar_barra_de_progresso(self):
-        # self.frame_barra = LabelFrame(self.frame_mestre, padx=0, pady=0)
-        # self.frame_barra.pack(padx=10, pady=10)
-
         self.valor_executado = Label(
             self.frame_mestre,
             text=f'Total executado xx'
         )
         self.valor_executado.pack()
-
         self.barra = ttk.Progressbar(self.frame_mestre, orient=HORIZONTAL, length=270, mode='determinate', variable=self.valor_progresso)
         self.barra.pack()
-
         self.barra['value'] = 0
 
 
@@ -341,7 +337,6 @@ class Interface(DadosDeContas):
         self.titulo_agencia.grid(row=0, column=5)
         self.titulo_conta.grid(row=0, column=6)
         self.titulo_cnpj.grid(row=0, column=7)
-
 
         self.lista_origem_bd.grid(row=1, column=1)
         self.lista_recurso_bd.grid(row=1, column=2)
@@ -547,7 +542,6 @@ class Interface(DadosDeContas):
             self.frame_caminhos, width=70
         )
 
-
         self.gravar_alterações = Button(
             self.frame_caminhos, text='Gravar alterações',
             command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
@@ -592,7 +586,6 @@ class Interface(DadosDeContas):
 
         self.pasta_guias.insert(0, self.urls[4][1])
         self.pasta_guias.grid(row=5, column=2, padx=20)
-
 
         self.gravar_alterações.grid(
             row=6, column=2, columnspan=1, padx=15, pady=10, ipadx=10,
