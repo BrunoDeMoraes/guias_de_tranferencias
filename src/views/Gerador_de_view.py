@@ -84,6 +84,7 @@ class Interface(DadosDeContas):
         self.comando = StringVar()
         self.comando.set('Escolha um comando')
         self.lista_de_comandos = OptionMenu(self.frame_mestre, self.comando, *self.comandos)
+        self.lista_de_comandos.config(width=35)
         self.lista_de_comandos.pack()
 
         self.botao_gerar_guia = Button(
@@ -96,7 +97,6 @@ class Interface(DadosDeContas):
         dia = int(self.data_hoje.strftime('%d'))
         mes = int(self.data_hoje.strftime('%m'))
         ano = int(self.data_hoje.strftime('%Y'))
-
 
         self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
         self.calendario.grid(row=0, column=0)
