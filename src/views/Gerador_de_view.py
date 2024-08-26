@@ -78,7 +78,8 @@ class Interface(DadosDeContas):
             'Gerar TEDs',
             'Gerar ISS',
             'Gerar IR',
-            'Transferência interna'
+            'Transferência interna',
+            'Mesclar arquivos'
         ]
         self.comando = StringVar()
         self.comando.set('Escolha um comando')
@@ -99,12 +100,6 @@ class Interface(DadosDeContas):
 
         self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
         self.calendario.grid(row=0, column=0)
-
-        self.botao_mesclar_arquivos = Button(
-            self.frame_mestre, text='Mesclar arquivos',
-            command=self.mesclar_arquivos
-        )
-        self.botao_mesclar_arquivos.pack(pady=10)
 
         self.valor_progresso = IntVar()
 
@@ -151,11 +146,12 @@ class Interface(DadosDeContas):
             'Gerar transferencias': transfer_constructor,
             'Gerar TEDs': ted_constructor,
             'Gerar ISS': iss_constructor,
-            'Gerar IR': ir_constructor
+            'Gerar IR': ir_constructor,
+            'Mesclar arquivos': self.mesclar_arquivos
         }
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
-        if 'todas' in comando_escolhido or 'interna' in comando_escolhido:
+        if 'todas' in comando_escolhido or 'interna' or 'Mesclar' in comando_escolhido:
             tipo_de_comando[comando_escolhido]()
         else:
             self.gerar_constructor(tipo_de_comando[comando_escolhido])
@@ -254,8 +250,6 @@ class Interface(DadosDeContas):
         self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
         self.texto.pack()
         self.Bvoltar.pack()
-
-
 
 
     def voltar(self):
