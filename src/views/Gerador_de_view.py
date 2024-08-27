@@ -90,7 +90,7 @@ class Interface(DadosDeContas):
 
         self.botao_gerar_guia = Button(
             self.frame_mestre, text='Gerar guias',
-            command= self.selecionar_tipo_de_guia
+            command= self.selecionar_tipo_de_guia_thread
         )
         self.botao_gerar_guia.pack(pady=10)
 
@@ -141,56 +141,80 @@ class Interface(DadosDeContas):
 
     def selecionar_tipo_de_guia(self):
         tipo_de_comando = {
-            'Gerar todas as guias': self.thread_barra_de_progresso,
+            'Gerar todas as guias': self.gera_todas_as_guias,
             'Transferência interna': self.abrir_dados_de_transferencia_interna,
-            'Gerar transferencias': transfer_constructor,
-            'Gerar TEDs': ted_constructor,
-            'Gerar ISS': iss_constructor,
-            'Gerar IR': ir_constructor,
+            'Gerar transferencias': self.gerar_constructor(transfer_constructor),
+            'Gerar TEDs': self.gerar_constructor(ted_constructor),
+            'Gerar ISS': self.gerar_constructor(iss_constructor),
+            'Gerar IR': self.gerar_constructor(ir_constructor),
             'Mesclar arquivos': self.mesclar_arquivos
         }
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
-        if 'todas' in comando_escolhido or 'interna' or 'Mesclar' in comando_escolhido:
+        if 'todas' in comando_escolhido or 'interna' in comando_escolhido or 'Mesclar' in comando_escolhido or 'transferencias' in comando_escolhido:
             tipo_de_comando[comando_escolhido]()
         else:
-            self.gerar_constructor(tipo_de_comando[comando_escolhido])
+            tipo_de_comando[comando_escolhido]
 
 
-    def thread_barra_de_progresso(self):
-        print('iniciando thred')
-        tr = threading.Thread(target=self.gera_todas_as_guias)
-        tr.start()
-        print('finalizando thread')
+    # def checagem_de_progresso(self):
+    #     while self.executor:
+    #         total = self.valor_progresso.get()
+    #         if total in [34, 69, 84, 99]:
+    #             continue
+    #         else:
+    #             self.valor_progresso.set((total + 1))
+    #             time.sleep(3)
+    #     print('Thread encerrada')
 
-
-    def checagem_de_progresso(self):
+    def progresso_continuo(self):
+        #self.executor = True
         while self.executor:
             total = self.valor_progresso.get()
-            if total in [34, 69, 84, 99]:
+            if total == 99:
                 continue
             else:
                 self.valor_progresso.set((total + 1))
                 time.sleep(3)
+        self.valor_progresso.set(100)
+        self.valor_progresso.set(0)
         print('Thread encerrada')
+        #self.executor = False
 
 
     def gera_todas_as_guias(self):
-        self.executor = True
-        thread_checagem = threading.Thread(target=self.checagem_de_progresso)
-        thread_checagem.start()
+        # thread_checagem = threading.Thread(target=self.progresso_continuo)
+        # thread_checagem.start()
         self.gerar_constructor(transfer_constructor)
-        self.valor_progresso.set(35)
+        # self.valor_progresso.set(35)
         self.gerar_constructor(ted_constructor)
-        self.valor_progresso.set(70)
+        # self.valor_progresso.set(70)
         self.gerar_constructor(iss_constructor)
-        self.valor_progresso.set(85)
+        # self.valor_progresso.set(85)
         self.gerar_constructor(ir_constructor)
         self.valor_progresso.set(100)
         self.valor_progresso.set(0)
         self.executor = False
 
-
+    def selecionar_tipo_de_guia_thread(self):
+        self.executor = True
+        thread_checagem_true = threading.Thread(target=self.progresso_continuo)
+        thread_checagem_true.start()
+        print('iniciando thred')
+        tr = threading.Thread(target=self.selecionar_tipo_de_guia)
+        tr.start()
+        print('finalizando thread')
+    #
+    # def thread_processo(self, processo):
+    #     print('iniciando thred')
+    #     tr = threading.Thread(target=processo)
+    #     tr.start()
+    #     print('finalizando thread')
+    #
+    # def gerador_de_processo(self, constructor):
+    #     self.gerar_constructor(constructor)
+    #
+    #
     def gerar_constructor(self, constructor, dados_internos=False):
         entrada = self.dados_de_entrada(dados_internos)
         print(f'Essa é a entrada {entrada}')
@@ -205,7 +229,13 @@ class Interface(DadosDeContas):
             text=f'Total executado xx'
         )
         self.valor_executado.pack()
-        self.barra = ttk.Progressbar(self.frame_mestre, orient=HORIZONTAL, length=270, mode='determinate', variable=self.valor_progresso)
+        self.barra = ttk.Progressbar(
+            self.frame_mestre,
+            orient=HORIZONTAL,
+            length=270,
+            mode='determinate',
+            variable=self.valor_progresso
+        )
         self.barra.pack()
         self.barra['value'] = 0
 
@@ -435,15 +465,12 @@ class Interface(DadosDeContas):
             [Interface.ORIGEM[0],
              '1',
              self.caminho_srssu.get()],
-
             [Interface.ORIGEM[1],
              '2',
              self.caminho_aps.get()],
-
             [Interface.ORIGEM[2],
              '3',
              self.caminho_srssu_i.get()],
-
             [Interface.ORIGEM[3],
              '4',
              self.caminho_aps_i.get()],
