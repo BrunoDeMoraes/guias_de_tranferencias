@@ -90,7 +90,7 @@ class Interface(DadosDeContas):
 
         self.botao_gerar_guia = Button(
             self.frame_mestre, text='Gerar guias',
-            command= self.selecionar_tipo_de_guia_thread
+            command = self.selecionar_tipo_de_guia_thread
         )
         self.botao_gerar_guia.pack(pady=10)
 
@@ -141,20 +141,20 @@ class Interface(DadosDeContas):
 
     def selecionar_tipo_de_guia(self):
         tipo_de_comando = {
-            'Gerar todas as guias': self.gera_todas_as_guias,
+            'Gerar todas as guias': self.gerar_todas_as_guias,
             'Transferência interna': self.abrir_dados_de_transferencia_interna,
-            'Gerar transferencias': self.gerar_constructor(transfer_constructor),
-            'Gerar TEDs': self.gerar_constructor(ted_constructor),
-            'Gerar ISS': self.gerar_constructor(iss_constructor),
-            'Gerar IR': self.gerar_constructor(ir_constructor),
+            'Gerar transferencias': self.gerar_tranferencia,
+            'Gerar TEDs': self.gerar_ted,
+            'Gerar ISS': self.gerar_iss,
+            'Gerar IR': self.gerar_ir,
             'Mesclar arquivos': self.mesclar_arquivos
         }
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
-        if 'todas' in comando_escolhido or 'interna' in comando_escolhido or 'Mesclar' in comando_escolhido or 'transferencias' in comando_escolhido:
-            tipo_de_comando[comando_escolhido]()
-        else:
-            tipo_de_comando[comando_escolhido]
+        # if 'todas' in comando_escolhido or 'interna' in comando_escolhido or 'Mesclar' in comando_escolhido or 'transferencias' in comando_escolhido:
+        tipo_de_comando[comando_escolhido]()
+        # else:
+        #     tipo_de_comando[comando_escolhido]
 
 
     # def checagem_de_progresso(self):
@@ -176,23 +176,41 @@ class Interface(DadosDeContas):
             else:
                 self.valor_progresso.set((total + 1))
                 time.sleep(3)
-        self.valor_progresso.set(100)
-        self.valor_progresso.set(0)
+        # self.valor_progresso.set(100)
+        # self.valor_progresso.set(0)
         print('Thread encerrada')
         #self.executor = False
 
 
-    def gera_todas_as_guias(self):
-        # thread_checagem = threading.Thread(target=self.progresso_continuo)
-        # thread_checagem.start()
+    def gerar_todas_as_guias(self):
         self.gerar_constructor(transfer_constructor)
-        # self.valor_progresso.set(35)
         self.gerar_constructor(ted_constructor)
-        # self.valor_progresso.set(70)
         self.gerar_constructor(iss_constructor)
-        # self.valor_progresso.set(85)
         self.gerar_constructor(ir_constructor)
+        self.finalizar_barra_de_progresso()
+
+    def gerar_tranferencia(self):
+        self.gerar_constructor(transfer_constructor)
+        self.finalizar_barra_de_progresso()
+
+
+    def gerar_ted(self):
+        self.gerar_constructor(ted_constructor)
+        self.finalizar_barra_de_progresso()
+
+
+    def gerar_ir(self):
+        self.gerar_constructor(ir_constructor)
+        self.finalizar_barra_de_progresso()
+
+    def gerar_iss(self):
+        self.gerar_constructor(iss_constructor)
+        self.finalizar_barra_de_progresso()
+
+
+    def finalizar_barra_de_progresso(self):
         self.valor_progresso.set(100)
+        time.sleep(1)
         self.valor_progresso.set(0)
         self.executor = False
 
@@ -204,17 +222,8 @@ class Interface(DadosDeContas):
         tr = threading.Thread(target=self.selecionar_tipo_de_guia)
         tr.start()
         print('finalizando thread')
-    #
-    # def thread_processo(self, processo):
-    #     print('iniciando thred')
-    #     tr = threading.Thread(target=processo)
-    #     tr.start()
-    #     print('finalizando thread')
-    #
-    # def gerador_de_processo(self, constructor):
-    #     self.gerar_constructor(constructor)
-    #
-    #
+
+
     def gerar_constructor(self, constructor, dados_internos=False):
         entrada = self.dados_de_entrada(dados_internos)
         print(f'Essa é a entrada {entrada}')
