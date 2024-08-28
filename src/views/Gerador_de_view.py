@@ -112,31 +112,37 @@ class Interface(DadosDeContas):
     def mesclar_arquivos(self):
         caminho_para_salvar_arquivos = filedialog.askdirectory()
         url_arquivos = []
+        self.inicializar_barra_de_progresso()
         for raiz, diretorios, arquivos in os.walk(caminho_para_salvar_arquivos):
             for arquivo in arquivos:
                 if arquivo.endswith('.pdf'):
                     caminho_completo = os.path.join(raiz, arquivo)
                     url = inverter_barra(caminho_completo)
                     url_arquivos.append(url)
-        with open(
-                (
-                        f'{caminho_para_salvar_arquivos}/Mesclados {self.data_de_pagamento()}.pdf'
-                ), 'wb'
-        ) as arquivo_final:
-            criador_de_pdf = PyPDF2.PdfWriter()
-            for url_arquivo in url_arquivos:
-                with open(url_arquivo, 'rb') as arquivo_aberto:
-                    arquivo_lido = PyPDF2.PdfReader(
-                        arquivo_aberto
-                    )
-                    for página in range(len(arquivo_lido.pages)):
-                        página_do_pdf = arquivo_lido.pages[página]
-                        criador_de_pdf.add_page(página_do_pdf)
-                    criador_de_pdf.write(arquivo_final)
-            messagebox.showinfo(
-                'Rolou tranquilo!',
-                f'Mesclagem de arquivos executada com sucesso!'
-            )
+        if os.path.exists(f'{caminho_para_salvar_arquivos}/Mesclados {self.data_de_pagamento()}.pdf'):
+            self.finalizar_barra_de_progresso()
+            messagebox.showerror('De novo, mano', 'O arquivo já existe. Se quiser criar novamente, apaga lá primeiro!')
+        else:
+            with open(
+                    (
+                            f'{caminho_para_salvar_arquivos}/Mesclados {self.data_de_pagamento()}.pdf'
+                    ), 'wb'
+            ) as arquivo_final:
+                criador_de_pdf = PyPDF2.PdfWriter()
+                for url_arquivo in url_arquivos:
+                    with open(url_arquivo, 'rb') as arquivo_aberto:
+                        arquivo_lido = PyPDF2.PdfReader(
+                            arquivo_aberto
+                        )
+                        for página in range(len(arquivo_lido.pages)):
+                            página_do_pdf = arquivo_lido.pages[página]
+                            criador_de_pdf.add_page(página_do_pdf)
+                        criador_de_pdf.write(arquivo_final)
+                self.finalizar_barra_de_progresso()
+                messagebox.showinfo(
+                    'Rolou tranquilo!',
+                    f'Mesclagem de arquivos executada com sucesso!'
+                )
 
 
     def selecionar_tipo_de_guia(self):
