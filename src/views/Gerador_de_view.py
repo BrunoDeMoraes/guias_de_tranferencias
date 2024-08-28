@@ -90,7 +90,7 @@ class Interface(DadosDeContas):
 
         self.botao_gerar_guia = Button(
             self.frame_mestre, text='Gerar guias',
-            command = self.selecionar_tipo_de_guia_thread
+            command=self.selecionar_tipo_de_guia_thread
         )
         self.botao_gerar_guia.pack(pady=10)
 
@@ -143,69 +143,40 @@ class Interface(DadosDeContas):
         tipo_de_comando = {
             'Gerar todas as guias': self.gerar_todas_as_guias,
             'Transferência interna': self.abrir_dados_de_transferencia_interna,
-            'Gerar transferencias': self.gerar_tranferencia,
-            'Gerar TEDs': self.gerar_ted,
-            'Gerar ISS': self.gerar_iss,
-            'Gerar IR': self.gerar_ir,
+            'Gerar transferencias': lambda: self.gerar_processo(transfer_constructor),
+            'Gerar TEDs': lambda: self.gerar_processo(ted_constructor),
+            'Gerar ISS': lambda: self.gerar_processo(iss_constructor),
+            'Gerar IR': lambda: self.gerar_processo(ir_constructor),
             'Mesclar arquivos': self.mesclar_arquivos
         }
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
-        # if 'todas' in comando_escolhido or 'interna' in comando_escolhido or 'Mesclar' in comando_escolhido or 'transferencias' in comando_escolhido:
         tipo_de_comando[comando_escolhido]()
-        # else:
-        #     tipo_de_comando[comando_escolhido]
 
-
-    # def checagem_de_progresso(self):
-    #     while self.executor:
-    #         total = self.valor_progresso.get()
-    #         if total in [34, 69, 84, 99]:
-    #             continue
-    #         else:
-    #             self.valor_progresso.set((total + 1))
-    #             time.sleep(3)
-    #     print('Thread encerrada')
 
     def progresso_continuo(self):
-        #self.executor = True
         while self.executor:
             total = self.valor_progresso.get()
             if total == 99:
                 continue
             else:
                 self.valor_progresso.set((total + 1))
-                time.sleep(3)
-        # self.valor_progresso.set(100)
-        # self.valor_progresso.set(0)
+                time.sleep(1)
         print('Thread encerrada')
-        #self.executor = False
 
 
     def gerar_todas_as_guias(self):
-        self.gerar_constructor(transfer_constructor)
-        self.gerar_constructor(ted_constructor)
-        self.gerar_constructor(iss_constructor)
-        self.gerar_constructor(ir_constructor)
-        self.finalizar_barra_de_progresso()
-
-    def gerar_tranferencia(self):
-        self.gerar_constructor(transfer_constructor)
+        self.gerar_processo(transfer_constructor)
+        self.gerar_processo(ted_constructor)
+        self.gerar_processo(iss_constructor)
+        self.gerar_processo(ir_constructor)
         self.finalizar_barra_de_progresso()
 
 
-    def gerar_ted(self):
-        self.gerar_constructor(ted_constructor)
-        self.finalizar_barra_de_progresso()
+    def gerar_processo(self, constructor):
+        self.inicializar_barra_de_progresso()
+        self.gerar_constructor(constructor)
 
-
-    def gerar_ir(self):
-        self.gerar_constructor(ir_constructor)
-        self.finalizar_barra_de_progresso()
-
-    def gerar_iss(self):
-        self.gerar_constructor(iss_constructor)
-        self.finalizar_barra_de_progresso()
 
 
     def finalizar_barra_de_progresso(self):
@@ -215,13 +186,17 @@ class Interface(DadosDeContas):
         self.executor = False
 
     def selecionar_tipo_de_guia_thread(self):
-        self.executor = True
-        thread_checagem_true = threading.Thread(target=self.progresso_continuo)
-        thread_checagem_true.start()
+        # self.inicializar_barra_de_progresso()
         print('iniciando thred')
         tr = threading.Thread(target=self.selecionar_tipo_de_guia)
         tr.start()
         print('finalizando thread')
+
+
+    def inicializar_barra_de_progresso(self):
+        self.executor = True
+        thread_checagem_true = threading.Thread(target=self.progresso_continuo)
+        thread_checagem_true.start()
 
 
     def gerar_constructor(self, constructor, dados_internos=False):
@@ -230,6 +205,7 @@ class Interface(DadosDeContas):
         resposta = constructor(entrada)
         print(f'Essa é a resposta {resposta}')
         self.transfer_text(resposta)
+        self.finalizar_barra_de_progresso()
 
 
     def criar_barra_de_progresso(self):
