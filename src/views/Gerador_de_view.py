@@ -150,10 +150,7 @@ class Interface(DadosDeContas):
                             criador_de_pdf.add_page(página_do_pdf)
                         criador_de_pdf.write(arquivo_final)
                 self.finalizar_barra_de_progresso()
-                messagebox.showinfo(
-                    'Rolou tranquilo!',
-                    f'Mesclagem de arquivos executada com sucesso!'
-                )
+                messagebox.showinfo('Rolou', 'Mesclagem concluída com sucesso!')
 
 
     def selecionar_tipo_de_guia(self):
@@ -169,7 +166,8 @@ class Interface(DadosDeContas):
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
         tipo_de_comando[comando_escolhido]()
-        messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
+        if comando_escolhido != 'Mesclar arquivos':
+            messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
 
 
     def progresso_continuo(self):
