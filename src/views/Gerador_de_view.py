@@ -690,7 +690,6 @@ class Interface(DadosDeContas):
         messagebox.showinfo('Rolou', 'Guia de transferência interna gerada!')
 
 
-
     def filtrar_dados_de_conta(self, lista_de_dados_conta):
         lista_filtrada = []
         for lista in lista_de_dados_conta:
