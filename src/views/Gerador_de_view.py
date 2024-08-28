@@ -178,15 +178,14 @@ class Interface(DadosDeContas):
         self.gerar_constructor(constructor)
 
 
-
     def finalizar_barra_de_progresso(self):
         self.valor_progresso.set(100)
+        self.executor = False
         time.sleep(1)
         self.valor_progresso.set(0)
-        self.executor = False
+
 
     def selecionar_tipo_de_guia_thread(self):
-        # self.inicializar_barra_de_progresso()
         print('iniciando thred')
         tr = threading.Thread(target=self.selecionar_tipo_de_guia)
         tr.start()
