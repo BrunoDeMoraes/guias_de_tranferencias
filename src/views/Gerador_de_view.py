@@ -74,7 +74,7 @@ class Interface(DadosDeContas):
         self.conta_origem.grid(row=0, column=0)
 
         self.comandos = [
-            'Gerar todas as guias',
+            'Criar todas as guias',
             'Gerar transferencias',
             'Gerar TEDs',
             'Gerar ISS',
@@ -141,7 +141,7 @@ class Interface(DadosDeContas):
 
     def selecionar_tipo_de_guia(self):
         tipo_de_comando = {
-            'Gerar todas as guias': self.gerar_todas_as_guias,
+            'Criar todas as guias': self.gerar_todas_as_guias,
             'Transferência interna': self.abrir_dados_de_transferencia_interna,
             'Gerar transferencias': lambda: self.gerar_processo(transfer_constructor),
             'Gerar TEDs': lambda: self.gerar_processo(ted_constructor),
