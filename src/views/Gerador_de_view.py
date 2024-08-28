@@ -166,7 +166,7 @@ class Interface(DadosDeContas):
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
         tipo_de_comando[comando_escolhido]()
-        if comando_escolhido != 'Mesclar arquivos':
+        if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
             messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
 
 
@@ -687,6 +687,8 @@ class Interface(DadosDeContas):
     def submeter_dados_internos(self):
         self.gerar_constructor(interna_constructor, True)
         self.dados_de_contas.destroy()
+        messagebox.showinfo('Rolou', 'Guia de transferência interna gerada!')
+
 
 
     def filtrar_dados_de_conta(self, lista_de_dados_conta):
