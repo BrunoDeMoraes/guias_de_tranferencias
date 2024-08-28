@@ -88,6 +88,10 @@ class Interface(DadosDeContas):
         self.lista_de_comandos.config(width=35)
         self.lista_de_comandos.pack()
 
+        self.comando_atual = f''
+
+
+
         self.botao_gerar_guia = Button(
             self.frame_mestre, text='Gerar guias',
             command=self.selecionar_tipo_de_guia_thread
@@ -105,6 +109,13 @@ class Interface(DadosDeContas):
         self.valor_progresso = IntVar()
 
         self.valor_progresso.trace('w', self.atualizar_progresso)
+
+
+        self.valor_executado = Label(
+            self.frame_mestre,
+            text=f''
+        )
+        self.valor_executado.pack()
 
         self.criar_barra_de_progresso()
 
@@ -158,6 +169,7 @@ class Interface(DadosDeContas):
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
         tipo_de_comando[comando_escolhido]()
+        messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
 
 
     def progresso_continuo(self):
@@ -172,11 +184,16 @@ class Interface(DadosDeContas):
 
 
     def gerar_todas_as_guias(self):
+        self.comando_atual = 'Transferências BRB'
         self.gerar_processo(transfer_constructor)
+        self.comando_atual = 'TEDs'
         self.gerar_processo(ted_constructor)
+        self.comando_atual = 'ISS'
         self.gerar_processo(iss_constructor)
+        self.comando_atual = 'IR'
         self.gerar_processo(ir_constructor)
         self.finalizar_barra_de_progresso()
+        self.comando_atual = ''
 
 
     def gerar_processo(self, constructor):
@@ -189,6 +206,7 @@ class Interface(DadosDeContas):
         self.executor = False
         time.sleep(1)
         self.valor_progresso.set(0)
+        self.valor_executado.config(text='')
 
 
     def selecionar_tipo_de_guia_thread(self):
@@ -209,16 +227,11 @@ class Interface(DadosDeContas):
         print(f'Essa é a entrada {entrada}')
         resposta = constructor(entrada)
         print(f'Essa é a resposta {resposta}')
-        self.transfer_text(resposta)
         self.finalizar_barra_de_progresso()
 
 
+
     def criar_barra_de_progresso(self):
-        self.valor_executado = Label(
-            self.frame_mestre,
-            text=f'Total executado xx'
-        )
-        self.valor_executado.pack()
         self.barra = ttk.Progressbar(
             self.frame_mestre,
             orient=HORIZONTAL,
@@ -232,7 +245,17 @@ class Interface(DadosDeContas):
 
     def atualizar_progresso(self, *args):
         progresso = self.valor_progresso.get()
+        tipo_de_guia = self.definir_guia_atual()
         self.barra['value'] = progresso
+        self.valor_executado.config(text=f'Gerando {tipo_de_guia}: {self.comando_atual} {progresso}%')
+
+
+    def definir_guia_atual(self):
+        comando_de_guia = self.comando.get()
+        comando_de_guia_sepaarado = comando_de_guia.split()
+        tipo_de_guia = ' '.join(comando_de_guia_sepaarado[1:])
+        return tipo_de_guia
+
 
 
     def dados_de_entrada(self, dados_internos) -> Dict:
