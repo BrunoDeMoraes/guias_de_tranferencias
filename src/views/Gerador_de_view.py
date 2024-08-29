@@ -64,8 +64,8 @@ class Interface(DadosDeContas):
         self.frame_calendario = LabelFrame(self.frame_mestre, padx=0, pady=0)
         self.frame_calendario.pack(fill="both", padx=10, pady=0, ipady=0)
 
-        self.frame_2 = LabelFrame(self.frame_mestre, padx=0, pady=0)
-        self.frame_2.pack(fill="both", padx=10, pady=10)
+        # self.frame_2 = LabelFrame(self.frame_mestre, padx=0, pady=0)
+        # self.frame_2.pack(fill="both", padx=10, pady=10)
 
         self.local = StringVar()
         self.local.set(Interface.ORIGEM[0])
@@ -226,7 +226,6 @@ class Interface(DadosDeContas):
         resposta = constructor(entrada)
         print(f'Essa é a resposta {resposta}')
         self.finalizar_barra_de_progresso()
-
 
 
     def criar_barra_de_progresso(self):
