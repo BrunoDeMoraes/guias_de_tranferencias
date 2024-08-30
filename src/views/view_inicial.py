@@ -58,23 +58,26 @@ class Interface(DadosDeContas):
 
 
     def criar_widgets(self):
-        self.frame_mestre = ctk.CTkFrame(self.tela, corner_radius=10)
+        self.frame_mestre = ctk.CTkFrame(self.tela, corner_radius=5)
         self.frame_mestre.pack()
 
-        # self.frame_1 = ctk.CTkFrame(self.frame_mestre)
-        # self.frame_1.pack(padx=10, pady=0)
+        self.frame_1 = ctk.CTkFrame(self.frame_mestre)
+        self.frame_1.pack(fill="both", padx=0, pady=0, ipady=0)
 
-        # self.frame_calendario = ctk.CTkFrame(self.frame_mestre)
-        # self.frame_calendario.pack(padx=10, pady=20, ipady=0)
+        self.frame_calendario = ctk.CTkFrame(self.frame_mestre)
+        self.frame_calendario.pack(fill="both", padx=0, pady=5, ipady=0)
 
-        # self.frame_2 = ctk.CTkFrame(self.frame_mestre)
-        # self.frame_2.pack(fill="both", padx=10, pady=10)
+        self.frame_2 = ctk.CTkFrame(self.frame_mestre)
+        self.frame_2.pack(fill="both", padx=0, pady=0)
+
+        self.frame_barra = ctk.CTkFrame(self.frame_mestre)
+        self.frame_barra.pack(fill="both", padx=0, pady=5)
 
         self.local = ctk.StringVar()
         self.local.set(Interface.ORIGEM[0])
 
         self.conta_origem = ctk.CTkOptionMenu(
-            self.frame_mestre,
+            self.frame_1,
             width=170,
             values=Interface.ORIGEM,
             variable=self.local,
@@ -87,8 +90,8 @@ class Interface(DadosDeContas):
         mes = int(self.data_hoje.strftime('%m'))
         ano = int(self.data_hoje.strftime('%Y'))
 
-        self.calendario = Calendar(self.frame_mestre, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
-        self.calendario.grid(row=1, column=0, pady=20)
+        self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
+        self.calendario.pack(pady=20)
 
         self.comandos = [
             'Criar todas as guias',
@@ -101,17 +104,16 @@ class Interface(DadosDeContas):
         ]
         self.comando = ctk.StringVar()
         self.comando.set('Escolha um comando')
-        self.lista_de_comandos = ctk.CTkOptionMenu(self.frame_mestre, values=self.comandos, variable=self.comando)
-        self.lista_de_comandos.grid(row=2, column=0, pady=10)
+        self.lista_de_comandos = ctk.CTkOptionMenu(self.frame_2, values=self.comandos, variable=self.comando)
+        self.lista_de_comandos.pack(pady=10)
 
         self.comando_atual = f''
 
         self.botao_gerar_guia = ctk.CTkButton(
-            self.frame_mestre, text='Gerar guias',
+            self.frame_2, text='Gerar guias',
             command=self.selecionar_tipo_de_guia_thread,
-            fg_color='orange'
         )
-        self.botao_gerar_guia.grid(row=3, column=0, pady=20)
+        self.botao_gerar_guia.pack(pady=20)
 
         self.valor_progresso = ctk.DoubleVar()
 
@@ -119,11 +121,10 @@ class Interface(DadosDeContas):
 
 
         self.valor_executado = ctk.CTkLabel(
-            self.frame_mestre,
-            text=f'',
-            anchor='s'
+            self.frame_barra,
+            text=f''
         )
-        self.valor_executado.grid(row=5, column=0)
+        self.valor_executado.grid(row=0, column=1)
 
         self.criar_barra_de_progresso()
 
@@ -238,16 +239,15 @@ class Interface(DadosDeContas):
 
     def criar_barra_de_progresso(self):
         self.barra = ctk.CTkProgressBar(
-            self.frame_mestre,
+            self.frame_barra,
             orientation='horizontal',
             width=300,
-            height=20,
+            # height=20,
             # length=270,
             mode='determinate',
             variable=self.valor_progresso,
-            fg_color='red'
         )
-        self.barra.grid(row=6, column=0)
+        self.barra.grid(row=1, column=1)
         self.barra['value'] = 0
 
 
@@ -727,9 +727,9 @@ if __name__ == '__main__':
                          fg="black",  # Cor do texto dos botões
                          font=("Times", 10))
     ctk.set_appearance_mode('dark')
-    ctk.set_default_color_theme('green')
+    ctk.set_default_color_theme('dark-blue')
     tela.title('Teste CTk')
-    tela.geometry("330x480")
+    tela.geometry("330x440")
     tela.resizable(1, 1)
     objeto_tela = Interface(tela)
     tela.config(menu=objeto_tela.menu)
