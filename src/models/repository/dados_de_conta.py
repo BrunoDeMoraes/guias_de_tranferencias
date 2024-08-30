@@ -112,6 +112,7 @@ class DadosDeContas:
         self.conexao(comando[0], comando[1])
 
     def deletar_conta(self, conta):
+        print(f'conta dentro do delete {conta}')
         comando = f'DELETE FROM contas WHERE numero = {conta}'
         banco_de_dados = self.caminho_do_bd()
         self.conexao(comando)

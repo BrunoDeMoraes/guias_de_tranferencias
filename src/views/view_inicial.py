@@ -45,7 +45,7 @@ class Interface(DadosDeContas):
     def __init__(self, tela):
         self.tela = tela
         self.menu = tk.Menu(self.tela)
-        self.menu_configurações = tk.Menu(self.menu, tearoff=0, bg='black', fg='white')
+        self.menu_configurações = tk.Menu(self.menu, tearoff=0, bg='#1F538D', fg='silver',  borderwidth=0)
         self.menu.add_cascade(
             label='Configurações', menu=self.menu_configurações)
         self.menu_configurações.add_separator()
@@ -292,11 +292,11 @@ class Interface(DadosDeContas):
         return data_de_pagamento
 
 
-    def transfer_text(self, resposta):
-        self.texto = Label(self.frame_mestre, text=resposta)
-        self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
-        self.texto.pack()
-        self.Bvoltar.pack()
+    # def transfer_text(self, resposta):
+    #     self.texto = Label(self.frame_mestre, text=resposta)
+    #     self.Bvoltar = Button(self.frame_mestre, text='Tela inicial', command=self.voltar)
+    #     self.texto.pack()
+    #     self.Bvoltar.pack()
 
 
     def voltar(self):
@@ -305,81 +305,82 @@ class Interface(DadosDeContas):
 
 
     def abrir_janela_cadastro(self):
-        self.janela_de_cadastro = Toplevel()
+        self.janela_de_cadastro = ctk.CTkToplevel()
+        self.janela_de_cadastro.geometry('1000x300')
         self.janela_de_cadastro.title('Cadastro de contas')
         self.janela_de_cadastro.resizable(True, True)
 
-        self.frame_geral = LabelFrame(
-            self.janela_de_cadastro, padx=50, pady=30
+        self.frame_geral = ctk.CTkFrame(
+            self.janela_de_cadastro
         )
         self.frame_geral.pack(padx=1, pady=1)
 
-        self.frame_de_cadastro = LabelFrame(
-            self.frame_geral, padx=10, pady=0
+        self.frame_de_cadastro = ctk.CTkFrame(
+            self.frame_geral
         )
         self.frame_de_cadastro.pack(padx=1, pady=1)
 
-        self.frame_de_exclusao = LabelFrame(
-            self.frame_geral, padx=10, pady=0
+        self.frame_de_exclusao = ctk.CTkFrame(
+            self.frame_geral
         )
         self.frame_de_exclusao.pack(padx=1, pady=1)
 
-        self.frame_display = LabelFrame(
-            self.frame_geral, padx=10, pady=0
+        self.frame_display = ctk.CTkFrame(
+            self.frame_geral
         )
         self.frame_display.pack(padx=1, pady=1)
 
         self.frame_geral.pack(padx=1, pady=1)
 
-        self.titulo_origem = Label(self.frame_de_cadastro, text="Origem")
+        self.titulo_origem = ctk.CTkLabel(self.frame_de_cadastro, text="Origem", padx=50)
 
-        self.origem_bd = StringVar()
+        self.origem_bd = ctk.StringVar()
         self.origem_bd.set(Interface.ORIGEM[0])
-        self.lista_origem_bd = OptionMenu(self.frame_de_cadastro, self.origem_bd, *Interface.ORIGEM)
-        self.lista_origem_bd.config(width=15)
+        self.lista_origem_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.origem_bd, values=Interface.ORIGEM)
+        self.lista_origem_bd.configure()
 
-        self.titulo_recurso = Label(self.frame_de_cadastro, text="Recurso")
+        self.titulo_recurso = ctk.CTkLabel(self.frame_de_cadastro, text="Recurso")
 
-        self.recurso_bd = StringVar()
+        self.recurso_bd = ctk.StringVar()
         self.recurso_bd.set(Interface.RECURSO[0])
-        self.lista_recurso_bd = OptionMenu(self.frame_de_cadastro, self.recurso_bd, *Interface.RECURSO)
-        self.lista_recurso_bd.config(width=15)
+        self.lista_recurso_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.recurso_bd, values=Interface.RECURSO)
+        self.lista_recurso_bd.configure()
 
-        self.titulo_tipo = Label(self.frame_de_cadastro, text="Tipo")
-        self.tipo_bd = StringVar()
+        self.titulo_tipo = ctk.CTkLabel(self.frame_de_cadastro, text="Tipo", padx=50)
+        self.tipo_bd = ctk.StringVar()
         self.tipo_bd.set(Interface.TIPO[0])
-        self.lista_tipo_bd = OptionMenu(self.frame_de_cadastro, self.tipo_bd, *Interface.TIPO)
-        self.lista_tipo_bd.config(width=15)
+        self.lista_tipo_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.tipo_bd, values=Interface.TIPO)
+        self.lista_tipo_bd.configure()
 
-        self.titulo_banco = Label(self.frame_de_cadastro, text="Banco")
+        self.titulo_banco = ctk.CTkLabel(self.frame_de_cadastro, text="Banco")
 
         self.bancos = []
         for banco in Interface.BANCO.keys():
             self.bancos.append(banco)
-        self.banco_bd = StringVar()
+        self.banco_bd = ctk.StringVar()
         self.banco_bd.set("BRB")
-        self.lista_banco_bd = OptionMenu(self.frame_de_cadastro, self.banco_bd, *self.bancos)
-        self.lista_banco_bd.config(width=15)
+        self.lista_banco_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.banco_bd, values=self.bancos)
+        self.lista_banco_bd.configure()
 
-        self.titulo_agencia = Label(self.frame_de_cadastro, text="Agência")
+        self.titulo_agencia = ctk.CTkLabel(self.frame_de_cadastro, text="Agência")
 
-        self.n_agencia = Entry(
-            self.frame_de_cadastro, width=10
+        self.n_agencia = ctk.CTkEntry(
+            self.frame_de_cadastro, width=50
         )
 
-        self.titulo_conta = Label(self.frame_de_cadastro, text="Conta")
+        self.titulo_conta = ctk.CTkLabel(self.frame_de_cadastro, text="Conta")
 
-        self.n_conta = Entry(
-            self.frame_de_cadastro, width=15
+        self.n_conta = ctk.CTkEntry(
+            self.frame_de_cadastro, width=85
         )
 
-        self.titulo_cnpj = Label(self.frame_de_cadastro, text="CNPJ")
+        self.titulo_cnpj = ctk.CTkLabel(self.frame_de_cadastro, text="CNPJ")
 
-        self.n_cnpj = Entry(
-            self.frame_de_cadastro, width=20
+        self.n_cnpj = ctk.CTkEntry(
+            self.frame_de_cadastro, width=130
         )
 
-        self.botao_cadastro = Button(self.frame_de_cadastro, text="Cadastrar", command=self.submeter_conta)
+        self.botao_cadastro = ctk.CTkButton(self.frame_de_cadastro, text="Cadastrar", command=self.submeter_conta)
 
         self.titulo_origem.grid(row=0, column=1)
         self.titulo_recurso.grid(row=0, column=2)
@@ -389,44 +390,52 @@ class Interface(DadosDeContas):
         self.titulo_conta.grid(row=0, column=6)
         self.titulo_cnpj.grid(row=0, column=7)
 
-        self.lista_origem_bd.grid(row=1, column=1)
-        self.lista_recurso_bd.grid(row=1, column=2)
-        self.lista_tipo_bd.grid(row=1, column=3)
-        self.lista_banco_bd.grid(row=1, column=4)
-        self.n_agencia.grid(row=1, column=5)
-        self.n_conta.grid(row=1, column=6)
-        self.n_cnpj.grid(row=1, column=7)
+        self.lista_origem_bd.grid(row=1, column=1, padx=10)
+        self.lista_recurso_bd.grid(row=1, column=2, padx=10)
+        self.lista_tipo_bd.grid(row=1, column=3, padx=10)
+        self.lista_banco_bd.grid(row=1, column=4, padx=10)
+        self.n_agencia.grid(row=1, column=5, padx=10)
+        self.n_conta.grid(row=1, column=6, padx=10)
+        self.n_cnpj.grid(row=1, column=7, padx=10)
 
-        self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10, sticky=E)
+        self.botao_cadastro.grid(row=2, column=1, columnspan=7, pady=10, sticky='e', padx=10)
 
-        self.opcoes_de_exclusao = Label(
+        self.opcoes_de_exclusao = ctk.CTkLabel(
             self.frame_de_exclusao, text="Caso deseje excluir uma conta, utilize a opção abaixo:")
 
-        self.v_contas = StringVar()
+        self.v_contas = ctk.StringVar()
+        self.v_contas.set('Selecione uma conta')
 
         self.atualizar_contas()
 
-        numeros_de_contas = self.numero_contas()
-        self.v_contas.set('Selecione uma conta')
-        self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *numeros_de_contas)
-        self.v_contas_bd.config(width=20)
+        numeros_de_contas_tupla = self.numero_contas()
+        numeros_de_contas = []
+        for i in numeros_de_contas_tupla:
+            numeros_de_contas.append(i[0])
 
-        self.botao_excluir = Button(self.frame_de_exclusao, text="Excluir conta", command=self.excluir_conta)
+        self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas)
+        self.v_contas_bd.configure(width=20)
+
+        self.botao_excluir = ctk.CTkButton(self.frame_de_exclusao, text="Excluir conta", command=self.excluir_conta)
 
         self.opcoes_de_exclusao.grid(row=0, column=1, columnspan=2)
         self.v_contas_bd.grid(row=1, column=1, padx=30)
         self.botao_excluir.grid(row=1, column=2, padx=30)
 
-        self.display = Label(self.frame_display, text='', width=30, height=8)
+        self.display = ctk.CTkLabel(self.frame_display, text='', width=30, height=8)
         self.display.pack()
 
         self.v_contas.trace('w', self.atualiza_label_cadastro)
 
 
     def atualiza_label_cadastro(self, *args):
-        conta = self.v_contas.get()[2:-3]
+        conta = self.v_contas.get()
+
         dados_conta = self.pegar_conta_por_numero(conta)
+
+        print(f'dados 0000 {dados_conta[0]}')
         origem_tipo = dados_conta[0][0].split()
+
         texto = (f'Origem: {origem_tipo[0]}\n'
                  f'Tipo: {origem_tipo[1]}\n'
                  f'Recurso: {dados_conta[0][1]}\n'
@@ -434,17 +443,22 @@ class Interface(DadosDeContas):
                  f'Agência: {dados_conta[0][4]}\n'
                  f'Conta: {dados_conta[0][5]}\n'
                  f'CNPJ: {dados_conta[0][6]}')
-        self.display.config(text=texto)
+        self.display.configure(text=texto)
 
 
     def atualizar_contas(self):
         if self.numero_contas() == []:
-            a = ["Nenhuma conta cadastrada"]
+            numeros_de_contas_tupla = ["Nenhuma conta cadastrada"]
         else:
-            a = self.numero_contas()
+            numeros_de_contas_tupla = self.numero_contas()
+        print(f'Esse é o aAAA{numeros_de_contas_tupla}')
+        numeros_de_contas = []
+        for i in numeros_de_contas_tupla:
+            numeros_de_contas.append(i[0])
+        print(f'Esse é o aAAA{numeros_de_contas}')
         self.v_contas.set('Selecione uma conta')
-        self.v_contas_bd = OptionMenu(self.frame_de_exclusao, self.v_contas, *a)
-        self.v_contas_bd.config(width=20)
+        self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas)
+        self.v_contas_bd.configure(width=20)
         self.v_contas_bd.grid(row=1, column=1, padx=30)
 
 
@@ -463,7 +477,8 @@ class Interface(DadosDeContas):
 
     def excluir_conta(self):
         conta = self.v_contas.get()
-        self.deletar_conta(conta[1:-2])
+        print(f'conta exclusão {conta}')
+        self.deletar_conta(conta)
         self.atualizar_contas()
 
 
