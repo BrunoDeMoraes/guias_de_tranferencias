@@ -28,6 +28,7 @@ class DadosDeContas:
 
     def conexao(self, *args):
         banco_de_dados = self.caminho_do_bd()
+        print(banco_de_dados)
         with sqlite3.connect(banco_de_dados) as conexao:
             direcionador = conexao.cursor()
             if len(args) > 1:
@@ -113,16 +114,27 @@ class DadosDeContas:
 
     def deletar_conta(self, conta):
         print(f'conta dentro do delete {conta}')
-        comando = f'DELETE FROM contas WHERE numero = {conta}'
+        comando = f"DELETE FROM contas WHERE numero = '{conta}'"
         banco_de_dados = self.caminho_do_bd()
         self.conexao(comando)
+        print('passei pela deleção')
 
 
 
 if __name__ == '__main__':
     c = DadosDeContas()
     # c.criar_bd(TABELAS)
-    consulta = 'SELECT * FROM urls'
+    consulta = 'SELECT * FROM contas'
     a = c.conexao(consulta)
     for i in a:
         print(i)
+
+    try:
+        c.deletar_conta('0082437')
+
+        b = c.conexao(consulta)
+        for i in b:
+            print(i)
+    except:
+        pass
+

@@ -404,12 +404,13 @@ class Interface(DadosDeContas):
             self.frame_de_exclusao, text="Caso deseje excluir uma conta, utilize a opção abaixo:")
 
         self.v_contas = ctk.StringVar()
-        self.v_contas.set('Selecione uma conta')
+
 
         self.atualizar_contas()
 
         numeros_de_contas_tupla = self.numero_contas()
         numeros_de_contas = []
+        self.v_contas.set('Selecione uma conta')
         for i in numeros_de_contas_tupla:
             numeros_de_contas.append(i[0])
 
@@ -433,7 +434,6 @@ class Interface(DadosDeContas):
 
         dados_conta = self.pegar_conta_por_numero(conta)
 
-        print(f'dados 0000 {dados_conta[0]}')
         origem_tipo = dados_conta[0][0].split()
 
         texto = (f'Origem: {origem_tipo[0]}\n'
@@ -456,8 +456,8 @@ class Interface(DadosDeContas):
         for i in numeros_de_contas_tupla:
             numeros_de_contas.append(i[0])
         print(f'Esse é o aAAA{numeros_de_contas}')
-        self.v_contas.set('Selecione uma conta')
         self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas)
+        self.v_contas.set('Selecione uma conta')
         self.v_contas_bd.configure(width=20)
         self.v_contas_bd.grid(row=1, column=1, padx=30)
 
