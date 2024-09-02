@@ -423,7 +423,7 @@ class Interface(DadosDeContas):
         self.v_contas_bd.grid(row=1, column=1, padx=30)
         self.botao_excluir.grid(row=1, column=2, padx=30)
 
-        self.display = ctk.CTkLabel(self.frame_display, text='', width=30, height=8)
+        self.display = ctk.CTkLabel(self.frame_display, text='', width=200, height=150)
         self.display.pack()
 
         self.v_contas.trace('w', self.atualiza_label_cadastro)
