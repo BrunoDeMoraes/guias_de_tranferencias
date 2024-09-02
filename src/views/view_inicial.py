@@ -434,16 +434,21 @@ class Interface(DadosDeContas):
 
         dados_conta = self.pegar_conta_por_numero(conta)
 
-        origem_tipo = dados_conta[0][0].split()
+        try:
+            origem_tipo = dados_conta[0][0].split()
+            texto = (f'Origem: {origem_tipo[0]}\n'
+                     f'Tipo: {origem_tipo[1]}\n'
+                     f'Recurso: {dados_conta[0][1]}\n'
+                     f'Banco: {dados_conta[0][3]}\n'
+                     f'Agência: {dados_conta[0][4]}\n'
+                     f'Conta: {dados_conta[0][5]}\n'
+                     f'CNPJ: {dados_conta[0][6]}')
+            self.display.configure(text=texto)
+        except IndexError:
+            self.display.configure(text='')
 
-        texto = (f'Origem: {origem_tipo[0]}\n'
-                 f'Tipo: {origem_tipo[1]}\n'
-                 f'Recurso: {dados_conta[0][1]}\n'
-                 f'Banco: {dados_conta[0][3]}\n'
-                 f'Agência: {dados_conta[0][4]}\n'
-                 f'Conta: {dados_conta[0][5]}\n'
-                 f'CNPJ: {dados_conta[0][6]}')
-        self.display.configure(text=texto)
+
+
 
 
     def atualizar_contas(self):
@@ -465,9 +470,9 @@ class Interface(DadosDeContas):
     def submeter_conta(self):
         self.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), Interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
         self.atualizar_contas()
-        self.n_agencia.delete(0, END)
-        self.n_conta.delete(0, END)
-        self.n_cnpj.delete(0, END)
+        self.n_agencia.delete(0, -1)
+        self.n_conta.delete(0, -1)
+        self.n_cnpj.delete(0, -1)
 
 
     def numero_contas(self):
