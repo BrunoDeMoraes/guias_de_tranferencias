@@ -414,8 +414,7 @@ class Interface(DadosDeContas):
         for i in numeros_de_contas_tupla:
             numeros_de_contas.append(i[0])
 
-        self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas)
-        self.v_contas_bd.configure(width=20)
+        self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas, width=200)
 
         self.botao_excluir = ctk.CTkButton(self.frame_de_exclusao, text="Excluir conta", command=self.excluir_conta)
 
@@ -461,18 +460,17 @@ class Interface(DadosDeContas):
         for i in numeros_de_contas_tupla:
             numeros_de_contas.append(i[0])
         print(f'Esse é o aAAA{numeros_de_contas}')
-        self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas)
+        self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas, width=200)
         self.v_contas.set('Selecione uma conta')
-        self.v_contas_bd.configure(width=20)
         self.v_contas_bd.grid(row=1, column=1, padx=30)
 
 
     def submeter_conta(self):
         self.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), Interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
         self.atualizar_contas()
-        self.n_agencia.delete(0, -1)
-        self.n_conta.delete(0, -1)
-        self.n_cnpj.delete(0, -1)
+        self.n_agencia.delete(0, ctk.END)
+        self.n_conta.delete(0, ctk.END)
+        self.n_cnpj.delete(0, ctk.END)
 
 
     def numero_contas(self):
