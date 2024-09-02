@@ -546,84 +546,79 @@ class Interface(DadosDeContas):
 
 
     def abrir_caminhos(self):
-        self.caminhos = Toplevel()
+        self.caminhos = ctk.CTkToplevel()
         self.urls = self.consultar_registros(URLS)
         self.caminhos.title('Caminhos')
         self.caminhos.resizable(False, False)
-        self.frame_caminhos = LabelFrame(
-            self.caminhos, padx=0, pady=0
+        self.frame_caminhos = ctk.CTkFrame(
+            self.caminhos
         )
         self.frame_caminhos.pack(padx=1, pady=1)
 
-        self.botao_xlsx = Button(
+        self.botao_xlsx = ctk.CTkButton(
             self.frame_caminhos, text='HRG Custeio',
             command=lambda: self.altera_caminho(self.caminho_srssu, True),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
+            font=('Helvetica', 12, 'bold')
         )
-        self.caminho_srssu = Entry(self.frame_caminhos, width=70)
+        self.caminho_srssu = ctk.CTkEntry(self.frame_caminhos, width=600)
 
-        self.botao_pasta_de_certidões = Button(
+        self.botao_pasta_de_certidões = ctk.CTkButton(
             self.frame_caminhos, text='APS Custeio',
             command=lambda: (
                 self.altera_caminho(self.caminho_aps, True)),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
+            font=('Helvetica', 12, 'bold')
         )
-        self.caminho_aps = Entry(
-            self.frame_caminhos, width=70
+        self.caminho_aps = ctk.CTkEntry(
+            self.frame_caminhos, width=600
         )
 
-        self.botao_log = Button(
+        self.botao_log = ctk.CTkButton(
             self.frame_caminhos, text='HRG Investimento',
-            command=lambda: self.altera_caminho(self.caminho_srssu_i, True), padx=0,
-            pady=0, bg='green', fg='white', font=('Helvetica', 8, 'bold'),
-            bd=1
+            command=lambda: self.altera_caminho(self.caminho_srssu_i, True),
+            font=('Helvetica', 12, 'bold')
         )
-        self.caminho_srssu_i = Entry(self.frame_caminhos, width=70)
+        self.caminho_srssu_i = ctk.CTkEntry(self.frame_caminhos, width=600)
 
-        self.certidões_para_pagamento = Button(
+        self.certidões_para_pagamento = ctk.CTkButton(
             self.frame_caminhos, text='APS Investimento',
             command=lambda: (
                 self.altera_caminho(self.caminho_aps_i, True)
             ),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
+            font=('Helvetica', 12, 'bold')
         )
 
-        self.caminho_aps_i = Entry(
-            self.frame_caminhos, width=70
+        self.caminho_aps_i = ctk.CTkEntry(
+            self.frame_caminhos, width=600
         )
 
-        self.botao_pasta_guias = Button(
+        self.botao_pasta_guias = ctk.CTkButton(
             self.frame_caminhos, text='Pasta destino para guias',
             command=lambda: (
                 self.altera_caminho(self.pasta_guias)
             ),
-            padx=0, pady=0, bg='green', fg='white',
-            font=('Helvetica', 8, 'bold'), bd=1
+            font=('Helvetica', 12, 'bold'),
         )
 
-        self.pasta_guias = Entry(
-            self.frame_caminhos, width=70
+        self.pasta_guias = ctk.CTkEntry(
+            self.frame_caminhos, width=600
         )
 
-        self.gravar_alterações = Button(
+        self.gravar_alterações = ctk.CTkButton(
             self.frame_caminhos, text='Gravar alterações',
-            command=self.atualizar_caminhos, padx=10, pady=10, bg='green',
-            fg='white', font=('Helvetica', 8, 'bold'), bd=1
+            command=self.atualizar_caminhos,
+            font=('Helvetica', 12, 'bold')
         )
 
         self.botao_xlsx.grid(
             row=1, column=1, columnspan=1, padx=15, pady=10, ipadx=5,
-            ipady=13, sticky=W + E
+            ipady=13, sticky='we'
         )
         self.caminho_srssu.insert(0, self.urls[0][1])
         self.caminho_srssu.grid(row=1, column=2, padx=20)
 
         self.botao_pasta_de_certidões.grid(
             row=2, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
+            ipady=13, sticky='we'
         )
 
         self.caminho_aps.insert(0, self.urls[1][1])
@@ -631,7 +626,7 @@ class Interface(DadosDeContas):
 
         self.botao_log.grid(
             row=3, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
+            ipady=13, sticky='we'
         )
 
         self.caminho_srssu_i.insert(0, self.urls[2][1])
@@ -639,7 +634,7 @@ class Interface(DadosDeContas):
 
         self.certidões_para_pagamento.grid(
             row=4, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
+            ipady=13, sticky='we'
         )
 
         self.caminho_aps_i.insert(0, self.urls[3][1])
@@ -647,7 +642,7 @@ class Interface(DadosDeContas):
 
         self.botao_pasta_guias.grid(
             row=5, column=1, columnspan=1, padx=15, pady=10, ipadx=10,
-            ipady=13, sticky=W + E
+            ipady=13, sticky='we'
         )
 
         self.pasta_guias.insert(0, self.urls[4][1])
@@ -660,54 +655,54 @@ class Interface(DadosDeContas):
 
 
     def abrir_dados_de_transferencia_interna(self):
-        self.dados_de_contas = Toplevel()
+        self.dados_de_contas = ctk.CTkToplevel()
         self.dados_de_contas.title('Transferência interna')
         self.dados_de_contas.resizable(True, True)
 
-        self.frame_geral_contas = LabelFrame(
-            self.dados_de_contas, padx=0, pady=0
+        self.frame_geral_contas = ctk.CTkFrame(
+            self.dados_de_contas
         )
         self.frame_geral_contas.pack()
-        self.frame_remetente = LabelFrame(
-            self.frame_geral_contas, padx=0, pady=0
+        self.frame_remetente = ctk.CTkFrame(
+            self.frame_geral_contas
         )
         self.frame_remetente.pack(padx=1, pady=1)
 
-        self.remetente = StringVar()
+        self.remetente = ctk.StringVar()
         numero_de_contas = self.numero_contas()
         lista_de_contas = self.listar_dados_de_conta(numero_de_contas)
         dados_filtrado = self.filtrar_dados_de_conta(lista_de_contas)
 
         self.remetente.set('Conta remetente')
-        self.lista_remetente = OptionMenu(self.frame_remetente, self.remetente, *dados_filtrado)
-        self.lista_remetente.config(width=50)
+        self.lista_remetente = ctk.CTkOptionMenu(self.frame_remetente, variable=self.remetente, values=dados_filtrado)
+        self.lista_remetente.configure(width=350)
         self.lista_remetente.grid(row=1, column=1, padx=30, pady=30)
 
-        self.valor_a_transferir_label = Label(self.frame_geral_contas, text='Valor a transferir')
+        self.valor_a_transferir_label = ctk.CTkLabel(self.frame_geral_contas, text='Valor a transferir')
         self.valor_a_transferir_label.pack()
 
-        self.valor_a_transferir = Entry(self.frame_geral_contas, width=10, font=('Helvetica', 14))
+        self.valor_a_transferir = ctk.CTkEntry(self.frame_geral_contas, width=120, font=('Helvetica', 20))
         self.valor_a_transferir.pack(pady=5)
 
-        self.frame_favorecido = LabelFrame(
-            self.frame_geral_contas, padx=0, pady=0
+        self.frame_favorecido = ctk.CTkFrame(
+            self.frame_geral_contas
         )
         self.frame_favorecido.pack(padx=1, pady=1)
 
-        self.favorecido = StringVar()
+        self.favorecido = ctk.StringVar()
         numero_de_contas2 = self.numero_contas()
         lista_de_contas2 = self.listar_dados_de_conta(numero_de_contas2)
         dados_filtrado2 = self.filtrar_dados_de_conta(lista_de_contas2)
 
         self.favorecido.set('Conta favorecido')
-        self.lista_favorecido = OptionMenu(self.frame_favorecido, self.favorecido, *dados_filtrado2)
-        self.lista_favorecido.config(width=50)
+        self.lista_favorecido = ctk.CTkOptionMenu(self.frame_favorecido, variable=self.favorecido, values=dados_filtrado2)
+        self.lista_favorecido.configure(width=350)
         self.lista_favorecido.grid(row=1, column=1, padx=30, pady=30)
 
-        self.botao_submissao = Button(
+        self.botao_submissao = ctk.CTkButton(
             self.frame_geral_contas, text='Criar guia',
             command=self.submeter_dados_internos,
-            bg='blue', fg='white', font=('Helvetica', 8, 'bold'), bd=1
+            font=('Helvetica', 12, 'bold')
         )
         self.botao_submissao.pack(pady=5)
 
