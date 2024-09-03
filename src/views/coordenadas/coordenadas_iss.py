@@ -11,7 +11,7 @@ LINHAS_ESTRUTURA = [
     (8, 264, 196, 264),  #linha horizontal 1 258
     (80, 264, 80, 254),  #linha vertical telefone
     (8, 254, 196, 254),  #linha horizontal 2 248
-    (135, 250, 135, 254),  #divisão linha 2.5
+    (133, 250, 133, 254),  #divisão linha 2.5
     (8, 250, 196, 250), #linha horizontal 3 238
     (8, 240, 102, 240),  #meia linha horizontal 1
     (102, 230, 196, 230),  #linha horizontal 4.5
@@ -62,7 +62,7 @@ TIMES7 = [
     (150, 261, "Tipo Conta Creditada"),
     (10, 251, "CNPJ/CPF(s)"),
     (104, 251, "Histórico"),
-    (137, 251, "Finalidade"),
+    (135, 251, "Finalidade"),
     (104, 247, "Valor por Extenso"),
     (10, 247, "Endereço"),
     (82, 261, "Telefone(s)"),
@@ -107,7 +107,7 @@ TIMESB8 = [
     (82, 256, "(61) 3449-7105"),  #telefone
     (104, 265, "Retenção de ISS"),
     (104, 256, "Conta corrente/Pessoa Jurídica"),
-    (148, 251, " Pagamento de impostos, tributos e taxas"),
+    (146, 251, " Pagamento de impostos, tributos e taxas"),
     (150, 256, "Conta corrente/Pessoa Jurídica"),
 ]
 

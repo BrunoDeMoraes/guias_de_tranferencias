@@ -7,7 +7,7 @@ LINHAS_ESTRUTURA = [
     (8, 268, 8, 220),  #linha esquerda
     (30, 268, 30, 264),  #divisão linha 1.2
     (124, 268, 124, 264),  #divisão linha 1.5
-    (168, 268, 168, 264),  #divisão linha 1.6
+    (166, 268, 166, 264),  #divisão linha 1.6
     (8, 264, 196, 264),  #linha horizontal 1 258
     (80, 264, 80, 254),  #linha vertical telefone
     (8, 254, 196, 254),  #linha horizontal 2 248
