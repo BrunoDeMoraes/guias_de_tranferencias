@@ -45,7 +45,13 @@ class Interface(DadosDeContas):
     def __init__(self, tela):
         self.tela = tela
         self.menu = tk.Menu(self.tela)
-        self.menu_configurações = tk.Menu(self.menu, tearoff=0, bg='#1F538D', fg='silver',  borderwidth=0)
+        self.menu_configurações = tk.Menu(
+            self.menu,
+            tearoff=0,
+            bg='#1F538D',
+            fg='silver',
+            borderwidth=0
+        )
         self.menu.add_cascade(
             label='Configurações', menu=self.menu_configurações)
         self.menu_configurações.add_separator()
@@ -90,7 +96,14 @@ class Interface(DadosDeContas):
         mes = int(self.data_hoje.strftime('%m'))
         ano = int(self.data_hoje.strftime('%Y'))
 
-        self.calendario = Calendar(self.frame_calendario, selectmode='day', year=ano, month=mes, day=dia, locale="pt_br")
+        self.calendario = Calendar(
+            self.frame_calendario,
+            selectmode='day',
+            year=ano,
+            month=mes,
+            day=dia,
+            locale="pt_br"
+        )
         self.calendario.pack(pady=20)
 
         self.comandos = [
@@ -104,7 +117,11 @@ class Interface(DadosDeContas):
         ]
         self.comando = ctk.StringVar()
         self.comando.set('Escolha um comando')
-        self.lista_de_comandos = ctk.CTkOptionMenu(self.frame_2, values=self.comandos, variable=self.comando)
+        self.lista_de_comandos = ctk.CTkOptionMenu(
+            self.frame_2,
+            values=self.comandos,
+            variable=self.comando
+        )
         self.lista_de_comandos.pack(pady=10)
 
         self.comando_atual = f''
@@ -141,7 +158,10 @@ class Interface(DadosDeContas):
                     url_arquivos.append(url)
         if os.path.exists(f'{caminho_para_salvar_arquivos}/Mesclados {self.data_de_pagamento()}.pdf'):
             self.finalizar_barra_de_progresso()
-            messagebox.showerror('De novo, mano', 'O arquivo já existe. Se quiser criar novamente, apaga lá primeiro!')
+            messagebox.showerror(
+                'De novo, mano',
+                'O arquivo já existe. Se quiser criar novamente, apaga lá primeiro!'
+            )
         else:
             with open(
                     (
@@ -255,7 +275,9 @@ class Interface(DadosDeContas):
         progresso = self.valor_progresso.get()
         tipo_de_guia = self.definir_guia_atual()
         self.barra['value'] = progresso
-        self.valor_executado.configure(text=f'Gerando {tipo_de_guia}: {self.comando_atual} {int(progresso * 100)}%')
+        self.valor_executado.configure(
+            text=f'Gerando {tipo_de_guia}: {self.comando_atual} {int(progresso * 100)}%'
+        )
 
 
     def definir_guia_atual(self):
@@ -263,7 +285,6 @@ class Interface(DadosDeContas):
         comando_de_guia_sepaarado = comando_de_guia.split()
         tipo_de_guia = ' '.join(comando_de_guia_sepaarado[1:])
         return tipo_de_guia
-
 
 
     def dados_de_entrada(self, dados_internos) -> Dict:
@@ -332,43 +353,79 @@ class Interface(DadosDeContas):
 
         self.frame_geral.pack(padx=1, pady=1)
 
-        self.titulo_origem = ctk.CTkLabel(self.frame_de_cadastro, text="Origem", padx=50)
+        self.titulo_origem = ctk.CTkLabel(
+            self.frame_de_cadastro,
+            text="Origem",
+            padx=50
+        )
 
         self.origem_bd = ctk.StringVar()
         self.origem_bd.set(Interface.ORIGEM[0])
-        self.lista_origem_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.origem_bd, values=Interface.ORIGEM)
+        self.lista_origem_bd = ctk.CTkOptionMenu(
+            self.frame_de_cadastro,
+            variable=self.origem_bd,
+            values=Interface.ORIGEM
+        )
         self.lista_origem_bd.configure()
 
-        self.titulo_recurso = ctk.CTkLabel(self.frame_de_cadastro, text="Recurso")
+        self.titulo_recurso = ctk.CTkLabel(
+            self.frame_de_cadastro,
+            text="Recurso"
+        )
 
         self.recurso_bd = ctk.StringVar()
         self.recurso_bd.set(Interface.RECURSO[0])
-        self.lista_recurso_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.recurso_bd, values=Interface.RECURSO)
+        self.lista_recurso_bd = ctk.CTkOptionMenu(
+            self.frame_de_cadastro,
+            variable=self.recurso_bd,
+            values=Interface.RECURSO
+        )
         self.lista_recurso_bd.configure()
 
-        self.titulo_tipo = ctk.CTkLabel(self.frame_de_cadastro, text="Tipo", padx=50)
+        self.titulo_tipo = ctk.CTkLabel(
+            self.frame_de_cadastro,
+            text="Tipo",
+            padx=50
+        )
         self.tipo_bd = ctk.StringVar()
         self.tipo_bd.set(Interface.TIPO[0])
-        self.lista_tipo_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.tipo_bd, values=Interface.TIPO)
+        self.lista_tipo_bd = ctk.CTkOptionMenu(
+            self.frame_de_cadastro,
+            variable=self.tipo_bd,
+            values=Interface.TIPO
+        )
         self.lista_tipo_bd.configure()
 
-        self.titulo_banco = ctk.CTkLabel(self.frame_de_cadastro, text="Banco")
+        self.titulo_banco = ctk.CTkLabel(
+            self.frame_de_cadastro,
+            text="Banco"
+        )
 
         self.bancos = []
         for banco in Interface.BANCO.keys():
             self.bancos.append(banco)
         self.banco_bd = ctk.StringVar()
         self.banco_bd.set("BRB")
-        self.lista_banco_bd = ctk.CTkOptionMenu(self.frame_de_cadastro, variable=self.banco_bd, values=self.bancos)
+        self.lista_banco_bd = ctk.CTkOptionMenu(
+            self.frame_de_cadastro,
+            variable=self.banco_bd,
+            values=self.bancos
+        )
         self.lista_banco_bd.configure()
 
-        self.titulo_agencia = ctk.CTkLabel(self.frame_de_cadastro, text="Agência")
+        self.titulo_agencia = ctk.CTkLabel(
+            self.frame_de_cadastro,
+            text="Agência"
+        )
 
         self.n_agencia = ctk.CTkEntry(
             self.frame_de_cadastro, width=50
         )
 
-        self.titulo_conta = ctk.CTkLabel(self.frame_de_cadastro, text="Conta")
+        self.titulo_conta = ctk.CTkLabel(
+            self.frame_de_cadastro,
+            text="Conta"
+        )
 
         self.n_conta = ctk.CTkEntry(
             self.frame_de_cadastro, width=85
@@ -460,13 +517,26 @@ class Interface(DadosDeContas):
         for i in numeros_de_contas_tupla:
             numeros_de_contas.append(i[0])
         print(f'Esse é o aAAA{numeros_de_contas}')
-        self.v_contas_bd = ctk.CTkOptionMenu(self.frame_de_exclusao, variable=self.v_contas, values=numeros_de_contas, width=200)
+        self.v_contas_bd = ctk.CTkOptionMenu(
+            self.frame_de_exclusao,
+            variable=self.v_contas,
+            values=numeros_de_contas,
+            width=200
+        )
         self.v_contas.set('Selecione uma conta')
         self.v_contas_bd.grid(row=1, column=1, padx=30)
 
 
     def submeter_conta(self):
-        self.cadastrar_conta(self.origem_bd.get(), self.recurso_bd.get(), self.tipo_bd.get(), Interface.BANCO[self.banco_bd.get()], self.n_agencia.get(), self.n_conta.get(), self.n_cnpj.get())
+        self.cadastrar_conta(
+            self.origem_bd.get(),
+            self.recurso_bd.get(),
+            self.tipo_bd.get(),
+            Interface.BANCO[self.banco_bd.get()],
+            self.n_agencia.get(),
+            self.n_conta.get(),
+            self.n_cnpj.get()
+        )
         self.atualizar_contas()
         self.n_agencia.delete(0, ctk.END)
         self.n_conta.delete(0, ctk.END)
@@ -674,14 +744,24 @@ class Interface(DadosDeContas):
         dados_filtrado = self.filtrar_dados_de_conta(lista_de_contas)
 
         self.remetente.set('Conta remetente')
-        self.lista_remetente = ctk.CTkOptionMenu(self.frame_remetente, variable=self.remetente, values=dados_filtrado)
+        self.lista_remetente = ctk.CTkOptionMenu(
+            self.frame_remetente,
+            variable=self.remetente,
+            values=dados_filtrado
+        )
         self.lista_remetente.configure(width=350)
         self.lista_remetente.grid(row=1, column=1, padx=30, pady=30)
 
-        self.valor_a_transferir_label = ctk.CTkLabel(self.frame_geral_contas, text='Valor a transferir')
+        self.valor_a_transferir_label = ctk.CTkLabel(
+            self.frame_geral_contas,
+            text='Valor a transferir'
+        )
         self.valor_a_transferir_label.pack()
 
-        self.valor_a_transferir = ctk.CTkEntry(self.frame_geral_contas, width=120, font=('Helvetica', 20))
+        self.valor_a_transferir = ctk.CTkEntry(
+            self.frame_geral_contas, width=120,
+            font=('Helvetica', 20)
+        )
         self.valor_a_transferir.pack(pady=5)
 
         self.frame_favorecido = ctk.CTkFrame(
@@ -695,7 +775,11 @@ class Interface(DadosDeContas):
         dados_filtrado2 = self.filtrar_dados_de_conta(lista_de_contas2)
 
         self.favorecido.set('Conta favorecido')
-        self.lista_favorecido = ctk.CTkOptionMenu(self.frame_favorecido, variable=self.favorecido, values=dados_filtrado2)
+        self.lista_favorecido = ctk.CTkOptionMenu(
+            self.frame_favorecido,
+            variable=self.favorecido,
+            values=dados_filtrado2
+        )
         self.lista_favorecido.configure(width=350)
         self.lista_favorecido.grid(row=1, column=1, padx=30, pady=30)
 
@@ -710,7 +794,10 @@ class Interface(DadosDeContas):
     def submeter_dados_internos(self):
         self.gerar_constructor(interna_constructor, True)
         self.dados_de_contas.destroy()
-        messagebox.showinfo('Rolou', 'Guia de transferência interna gerada!')
+        messagebox.showinfo(
+            'Rolou',
+            'Guia de transferência interna gerada!'
+        )
 
 
     def filtrar_dados_de_conta(self, lista_de_dados_conta):

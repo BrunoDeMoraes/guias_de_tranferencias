@@ -54,17 +54,15 @@ class InterfaceController(ABC):
         return lista_de_pagamentos
 
 
-
     def converter_valores_em_string(self, pagamentos: List):
         for pagamento in pagamentos:
             self.converter_valores_em_string_lista_simples(pagamento)
 
 
-
     def converter_valores_em_string_lista_simples(self, pagamento):
         indice = 0
         for dado in pagamento:
-            if isinstance(dado, float):
+            if isinstance(dado, float) or isinstance(dado, int):
                 valor_formatado = self.formartar_valor(dado)
                 pagamento[indice] = valor_formatado
             indice += 1

@@ -36,10 +36,8 @@ class IssController(InterfaceController):
         pagamentos = self.pagametos.listar_pagamentos(fonte)
         lista_de_pagamentos = self.listar_pagamentos_de_imposto(pagamentos, 6)
 
-
         for pagamento in lista_de_pagamentos:
             contas[pagamento[5]].append(pagamento)
-
 
         for conta in contas.items():
             transferencia = {}
