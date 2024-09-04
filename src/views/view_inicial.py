@@ -15,6 +15,8 @@ from tkcalendar import Calendar
 from datetime import date
 from typing import Dict
 
+from src.constantes import PLANILHA_INEXISTENTE
+
 from src.comandos_sql import URLS
 from src.comandos_sql import ATUALIZAR_CAMINHOS
 from src.comandos_sql import CAMINHOS_ATUALIZADOS
@@ -61,6 +63,7 @@ class Interface(DadosDeContas):
         self.menu_configurações.add_command(
             label='Origens', command=self.abrir_caminhos)
         self.criar_widgets()
+
 
 
     def criar_widgets(self):
@@ -183,23 +186,24 @@ class Interface(DadosDeContas):
 
 
     def selecionar_tipo_de_guia(self):
-        tipo_de_comando = {
-            'Criar todas as guias': self.gerar_todas_as_guias,
-            'Transferência interna': self.abrir_dados_de_transferencia_interna,
-            'Gerar transferencias': lambda: self.gerar_processo(transfer_constructor),
-            'Gerar TEDs': lambda: self.gerar_processo(ted_constructor),
-            'Gerar ISS': lambda: self.gerar_processo(iss_constructor),
-            'Gerar IR': lambda: self.gerar_processo(ir_constructor),
-            'Mesclar arquivos': self.mesclar_arquivos
-        }
-        comando_escolhido = self.comando.get()
-        print(f'Esse é o comando {comando_escolhido}')
-        try:
-            tipo_de_comando[comando_escolhido]()
-            if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
-                messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
-        except KeyError:
-            messagebox.showerror('Tem nada selecionado','Seleciona uma opção aí ou não vai rolar!')
+        if self.configurar_pasta_guia():
+            tipo_de_comando = {
+                'Criar todas as guias': self.gerar_todas_as_guias,
+                'Transferência interna': self.abrir_dados_de_transferencia_interna,
+                'Gerar transferencias': lambda: self.gerar_processo(transfer_constructor),
+                'Gerar TEDs': lambda: self.gerar_processo(ted_constructor),
+                'Gerar ISS': lambda: self.gerar_processo(iss_constructor),
+                'Gerar IR': lambda: self.gerar_processo(ir_constructor),
+                'Mesclar arquivos': self.mesclar_arquivos
+            }
+            comando_escolhido = self.comando.get()
+            print(f'Esse é o comando {comando_escolhido}')
+            try:
+                tipo_de_comando[comando_escolhido]()
+                if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
+                    messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
+            except KeyError:
+                messagebox.showerror('Tem nada selecionado','Seleciona uma opção aí ou não vai rolar!')
 
 
     def progresso_continuo(self):
@@ -332,7 +336,7 @@ class Interface(DadosDeContas):
         self.janela_de_cadastro = ctk.CTkToplevel()
         self.janela_de_cadastro.geometry('1000x300')
         self.janela_de_cadastro.title('Cadastro de contas')
-        self.janela_de_cadastro.resizable(True, True)
+        self.janela_de_cadastro.resizable(0, 0)
 
         self.frame_geral = ctk.CTkFrame(
             self.janela_de_cadastro
@@ -628,7 +632,7 @@ class Interface(DadosDeContas):
         self.caminhos = ctk.CTkToplevel()
         self.urls = self.consultar_registros(URLS)
         self.caminhos.title('Caminhos')
-        self.caminhos.resizable(False, False)
+        self.caminhos.resizable(0, 0)
         self.frame_caminhos = ctk.CTkFrame(
             self.caminhos
         )
@@ -732,11 +736,28 @@ class Interface(DadosDeContas):
             ipady=13
         )
 
+    def configurar_pasta_guia(self):
+        urls = self.consultar_registros(URLS)
+        if not os.path.exists(urls[4][1]):
+            messagebox.showerror(
+                PLANILHA_INEXISTENTE[0],
+                PLANILHA_INEXISTENTE[1]
+            )
+            return False
+        else:
+            print(f"uuuuuuuuu {urls[4][1]}")
+            return True
+
+        # validador = self.pasta_guias.get()
+        # if validador == '':
+        #     print('Não tem pasta de guias')
+        # else:
+        #     print(f'Essa é a pasta guia {validador}')
 
     def abrir_dados_de_transferencia_interna(self):
         self.dados_de_contas = ctk.CTkToplevel()
         self.dados_de_contas.title('Transferência interna')
-        self.dados_de_contas.resizable(True, True)
+        self.dados_de_contas.resizable(0, 0)
 
         self.frame_geral_contas = ctk.CTkFrame(
             self.dados_de_contas
@@ -839,7 +860,7 @@ if __name__ == '__main__':
     ctk.set_default_color_theme('dark-blue')
     tela.title('Teste CTk')
     tela.geometry("330x440")
-    tela.resizable(1, 1)
+    tela.resizable(0, 0)
     objeto_tela = Interface(tela)
     tela.config(menu=objeto_tela.menu)
     tela.mainloop()

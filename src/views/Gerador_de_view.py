@@ -296,7 +296,7 @@ class Interface(DadosDeContas):
     def abrir_janela_cadastro(self):
         self.janela_de_cadastro = Toplevel()
         self.janela_de_cadastro.title('Cadastro de contas')
-        self.janela_de_cadastro.resizable(True, True)
+        self.janela_de_cadastro.resizable(0, 0)
 
         self.frame_geral = LabelFrame(
             self.janela_de_cadastro, padx=50, pady=30
@@ -633,7 +633,7 @@ class Interface(DadosDeContas):
     def abrir_dados_de_transferencia_interna(self):
         self.dados_de_contas = Toplevel()
         self.dados_de_contas.title('Transferência interna')
-        self.dados_de_contas.resizable(True, True)
+        self.dados_de_contas.resizable(0, 0)
 
         self.frame_geral_contas = LabelFrame(
             self.dados_de_contas, padx=0, pady=0
