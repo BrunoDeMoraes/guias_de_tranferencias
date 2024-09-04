@@ -75,7 +75,7 @@ TIMES7 = [
     (32, 265, "Nº Conta Remetente"),
     (104, 265, "Agência"),
     (126, 265, "Nº Conta Favorecido"),
-    (170, 265, "Valor"),
+    (167, 265, "Valor"),
     (10, 261, "Nome do(s) Remetente(s)"),
     (104, 261, "Nome do(s) Destinatário(s)"),
     (10, 251, "CNPJ/CPF(s)"),
@@ -168,7 +168,7 @@ TIMESB8FORNECEDOR = [
     (119, 251, 6)  #CNPJ - fornecedor
 ]
 
-TIMESBVALORTOTAL = [(176, 265, 'Valor_total')]  #valor
+TIMESBVALORTOTAL = [(174, 265, 'Valor_total')]  #valor
 
 TIMESB8ALINHADO = [
     (104, 258, 'Nome_empresa')
