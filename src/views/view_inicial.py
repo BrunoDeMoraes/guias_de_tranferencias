@@ -197,7 +197,6 @@ class Interface(DadosDeContas):
                 'Mesclar arquivos': self.mesclar_arquivos
             }
             comando_escolhido = self.comando.get()
-            print(f'Esse é o comando {comando_escolhido}')
             try:
                 tipo_de_comando[comando_escolhido]()
                 if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
@@ -214,7 +213,6 @@ class Interface(DadosDeContas):
             else:
                 self.valor_progresso.set((total + 0.01))
                 time.sleep(1)
-        print('Thread encerrada')
 
 
     def gerar_todas_as_guias(self):
@@ -244,10 +242,8 @@ class Interface(DadosDeContas):
 
 
     def selecionar_tipo_de_guia_thread(self):
-        print('iniciando thred')
         tr = threading.Thread(target=self.selecionar_tipo_de_guia)
         tr.start()
-        print('finalizando thread')
 
 
     def inicializar_barra_de_progresso(self):
@@ -258,9 +254,7 @@ class Interface(DadosDeContas):
 
     def gerar_constructor(self, constructor, dados_internos=False):
         entrada = self.dados_de_entrada(dados_internos)
-        print(f'Essa é a entrada {entrada}')
-        resposta = constructor(entrada)
-        print(f'Essa é a resposta {resposta}')
+        constructor(entrada)
         self.finalizar_barra_de_progresso()
 
 
@@ -519,11 +513,9 @@ class Interface(DadosDeContas):
             numeros_de_contas_tupla = ["Nenhuma conta cadastrada"]
         else:
             numeros_de_contas_tupla = self.numero_contas()
-        print(f'Esse é o aAAA{numeros_de_contas_tupla}')
         numeros_de_contas = []
         for i in numeros_de_contas_tupla:
             numeros_de_contas.append(i[0])
-        print(f'Esse é o aAAA{numeros_de_contas}')
         self.v_contas_bd = ctk.CTkOptionMenu(
             self.frame_de_exclusao,
             variable=self.v_contas,
@@ -563,7 +555,6 @@ class Interface(DadosDeContas):
         if conta == 'Selecione uma conta':
             messagebox.showerror('Tem nada selecionado','Seleciona uma opção aí ou não vai rolar!')
         else:
-            print(f'conta exclusão {conta}')
             self.deletar_conta(conta)
             self.atualizar_contas()
 
@@ -745,14 +736,8 @@ class Interface(DadosDeContas):
             )
             return False
         else:
-            print(f"uuuuuuuuu {urls[4][1]}")
             return True
 
-        # validador = self.pasta_guias.get()
-        # if validador == '':
-        #     print('Não tem pasta de guias')
-        # else:
-        #     print(f'Essa é a pasta guia {validador}')
 
     def abrir_dados_de_transferencia_interna(self):
         self.dados_de_contas = ctk.CTkToplevel()

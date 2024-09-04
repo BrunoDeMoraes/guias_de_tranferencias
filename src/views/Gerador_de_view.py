@@ -164,7 +164,6 @@ class Interface(DadosDeContas):
             'Mesclar arquivos': self.mesclar_arquivos
         }
         comando_escolhido = self.comando.get()
-        print(f'Esse é o comando {comando_escolhido}')
         tipo_de_comando[comando_escolhido]()
         if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
             messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
@@ -178,7 +177,6 @@ class Interface(DadosDeContas):
             else:
                 self.valor_progresso.set((total + 1))
                 time.sleep(1)
-        print('Thread encerrada')
 
 
     def gerar_todas_as_guias(self):
@@ -208,10 +206,8 @@ class Interface(DadosDeContas):
 
 
     def selecionar_tipo_de_guia_thread(self):
-        print('iniciando thred')
         tr = threading.Thread(target=self.selecionar_tipo_de_guia)
         tr.start()
-        print('finalizando thread')
 
 
     def inicializar_barra_de_progresso(self):
@@ -222,9 +218,7 @@ class Interface(DadosDeContas):
 
     def gerar_constructor(self, constructor, dados_internos=False):
         entrada = self.dados_de_entrada(dados_internos)
-        print(f'Essa é a entrada {entrada}')
-        resposta = constructor(entrada)
-        print(f'Essa é a resposta {resposta}')
+        constructor(entrada)
         self.finalizar_barra_de_progresso()
 
 
