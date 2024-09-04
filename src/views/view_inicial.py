@@ -194,9 +194,12 @@ class Interface(DadosDeContas):
         }
         comando_escolhido = self.comando.get()
         print(f'Esse é o comando {comando_escolhido}')
-        tipo_de_comando[comando_escolhido]()
-        if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
-            messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
+        try:
+            tipo_de_comando[comando_escolhido]()
+            if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
+                messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
+        except KeyError:
+            messagebox.showerror('Tem nada selecionado','Seleciona uma opção aí ou não vai rolar!')
 
 
     def progresso_continuo(self):
@@ -550,9 +553,12 @@ class Interface(DadosDeContas):
 
     def excluir_conta(self):
         conta = self.v_contas.get()
-        print(f'conta exclusão {conta}')
-        self.deletar_conta(conta)
-        self.atualizar_contas()
+        if conta == 'Selecione uma conta':
+            messagebox.showerror('Tem nada selecionado','Seleciona uma opção aí ou não vai rolar!')
+        else:
+            print(f'conta exclusão {conta}')
+            self.deletar_conta(conta)
+            self.atualizar_contas()
 
 
     def altera_caminho(self, entrada, xlsx=False):
