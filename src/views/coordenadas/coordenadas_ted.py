@@ -167,7 +167,7 @@ TIMESB8CONTA = [
     (35, 265, 4), #agência
     (53, 265, 5), #conta
     (10, 256, 0),  #origem
-    (37, 256, 1),  #tipo
+    (39, 256, 1),  #tipo
     (25, 251, 6),  #CNPJ - regional
 ]
 
