@@ -531,19 +531,22 @@ class Interface(DadosDeContas):
 
 
     def submeter_conta(self):
-        self.cadastrar_conta(
-            self.origem_bd.get(),
-            self.recurso_bd.get(),
-            self.tipo_bd.get(),
-            Interface.BANCO[self.banco_bd.get()],
-            self.n_agencia.get(),
-            self.n_conta.get(),
-            self.n_cnpj.get()
-        )
-        self.atualizar_contas()
-        self.n_agencia.delete(0, ctk.END)
-        self.n_conta.delete(0, ctk.END)
-        self.n_cnpj.delete(0, ctk.END)
+        if self.n_agencia.get() == '' or self.n_conta.get() == '' or self.n_cnpj.get() == '':
+            messagebox.showerror('Tem campo vazio', 'Preencha os campos agência, conta e CNPJ.')
+        else:
+            self.cadastrar_conta(
+                self.origem_bd.get(),
+                self.recurso_bd.get(),
+                self.tipo_bd.get(),
+                Interface.BANCO[self.banco_bd.get()],
+                self.n_agencia.get(),
+                self.n_conta.get(),
+                self.n_cnpj.get()
+            )
+            self.atualizar_contas()
+            self.n_agencia.delete(0, ctk.END)
+            self.n_conta.delete(0, ctk.END)
+            self.n_cnpj.delete(0, ctk.END)
 
 
     def numero_contas(self):
