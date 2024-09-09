@@ -104,12 +104,21 @@ class DadosDePagamentoRepository:
 
 
     def __somar_valores_subset(self, subset):
-        soma = subset['Liquido'].sum()
-        soma_iss = subset['ISS'].sum()
-        soma_ir = subset['IR'].sum()
-        soma_valor_total = subset['V. Total'].sum()
-        somas = [soma, soma_iss, soma_ir, soma_valor_total]
-        return somas
+        try:
+            soma = subset['Liquido'].sum()
+            soma_iss = subset['ISS'].sum()
+            soma_ir = subset['IR'].sum()
+            soma_valor_total = subset['V. Total'].sum()
+            somas = [soma, soma_iss, soma_ir, soma_valor_total]
+            return somas
+        except TypeError:
+            messagebox.showerror(
+                'Planilha zuada!',
+                (
+                    'Algum valor foi digitado errado ou está com tipo inadequado'
+                    ' nas colunas de ISS, IR ou Valor líquido.'
+                )
+            )
 
 
     def __compilar_linha_de_pagamento(self, descricao, linha, colunas_somadas):
