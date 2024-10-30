@@ -108,9 +108,9 @@ TIMES7 = [
     )
      ),
     (17, 201, (
-        "Luiz Antônio Roriz Bueno - "
+        "Wandson Pinheiro Guedes - "
         "Diretor Administrativo - Ma"
-        "trícula: 1.659.430-4"
+        "trícula: 198.851-4 "
     )
      ),
     (114, 201, (
