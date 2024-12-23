@@ -76,9 +76,9 @@ TIMES7 = [
     )
      ),
     (17, 221, (
-        "Wandson Pinheiro Guedes - "
+        "Paulo Emanuel Oliveira de Sousa - "
         "Diretor Administrativo - Ma"
-        "trícula: 198.851-4 "
+        "trícula: 1.714.143-5"
     )
      ),
     (114, 221, (
