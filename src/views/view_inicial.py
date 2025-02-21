@@ -201,8 +201,17 @@ class Interface(DadosDeContas):
                 tipo_de_comando[comando_escolhido]()
                 if comando_escolhido not in ['Mesclar arquivos', 'Transferência interna']:
                     messagebox.showinfo('Parece que rolou!', f'Tudo certo!!!')
-            except KeyError:
-                messagebox.showerror('Tem nada selecionado','Seleciona uma opção aí ou não vai rolar!')
+            except KeyError as e:
+                if e.args[0] == 'Escolha um comando':
+                    messagebox.showerror(
+                        'Tem nada selecionado',
+                        f'Seleciona uma opção aí ou não vai rolar!'
+                    )
+                else:
+                    messagebox.showerror(
+                        'Tem algo errado na planilha!',
+                        f'Corrigir como foram inseridos os dados do fornecedor {e.args[0]}'
+                    )
             finally:
                 self.finalizar_barra_de_progresso()
 
