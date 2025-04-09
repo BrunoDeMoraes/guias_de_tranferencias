@@ -108,9 +108,9 @@ TIMES7 = [
     )
      ),
     (17, 201, (
-        "Paulo Emanuel Oliveira de Sousa - "
-        "Diretor Administrativo - Ma"
-        "trícula: 1.714.143-5"
+        "Loyani Katrina Cabral Ipac - "
+        "Diretora Administrativa - Ma"
+        "trícula: 1.661.866-1"
     )
      ),
     (114, 201, (
